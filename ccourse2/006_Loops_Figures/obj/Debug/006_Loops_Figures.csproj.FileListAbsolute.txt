@@ -1,0 +1,5 @@
+E:\csharp\ccourse2\006_Loops_Figures\bin\Debug\006_Loops_Figures.exe.config
+E:\csharp\ccourse2\006_Loops_Figures\bin\Debug\006_Loops_Figures.exe
+E:\csharp\ccourse2\006_Loops_Figures\bin\Debug\006_Loops_Figures.pdb
+E:\csharp\ccourse2\006_Loops_Figures\obj\Debug\006_Loops_Figures.exe
+E:\csharp\ccourse2\006_Loops_Figures\obj\Debug\006_Loops_Figures.pdb

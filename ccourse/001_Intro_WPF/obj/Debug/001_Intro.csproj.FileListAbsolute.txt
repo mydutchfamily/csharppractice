@@ -1,0 +1,14 @@
+E:\csharp\ccourse\001_Intro\bin\Debug\001_Intro.exe.config
+E:\csharp\ccourse\001_Intro\bin\Debug\001_Intro.exe
+E:\csharp\ccourse\001_Intro\bin\Debug\001_Intro.pdb
+E:\csharp\ccourse\001_Intro\obj\Debug\001_Intro.csprojAssemblyReference.cache
+E:\csharp\ccourse\001_Intro\obj\Debug\MainWindow.g.cs
+E:\csharp\ccourse\001_Intro\obj\Debug\App.g.cs
+E:\csharp\ccourse\001_Intro\obj\Debug\001_Intro_MarkupCompile.cache
+E:\csharp\ccourse\001_Intro\obj\Debug\001_Intro_MarkupCompile.lref
+E:\csharp\ccourse\001_Intro\obj\Debug\MainWindow.baml
+E:\csharp\ccourse\001_Intro\obj\Debug\001_Intro.g.resources
+E:\csharp\ccourse\001_Intro\obj\Debug\_001_Intro.Properties.Resources.resources
+E:\csharp\ccourse\001_Intro\obj\Debug\001_Intro.csproj.GenerateResource.cache
+E:\csharp\ccourse\001_Intro\obj\Debug\001_Intro.exe
+E:\csharp\ccourse\001_Intro\obj\Debug\001_Intro.pdb

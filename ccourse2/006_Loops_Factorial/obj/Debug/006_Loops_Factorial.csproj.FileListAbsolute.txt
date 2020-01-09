@@ -1,0 +1,6 @@
+E:\csharp\ccourse2\006_Loops_Factorial\bin\Debug\006_Loops_Factorial.exe.config
+E:\csharp\ccourse2\006_Loops_Factorial\bin\Debug\006_Loops_Factorial.exe
+E:\csharp\ccourse2\006_Loops_Factorial\bin\Debug\006_Loops_Factorial.pdb
+E:\csharp\ccourse2\006_Loops_Factorial\obj\Debug\006_Loops_Factorial.csprojAssemblyReference.cache
+E:\csharp\ccourse2\006_Loops_Factorial\obj\Debug\006_Loops_Factorial.exe
+E:\csharp\ccourse2\006_Loops_Factorial\obj\Debug\006_Loops_Factorial.pdb

@@ -1,0 +1,5 @@
+E:\csharp\ccourse2\05_Arrays_009_4\bin\Debug\05_Arrays_009_4.exe.config
+E:\csharp\ccourse2\05_Arrays_009_4\bin\Debug\05_Arrays_009_4.exe
+E:\csharp\ccourse2\05_Arrays_009_4\bin\Debug\05_Arrays_009_4.pdb
+E:\csharp\ccourse2\05_Arrays_009_4\obj\Debug\05_Arrays_009_4.exe
+E:\csharp\ccourse2\05_Arrays_009_4\obj\Debug\05_Arrays_009_4.pdb

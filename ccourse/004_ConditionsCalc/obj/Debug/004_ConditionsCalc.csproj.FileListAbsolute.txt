@@ -1,0 +1,6 @@
+E:\csharp\ccourse\004_ConditionsCalc\bin\Debug\004_ConditionsCalc.exe.config
+E:\csharp\ccourse\004_ConditionsCalc\bin\Debug\004_ConditionsCalc.exe
+E:\csharp\ccourse\004_ConditionsCalc\bin\Debug\004_ConditionsCalc.pdb
+E:\csharp\ccourse\004_ConditionsCalc\obj\Debug\004_ConditionsCalc.csprojAssemblyReference.cache
+E:\csharp\ccourse\004_ConditionsCalc\obj\Debug\004_ConditionsCalc.exe
+E:\csharp\ccourse\004_ConditionsCalc\obj\Debug\004_ConditionsCalc.pdb

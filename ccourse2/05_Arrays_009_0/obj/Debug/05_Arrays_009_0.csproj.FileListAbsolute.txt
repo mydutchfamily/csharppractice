@@ -1,0 +1,6 @@
+E:\csharp\ccourse2\05_Arrays_009_0\bin\Debug\05_Arrays_009_0.exe.config
+E:\csharp\ccourse2\05_Arrays_009_0\bin\Debug\05_Arrays_009_0.exe
+E:\csharp\ccourse2\05_Arrays_009_0\bin\Debug\05_Arrays_009_0.pdb
+E:\csharp\ccourse2\05_Arrays_009_0\obj\Debug\05_Arrays_009_0.csprojAssemblyReference.cache
+E:\csharp\ccourse2\05_Arrays_009_0\obj\Debug\05_Arrays_009_0.exe
+E:\csharp\ccourse2\05_Arrays_009_0\obj\Debug\05_Arrays_009_0.pdb

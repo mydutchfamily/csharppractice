@@ -1,0 +1,6 @@
+E:\csharp\ccourse2\007_Methods_Calculate\obj\Debug\007_Methods_Calculate.csprojAssemblyReference.cache
+E:\csharp\ccourse2\007_Methods_Calculate\bin\Debug\007_Methods_Calculate.exe.config
+E:\csharp\ccourse2\007_Methods_Calculate\bin\Debug\007_Methods_Calculate.exe
+E:\csharp\ccourse2\007_Methods_Calculate\bin\Debug\007_Methods_Calculate.pdb
+E:\csharp\ccourse2\007_Methods_Calculate\obj\Debug\007_Methods_Calculate.exe
+E:\csharp\ccourse2\007_Methods_Calculate\obj\Debug\007_Methods_Calculate.pdb

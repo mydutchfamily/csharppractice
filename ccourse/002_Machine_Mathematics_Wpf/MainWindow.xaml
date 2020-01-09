@@ -1,0 +1,20 @@
+﻿<Window x:Class="_002_Machine_Mathematics_Wpf.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:_002_Machine_Mathematics_Wpf"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="187.817">
+    <Grid>
+        <Button x:Name="ButtonByte" Content="Byte" HorizontalAlignment="Left" Height="41" Margin="10,22,0,0" VerticalAlignment="Top" Width="140" Click="Button_Click"/>
+        <Button x:Name="ButtonSbyte" Content="Sbyte" HorizontalAlignment="Left" Height="37" Margin="10,68,0,0" VerticalAlignment="Top" Width="140" Click="Button_Click"/>
+        <Button x:Name="ButtonShort" Content="Short" HorizontalAlignment="Left" Height="37" Margin="10,110,0,0" VerticalAlignment="Top" Width="140" Click="Button_Click"/>
+        <Button x:Name="ButtonUshort" Content="Ushort" HorizontalAlignment="Left" Height="37" Margin="10,152,0,0" VerticalAlignment="Top" Width="140" Click="Button_Click"/>
+        <Button x:Name="ButtonInt" Content="Int" HorizontalAlignment="Left" Height="37" Margin="10,194,0,0" VerticalAlignment="Top" Width="140" Click="Button_Click"/>
+        <Button x:Name="ButtonUint" Content="Uint" HorizontalAlignment="Left" Height="37" Margin="10,236,0,0" VerticalAlignment="Top" Width="140" Click="Button_Click"/>
+        <Button x:Name="ButtonLong" Content="Long" HorizontalAlignment="Left" Height="37" Margin="10,278,0,0" VerticalAlignment="Top" Width="140" Click="Button_Click"/>
+        <Button x:Name="ButtonUlong" Content="Ulong" HorizontalAlignment="Left" Height="37" Margin="10,320,0,0" VerticalAlignment="Top" Width="140" Click="Button_Click"/>
+
+    </Grid>
+</Window>

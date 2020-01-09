@@ -1,0 +1,5 @@
+E:\csharp\ccourse\003_Variable\bin\Debug\003_Variable.exe.config
+E:\csharp\ccourse\003_Variable\bin\Debug\003_Variable.exe
+E:\csharp\ccourse\003_Variable\bin\Debug\003_Variable.pdb
+E:\csharp\ccourse\003_Variable\obj\Debug\003_Variable.exe
+E:\csharp\ccourse\003_Variable\obj\Debug\003_Variable.pdb

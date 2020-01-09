@@ -1,0 +1,5 @@
+E:\csharp\ccourse2\006_Loops_FromAtoB1\bin\Debug\006_Loops_FromAtoB1.exe.config
+E:\csharp\ccourse2\006_Loops_FromAtoB1\bin\Debug\006_Loops_FromAtoB1.exe
+E:\csharp\ccourse2\006_Loops_FromAtoB1\bin\Debug\006_Loops_FromAtoB1.pdb
+E:\csharp\ccourse2\006_Loops_FromAtoB1\obj\Debug\006_Loops_FromAtoB1.exe
+E:\csharp\ccourse2\006_Loops_FromAtoB1\obj\Debug\006_Loops_FromAtoB1.pdb

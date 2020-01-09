@@ -1,0 +1,6 @@
+E:\csharp\ccourse2\006_Loops_Stars\obj\Debug\006_Loops_Stars.csprojAssemblyReference.cache
+E:\csharp\ccourse2\006_Loops_Stars\bin\Debug\006_Loops_Stars.exe.config
+E:\csharp\ccourse2\006_Loops_Stars\bin\Debug\006_Loops_Stars.exe
+E:\csharp\ccourse2\006_Loops_Stars\bin\Debug\006_Loops_Stars.pdb
+E:\csharp\ccourse2\006_Loops_Stars\obj\Debug\006_Loops_Stars.exe
+E:\csharp\ccourse2\006_Loops_Stars\obj\Debug\006_Loops_Stars.pdb

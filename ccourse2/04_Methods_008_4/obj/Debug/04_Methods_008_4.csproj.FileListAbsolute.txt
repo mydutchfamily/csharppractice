@@ -1,0 +1,14 @@
+E:\csharp\ccourse2\04_Methods_008_4\bin\Debug\04_Methods_008_4.exe.config
+E:\csharp\ccourse2\04_Methods_008_4\bin\Debug\04_Methods_008_4.exe
+E:\csharp\ccourse2\04_Methods_008_4\bin\Debug\04_Methods_008_4.pdb
+E:\csharp\ccourse2\04_Methods_008_4\obj\Debug\04_Methods_008_4.csprojAssemblyReference.cache
+E:\csharp\ccourse2\04_Methods_008_4\obj\Debug\MainWindow.g.cs
+E:\csharp\ccourse2\04_Methods_008_4\obj\Debug\App.g.cs
+E:\csharp\ccourse2\04_Methods_008_4\obj\Debug\04_Methods_008_4_MarkupCompile.cache
+E:\csharp\ccourse2\04_Methods_008_4\obj\Debug\04_Methods_008_4_MarkupCompile.lref
+E:\csharp\ccourse2\04_Methods_008_4\obj\Debug\MainWindow.baml
+E:\csharp\ccourse2\04_Methods_008_4\obj\Debug\04_Methods_008_4.g.resources
+E:\csharp\ccourse2\04_Methods_008_4\obj\Debug\_04_Methods_008_4.Properties.Resources.resources
+E:\csharp\ccourse2\04_Methods_008_4\obj\Debug\04_Methods_008_4.csproj.GenerateResource.cache
+E:\csharp\ccourse2\04_Methods_008_4\obj\Debug\04_Methods_008_4.exe
+E:\csharp\ccourse2\04_Methods_008_4\obj\Debug\04_Methods_008_4.pdb

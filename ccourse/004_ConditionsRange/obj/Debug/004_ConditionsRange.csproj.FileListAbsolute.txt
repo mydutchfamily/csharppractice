@@ -1,0 +1,5 @@
+E:\csharp\ccourse\004_ConditionsRange\bin\Debug\004_ConditionsRange.exe.config
+E:\csharp\ccourse\004_ConditionsRange\bin\Debug\004_ConditionsRange.exe
+E:\csharp\ccourse\004_ConditionsRange\bin\Debug\004_ConditionsRange.pdb
+E:\csharp\ccourse\004_ConditionsRange\obj\Debug\004_ConditionsRange.exe
+E:\csharp\ccourse\004_ConditionsRange\obj\Debug\004_ConditionsRange.pdb

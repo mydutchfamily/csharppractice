@@ -1,0 +1,6 @@
+E:\csharp\ccourse\002_Machine_Mathematics\obj\Debug\002_Machine_Mathematics.csprojAssemblyReference.cache
+E:\csharp\ccourse\002_Machine_Mathematics\bin\Debug\002_Machine_Mathematics.exe.config
+E:\csharp\ccourse\002_Machine_Mathematics\bin\Debug\002_Machine_Mathematics.exe
+E:\csharp\ccourse\002_Machine_Mathematics\bin\Debug\002_Machine_Mathematics.pdb
+E:\csharp\ccourse\002_Machine_Mathematics\obj\Debug\002_Machine_Mathematics.exe
+E:\csharp\ccourse\002_Machine_Mathematics\obj\Debug\002_Machine_Mathematics.pdb

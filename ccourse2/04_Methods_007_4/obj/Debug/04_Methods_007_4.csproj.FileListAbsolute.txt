@@ -1,0 +1,6 @@
+E:\csharp\ccourse2\04_Methods_007_4\bin\Debug\04_Methods_007_4.exe.config
+E:\csharp\ccourse2\04_Methods_007_4\bin\Debug\04_Methods_007_4.exe
+E:\csharp\ccourse2\04_Methods_007_4\bin\Debug\04_Methods_007_4.pdb
+E:\csharp\ccourse2\04_Methods_007_4\obj\Debug\04_Methods_007_4.csprojAssemblyReference.cache
+E:\csharp\ccourse2\04_Methods_007_4\obj\Debug\04_Methods_007_4.exe
+E:\csharp\ccourse2\04_Methods_007_4\obj\Debug\04_Methods_007_4.pdb
