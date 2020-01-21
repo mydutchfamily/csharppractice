@@ -14,13 +14,21 @@ namespace GradeBook
             do
             {
                 input = Console.ReadLine();
-                if (double.TryParse(input, out grade))
+                try
                 {
-                    book.AddGrade(grade);
+                    if (double.TryParse(input, out grade))
+                    {
+                        book.AddGrade(grade);
+                    }
+                    else
+                    {
+                        break;
+                    }
                 }
-                else
+                catch (Exception e)
                 {
-                    break;
+                    System.Console.WriteLine(e.Message);
+                    //throw; 
                 }
             } while (true);
 
