@@ -5,9 +5,18 @@ namespace GradeBook
 {
     class Program
     {
+
+        static void OnGradeAdded(object sender, EventArgs e){
+                System.Console.WriteLine("A grade was added");
+        }
         static void Main(string[] args)
         {
             var book = new Book("My grade book");
+            book.GradeAdded += OnGradeAdded;
+            book.GradeAdded -= OnGradeAdded;
+            book.GradeAdded += OnGradeAdded;
+
+
             var grade = 0.0;
             var input = "";
             Console.WriteLine("Enter grade(s) from 0 to 100 or else for exit: ");
@@ -25,11 +34,20 @@ namespace GradeBook
                         break;
                     }
                 }
-                catch (Exception e)
+                catch (ArgumentException e)
                 {
                     System.Console.WriteLine(e.Message);
                     //throw; 
                 }
+                catch (FormatException e)
+                {
+                    System.Console.WriteLine(e.Message);
+                    //throw; 
+                }            
+                finally
+                {
+                    System.Console.WriteLine("****");
+                }    
             } while (true);
 
             book.AddGrade(89.1);
