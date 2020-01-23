@@ -6,12 +6,43 @@ namespace GradeBook
 
     public delegate void GradeAddedDelegate(object sender, EventArgs args);
 
-    public class Book
+
+    public class NamedObject
+    {
+        public NamedObject(string name)
+        {
+            Name = name;
+        }
+
+        public string Name
+        {
+            get;
+            set;
+        }
+    }
+
+public interface IBook{
+    void AddGrade(double grade);
+    Stat GetStat();
+    string Name{get;}
+    event GradeAddedDelegate GradeAdded;
+}
+    public abstract class Book : NamedObject, IBook {
+        public Book(string name) : base(name)
+        {
+        }
+
+        public abstract event GradeAddedDelegate GradeAdded;
+
+        public abstract void AddGrade(double grade);
+        public abstract Stat GetStat();
+    }
+
+    public class InMemoryBook : Book
     {
 
         private List<double> grades;
-
-        public event GradeAddedDelegate GradeAdded;
+        public override event GradeAddedDelegate GradeAdded;
         private string name1;
         public string Name1
         {
@@ -28,16 +59,9 @@ namespace GradeBook
             }
         }
 
-
-        public string Name
-        {
-            get;
-            set;
-        }
-
         public const string category = "Science";
 
-        public Book(string name)
+        public InMemoryBook(string name) : base(name)
         {
             this.Name = name;
             grades = new List<double>();
@@ -61,12 +85,13 @@ namespace GradeBook
                     break;
             }
         }
-        public void AddGrade(double grade)
+        public override void AddGrade(double grade)
         {
             if (grade <= 100 && grade >= 0)
             {
                 grades.Add(grade);
-                if(GradeAdded != null){
+                if (GradeAdded != null)
+                {
                     GradeAdded(this, new EventArgs());
                 }
             }
@@ -90,7 +115,7 @@ namespace GradeBook
         }
 
 
-        public Stat GetStat()
+        public override Stat GetStat()
         {
             var result = 0.0;
             Stat stat = new Stat();
