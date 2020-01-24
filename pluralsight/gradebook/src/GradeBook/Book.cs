@@ -21,17 +21,18 @@ namespace GradeBook
         }
     }
 
-public interface IBook{
-    void AddGrade(double grade);
-    Stat GetStat();
-    string Name{get;}
-    event GradeAddedDelegate GradeAdded;
-}
-    public abstract class Book : NamedObject, IBook {
+    public interface IBook
+    {
+        void AddGrade(double grade);
+        Stat GetStat();
+        string Name { get; }
+        event GradeAddedDelegate GradeAdded;
+    }
+    public abstract class Book : NamedObject, IBook
+    {
         public Book(string name) : base(name)
         {
         }
-
         public abstract event GradeAddedDelegate GradeAdded;
 
         public abstract void AddGrade(double grade);
@@ -40,7 +41,6 @@ public interface IBook{
 
     public class InMemoryBook : Book
     {
-
         private List<double> grades;
         public override event GradeAddedDelegate GradeAdded;
         private string name1;
@@ -114,49 +114,10 @@ public interface IBook{
             Console.WriteLine($"The letter of grade is :{stat.Grade}");
         }
 
-
         public override Stat GetStat()
         {
-            var result = 0.0;
-            Stat stat = new Stat();
-            var highGrade = double.MinValue;
-            var lowestGrade = double.MaxValue;
-
-            foreach (double number in grades)
-            {
-                result += number;
-                highGrade = Math.Max(number, highGrade);
-                lowestGrade = Math.Min(number, lowestGrade);
-            }
-
-            stat.Average = result / grades.Count;
-            stat.High = highGrade;
-            stat.Low = lowestGrade;
-
-            switch (stat.Average)
-            {
-                case var d when d >= 90.0:
-                    stat.Grade = 'A';
-                    break;
-
-                case var d when d >= 80.0:
-                    stat.Grade = 'B';
-                    break;
-
-                case var d when d >= 70.0:
-                    stat.Grade = 'C';
-                    break;
-
-                case var d when d >= 60.0:
-                    stat.Grade = 'E';
-                    break;
-
-                default:
-                    stat.Grade = 'F';
-                    break;
-
-            }
-
+            Stat stat = new Stat(grades);
+            stat.Calc();
             return stat;
         }
     }
