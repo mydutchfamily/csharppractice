@@ -1,0 +1,11 @@
+C:\csharp\code\pluralsight\var_and_cond\bin\Debug\netcoreapp3.1\var_and_cond.exe
+C:\csharp\code\pluralsight\var_and_cond\bin\Debug\netcoreapp3.1\var_and_cond.deps.json
+C:\csharp\code\pluralsight\var_and_cond\bin\Debug\netcoreapp3.1\var_and_cond.runtimeconfig.json
+C:\csharp\code\pluralsight\var_and_cond\bin\Debug\netcoreapp3.1\var_and_cond.runtimeconfig.dev.json
+C:\csharp\code\pluralsight\var_and_cond\bin\Debug\netcoreapp3.1\var_and_cond.dll
+C:\csharp\code\pluralsight\var_and_cond\bin\Debug\netcoreapp3.1\var_and_cond.pdb
+C:\csharp\code\pluralsight\var_and_cond\obj\Debug\netcoreapp3.1\var_and_cond.csprojAssemblyReference.cache
+C:\csharp\code\pluralsight\var_and_cond\obj\Debug\netcoreapp3.1\var_and_cond.AssemblyInfoInputs.cache
+C:\csharp\code\pluralsight\var_and_cond\obj\Debug\netcoreapp3.1\var_and_cond.AssemblyInfo.cs
+C:\csharp\code\pluralsight\var_and_cond\obj\Debug\netcoreapp3.1\var_and_cond.dll
+C:\csharp\code\pluralsight\var_and_cond\obj\Debug\netcoreapp3.1\var_and_cond.pdb

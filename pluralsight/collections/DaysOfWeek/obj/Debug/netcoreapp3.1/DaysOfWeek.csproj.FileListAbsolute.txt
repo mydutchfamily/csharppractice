@@ -1,0 +1,11 @@
+C:\csharp\code\pluralsight\collections\DaysOfweek\bin\Debug\netcoreapp3.1\DaysOfWeek.exe
+C:\csharp\code\pluralsight\collections\DaysOfweek\bin\Debug\netcoreapp3.1\DaysOfWeek.deps.json
+C:\csharp\code\pluralsight\collections\DaysOfweek\bin\Debug\netcoreapp3.1\DaysOfWeek.runtimeconfig.json
+C:\csharp\code\pluralsight\collections\DaysOfweek\bin\Debug\netcoreapp3.1\DaysOfWeek.runtimeconfig.dev.json
+C:\csharp\code\pluralsight\collections\DaysOfweek\bin\Debug\netcoreapp3.1\DaysOfWeek.dll
+C:\csharp\code\pluralsight\collections\DaysOfweek\bin\Debug\netcoreapp3.1\DaysOfWeek.pdb
+C:\csharp\code\pluralsight\collections\DaysOfweek\obj\Debug\netcoreapp3.1\DaysOfWeek.csprojAssemblyReference.cache
+C:\csharp\code\pluralsight\collections\DaysOfweek\obj\Debug\netcoreapp3.1\DaysOfWeek.AssemblyInfoInputs.cache
+C:\csharp\code\pluralsight\collections\DaysOfweek\obj\Debug\netcoreapp3.1\DaysOfWeek.AssemblyInfo.cs
+C:\csharp\code\pluralsight\collections\DaysOfweek\obj\Debug\netcoreapp3.1\DaysOfWeek.dll
+C:\csharp\code\pluralsight\collections\DaysOfweek\obj\Debug\netcoreapp3.1\DaysOfWeek.pdb
