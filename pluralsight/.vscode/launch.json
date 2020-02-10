@@ -11,9 +11,11 @@
             "preLaunchTask": "build",
             // If you have changed target frameworks, make sure to update the program path.
             //"program": "${workspaceFolder}/gradebook/src/GradeBook/bin/Debug/netcoreapp3.1/GradeBook.dll",
-            "program": "${workspaceFolder}/collections/country_csv/bin/Debug/netcoreapp3.1/country_csv.exe",
+            //"program": "${workspaceFolder}/collections/country_csv/bin/Debug/netcoreapp3.1/country_csv.exe",
+            "program": "${workspaceFolder}/collections/country_list/bin/Debug/netcoreapp3.1/country_list.exe",            
             "args": [],
-            "cwd": "${workspaceFolder}/collections/country_csv",
+            //"cwd": "${workspaceFolder}/collections/country_csv",
+            "cwd": "${workspaceFolder}/collections/country_list",
             // For more information about the 'console' field, see https://aka.ms/VSCode-CS-LaunchJson-Console
             "console": "internalConsole",
             "stopAtEntry": false
