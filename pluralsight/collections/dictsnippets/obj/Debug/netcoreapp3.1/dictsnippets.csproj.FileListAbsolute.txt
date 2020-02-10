@@ -1,0 +1,11 @@
+C:\csharp\code\pluralsight\collections\dictsnippets\obj\Debug\netcoreapp3.1\dictsnippets.csprojAssemblyReference.cache
+C:\csharp\code\pluralsight\collections\dictsnippets\obj\Debug\netcoreapp3.1\dictsnippets.AssemblyInfoInputs.cache
+C:\csharp\code\pluralsight\collections\dictsnippets\obj\Debug\netcoreapp3.1\dictsnippets.AssemblyInfo.cs
+C:\csharp\code\pluralsight\collections\dictsnippets\bin\Debug\netcoreapp3.1\dictsnippets.exe
+C:\csharp\code\pluralsight\collections\dictsnippets\bin\Debug\netcoreapp3.1\dictsnippets.deps.json
+C:\csharp\code\pluralsight\collections\dictsnippets\bin\Debug\netcoreapp3.1\dictsnippets.runtimeconfig.json
+C:\csharp\code\pluralsight\collections\dictsnippets\bin\Debug\netcoreapp3.1\dictsnippets.runtimeconfig.dev.json
+C:\csharp\code\pluralsight\collections\dictsnippets\bin\Debug\netcoreapp3.1\dictsnippets.dll
+C:\csharp\code\pluralsight\collections\dictsnippets\bin\Debug\netcoreapp3.1\dictsnippets.pdb
+C:\csharp\code\pluralsight\collections\dictsnippets\obj\Debug\netcoreapp3.1\dictsnippets.dll
+C:\csharp\code\pluralsight\collections\dictsnippets\obj\Debug\netcoreapp3.1\dictsnippets.pdb
