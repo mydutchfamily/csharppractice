@@ -1,0 +1,11 @@
+C:\csharp\code\pluralsight\collections\collections_collections\obj\Debug\netcoreapp3.1\collections_collections.csprojAssemblyReference.cache
+C:\csharp\code\pluralsight\collections\collections_collections\obj\Debug\netcoreapp3.1\collections_collections.AssemblyInfoInputs.cache
+C:\csharp\code\pluralsight\collections\collections_collections\obj\Debug\netcoreapp3.1\collections_collections.AssemblyInfo.cs
+C:\csharp\code\pluralsight\collections\collections_collections\bin\Debug\netcoreapp3.1\collections_collections.exe
+C:\csharp\code\pluralsight\collections\collections_collections\bin\Debug\netcoreapp3.1\collections_collections.deps.json
+C:\csharp\code\pluralsight\collections\collections_collections\bin\Debug\netcoreapp3.1\collections_collections.runtimeconfig.json
+C:\csharp\code\pluralsight\collections\collections_collections\bin\Debug\netcoreapp3.1\collections_collections.runtimeconfig.dev.json
+C:\csharp\code\pluralsight\collections\collections_collections\bin\Debug\netcoreapp3.1\collections_collections.dll
+C:\csharp\code\pluralsight\collections\collections_collections\bin\Debug\netcoreapp3.1\collections_collections.pdb
+C:\csharp\code\pluralsight\collections\collections_collections\obj\Debug\netcoreapp3.1\collections_collections.dll
+C:\csharp\code\pluralsight\collections\collections_collections\obj\Debug\netcoreapp3.1\collections_collections.pdb
