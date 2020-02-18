@@ -1,0 +1,11 @@
+C:\csharp\code\pluralsight\collections\noughts_and_crosses\obj\Debug\netcoreapp3.1\noughts_and_crosses.csprojAssemblyReference.cache
+C:\csharp\code\pluralsight\collections\noughts_and_crosses\obj\Debug\netcoreapp3.1\noughts_and_crosses.AssemblyInfoInputs.cache
+C:\csharp\code\pluralsight\collections\noughts_and_crosses\obj\Debug\netcoreapp3.1\noughts_and_crosses.AssemblyInfo.cs
+C:\csharp\code\pluralsight\collections\noughts_and_crosses\bin\Debug\netcoreapp3.1\noughts_and_crosses.exe
+C:\csharp\code\pluralsight\collections\noughts_and_crosses\bin\Debug\netcoreapp3.1\noughts_and_crosses.deps.json
+C:\csharp\code\pluralsight\collections\noughts_and_crosses\bin\Debug\netcoreapp3.1\noughts_and_crosses.runtimeconfig.json
+C:\csharp\code\pluralsight\collections\noughts_and_crosses\bin\Debug\netcoreapp3.1\noughts_and_crosses.runtimeconfig.dev.json
+C:\csharp\code\pluralsight\collections\noughts_and_crosses\bin\Debug\netcoreapp3.1\noughts_and_crosses.dll
+C:\csharp\code\pluralsight\collections\noughts_and_crosses\bin\Debug\netcoreapp3.1\noughts_and_crosses.pdb
+C:\csharp\code\pluralsight\collections\noughts_and_crosses\obj\Debug\netcoreapp3.1\noughts_and_crosses.dll
+C:\csharp\code\pluralsight\collections\noughts_and_crosses\obj\Debug\netcoreapp3.1\noughts_and_crosses.pdb
