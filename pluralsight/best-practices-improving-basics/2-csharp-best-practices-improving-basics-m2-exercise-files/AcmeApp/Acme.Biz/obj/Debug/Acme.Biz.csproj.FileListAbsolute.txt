@@ -5,3 +5,10 @@ F:\ARB\GitHub\csharppractice\pluralsight\best-practices-improving-basics\2-cshar
 F:\ARB\GitHub\csharppractice\pluralsight\best-practices-improving-basics\2-csharp-best-practices-improving-basics-m2-exercise-files\AcmeApp\Acme.Biz\obj\Debug\Acme.Biz.csprojResolveAssemblyReference.cache
 F:\ARB\GitHub\csharppractice\pluralsight\best-practices-improving-basics\2-csharp-best-practices-improving-basics-m2-exercise-files\AcmeApp\Acme.Biz\obj\Debug\Acme.Biz.dll
 F:\ARB\GitHub\csharppractice\pluralsight\best-practices-improving-basics\2-csharp-best-practices-improving-basics-m2-exercise-files\AcmeApp\Acme.Biz\obj\Debug\Acme.Biz.pdb
+C:\csharp\code\pluralsight\best-practices-improving-basics\2-csharp-best-practices-improving-basics-m2-exercise-files\AcmeApp\Acme.Biz\bin\Debug\Acme.Biz.dll
+C:\csharp\code\pluralsight\best-practices-improving-basics\2-csharp-best-practices-improving-basics-m2-exercise-files\AcmeApp\Acme.Biz\bin\Debug\Acme.Biz.pdb
+C:\csharp\code\pluralsight\best-practices-improving-basics\2-csharp-best-practices-improving-basics-m2-exercise-files\AcmeApp\Acme.Biz\bin\Debug\Acme.Common.dll
+C:\csharp\code\pluralsight\best-practices-improving-basics\2-csharp-best-practices-improving-basics-m2-exercise-files\AcmeApp\Acme.Biz\bin\Debug\Acme.Common.pdb
+C:\csharp\code\pluralsight\best-practices-improving-basics\2-csharp-best-practices-improving-basics-m2-exercise-files\AcmeApp\Acme.Biz\obj\Debug\Acme.Biz.csprojResolveAssemblyReference.cache
+C:\csharp\code\pluralsight\best-practices-improving-basics\2-csharp-best-practices-improving-basics-m2-exercise-files\AcmeApp\Acme.Biz\obj\Debug\Acme.Biz.dll
+C:\csharp\code\pluralsight\best-practices-improving-basics\2-csharp-best-practices-improving-basics-m2-exercise-files\AcmeApp\Acme.Biz\obj\Debug\Acme.Biz.pdb

@@ -9,3 +9,13 @@ F:\ARB\GitHub\csharppractice\pluralsight\best-practices-improving-basics\2-cshar
 F:\ARB\GitHub\csharppractice\pluralsight\best-practices-improving-basics\2-csharp-best-practices-improving-basics-m2-exercise-files\AcmeApp\Tests\Acme.BizTests\obj\Debug\Acme.BizTests.csprojResolveAssemblyReference.cache
 F:\ARB\GitHub\csharppractice\pluralsight\best-practices-improving-basics\2-csharp-best-practices-improving-basics-m2-exercise-files\AcmeApp\Tests\Acme.BizTests\obj\Debug\Acme.BizTests.dll
 F:\ARB\GitHub\csharppractice\pluralsight\best-practices-improving-basics\2-csharp-best-practices-improving-basics-m2-exercise-files\AcmeApp\Tests\Acme.BizTests\obj\Debug\Acme.BizTests.pdb
+C:\csharp\code\pluralsight\best-practices-improving-basics\2-csharp-best-practices-improving-basics-m2-exercise-files\AcmeApp\Tests\Acme.BizTests\bin\Debug\Acme.BizTests.dll
+C:\csharp\code\pluralsight\best-practices-improving-basics\2-csharp-best-practices-improving-basics-m2-exercise-files\AcmeApp\Tests\Acme.BizTests\bin\Debug\Acme.BizTests.pdb
+C:\csharp\code\pluralsight\best-practices-improving-basics\2-csharp-best-practices-improving-basics-m2-exercise-files\AcmeApp\Tests\Acme.BizTests\bin\Debug\Acme.Biz.dll
+C:\csharp\code\pluralsight\best-practices-improving-basics\2-csharp-best-practices-improving-basics-m2-exercise-files\AcmeApp\Tests\Acme.BizTests\bin\Debug\Microsoft.VisualStudio.QualityTools.UnitTestFramework.dll
+C:\csharp\code\pluralsight\best-practices-improving-basics\2-csharp-best-practices-improving-basics-m2-exercise-files\AcmeApp\Tests\Acme.BizTests\bin\Debug\Acme.Common.dll
+C:\csharp\code\pluralsight\best-practices-improving-basics\2-csharp-best-practices-improving-basics-m2-exercise-files\AcmeApp\Tests\Acme.BizTests\bin\Debug\Acme.Biz.pdb
+C:\csharp\code\pluralsight\best-practices-improving-basics\2-csharp-best-practices-improving-basics-m2-exercise-files\AcmeApp\Tests\Acme.BizTests\bin\Debug\Acme.Common.pdb
+C:\csharp\code\pluralsight\best-practices-improving-basics\2-csharp-best-practices-improving-basics-m2-exercise-files\AcmeApp\Tests\Acme.BizTests\obj\Debug\Acme.BizTests.csprojResolveAssemblyReference.cache
+C:\csharp\code\pluralsight\best-practices-improving-basics\2-csharp-best-practices-improving-basics-m2-exercise-files\AcmeApp\Tests\Acme.BizTests\obj\Debug\Acme.BizTests.dll
+C:\csharp\code\pluralsight\best-practices-improving-basics\2-csharp-best-practices-improving-basics-m2-exercise-files\AcmeApp\Tests\Acme.BizTests\obj\Debug\Acme.BizTests.pdb

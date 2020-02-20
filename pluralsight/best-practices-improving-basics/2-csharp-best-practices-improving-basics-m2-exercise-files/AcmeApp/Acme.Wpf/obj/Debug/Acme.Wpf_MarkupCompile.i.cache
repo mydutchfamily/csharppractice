@@ -4,16 +4,16 @@
 winexe
 C#
 .cs
-F:\ARB\GitHub\csharppractice\pluralsight\best-practices-improving-basics\2-csharp-best-practices-improving-basics-m2-exercise-files\AcmeApp\Acme.Wpf\obj\Debug\
+C:\csharp\code\pluralsight\best-practices-improving-basics\2-csharp-best-practices-improving-basics-m2-exercise-files\AcmeApp\Acme.Wpf\obj\Debug\
 Acme.Wpf
 none
 false
 DEBUG;TRACE
-F:\ARB\GitHub\csharppractice\pluralsight\best-practices-improving-basics\2-csharp-best-practices-improving-basics-m2-exercise-files\AcmeApp\Acme.Wpf\App.xaml
+C:\csharp\code\pluralsight\best-practices-improving-basics\2-csharp-best-practices-improving-basics-m2-exercise-files\AcmeApp\Acme.Wpf\App.xaml
 315270850
 
-11-450711280
-141319328965
+11-1522348365
+14-1350206749
 Assets\StyleLibrary.xaml;MainWindow.xaml;Views\VendorDetailView.xaml;
 
 True
