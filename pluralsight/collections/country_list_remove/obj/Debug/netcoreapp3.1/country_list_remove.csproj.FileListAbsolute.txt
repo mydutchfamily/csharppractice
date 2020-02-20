@@ -1,0 +1,11 @@
+C:\csharp\code\pluralsight\collections\country_list_remove\bin\Debug\netcoreapp3.1\country_list_remove.exe
+C:\csharp\code\pluralsight\collections\country_list_remove\bin\Debug\netcoreapp3.1\country_list_remove.deps.json
+C:\csharp\code\pluralsight\collections\country_list_remove\bin\Debug\netcoreapp3.1\country_list_remove.runtimeconfig.json
+C:\csharp\code\pluralsight\collections\country_list_remove\bin\Debug\netcoreapp3.1\country_list_remove.runtimeconfig.dev.json
+C:\csharp\code\pluralsight\collections\country_list_remove\bin\Debug\netcoreapp3.1\country_list_remove.dll
+C:\csharp\code\pluralsight\collections\country_list_remove\bin\Debug\netcoreapp3.1\country_list_remove.pdb
+C:\csharp\code\pluralsight\collections\country_list_remove\obj\Debug\netcoreapp3.1\country_list_remove.csprojAssemblyReference.cache
+C:\csharp\code\pluralsight\collections\country_list_remove\obj\Debug\netcoreapp3.1\country_list_remove.AssemblyInfoInputs.cache
+C:\csharp\code\pluralsight\collections\country_list_remove\obj\Debug\netcoreapp3.1\country_list_remove.AssemblyInfo.cs
+C:\csharp\code\pluralsight\collections\country_list_remove\obj\Debug\netcoreapp3.1\country_list_remove.dll
+C:\csharp\code\pluralsight\collections\country_list_remove\obj\Debug\netcoreapp3.1\country_list_remove.pdb

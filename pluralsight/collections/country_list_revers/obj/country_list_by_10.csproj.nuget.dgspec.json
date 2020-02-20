@@ -1,0 +1,58 @@
+{
+  "format": 1,
+  "restore": {
+    "C:\\csharp\\code\\pluralsight\\collections\\country_list_revers\\country_list_by_10.csproj": {}
+  },
+  "projects": {
+    "C:\\csharp\\code\\pluralsight\\collections\\country_list_revers\\country_list_by_10.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\csharp\\code\\pluralsight\\collections\\country_list_revers\\country_list_by_10.csproj",
+        "projectName": "country_list_by_10",
+        "projectPath": "C:\\csharp\\code\\pluralsight\\collections\\country_list_revers\\country_list_by_10.csproj",
+        "packagesPath": "C:\\Users\\noone\\.nuget\\packages\\",
+        "outputPath": "C:\\csharp\\code\\pluralsight\\collections\\country_list_revers\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\noone\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "netcoreapp3.1"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netcoreapp3.1": {
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netcoreapp3.1": {
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.100\\RuntimeIdentifierGraph.json"
+        }
+      }
+    }
+  }
+}
