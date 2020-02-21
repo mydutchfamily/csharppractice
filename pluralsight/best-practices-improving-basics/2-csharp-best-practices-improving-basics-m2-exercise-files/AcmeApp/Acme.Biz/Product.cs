@@ -13,11 +13,15 @@ namespace Acme.Biz
     /// </summary>
     public class Product
     {
+        public const double InchesPerMeter = 39.37;
+        public readonly decimal MinimumPrice;
+
         #region Constructors
         public Product()
         {
             Console.WriteLine("Product instance created");
-           //this.ProductVendor = new Vendor();
+            //this.ProductVendor = new Vendor();
+            this.MinimumPrice = .96m;
         }
 
         public Product(string productName, string description, int productId):this()
@@ -26,11 +30,25 @@ namespace Acme.Biz
             this.description = description;
             this.productId = productId;
 
+            if (ProductName.StartsWith("Bulk"))
+            {
+                this.MinimumPrice = 9.99m;
+            }
             Console.WriteLine("Product instance has a name: "+ productName);
         }
         #endregion
 
         #region Properties
+
+        private DateTime? availabilityDate; //nullable 
+
+        public DateTime? AvailabilityDate  //nullable
+        {
+            get { return availabilityDate; }
+            set { availabilityDate = value; }
+        }
+
+
         private Vendor productVendor;
 
         public Vendor ProductVendor
@@ -81,7 +99,8 @@ namespace Acme.Biz
 
             var result = LogAction("saying hello");
 
-            return "Hello " + ProductName + " (" + ProductId + "): " + Description;
+            return "Hello " + ProductName + " (" + ProductId + "): " + Description + 
+                " Available on: " + AvailabilityDate?.ToShortDateString();
         }
 
     }

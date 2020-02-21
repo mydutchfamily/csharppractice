@@ -20,7 +20,7 @@ namespace Acme.BizTests
             currentProduct.ProductId = 1;
             currentProduct.Description = "15-inch steel blade hand saw";
             currentProduct.ProductVendor.CompanyName = "ABC Corp";
-            var expected = "Hello Saw (1): 15-inch steel blade hand saw";
+            var expected = "Hello Saw (1): 15-inch steel blade hand saw Available on: ";
 
             Assert.AreEqual(expected, currentProduct.SayHello());
         }
@@ -30,7 +30,7 @@ namespace Acme.BizTests
         {
             var currentProduct = new Product("Saw", "15-inch steel blade hand saw", 1);
 
-            var expected = "Hello Saw (1): 15-inch steel blade hand saw";
+            var expected = "Hello Saw (1): 15-inch steel blade hand saw Available on: ";
 
             Assert.AreEqual(expected, currentProduct.SayHello());
         }
@@ -44,7 +44,7 @@ namespace Acme.BizTests
                 ProductId = 1
             };
 
-            var expected = "Hello Saw (1): 15-inch steel blade hand saw";
+            var expected = "Hello Saw (1): 15-inch steel blade hand saw Available on: ";
 
             Assert.AreEqual(expected, currentProduct.SayHello());
         }
@@ -58,6 +58,36 @@ namespace Acme.BizTests
             string expected = null;
 
             Assert.AreEqual(expected, companyName);
+        }
+
+        [TestMethod()]
+        public void ConvertMetersToInchesTest()
+        {
+            var expected = 78.74;
+
+            var actual = 2*Product.InchesPerMeter;
+
+            Assert.AreEqual(expected, actual);
+        }
+
+        [TestMethod()]
+        public void MinimumPriceTest_Default()
+        {
+            var expected = .96m;
+
+            var product = new Product();
+
+            Assert.AreEqual(expected, product.MinimumPrice);
+        }
+
+        [TestMethod()]
+        public void MinimumPriceTest_Bulk()
+        {
+            var currentProduct = new Product("BulkSaw", "15-inch steel blade hand saw", 1);
+
+            var expected = 9.99m;
+
+            Assert.AreEqual(expected, currentProduct.MinimumPrice);
         }
 
     }
