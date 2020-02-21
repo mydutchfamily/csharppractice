@@ -1,0 +1,9 @@
+F:\ARB\GitHub\csharppractice\pluralsight\best-practices-improving-basics\2-csharp-best-practices-improving-basics-m2-exercise-files\AcmeApp\Tests\Acme.CommonTests\bin\Debug\Acme.CommonTests.dll
+F:\ARB\GitHub\csharppractice\pluralsight\best-practices-improving-basics\2-csharp-best-practices-improving-basics-m2-exercise-files\AcmeApp\Tests\Acme.CommonTests\bin\Debug\Acme.CommonTests.pdb
+F:\ARB\GitHub\csharppractice\pluralsight\best-practices-improving-basics\2-csharp-best-practices-improving-basics-m2-exercise-files\AcmeApp\Tests\Acme.CommonTests\bin\Debug\Acme.Common.dll
+F:\ARB\GitHub\csharppractice\pluralsight\best-practices-improving-basics\2-csharp-best-practices-improving-basics-m2-exercise-files\AcmeApp\Tests\Acme.CommonTests\bin\Debug\Microsoft.VisualStudio.QualityTools.UnitTestFramework.dll
+F:\ARB\GitHub\csharppractice\pluralsight\best-practices-improving-basics\2-csharp-best-practices-improving-basics-m2-exercise-files\AcmeApp\Tests\Acme.CommonTests\bin\Debug\Acme.Common.pdb
+F:\ARB\GitHub\csharppractice\pluralsight\best-practices-improving-basics\2-csharp-best-practices-improving-basics-m2-exercise-files\AcmeApp\Tests\Acme.CommonTests\bin\Debug\Microsoft.VisualStudio.QualityTools.UnitTestFramework.xml
+F:\ARB\GitHub\csharppractice\pluralsight\best-practices-improving-basics\2-csharp-best-practices-improving-basics-m2-exercise-files\AcmeApp\Tests\Acme.CommonTests\obj\Debug\Acme.CommonTests.csprojResolveAssemblyReference.cache
+F:\ARB\GitHub\csharppractice\pluralsight\best-practices-improving-basics\2-csharp-best-practices-improving-basics-m2-exercise-files\AcmeApp\Tests\Acme.CommonTests\obj\Debug\Acme.CommonTests.dll
+F:\ARB\GitHub\csharppractice\pluralsight\best-practices-improving-basics\2-csharp-best-practices-improving-basics-m2-exercise-files\AcmeApp\Tests\Acme.CommonTests\obj\Debug\Acme.CommonTests.pdb

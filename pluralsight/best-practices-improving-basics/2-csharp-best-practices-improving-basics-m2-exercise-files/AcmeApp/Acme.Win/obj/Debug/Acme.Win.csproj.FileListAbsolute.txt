@@ -1,0 +1,13 @@
+F:\ARB\GitHub\csharppractice\pluralsight\best-practices-improving-basics\2-csharp-best-practices-improving-basics-m2-exercise-files\AcmeApp\Acme.Win\bin\Debug\Acme.Win.exe.config
+F:\ARB\GitHub\csharppractice\pluralsight\best-practices-improving-basics\2-csharp-best-practices-improving-basics-m2-exercise-files\AcmeApp\Acme.Win\bin\Debug\Acme.Win.exe
+F:\ARB\GitHub\csharppractice\pluralsight\best-practices-improving-basics\2-csharp-best-practices-improving-basics-m2-exercise-files\AcmeApp\Acme.Win\bin\Debug\Acme.Win.pdb
+F:\ARB\GitHub\csharppractice\pluralsight\best-practices-improving-basics\2-csharp-best-practices-improving-basics-m2-exercise-files\AcmeApp\Acme.Win\bin\Debug\Acme.Biz.dll
+F:\ARB\GitHub\csharppractice\pluralsight\best-practices-improving-basics\2-csharp-best-practices-improving-basics-m2-exercise-files\AcmeApp\Acme.Win\bin\Debug\Acme.Common.dll
+F:\ARB\GitHub\csharppractice\pluralsight\best-practices-improving-basics\2-csharp-best-practices-improving-basics-m2-exercise-files\AcmeApp\Acme.Win\bin\Debug\Acme.Biz.pdb
+F:\ARB\GitHub\csharppractice\pluralsight\best-practices-improving-basics\2-csharp-best-practices-improving-basics-m2-exercise-files\AcmeApp\Acme.Win\bin\Debug\Acme.Common.pdb
+F:\ARB\GitHub\csharppractice\pluralsight\best-practices-improving-basics\2-csharp-best-practices-improving-basics-m2-exercise-files\AcmeApp\Acme.Win\obj\Debug\Acme.Win.csprojResolveAssemblyReference.cache
+F:\ARB\GitHub\csharppractice\pluralsight\best-practices-improving-basics\2-csharp-best-practices-improving-basics-m2-exercise-files\AcmeApp\Acme.Win\obj\Debug\Acme.Win.Properties.Resources.resources
+F:\ARB\GitHub\csharppractice\pluralsight\best-practices-improving-basics\2-csharp-best-practices-improving-basics-m2-exercise-files\AcmeApp\Acme.Win\obj\Debug\Acme.Win.VendorWin.resources
+F:\ARB\GitHub\csharppractice\pluralsight\best-practices-improving-basics\2-csharp-best-practices-improving-basics-m2-exercise-files\AcmeApp\Acme.Win\obj\Debug\Acme.Win.csproj.GenerateResource.Cache
+F:\ARB\GitHub\csharppractice\pluralsight\best-practices-improving-basics\2-csharp-best-practices-improving-basics-m2-exercise-files\AcmeApp\Acme.Win\obj\Debug\Acme.Win.exe
+F:\ARB\GitHub\csharppractice\pluralsight\best-practices-improving-basics\2-csharp-best-practices-improving-basics-m2-exercise-files\AcmeApp\Acme.Win\obj\Debug\Acme.Win.pdb
