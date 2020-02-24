@@ -10,6 +10,11 @@ namespace MobilePhoneT1
     {
         static void Main(string[] args)
         {
+            IPhone phone = PhoneBuilder.BuildSimplePhone();
+
+            phone.Operator = "Sim";
+
+            Console.WriteLine(phone.GetDescription());
         }
     }
 }
