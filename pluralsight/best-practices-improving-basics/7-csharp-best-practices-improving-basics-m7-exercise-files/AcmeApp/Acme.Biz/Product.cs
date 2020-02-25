@@ -50,6 +50,8 @@ namespace Acme.Biz
             set { availabilityDate = value; }
         }
 
+        public  int Type { get; set; }
+
         public decimal Cost { get; set; }
 
         private string productName;
