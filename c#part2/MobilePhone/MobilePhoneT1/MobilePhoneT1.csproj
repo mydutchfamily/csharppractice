@@ -58,6 +58,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Interfaces\APhone.cs" />
     <Compile Include="Implementation\Keyboard.cs" />
     <Compile Include="Interfaces\IComponent.cs" />
     <Compile Include="Interfaces\IKeyboard.cs" />

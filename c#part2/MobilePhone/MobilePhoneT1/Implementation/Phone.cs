@@ -1,67 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 using System.Text;
-using System.Threading.Tasks;
+using MobilePhoneT1.Interfaces;
 
-namespace MobilePhoneT1
+namespace MobilePhoneT1.Implementation
 {
-    class Phone : IPhone
+    class Phone : GeneralPhone
     {
-        private readonly string formFactor;
-        private string @operator;
-        List<IComponent> phoneComponents = new List<IComponent>();
-
-        public Phone(string formFactor) {
-            this.formFactor = formFactor;
-        }
-        public string FormFactor
+        public Phone(string formFactor, string serialNumber)
         {
-            get
-            {
-                return formFactor;
-            }
+            this.SerialNumber = serialNumber;
+            this.FormFactor = formFactor;
         }
 
-        public string Operator
+        private Phone()
         {
-            get
-            {
-                return @operator ?? "N/A";
-            }
-
-            set
-            {
-                @operator = value;
-            }
-        }
-
-        public List<IComponent> PhoneComponents
-        {
-            get
-            {
-                return phoneComponents;
-            }
-
-            set
-            {
-                this.phoneComponents = value;
-            }
-        }
-
-        public string GetDescription()
-        {
-            StringBuilder strBldr = new StringBuilder();
-            strBldr.AppendLine($"phone form factor is:{this.formFactor}, used operator {this.Operator}");
-
-            if (phoneComponents != null && phoneComponents.Count > 0)
-            {
-                foreach (IComponent component in phoneComponents) {
-                    strBldr.AppendLine(component.GetDescription());
-                }
-            }
-            return strBldr.ToString();
-            
         }
     }
 }

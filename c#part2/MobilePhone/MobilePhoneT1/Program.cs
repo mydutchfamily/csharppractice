@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using MobilePhoneT1.Interfaces;
 
 namespace MobilePhoneT1
 {
@@ -10,7 +11,7 @@ namespace MobilePhoneT1
     {
         static void Main(string[] args)
         {
-            IPhone phone = PhoneBuilder.BuildSimplePhone();
+            IPhone phone = PhoneBuilder.BuildSimplePhone("BP20200225");
 
             phone.Operator = "Sim";
 

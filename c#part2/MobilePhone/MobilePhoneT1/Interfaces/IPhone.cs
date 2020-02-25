@@ -1,20 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
-namespace MobilePhoneT1
+namespace MobilePhoneT1.Interfaces
 {
-    interface IPhone
+    interface IPhone:IComponent
     {
         List<IComponent> PhoneComponents { get; set;}
 
         string FormFactor { get;}
 
         string Operator { get; set;}
-
-        string GetDescription();
 
     }
 }

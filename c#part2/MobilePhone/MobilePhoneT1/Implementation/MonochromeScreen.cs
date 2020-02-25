@@ -1,26 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace MobilePhoneT1
+﻿namespace MobilePhoneT1.Implementation
 {
     class MonochromeScreen : IScreen
     {
         private string type;
         private Resolution resolution;
 
-        public MonochromeScreen(string type, int x, int y) {
-            this.type = type;
-            resolution = new Resolution();
-            resolution.x = x;
-            resolution.y = y;
-
-        }
-
-        private MonochromeScreen() {
-        }
+        public string ComponentType { get; } = "2 lines text monochrome display";
+        public string SerialNumber { get; }
 
         public Resolution Resolution
         {
@@ -37,10 +23,23 @@ namespace MobilePhoneT1
                 return type;
             }
         }
+        public MonochromeScreen(string type, int x, int y, string serialNumber) {
+            this.type = type;
+            resolution = new Resolution
+            {
+                x = x,
+                y = y
+            };
 
+            this.SerialNumber = serialNumber;
+
+        }
+
+        private MonochromeScreen() {
+        }
         public string GetDescription()
         {
-            return $"screen type: {type}, x:y resolution: {resolution.x}:{resolution.y}";
+            return $"screen type: {type}, resolution: {resolution.x}:{resolution.y}";
         }
     }
 }

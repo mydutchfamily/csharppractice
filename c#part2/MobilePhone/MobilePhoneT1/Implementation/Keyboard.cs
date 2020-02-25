@@ -8,25 +8,21 @@ namespace MobilePhoneT1.Implementation
 {
     class Keyboard : IKeyboard
     {
+        public string ComponentType { get; } = "Button keypad";
+        public string SerialNumber { get; }
 
-        public Keyboard(List<string> languages) {
-            this.languages = languages;
+        public List<string> Languages { get; } = new List<string>();
+        public Keyboard(List<string> languages, string serialNumber)
+        {
+            this.SerialNumber = serialNumber;
+            this.Languages = languages;
         }
         private Keyboard(){
         }
-
-        private List<string> languages = new List<string>();
-        public List<string> Languages
-        {
-            get
-            {
-                return languages;
-            }
-        }
-
         public string GetDescription()
         {
-            return $"keyboard support {languages.Count} languages: {String.Join(",", languages)}";
+            return $"keyboard support {Languages.Count} languages: {String.Join(",", Languages)}";
         }
+
     }
 }
