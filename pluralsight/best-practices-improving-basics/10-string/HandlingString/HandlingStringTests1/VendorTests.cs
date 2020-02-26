@@ -35,5 +35,44 @@ namespace HandlingString.Tests
 
             Assert.AreEqual(expceted, actual);
         }
+
+        [TestMethod()]
+        public void ProductCodeTest()
+        {
+            var vendor = new Vendor();
+            vendor.VendorId = 1;
+            vendor.CompanyName = "ABC Corp";
+            var expected = "ABC Corp-001";
+
+            var actual = vendor.ProductCode;
+
+            Assert.AreEqual(expected, actual);
+        }
+
+        [TestMethod()]
+        public void VendorCodeTest()
+        {
+            var vendor = new Vendor();
+            vendor.VendorId = 1;
+            vendor.CompanyName = "ABC Corp";
+            var expected = "ABC Corp-001";
+
+            var actual = vendor.VendorCode;
+
+            Assert.AreEqual(expected, actual);
+        }
+
+        [TestMethod()]
+        public void PlaceOrderTest()
+        {
+            var vendor = new Vendor();
+            vendor.VendorId = 1;
+            vendor.CompanyName = "ABC Corp";
+
+            var actual = vendor.PlaceOrder(50);
+            var expected = "Order from Acme\r\nProduct: rtgfh\r\nQuantity: 50\r\nInstructions: standard delivery";
+
+            Assert.AreEqual(expected, actual);
+        }
     }
 }
