@@ -6,9 +6,9 @@ namespace APM.SL
   public class Discount
   {
     public int DiscountId { get; private set; }
-    public string DiscountName { get; set; }
+        public string DiscountName { get; set; } = ""; // <Nullable>enable</Nullable>
 
-    public decimal PercentOff { get; set; }
+        public decimal PercentOff { get; set; }
 
     // ... Discount details
 
