@@ -9,12 +9,52 @@ namespace MyClassesTest
     [TestClass]
     public class FileProcessTest
     {
-        private const string fileLocation = "C:\\csharp\\code\\pluralsight\\basics_unit_tests\\MyClasses\\MyClassesTest\\FileExist.txt";
-        //private string fileLocation = "F:\\ARB\\GitHub\\csharppractice\\pluralsight\\basics_unit_tests\\MyClasses\\MyClassesTest\\FileExist.txt";
+        //private const string fileLocation = "C:\\csharp\\code\\pluralsight\\basics_unit_tests\\MyClasses\\MyClassesTest\\FileExist.txt";
+        private string fileLocation = "F:\\ARB\\GitHub\\csharppractice\\pluralsight\\basics_unit_tests\\MyClasses\\MyClassesTest\\FileExist.txt";
 
         private const string BAD_FILE_NAME = "F:\\FileNotExist.txt";
 
         private string _GoodFileName;
+
+        [ClassInitialize]
+        public static void ClassInitialize(TestContext testContext)
+        {
+            testContext.WriteLine("In the Class Initialize");
+        }
+
+        [ClassCleanup]
+        public static void ClassCleanup()
+        {
+
+        }
+
+        [TestInitialize]
+        public void TestInitialize()
+        {
+            if (TestContext.TestName == "CreateFileNameDoesExist")
+            {
+                SetGoodFileName();
+                if (!string.IsNullOrEmpty(_GoodFileName))
+                {
+                    TestContext.WriteLine("Creating File: "+ _GoodFileName);
+                    File.AppendAllText(_GoodFileName, "Text from TestInitialize");
+                }
+
+            }
+        }
+
+        [TestCleanup]
+        public void TestCleanup()
+        {
+            if (TestContext.TestName == "CreateFileNameDoesExist")
+            {
+                if (!string.IsNullOrEmpty(_GoodFileName))
+                {
+                    TestContext.WriteLine("Deleting File: " + _GoodFileName);
+                    File.Delete(_GoodFileName);
+                }
+            }
+        }
 
         public TestContext TestContext{ get; set; }
 
@@ -44,13 +84,13 @@ namespace MyClassesTest
             FileProcess fp = new FileProcess();
             bool fromCall;
 
-            SetGoodFileName();
-            TestContext.WriteLine("Creating the file" + _GoodFileName);
-            File.AppendAllText(_GoodFileName, "Some Text");
+            //SetGoodFileName();
+            //TestContext.WriteLine("Creating the file" + _GoodFileName);
+            //File.AppendAllText(_GoodFileName, "Some Text");
             TestContext.WriteLine("Testing the file" + _GoodFileName);
             fromCall = fp.FileExists(_GoodFileName);
-            TestContext.WriteLine("Deleting the file" + _GoodFileName);
-            File.Delete(_GoodFileName);
+            //TestContext.WriteLine("Deleting the file" + _GoodFileName);
+            //File.Delete(_GoodFileName);
 
             Assert.IsTrue(fromCall);
 
