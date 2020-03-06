@@ -32,7 +32,7 @@ namespace MyClassesTest
         [TestInitialize]
         public void TestInitialize()
         {
-            if (TestContext.TestName == "CreateFileNameDoesExist")
+            if (TestContext.TestName.StartsWith("CreateFileNameDoesExist"))
             {
                 SetGoodFileName();
                 if (!string.IsNullOrEmpty(_GoodFileName))
@@ -47,7 +47,7 @@ namespace MyClassesTest
         [TestCleanup]
         public void TestCleanup()
         {
-            if (TestContext.TestName == "CreateFileNameDoesExist")
+            if (TestContext.TestName.StartsWith("CreateFileNameDoesExist"))
             {
                 if (!string.IsNullOrEmpty(_GoodFileName))
                 {
@@ -65,6 +65,28 @@ namespace MyClassesTest
             if (_GoodFileName.Contains("[AppPath]")) {
                 _GoodFileName = _GoodFileName.Replace("[AppPath]", Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData));
             }
+        }
+
+        [TestMethod]
+        public void CreateFileNameDoesExistSimpleMessage()
+        {
+            FileProcess fileProcess = new FileProcess();
+            bool fromCall;
+
+            fromCall = fileProcess.FileExists(_GoodFileName);
+
+            Assert.IsFalse(fromCall, "File DOES not Exist.");
+        }
+
+        [TestMethod]
+        public void CreateFileNameDoesExistMessageWithFormatting()
+        {
+            FileProcess fileProcess = new FileProcess();
+            bool fromCall;
+
+            fromCall = fileProcess.FileExists(_GoodFileName);
+
+            Assert.IsFalse(fromCall, "File '{0}' DOES not Exist.", _GoodFileName);
         }
 
         [TestMethod]
