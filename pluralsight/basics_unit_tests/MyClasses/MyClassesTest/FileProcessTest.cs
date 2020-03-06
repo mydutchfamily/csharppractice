@@ -3,6 +3,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using MyClasses;
 using System.Configuration;
 using System.IO;
+using System.Runtime.Remoting.Messaging;
 
 namespace MyClassesTest
 {
@@ -67,6 +68,10 @@ namespace MyClassesTest
         }
 
         [TestMethod]
+        [Owner("Vova")]
+        [Priority(0)]
+        [TestCategory("NoException")]
+        [Ignore()]
         public void FileNameDoesExist()
         {
             FileProcess fp = new FileProcess();
@@ -79,6 +84,36 @@ namespace MyClassesTest
         }
 
         [TestMethod]
+        [Timeout(3000)] //wait for 3 sec and fail the test
+        public void SimulateTimeoutTest()
+        {
+            System.Threading.Thread.Sleep(4000);
+        }
+
+        private const string FILE_NAME = @"FileToDeploy.txt";
+
+        [TestMethod]
+        [Owner("Egor")]
+        [DeploymentItem(FILE_NAME)]
+        public void FileNameDoesExistUsingDeploymentItem()
+        {
+            FileProcess fileProcess = new FileProcess();
+            string fileName;
+            bool fromCall;
+
+            fileName = TestContext.DeploymentDirectory + @"\" + FILE_NAME;
+                       TestContext.WriteLine("Checking file:" + fileName);
+
+            fromCall = fileProcess.FileExists(fileName);
+
+            Assert.IsTrue(fromCall);
+        }
+
+        [TestMethod]
+        [Description("Check to see if a file does exist.")]
+        [Owner("Alex")]
+        [Priority(0)]
+        [TestCategory("NoException")]
         public void CreateFileNameDoesExist()
         {
             FileProcess fp = new FileProcess();
@@ -97,6 +132,8 @@ namespace MyClassesTest
         }
 
         [TestMethod]
+        [Priority(1)]
+        [TestCategory("NoException")]
         public void FileNameDoesNotExist()
         {
             FileProcess fp = new FileProcess();
@@ -109,6 +146,8 @@ namespace MyClassesTest
         }
 
         [TestMethod]
+        [Priority(2)]
+        [TestCategory("Exception")]
         [ExpectedException(typeof(ArgumentNullException))]
         public void FileNameNullOrEmpty_ThrowsArgumentNullException()
         {
@@ -118,6 +157,7 @@ namespace MyClassesTest
         }
 
         [TestMethod]
+        [Priority(2)]
         public void FileNameNullOrEmpty_ThrowsArgumentNullException_UsingTryCatch()
         {
             FileProcess fp = new FileProcess();
