@@ -6,14 +6,13 @@ namespace MobilePhoneT1.Implementation
 {
     class Phone : GeneralPhone
     {
-        public Phone(string formFactor, string serialNumber)
+        public Phone(string formFactor, string serialNumber) :base(formFactor, serialNumber)
         {
-            this.SerialNumber = serialNumber;
-            this.FormFactor = formFactor;
-        }
+            List<IComponent> components = new List<IComponent>();
+            components.Add(new MonochromeScreen("Monochrome", 120, 70, "2LTMD20200225"));
+            components.Add(new Keyboard(new List<string> { "English", "Russian" }, "KP20200225"));
 
-        private Phone()
-        {
+            this.PhoneComponents = components;
         }
     }
 }

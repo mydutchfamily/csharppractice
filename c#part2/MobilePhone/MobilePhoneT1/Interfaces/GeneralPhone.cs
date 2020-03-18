@@ -1,50 +1,73 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Text;
 
 namespace MobilePhoneT1.Interfaces
 {
-    public abstract class GeneralPhone:IPhone
+    public abstract class GeneralPhone : IPhone
     {
-    
-    private string vOperator;
-    private List<IComponent> vPhoneComponents = new List<IComponent>();
 
-    public string ComponentType { get; } = "Phone body";
-    public string SerialNumber { get; set; }
+        private string vSimCard;
+        private string vFormFactor;
+        private string vSerialNumber;
+        private List<IComponent> vPhoneComponents;
 
-    public string FormFactor { get; set; }
-
-        public string Operator
-    {
-        get
+        public GeneralPhone(string formFactor, string serialNumber)
         {
-            return vOperator ?? "N/A";
+            vSerialNumber = serialNumber;
+            vFormFactor = formFactor;
         }
 
-        set
+        public string ComponentType { get; } = "Phone body";
+
+        public string SimCard
         {
-            vOperator = value;
-        }
-    }
-
-    public List<IComponent> PhoneComponents {
-        get { return vPhoneComponents; }
-        set { vPhoneComponents = value; }
-    }
-
-        public string GetDescription()
-    {
-        StringBuilder strBldr = new StringBuilder();
-        strBldr.AppendLine($"phone form factor is:{this.FormFactor}, used operator: {this.Operator}");
-
-        if (vPhoneComponents != null && vPhoneComponents.Count > 0)
-        {
-            foreach (IComponent component in vPhoneComponents)
+            get
             {
-                strBldr.AppendLine(component.GetDescription());
+                return vSimCard ?? "N/A";
+            }
+
+            set
+            {
+                vSimCard = value;
             }
         }
-        return strBldr.ToString();
+
+        public string SerialNumber
+        {
+            get
+            {
+                return vSerialNumber;
+            }
+        }
+
+        public List<IComponent> PhoneComponents
+        {
+           get { return vPhoneComponents?.GetRange(0, vPhoneComponents.Count); }
+           protected set { vPhoneComponents = value; }
+        }
+
+        public string FormFactor
+        {
+            get
+            {
+                return vFormFactor;
+            }
+        }
+
+        public override string ToString()
+        {
+            StringBuilder strBldr = new StringBuilder();
+            strBldr.AppendLine($"phone form factor is:{FormFactor}, used operator: {SimCard}");
+
+            if (vPhoneComponents != null && vPhoneComponents.Count > 0)
+            {
+                foreach (IComponent component in vPhoneComponents)
+                {
+                    strBldr.AppendLine(component.ToString());
+                }
+            }
+            return strBldr.ToString();
+        }
     }
-}
 }

@@ -35,9 +35,7 @@
 
         }
 
-        private MonochromeScreen() {
-        }
-        public string GetDescription()
+        public override string ToString()
         {
             return $"screen type: {type}, resolution: {resolution.x}:{resolution.y}";
         }

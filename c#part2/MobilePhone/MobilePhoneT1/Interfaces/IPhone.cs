@@ -4,11 +4,11 @@ namespace MobilePhoneT1.Interfaces
 {
     interface IPhone:IComponent
     {
-        List<IComponent> PhoneComponents { get; set;}
+        List<IComponent> PhoneComponents { get;}
 
         string FormFactor { get;}
 
-        string Operator { get; set;}
+        string SimCard { get; set;}
 
     }
 }

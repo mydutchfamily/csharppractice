@@ -58,6 +58,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Implementation\GamePhone.cs" />
+    <Compile Include="Implementation\KeyboardWithJoystick.cs" />
     <Compile Include="Interfaces\GeneralPhone.cs" />
     <Compile Include="Implementation\Keyboard.cs" />
     <Compile Include="Interfaces\IComponent.cs" />
@@ -66,7 +68,6 @@
     <Compile Include="Interfaces\IScreen.cs" />
     <Compile Include="Implementation\MonochromeScreen.cs" />
     <Compile Include="Implementation\Phone.cs" />
-    <Compile Include="PhoneBuilder.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

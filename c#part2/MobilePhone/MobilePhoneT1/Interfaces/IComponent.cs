@@ -11,6 +11,5 @@ namespace MobilePhoneT1
     {
         string ComponentType { get; }
         string SerialNumber { get; }
-        string GetDescription();
     }
 }
