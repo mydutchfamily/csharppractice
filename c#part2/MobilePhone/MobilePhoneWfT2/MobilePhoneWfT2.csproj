@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{DA997891-A3B9-4D2F-8773-A55C27C011C1}</ProjectGuid>
-    <OutputType>Exe</OutputType>
+    <ProjectGuid>{410911B1-4758-4C48-8BE4-13F12916ED13}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>MobilePhoneT2</RootNamespace>
-    <AssemblyName>MobilePhoneT2</AssemblyName>
+    <RootNamespace>MobilePhoneWfT2</RootNamespace>
+    <AssemblyName>MobilePhoneWfT2</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -39,36 +39,39 @@
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Net.Http" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Enums\Enums.cs" />
-    <Compile Include="Implementation\ConsoleOutput.cs" />
-    <Compile Include="Implementation\GamePhone.cs" />
-    <Compile Include="Implementation\HeadsetSony.cs" />
-    <Compile Include="Implementation\Joystick.cs" />
-    <Compile Include="Implementation\Keyboard.cs" />
-    <Compile Include="Implementation\KeyboardWithJoystick.cs" />
-    <Compile Include="Implementation\MonochromeScreen.cs" />
-    <Compile Include="Implementation\Phone.cs" />
-    <Compile Include="Implementation\PowerBank.cs" />
-    <Compile Include="Interfaces\IOutput.cs" />
-    <Compile Include="Interfaces\Markers\IBluetooth.cs" />
-    <Compile Include="AbstractClass\GeneralPhone.cs" />
-    <Compile Include="Interfaces\IComponent.cs" />
-    <Compile Include="AbstractClass\InterconnectionCommon.cs" />
-    <Compile Include="Interfaces\IInterconnection.cs" />
-    <Compile Include="Interfaces\IKeyboard.cs" />
-    <Compile Include="Interfaces\IPhone.cs" />
-    <Compile Include="Interfaces\Markers\IPlayback.cs" />
-    <Compile Include="Interfaces\Markers\IPowerSupply.cs" />
-    <Compile Include="Interfaces\IScreen.cs" />
-    <Compile Include="Interfaces\Markers\ITypec.cs" />
-    <Compile Include="Interfaces\Markers\IUsb.cs" />
-    <Compile Include="Interfaces\Markers\IWifi.cs" />
+    <Compile Include="Form1.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form1.Designer.cs">
+      <DependentUpon>Form1.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
