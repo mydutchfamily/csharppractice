@@ -1,8 +1,8 @@
-﻿using MobilePhoneT2.Enums;
+﻿using MobilePhoneClT2.Enums;
 
-namespace MobilePhoneT2.Implementation
+namespace MobilePhoneClT2.Implementation
 {
-    class MonochromeScreen : IScreen
+    public class MonochromeScreen : IScreen
     {
         private string type;
         private Resolution resolution;

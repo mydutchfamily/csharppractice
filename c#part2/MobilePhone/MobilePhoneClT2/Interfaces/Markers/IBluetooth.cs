@@ -4,11 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MobilePhoneT2.Interfaces
+namespace MobilePhoneClT2.Interfaces
 {
-    interface IOutput
+    interface IBluetooth : IComponent
     {
-       void Write(string text);
-       void WriteLine(string text);
     }
 }

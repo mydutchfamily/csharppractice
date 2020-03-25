@@ -1,15 +1,15 @@
-﻿using MobilePhoneT2.AbstractClass;
-using MobilePhoneT2.Enums;
-using MobilePhoneT2.Interfaces;
+﻿using MobilePhoneClT2.AbstractClass;
+using MobilePhoneClT2.Enums;
+using MobilePhoneClT2.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MobilePhoneT2.Implementation
+namespace MobilePhoneClT2.Implementation
 {
-    class HeadsetSony : InterconnectionCommon, IPlayback
+    public class HeadsetSony : InterconnectionCommon, IPlayback
     {
         private IOutput output;
         public HeadsetSony(string serialNumber, IOutput output) {

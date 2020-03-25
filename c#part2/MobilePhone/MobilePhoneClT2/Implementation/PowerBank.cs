@@ -1,15 +1,15 @@
-﻿using MobilePhoneT2.AbstractClass;
-using MobilePhoneT2.Enums;
-using MobilePhoneT2.Interfaces;
+﻿using MobilePhoneClT2.AbstractClass;
+using MobilePhoneClT2.Enums;
+using MobilePhoneClT2.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MobilePhoneT2.Implementation
+namespace MobilePhoneClT2.Implementation
 {
-    class PowerBank : InterconnectionCommon, IPowerSupply
+    public class PowerBank : InterconnectionCommon, IPowerSupply
     {
         private IOutput output;
         public PowerBank(string serialNumber, IOutput output) {

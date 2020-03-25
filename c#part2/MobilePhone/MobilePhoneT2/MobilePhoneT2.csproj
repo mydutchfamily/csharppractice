@@ -43,35 +43,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Enums\Enums.cs" />
-    <Compile Include="Implementation\ConsoleOutput.cs" />
-    <Compile Include="Implementation\GamePhone.cs" />
-    <Compile Include="Implementation\HeadsetSony.cs" />
-    <Compile Include="Implementation\Joystick.cs" />
-    <Compile Include="Implementation\Keyboard.cs" />
-    <Compile Include="Implementation\KeyboardWithJoystick.cs" />
-    <Compile Include="Implementation\MonochromeScreen.cs" />
-    <Compile Include="Implementation\Phone.cs" />
-    <Compile Include="Implementation\PowerBank.cs" />
-    <Compile Include="Interfaces\IOutput.cs" />
-    <Compile Include="Interfaces\Markers\IBluetooth.cs" />
-    <Compile Include="AbstractClass\GeneralPhone.cs" />
-    <Compile Include="Interfaces\IComponent.cs" />
-    <Compile Include="AbstractClass\InterconnectionCommon.cs" />
-    <Compile Include="Interfaces\IInterconnection.cs" />
-    <Compile Include="Interfaces\IKeyboard.cs" />
-    <Compile Include="Interfaces\IPhone.cs" />
-    <Compile Include="Interfaces\Markers\IPlayback.cs" />
-    <Compile Include="Interfaces\Markers\IPowerSupply.cs" />
-    <Compile Include="Interfaces\IScreen.cs" />
-    <Compile Include="Interfaces\Markers\ITypec.cs" />
-    <Compile Include="Interfaces\Markers\IUsb.cs" />
-    <Compile Include="Interfaces\Markers\IWifi.cs" />
+    <Compile Include="ConsoleOutput.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\MobilePhoneClT2\MobilePhoneClT2.csproj">
+      <Project>{938b77be-e002-4ca7-a03d-c627ea96e5b9}</Project>
+      <Name>MobilePhoneClT2</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

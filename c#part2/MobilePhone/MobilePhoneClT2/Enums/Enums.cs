@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MobilePhoneT2.Enums
+namespace MobilePhoneClT2.Enums
 {
     public enum JoystickButtons { Up, Down, Left, Right, Ok, Cancel, NumberOfItems };
     public enum ComponentTypes { Keyboard, Joystick, Phone, Interconnection, Screen, NumberOfItems };

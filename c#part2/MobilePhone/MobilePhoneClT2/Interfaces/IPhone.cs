@@ -1,10 +1,10 @@
 ﻿using System.Collections.Generic;
-using MobilePhoneT2.Implementation;
+using MobilePhoneClT2.Implementation;
 using System;
-using MobilePhoneT2.AbstractClass;
-using MobilePhoneT2.Enums;
+using MobilePhoneClT2.AbstractClass;
+using MobilePhoneClT2.Enums;
 
-namespace MobilePhoneT2.Interfaces
+namespace MobilePhoneClT2.Interfaces
 {
     public interface IPhone:IComponent
     {

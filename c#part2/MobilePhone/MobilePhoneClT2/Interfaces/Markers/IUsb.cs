@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MobilePhoneT2.Interfaces
+namespace MobilePhoneClT2.Interfaces
 {
-    interface IBluetooth : IComponent
+    interface IUsb : IComponent
     {
     }
 }

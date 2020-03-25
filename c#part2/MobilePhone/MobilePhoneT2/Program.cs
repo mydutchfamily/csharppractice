@@ -1,13 +1,13 @@
-﻿using MobilePhoneT2.Enums;
-using MobilePhoneT2.Implementation;
-using MobilePhoneT2.Interfaces;
+﻿using MobilePhoneClT2.Interfaces;
+using MobilePhoneClT2.Implementation;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using MobilePhoneClT2.Enums;
 
-namespace MobilePhoneT2
+namespace MobilePhoneClT2
 {
     class Program
     {

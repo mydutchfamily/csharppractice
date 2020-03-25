@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MobilePhoneT2
+namespace MobilePhoneClT2
 {
     interface IKeyboard: IComponent
     {

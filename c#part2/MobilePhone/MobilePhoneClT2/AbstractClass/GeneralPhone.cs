@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using MobilePhoneT2.Implementation;
+using MobilePhoneClT2.Implementation;
 using System.Linq;
-using MobilePhoneT2.Interfaces;
-using MobilePhoneT2.Enums;
+using MobilePhoneClT2.Interfaces;
+using MobilePhoneClT2.Enums;
 
-namespace MobilePhoneT2.AbstractClass
+namespace MobilePhoneClT2.AbstractClass
 {
     public abstract class GeneralPhone : IPhone
     {

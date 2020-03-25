@@ -1,11 +1,11 @@
-﻿using MobilePhoneT2.Interfaces;
+﻿using MobilePhoneClT2.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MobilePhoneT2.Implementation
+namespace MobilePhoneClT2.Implementation
 {
     class ConsoleOutput : IOutput
     {

@@ -1,11 +1,11 @@
 ﻿using System.Collections.Generic;
 using System.Text;
-using MobilePhoneT2.Interfaces;
-using MobilePhoneT2.AbstractClass;
+using MobilePhoneClT2.Interfaces;
+using MobilePhoneClT2.AbstractClass;
 
-namespace MobilePhoneT2.Implementation
+namespace MobilePhoneClT2.Implementation
 {
-    class Phone : GeneralPhone
+    public class Phone : GeneralPhone
     {
         public Phone(string formFactor, string serialNumber) :base(formFactor, serialNumber)
         {
