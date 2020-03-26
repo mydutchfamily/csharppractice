@@ -44,7 +44,7 @@ namespace MobilePhoneClT2
                     gamePhone.PluginDevice(powerBank).ExecuteDevice(typeof(PowerBank).Name);
                     break;
                 default:
-                    Console.WriteLine("Unknown device selected");
+                    output.WriteLine("Unknown device selected");
                     break;
             }
 
