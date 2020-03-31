@@ -18,5 +18,11 @@ namespace EventsDelegatesLambdas
             action(x, y);
             Console.WriteLine(nameof(ProcessAction) + " done");
         }
+
+        public void ProcessFunc(int x, int y, Func<int, int, int> func)
+        {
+            var result = func(x, y);
+            Console.WriteLine(nameof(ProcessFunc) + ": " + result);
+        }
     }
 }

@@ -22,12 +22,30 @@ namespace EventsDelegatesLambdas
     {
         static void Main(string[] args)
         {
+            var customers = new List<Customer> {
+                new Customer { ID = 1, LastName = "lastclient1", FirstName = "firstclient1", City = "cityclient1"},
+                new Customer { ID = 2, LastName = "lastclient2", FirstName = "firstclient2", City = "cityclient1"},
+                new Customer { ID = 3, LastName = "lastclient3", FirstName = "firstclient3", City = "cityclient2"},
+                new Customer { ID = 4, LastName = "lastclient4", FirstName = "firstclient4", City = "cityclient3"}
+            };
+
+            var cityCust = customers.Where(c => c.City == "cityclient1" && c.ID < 2).OrderBy(c => c.FirstName);
+
+            foreach (var cust in cityCust) {
+                Console.WriteLine(cust.FirstName);
+            }
+
+            Console.WriteLine("************************************************************");
+
             BizRuleDelegate addDel = (x, y) => x + y;
 
             var process = new ProcessData();
             process.Process(3, 8, addDel);
             Action<int, int> myAction = (x, y) => Console.WriteLine("Action lambda in: " + (x + y));
             process.ProcessAction(2, 3, myAction);
+
+            Func<int, int, int> funcAddDel = (x, y) => x + y;
+            process.ProcessFunc(2, 4, funcAddDel);
 
             Console.WriteLine("************************************************************");
 
