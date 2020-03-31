@@ -22,11 +22,14 @@ namespace EventsDelegatesLambdas
     {
         static void Main(string[] args)
         {
-            BizRuleDelegate addDell = (x, y) => x + y;
-            BizRuleDelegate subDell = (x, y) => x - y;
+            BizRuleDelegate addDel = (x, y) => x + y;
 
             var process = new ProcessData();
-            process.Process(3, 8, addDell);
+            process.Process(3, 8, addDel);
+            Action<int, int> myAction = (x, y) => Console.WriteLine("Action lambda in: " + (x + y));
+            process.ProcessAction(2, 3, myAction);
+
+            Console.WriteLine("************************************************************");
 
             WorkPerformedHandler del1 = new WorkPerformedHandler(WorkPerformed1);
             WorkPerformedHandler del2 = new WorkPerformedHandler(WorkPerformed2);
@@ -39,6 +42,8 @@ namespace EventsDelegatesLambdas
             del1 += del2 + del3;
             int finalHours = del1(4, WorkType.Golf);// last value returned
             Console.WriteLine(finalHours);
+
+            Console.WriteLine("************************************************************");
 
             var worker = new Worker();
 
