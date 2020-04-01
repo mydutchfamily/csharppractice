@@ -47,7 +47,17 @@ namespace MobilePhoneWfT2
             choice = 3;
         }
 
-        private void Apply_Click(object sender, EventArgs e)
+        private void Apply_Click(object sender, EventArgs a)
+        {
+            try {
+                ApplyChoice();
+            }
+            catch (NotImplementedException e) {
+                MessageBox.Show(e.Message);
+            }
+        }
+
+        private void ApplyChoice()
         {
             switch (choice)
             {

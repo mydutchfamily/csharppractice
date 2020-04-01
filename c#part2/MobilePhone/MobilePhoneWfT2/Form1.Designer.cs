@@ -93,10 +93,11 @@
             // 
             // outputTextBox
             // 
-            this.outputTextBox.Location = new System.Drawing.Point(1, 147);
+            this.outputTextBox.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.outputTextBox.Location = new System.Drawing.Point(0, 147);
             this.outputTextBox.Name = "outputTextBox";
             this.outputTextBox.ReadOnly = true;
-            this.outputTextBox.Size = new System.Drawing.Size(289, 123);
+            this.outputTextBox.Size = new System.Drawing.Size(292, 126);
             this.outputTextBox.TabIndex = 5;
             this.outputTextBox.Text = "";
             // 
@@ -111,6 +112,7 @@
             this.Controls.Add(this.sony35);
             this.Controls.Add(this.sonyBTH);
             this.Controls.Add(this.label1);
+            this.MaximizeBox = false;
             this.Name = "Form1";
             this.Text = "Form1";
             this.ResumeLayout(false);
