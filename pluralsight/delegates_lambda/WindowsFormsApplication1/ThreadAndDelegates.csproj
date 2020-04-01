@@ -33,7 +33,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <StartupObject>WindowsFormsApplication1.BackgroundWorkerDemo</StartupObject>
+    <StartupObject>WindowsFormsApplication1.UsingAThread</StartupObject>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -63,6 +63,12 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UsingAThread.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UsingAThread.Designer.cs">
+      <DependentUpon>UsingAThread.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="AsyncGood.resx">
       <DependentUpon>AsyncGood.cs</DependentUpon>
     </EmbeddedResource>
@@ -78,6 +84,9 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="UsingAThread.resx">
+      <DependentUpon>UsingAThread.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
