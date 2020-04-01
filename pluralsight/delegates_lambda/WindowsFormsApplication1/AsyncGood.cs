@@ -20,9 +20,10 @@ namespace ThreadAndDelegates
             InitializeComponent();
         }
 
-        //public static void Main() {
-        //    Application.Run(new Form1());
-        //}
+        public static void Main()
+        {
+            Application.Run(new Form1());
+        }
 
         private void button1_Click(object sender, EventArgs e)
         {
