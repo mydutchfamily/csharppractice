@@ -7,8 +7,8 @@
     <ProjectGuid>{8D19BA00-824F-45A9-B86F-AA04C1D7BDE3}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>WindowsFormsApplication1</RootNamespace>
-    <AssemblyName>WindowsFormsApplication1</AssemblyName>
+    <RootNamespace>ThreadAndDelegates</RootNamespace>
+    <AssemblyName>ThreadAndDelegates</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -33,11 +33,12 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <StartupObject>WindowsFormsApplication1.UsingAThread</StartupObject>
+    <StartupObject>ThreadAndDelegates.DirectorySearcherForm</StartupObject>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.DirectoryServices" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -47,6 +48,10 @@
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
+    <Reference Include="WindowsFormsApplication1, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>obj\Debug\WindowsFormsApplication1.exe</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BackgroundWorkerDemo.cs">
@@ -60,6 +65,15 @@
     </Compile>
     <Compile Include="AsyncGood.Designer.cs">
       <DependentUpon>AsyncGood.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DirectorySearcher.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="DirectorySearcherForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DirectorySearcherForm.Designer.cs">
+      <DependentUpon>DirectorySearcherForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -75,6 +89,9 @@
     <EmbeddedResource Include="BackgroundWorkerDemo.resx">
       <DependentUpon>BackgroundWorkerDemo.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="DirectorySearcherForm.resx">
+      <DependentUpon>DirectorySearcherForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -83,6 +100,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <EmbeddedResource Include="UsingAThread.resx">
       <DependentUpon>UsingAThread.cs</DependentUpon>

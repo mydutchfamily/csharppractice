@@ -11,18 +11,18 @@ using System.Windows.Forms;
 
 namespace ThreadAndDelegates
 {
-    public partial class Form1 : Form
+    public partial class AsyncGood : Form
     {
         delegate void StartProcessDelegate(int val);
         delegate void ShowProgressDelegate(int val);
-        public Form1()
+        public AsyncGood()
         {
             InitializeComponent();
         }
 
         public static void Main()
         {
-            Application.Run(new Form1());
+            Application.Run(new AsyncGood());
         }
 
         private void button1_Click(object sender, EventArgs e)

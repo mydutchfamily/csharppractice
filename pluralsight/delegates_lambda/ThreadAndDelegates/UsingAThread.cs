@@ -9,7 +9,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace WindowsFormsApplication1
+namespace ThreadAndDelegates
 {
     public partial class UsingAThread : Form
     {

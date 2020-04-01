@@ -1,6 +1,6 @@
 ﻿namespace ThreadAndDelegates
 {
-    partial class Form1
+    partial class AsyncGood
     {
         /// <summary>
         /// Required designer variable.
@@ -59,7 +59,7 @@
             this.label1.TabIndex = 2;
             this.label1.Text = "label1";
             // 
-            // Form1
+            // AsyncGood
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -67,8 +67,8 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.progressBar1);
             this.Controls.Add(this.button1);
-            this.Name = "Form1";
-            this.Text = "Form1";
+            this.Name = "AsyncGood";
+            this.Text = "AsyncGood";
             this.ResumeLayout(false);
             this.PerformLayout();
 
