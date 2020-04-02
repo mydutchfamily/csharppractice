@@ -10,10 +10,19 @@ namespace WorkingWithNulls
     {
         static void Main(string[] args)
         {
-            PlayerCharacter player = new PlayerCharacter();
-            player.Name = "  ";
+            PlayerCharacter[] players = null;
 
-            PlayerDisplayer.Write(player);
+            string name = players?[0]?.Name;// null conditional operator
+
+            PlayerCharacter player1 = null;
+
+            name = player1?.Name;// null conditional operator
+
+
+            PlayerCharacter player2 = new PlayerCharacter();
+            player2.Name = "  ";
+
+            PlayerDisplayer.Write(player2);
         }
     }
 }

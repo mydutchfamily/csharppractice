@@ -23,11 +23,23 @@ namespace WorkingWithNulls
             }
             else { Console.WriteLine(player.DaysSinceLastLogin); }
 
-            if (player.DateOfBirth == null)
+
+            if (!player.DateOfBirth.HasValue) // == null
             {
-                Console.WriteLine($"No value for {nameof(player.DateOfBirth)}");
+                DateTime dt = player.DateOfBirth.GetValueOrDefault(DateTime.MinValue);
+
+                dt = player.DateOfBirth.HasValue ? player.DateOfBirth.Value : DateTime.MinValue;// conditional operator
+
+                dt = player.DateOfBirth ?? DateTime.MinValue;// null-coalescing operator
+
+                if (dt == DateTime.MinValue)
+                {
+                    //Console.WriteLine(player.DateOfBirth.Value); // >>> System.InvalidOperationException
+                    Console.WriteLine($"No value for {nameof(player.DateOfBirth)} used default: {dt}");
+                }
+                
             }
-            else { Console.WriteLine(player.DateOfBirth); }
+            else { Console.WriteLine(player.DateOfBirth.Value); }
 
             if (player.Age == null)
             {
