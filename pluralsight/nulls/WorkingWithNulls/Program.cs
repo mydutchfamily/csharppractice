@@ -23,6 +23,34 @@ namespace WorkingWithNulls
             player2.Name = "  ";
 
             PlayerDisplayer.Write(player2);
+
+            Console.WriteLine("**********************************************");
+
+            PlayerCharacter sarah = new PlayerCharacter(new DiamondSkinDefence()) { Name = "Sarah"};
+            PlayerCharacter amrit = new PlayerCharacter(new IronBonesDefence()) { Name = "Amrit" };
+            PlayerCharacter gentry = new PlayerCharacter((ISpecialDefence)null) { Name = "Gentry" };
+
+            sarah.Hit1(10);
+            amrit.Hit1(10);
+            gentry.Hit1(10);
+
+            Console.WriteLine("**********************************************");
+
+            PlayerCharacter nullgentry = new PlayerCharacter(new NullDefence()) { Name = "NullGentry" };
+
+            nullgentry.Hit2(10);
+
+            Console.WriteLine("**********************************************");
+
+            PlayerCharacter absgentry = new PlayerCharacter(new AbstractDefence()) { Name = "AbsGentry" };
+
+            absgentry.Hit3(10);
+
+            Console.WriteLine("**********************************************");
+
+            PlayerCharacter singletongentry = new PlayerCharacter(SpecialDefence.Null) { Name = "SingletonGentry" };
+
+            singletongentry.Hit3(10);
         }
     }
 }
