@@ -19,5 +19,6 @@ namespace MobilePhoneClT2.Interfaces
         List<Plugins> SupportedPlugins { get; }
 
         Boolean ExecuteDevice(string deviceType);
+        T UseComponent<T>() where T : class, IComponent;
     }
 }

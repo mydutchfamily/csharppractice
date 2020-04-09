@@ -13,6 +13,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MobilePhoneClT2", "MobilePh
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MobilePhoneClT2Tests", "MobilePhoneClT2Tests\MobilePhoneClT2Tests.csproj", "{5850D3FE-D407-43C5-8A6B-C6D0DE384DE0}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MobilePhoneWfT3", "MobilePhoneWfT3\MobilePhoneWfT3.csproj", "{7E705C38-BBD6-4025-8AEB-C273D2EC299C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MobilePhoneWfT3Tests", "MobilePhoneWfT3Tests\MobilePhoneWfT3Tests.csproj", "{0785CDED-187C-4C4E-8C79-C4475649ECB3}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +43,14 @@ Global
 		{5850D3FE-D407-43C5-8A6B-C6D0DE384DE0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5850D3FE-D407-43C5-8A6B-C6D0DE384DE0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5850D3FE-D407-43C5-8A6B-C6D0DE384DE0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7E705C38-BBD6-4025-8AEB-C273D2EC299C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7E705C38-BBD6-4025-8AEB-C273D2EC299C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7E705C38-BBD6-4025-8AEB-C273D2EC299C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7E705C38-BBD6-4025-8AEB-C273D2EC299C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0785CDED-187C-4C4E-8C79-C4475649ECB3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0785CDED-187C-4C4E-8C79-C4475649ECB3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0785CDED-187C-4C4E-8C79-C4475649ECB3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0785CDED-187C-4C4E-8C79-C4475649ECB3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -120,7 +120,7 @@ namespace CS8NullBasics
 
             LogNonNullable3(nullMessage); // warning
             LogNonNullable3(nonNullMessage); //ok
-            //LogNonNullable3(nullDate);// error: nullDate is not a reference type - class
+            //methodLogNonNullable3(nullDate);// error: nullDate is not a reference type - class
         }
     }
 }

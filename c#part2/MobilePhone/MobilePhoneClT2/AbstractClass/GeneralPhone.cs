@@ -105,5 +105,20 @@ namespace MobilePhoneClT2.AbstractClass
                 return false;
             }
         }
+
+       public T UseComponent<T>() where T : class, IComponent
+        {
+            T component = null;
+            foreach (IComponent item in vPhoneComponents)
+            {
+                if (typeof(T).Name.Equals(item.GetType().Name))
+                {
+                    component = (T)item;
+                    break;
+                }
+            }
+
+            return component;
+        }
     }
 }
