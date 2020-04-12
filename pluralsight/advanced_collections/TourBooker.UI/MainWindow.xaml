@@ -41,8 +41,11 @@
             <!--<ListBox x:Name="lbxAllCountries" Margin="3"
 				ItemsSource="{Binding Path=AllCountriesByKey.Values}" values not sorted in the list/>-->
             
+            <!--<ListBox x:Name="lbxAllCountries" Margin="3"
+				ItemsSource="{Binding Path=AllCountriesByKeySorted.Values}" /> values sorted by key not by values-->
+            
             <ListBox x:Name="lbxAllCountries" Margin="3"
-				ItemsSource="{Binding Path=AllCountriesByKeySorted.Values}" />
+				ItemsSource="{Binding Path=AllCountriesByKeySortedList.Values}" /> <!--values still sorted by key not by values-->
         </GroupBox>
     </Grid>
 </Window>
