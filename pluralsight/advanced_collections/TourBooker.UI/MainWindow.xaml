@@ -32,8 +32,17 @@
         </GroupBox>
 
         <GroupBox Header="All Countries" Grid.Column="1" Margin="3">
+            <!--<ListBox x:Name="lbxAllCountries" Margin="3"
+				ItemsSource="{Binding Path=AllCountries}" /> values from the List-->
+            
+            <!--<ListBox x:Name="lbxAllCountries" Margin="3"
+				ItemsSource="{Binding Path=AllCountriesByKey}" /> wrong screen output format-->
+            
+            <!--<ListBox x:Name="lbxAllCountries" Margin="3"
+				ItemsSource="{Binding Path=AllCountriesByKey.Values}" values not sorted in the list/>-->
+            
             <ListBox x:Name="lbxAllCountries" Margin="3"
-				ItemsSource="{Binding Path=AllCountriesByKey.Values}" />
+				ItemsSource="{Binding Path=AllCountriesByKeySorted.Values}" />
         </GroupBox>
     </Grid>
 </Window>
