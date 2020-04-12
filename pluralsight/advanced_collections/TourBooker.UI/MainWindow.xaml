@@ -33,7 +33,7 @@
 
         <GroupBox Header="All Countries" Grid.Column="1" Margin="3">
             <ListBox x:Name="lbxAllCountries" Margin="3"
-				ItemsSource="{Binding Path=AllCountries}" />
+				ItemsSource="{Binding Path=AllCountriesByKey.Values}" />
         </GroupBox>
     </Grid>
 </Window>

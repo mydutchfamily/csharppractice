@@ -14,7 +14,7 @@ namespace TourBooker.Logic
             CsvReader reader = new CsvReader(csvFilePath);
             this.AllCountries = reader.ReadAllCountries().OrderBy(x=>x.Name).ToList();
 
-            this.AllCountriesByKey = AllCountries.ToDictionary(x => x.Code);
+            this.AllCountriesByKey = AllCountries.ToDictionary(x => x.Code, StringComparer.OrdinalIgnoreCase); // add statndart comparator to ignore case 
         }
     }
 }
