@@ -10,6 +10,8 @@ namespace TourBooker.Logic
     {
         public string Name { get; }
         public string Code { get; }
+
+        public CountryCode CountryCode { get; }
         public string Region { get; }
         public int Population { get; }
 
@@ -17,10 +19,10 @@ namespace TourBooker.Logic
         {
             this.Name = name;
             this.Code = code;
+            this.CountryCode = new CountryCode(code);
             this.Region = region;
             this.Population = population;
         }
-
         public override string ToString() => $"{Name} ({Code})";
     }
 }

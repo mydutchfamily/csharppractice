@@ -24,7 +24,8 @@
                 </Grid.ColumnDefinitions>
                 <TextBlock>Enter code</TextBlock>
                 <TextBox Grid.Column="1" MinWidth="80"  x:Name="tbxCountryCode" TextChanged="tbxCountryCode_TextChanged"></TextBox>
-                <TextBlock Grid.Row="1" Grid.Column="0" Text="{Binding Path=Code}" Height="25" VerticalAlignment="Bottom" />
+                <!--<TextBlock Grid.Row="1" Grid.Column="0" Text="{Binding Path=Code }" Height="25" VerticalAlignment="Bottom" />-->
+                <TextBlock Grid.Row="1" Grid.Column="0" Text="{Binding Path=CountryCode}" Height="25" VerticalAlignment="Bottom" />
                 <TextBlock Grid.Row="1" Grid.Column="1" Text="{Binding Path=Name}" />
                 <TextBlock Grid.Row="2" Grid.Column="1" Text="{Binding Path=Region}" />
             </Grid>
@@ -44,8 +45,11 @@
             <!--<ListBox x:Name="lbxAllCountries" Margin="3"
 				ItemsSource="{Binding Path=AllCountriesByKeySorted.Values}" /> values sorted by key not by values-->
             
+            <!--<ListBox x:Name="lbxAllCountries" Margin="3"
+				ItemsSource="{Binding Path=AllCountriesByKeySortedList.Values}" />--> <!--values still sorted by key not by values-->
+
             <ListBox x:Name="lbxAllCountries" Margin="3"
-				ItemsSource="{Binding Path=AllCountriesByKeySortedList.Values}" /> <!--values still sorted by key not by values-->
+				ItemsSource="{Binding Path=AllCountriesCCByKey.Values}" />
         </GroupBox>
     </Grid>
 </Window>

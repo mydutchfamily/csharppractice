@@ -47,7 +47,10 @@ namespace TourBooker.UI
             //return AllData.AllCountries.Find(x => x.Code == code);
 
             Country result;
-            AllData.AllCountriesByKey.TryGetValue(code, out result);
+            //AllData.AllCountriesByKey.TryGetValue(code, out result);
+
+            AllData.AllCountriesCCByKey.TryGetValue(new CountryCode(code), out result); 
+
             return result;
         }
     }

@@ -10,6 +10,7 @@ namespace TourBooker.Logic
     {
         public List<Country> AllCountries { get; private set; }
         public Dictionary<string, Country> AllCountriesByKey { get; private set;}
+        public Dictionary<CountryCode, Country> AllCountriesCCByKey { get; private set; }
         public SortedDictionary<string, Country> AllCountriesByKeySorted { get; private set; }
 
         public SortedList<string, Country> AllCountriesByKeySortedList { get; private set; }
@@ -18,6 +19,8 @@ namespace TourBooker.Logic
             this.AllCountries = reader.ReadAllCountries().OrderBy(x=>x.Name).ToList();
 
             this.AllCountriesByKey = AllCountries.ToDictionary(x => x.Code, StringComparer.OrdinalIgnoreCase); // add statndart comparator to ignore case 
+
+            this.AllCountriesCCByKey = AllCountries.ToDictionary(x => x.CountryCode);
 
             this.AllCountriesByKeySorted = new SortedDictionary<string, Country>(AllCountriesByKey);
 

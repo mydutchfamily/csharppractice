@@ -45,6 +45,7 @@
   <ItemGroup>
     <Compile Include="AppData.cs" />
     <Compile Include="Country.cs" />
+    <Compile Include="CountryCode.cs" />
     <Compile Include="CsvReader.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
