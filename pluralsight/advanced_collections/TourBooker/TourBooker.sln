@@ -5,7 +5,9 @@ VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TourBooker.Logic", "TourBooker.Logic.csproj", "{9444169B-3554-4FC0-9BC0-CBBD3CDCC17F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TourBooker.UI", "..\TourBooker.UI\TourBooker.UI.csproj", "{C9BC5C0D-1D99-4F7A-8954-4272A0CBB2E2}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CountriesList.UI", "..\TourBooker.UI\CountriesList.UI.csproj", "{C9BC5C0D-1D99-4F7A-8954-4272A0CBB2E2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SaveTour.UI", "..\SaveTour.UI\SaveTour.UI.csproj", "{D021A1A5-6FC2-4C7C-8E13-9D8228461CD9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{C9BC5C0D-1D99-4F7A-8954-4272A0CBB2E2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C9BC5C0D-1D99-4F7A-8954-4272A0CBB2E2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C9BC5C0D-1D99-4F7A-8954-4272A0CBB2E2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D021A1A5-6FC2-4C7C-8E13-9D8228461CD9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D021A1A5-6FC2-4C7C-8E13-9D8228461CD9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D021A1A5-6FC2-4C7C-8E13-9D8228461CD9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D021A1A5-6FC2-4C7C-8E13-9D8228461CD9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
