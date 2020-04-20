@@ -31,5 +31,13 @@ namespace Queries
                 }
             }
         }
+
+        public static IEnumerable<double> Random()
+        {// will return numbers infinitely
+            var random = new Random();
+            while (true) {
+                yield return random.NextDouble();
+            }
+        }
     }
 }

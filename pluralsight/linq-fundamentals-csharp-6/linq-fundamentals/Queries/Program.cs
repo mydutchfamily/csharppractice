@@ -47,6 +47,14 @@ namespace Queries
             {
                 Console.WriteLine(enumerator.Current.Title);
             }
+
+            Console.WriteLine("***********************************");
+            var numbers = MyLinq.Random().Where(n => n > 0.5).Take(10);
+            foreach (var item in numbers)
+            {
+                Console.WriteLine(item);
+            }
+
         }
     }
 }
