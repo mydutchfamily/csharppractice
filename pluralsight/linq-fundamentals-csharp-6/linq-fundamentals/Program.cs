@@ -13,6 +13,37 @@ namespace linq_fundamentals
         {
             string path = @"C:\windows";
             ShowLargeFilesWithoutLinq(path);
+            Console.WriteLine("****************************");
+            ShowLargeFilesWithQueryLinq(path);
+            Console.WriteLine("****************************");
+            ShowLargeFilesWithMethodLinq(path);
+        }
+
+        private static void ShowLargeFilesWithMethodLinq(string path)
+        {
+            var query = new DirectoryInfo(path).GetFiles()
+                .OrderByDescending(f => f.Length)
+                .Take(5);
+            
+            foreach (var item in query)
+            {
+                Console.WriteLine($"{item.Name,-20}: {item.Length,10:N0}");
+            }
+        }
+
+        private static void ShowLargeFilesWithQueryLinq(string path)
+        {
+            DirectoryInfo directory = new DirectoryInfo(path);
+            FileInfo[] files = directory.GetFiles();
+
+            var query = from file in files
+                        orderby file.Length descending
+                        select file;
+
+            foreach (var item in query.Take(5))
+            {
+                Console.WriteLine($"{item.Name,-20}: {item.Length,10:N0}");
+            }
         }
 
         private static void ShowLargeFilesWithoutLinq(string path)
