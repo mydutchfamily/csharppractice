@@ -27,6 +27,32 @@ namespace Features
                 Console.WriteLine(enumerator.Current.Name);
             }
 
+            Console.WriteLine("*****************");
+            foreach (var item in developers.Where(NameStartsWithS))
+            {
+                Console.WriteLine(item.Name);
+            }
+
+            Console.WriteLine("*****************");
+            foreach (var item in developers.Where(delegate (Employee arg)
+        {
+                return arg.Name.StartsWith("S");
+            }))
+            {
+                Console.WriteLine(item.Name);
+            }
+
+            Console.WriteLine("*****************");
+            foreach (var item in developers.Where(arg=> arg.Name.StartsWith("S")))
+            {
+                Console.WriteLine(item.Name);
+            }
+
+        }
+
+        private static bool NameStartsWithS(Employee arg)
+        {
+            return arg.Name.StartsWith("S");
         }
     }
 }
