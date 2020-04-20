@@ -30,6 +30,23 @@ namespace Queries
             {
                 Console.WriteLine(item.Title);
             }
+            Console.WriteLine("***********************************");
+            query = movies.Filter2(m => m.Year > 2000);
+
+            foreach (var item in query)
+            {
+                Console.WriteLine(item.Title);
+            }
+
+            Console.WriteLine("***********************************");
+            query = movies.Filter2(m => m.Year > 2000).ToList();// will run query once to get results
+
+            Console.WriteLine(query.Count());
+            var enumerator = query.GetEnumerator();
+            while(enumerator.MoveNext())
+            {
+                Console.WriteLine(enumerator.Current.Title);
+            }
         }
     }
 }
