@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using System.IO;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -12,6 +13,18 @@ namespace CarsDB
     {
         static void Main(string[] args)
         {
+            Func<int, int, int> add1 = (x, y) => x + y;
+            Console.WriteLine(add1);
+
+            Expression<Func<int, int, int>> add2 = (x, y) => x + y;
+            Console.WriteLine(add2);
+            Console.WriteLine(add2.Compile()(3,5));
+
+            var add3 = add2.Compile();
+            Console.WriteLine(add3(5,6));
+
+            Console.WriteLine("*********************************************************");
+
             Database.SetInitializer(new DropCreateDatabaseIfModelChanges<CarDb>());// force framework recreate db if something has changed
             InsertData();
             QueryData();
