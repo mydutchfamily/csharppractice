@@ -19,6 +19,41 @@ namespace CarsXml
             QueryXml2();
             Console.WriteLine("********************************");
             CreateXmlWithNameSpace();
+            QueryXmlWithNameSpace();
+            Console.WriteLine("********************************");
+            QueryXmlWithNameSpace2();// with protection from exception
+        }
+
+        private static void QueryXmlWithNameSpace2()
+        {
+            XNamespace ns = "http://pluralsight.com/cars/2016";
+            XNamespace ex = "http://pluralsight.com/cars/2016/ex";
+            var document = XDocument.Load("fuel5.xml");
+
+            var query = from element in document.Element("Cars")?.Elements(ex + "Car") // looking for Cars not in name space > nothing found
+                        ?? Enumerable.Empty<XElement>()
+                        where element.Attribute("Manufacturer").Value == "BMW"
+                        select element.Attribute("Name").Value;
+
+            foreach (var name in query.Take(10))
+            {
+                Console.WriteLine(name);
+            }
+        }
+        private static void QueryXmlWithNameSpace()
+        {
+            XNamespace ns = "http://pluralsight.com/cars/2016";
+            XNamespace ex = "http://pluralsight.com/cars/2016/ex";
+            var document = XDocument.Load("fuel5.xml");
+
+            var query = from element in document.Element(ns + "Cars").Elements(ex+"Car")
+                        where element.Attribute("Manufacturer").Value == "BMW"
+                        select element.Attribute("Name").Value;
+
+            foreach (var name in query.Take(10))
+            {
+                Console.WriteLine(name);
+            }
         }
 
         private static void CreateXmlWithNameSpace()
