@@ -19,13 +19,36 @@ namespace CarsDB
 
         private static void QueryData()
         {
-            
+            var db = new CarDb();
+            //db.Database.Log = Console.WriteLine; // will print out all sql commands
+
+            var query = from car in db.Cars
+                        orderby car.Combined descending, car.Name ascending
+                        select car;
+
+            foreach (var car in query.Take(10))
+            {
+                Console.WriteLine($"{car.Name}: {car.Combined}");
+            }
+
+            Console.WriteLine("************************************************");
+
+            var query2 = db.Cars.Where(c => c.Manufacturer == "BMW")
+                .OrderByDescending(c => c.Combined).ThenBy(c => c.Name)
+                .Take(10);
+
+            foreach (var car in query2)
+            {
+                Console.WriteLine($"{car.Name}: {car.Combined}");
+            }
+
         }
 
         private static void InsertData()
         {
             var cars = ProcessCars("fuel.csv");
             var db = new CarDb();// by default will try to connect to local db
+            //db.Database.Log = Console.WriteLine; // will print out all sql commands
 
             if (!db.Cars.Any())
             {
