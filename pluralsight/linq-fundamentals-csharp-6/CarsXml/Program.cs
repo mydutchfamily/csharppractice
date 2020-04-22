@@ -13,9 +13,35 @@ namespace CarsXml
         static void Main(string[] args)
         {
             CreateXml();
+          
             QueryXml();
-
+            Console.WriteLine("********************************");
+            QueryXml2();
+            Console.WriteLine("********************************");
+            CreateXmlWithNameSpace();
         }
+
+        private static void CreateXmlWithNameSpace()
+        {
+            var records = ProcessCars("fuel.csv");
+
+            XNamespace ns = "http://pluralsight.com/cars/2016";
+            XNamespace ex = "http://pluralsight.com/cars/2016/ex";
+            var document4 = new XDocument();
+            var cars4 = new XElement(ns + "Cars");
+
+            var elements = from record in records
+                           select new XElement(ex /*ns*/ + "Car",
+                           new XAttribute("Name", record.Name),
+                           new XAttribute("Combined", record.Combined),
+                            new XAttribute("Manufacturer", record.Manufacturer));
+
+            cars4.Add(new XAttribute(XNamespace.Xmlns + "ex", ex));
+            cars4.Add(elements);
+            document4.Add(cars4);
+            document4.Save("fuel5.xml");
+        }
+
         private static void QueryXml()
         {
             var document = XDocument.Load("fuel4.xml");
@@ -24,7 +50,21 @@ namespace CarsXml
                         where element.Attribute("Manufacturer").Value == "BMW"
                         select element.Attribute("Name").Value;
 
-            foreach (var name in query)
+            foreach (var name in query.Take(10))
+            {
+                Console.WriteLine(name);
+            }
+        }
+
+        private static void QueryXml2()
+        {
+            var document = XDocument.Load("fuel4.xml");
+
+            var query = from element in document.Descendants("Car")
+                        where element.Attribute("Manufacturer")?.Value == "BMW" //prevent from exception
+                        select element.Attribute("Name").Value;
+
+            foreach (var name in query.Take(10))
             {
                 Console.WriteLine(name);
             }
