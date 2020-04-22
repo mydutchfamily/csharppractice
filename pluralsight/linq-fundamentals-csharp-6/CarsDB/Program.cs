@@ -71,16 +71,57 @@ namespace CarsDB
 
             Console.WriteLine("************************************************");
 
-            db.Database.Log = Console.WriteLine; // will print out all sql commands
+            //db.Database.Log = Console.WriteLine; // will print out all sql commands
             var query4 = db.Cars.Where(c => c.Manufacturer == "BMW")
                 .OrderByDescending(c => c.Combined).ThenBy(c => c.Name)
                 .Take(10);
 
             Console.WriteLine(query4.Count());// as it is not a IList will force extra select to count it in db
 
-            foreach (var car in query3)
+            foreach (var car in query4)
             {
                 Console.WriteLine($"{car.Name}: {car.Combined}");
+            }
+
+            Console.WriteLine("************************************************");
+
+            //db.Database.Log = Console.WriteLine; // will print out all sql commands
+            var query5 = db.Cars.GroupBy(c => c.Manufacturer)
+                .Select(group => new // anonumus class with two properties
+                {
+                    Name = group.Key,
+                    Cars = group.OrderByDescending(c => c.Combined).Take(2)
+                });
+
+
+            foreach (var group in query5)
+            {
+                Console.WriteLine(group.Name);
+                foreach (var car in group.Cars)
+                {
+                    Console.WriteLine($"\t{car.Name}: {car.Combined}");
+                }
+            }
+
+            Console.WriteLine("************************************************");
+
+            //db.Database.Log = Console.WriteLine; // will print out all sql commands
+            var query6 = from car in db.Cars
+                         group car by car.Manufacturer into manufacturer
+                         select new {
+                             Name = manufacturer.Key,
+                             Cars = (from car in manufacturer orderby car.Combined descending
+                                    select car).Take(2)
+                         };
+
+
+            foreach (var group in query6)
+            {
+                Console.WriteLine(group.Name);
+                foreach (var car in group.Cars)
+                {
+                    Console.WriteLine($"\t{car.Name}: {car.Combined}");
+                }
             }
 
         }
