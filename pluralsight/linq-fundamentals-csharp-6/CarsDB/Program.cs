@@ -46,11 +46,25 @@ namespace CarsDB
 
             Console.WriteLine("************************************************");
 
+            db.Database.Log = Console.WriteLine; // will print out all sql commands
             var query2 = db.Cars.Where(c => c.Manufacturer == "BMW")
                 .OrderByDescending(c => c.Combined).ThenBy(c => c.Name)
-                .Take(10);
+                .Take(10);// will build query to take 10
 
             foreach (var car in query2)
+            {
+                Console.WriteLine($"{car.Name}: {car.Combined}");
+            }
+
+            Console.WriteLine("************************************************");
+
+            db.Database.Log = Console.WriteLine; // will print out all sql commands
+            var query3 = db.Cars.Where(c => c.Manufacturer == "BMW")
+                .OrderByDescending(c => c.Combined).ThenBy(c => c.Name)
+                .ToList()// because of this query all BMW into memory and only then take 10;
+                .Take(10);
+
+            foreach (var car in query3)
             {
                 Console.WriteLine($"{car.Name}: {car.Combined}");
             }
