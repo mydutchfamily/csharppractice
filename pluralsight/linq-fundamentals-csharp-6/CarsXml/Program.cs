@@ -20,7 +20,7 @@ namespace CarsXml
         {
             var document = XDocument.Load("fuel4.xml");
 
-            var query = from element in document.Element("Cars").Elements("Cars")
+            var query = from element in document.Element("Cars").Elements("Car")
                         where element.Attribute("Manufacturer").Value == "BMW"
                         select element.Attribute("Name").Value;
 
@@ -110,7 +110,7 @@ namespace CarsXml
                 cars3.Add(car);
             }
 
-            document3.Add(cars2);
+            document3.Add(cars3);
             document3.Save("fuel3.xml");
 
             //***************************************************************
@@ -129,7 +129,7 @@ namespace CarsXml
                             new XAttribute("Manufacturer", record.Manufacturer));
 
             cars4.Add(elements);
-            document4.Add(cars2);
+            document4.Add(cars4);
             document4.Save("fuel4.xml");
         }
 
