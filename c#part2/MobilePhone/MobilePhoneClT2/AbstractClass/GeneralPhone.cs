@@ -14,8 +14,10 @@ namespace MobilePhoneClT2.AbstractClass
         private string vSimCard;
         private string vFormFactor;
         private string vSerialNumber;
+        private Contact myContact;
         private List<IComponent> vPhoneComponents;
         protected List<IInterconnection> connectedDevices = new List<IInterconnection>();
+        protected HashSet<System.Collections.ICollection> Memory { get; set; }
 
         public GeneralPhone(string formFactor, string serialNumber)
         {
@@ -119,6 +121,35 @@ namespace MobilePhoneClT2.AbstractClass
             }
 
             return component;
+        }
+
+        public bool TryGetContact(string name, out Contact contact) {
+            contact = this.UseComponent<Memory>()?.Get<Contact>()?.Where(c => c.Name == name).Single();
+            return contact != null;
+        }
+
+        public void SendSms(string smsText, TextBoxOutput output = null, params string[] names) {
+            Contact contact;
+            foreach (var name in names)
+            {
+                if (this.TryGetContact(name, out contact))
+                {
+                    this.UseComponent<SmsCommunicator>().SendSms(contact, smsText, output);
+                }
+            }
+        }
+
+        public Contact GetMyContact(TextBoxOutput output = null) {
+            if (myContact == null)
+            {
+                Action<SmsMessage> subscribe = this.UseComponent<SmsCommunicator>().Subscribe(output);
+                myContact = new Contact(this.SimCard, subscribe);
+            }
+
+            return myContact;
+        }
+        public void AddContact(params Contact[] contacts) {
+            this.UseComponent<Memory>().Add<Contact>(contacts);
         }
     }
 }

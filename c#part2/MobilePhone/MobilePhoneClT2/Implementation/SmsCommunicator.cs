@@ -6,40 +6,74 @@ using System.Threading.Tasks;
 using MobilePhoneClT2.Enums;
 using MobilePhoneClT2.Interfaces;
 using System.Windows.Forms;
+using MobilePhoneClT2.AbstractClass;
 
 namespace MobilePhoneClT2.Implementation
 {
     public class SmsCommunicator : IComponent
     {
-        private Action<string> smsRecipients;
+        private Action<SmsMessage> smsRecipients;
+
+        private readonly GeneralPhone phone;
         public ComponentTypes ComponentType { get; } = ComponentTypes.Communicator;
 
         public string SerialNumber { get; }
 
-        public SmsCommunicator(string serialNumber)
+        public List<SmsMessage> ReceivedSms { get; private set; } = new List<SmsMessage>();
+
+        public SmsCommunicator(string serialNumber, GeneralPhone phone)
         {
             this.SerialNumber = serialNumber;
+            this.phone = phone;
         }
 
-        public void SendSms(string smsText)
+        public SmsMessage SendSms(Contact contact, string smsText)
         {
-            smsRecipients(smsText);
+            var msg = new SmsMessage() { ReceivedFrom = phone?.SimCard, SendTo = contact?.Name, Text = smsText, SentTime = DateTime.Now, Status = SmsMessage.MsgStatus.Sent };
 
-            foreach (Action<string> del in smsRecipients.GetInvocationList()) {
-                smsRecipients -= del;
-            }
+            phone.UseComponent<Memory>().Add<SmsMessage>(msg);
+
+            contact.SmsReceiver(msg);
+
+            return msg;
         }
 
-        public Action<string> Subscribe(TextBoxOutput output)
+        public SmsMessage SendSms(string smsText)
         {
-            return (s) => output.WriteLine(s);
+            var msg = new SmsMessage() { ReceivedFrom = phone?.SimCard, Text = smsText, SentTime = DateTime.Now, Status = SmsMessage.MsgStatus.Sent };
+
+            phone.UseComponent<Memory>().Add<SmsMessage>(msg);
+
+            smsRecipients(msg);
+
+            return msg;
         }
 
-        public SmsCommunicator AddRecipient(Action<string> action)
+        public SmsMessage SendSms(Contact contact, string smsText, TextBoxOutput output = null)
         {
-            smsRecipients += action;
+            var msg = SendSms(contact,smsText);
+            output?.WriteLine(msg.ToString());
+            return msg;
+        }
+
+        public Action<SmsMessage> Subscribe(TextBoxOutput output = null)
+        {          
+            return (s) =>
+            {
+                var r = s.Clone();
+                r.ReceivedTime = DateTime.Now;
+                r.Status = SmsMessage.MsgStatus.Received;
+                phone.UseComponent<Memory>().Add<SmsMessage>(r);
+                output?.WriteLine(r.ToString());
+            };
+        }
+
+        public SmsCommunicator SetRecipient(Action<SmsMessage> smsRecipients)
+        {
+            this.smsRecipients = smsRecipients;
             return this;
         }
+
         public override string ToString()
         {
             return $"{nameof(SmsCommunicator)} with serial number {SerialNumber}";

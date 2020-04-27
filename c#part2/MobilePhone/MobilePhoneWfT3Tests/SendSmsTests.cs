@@ -9,6 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using MobilePhoneClT2.Enums;
 
 namespace MobilePhoneWfT3.Tests
 {
@@ -83,8 +84,8 @@ namespace MobilePhoneWfT3.Tests
             string tesString = "TEST STRING";
             MockTextBoxOutput mockoutput = new MockTextBoxOutput(richTextBox);
 
-            Action<string> subscribe = smsPhone2.UseComponent<SmsCommunicator>().Subscribe(mockoutput);
-            smsPhone1.UseComponent<SmsCommunicator>().AddRecipient(subscribe).SendSms(tesString);
+            Action<SmsMessage> subscribe = smsPhone2.UseComponent<SmsCommunicator>().Subscribe(mockoutput);
+            smsPhone1.UseComponent<SmsCommunicator>().SetRecipient(subscribe).SendSms(tesString);
 
             Assert.IsTrue(methodCalled == 1, $"Method {nameof(mockoutput.WriteLine)} must be called once");
         }
