@@ -28,11 +28,13 @@ namespace AsynchronousProgramming
     }
     public class StockService: IStockService
     {
+        int i = 0;
         public Task<IEnumerable<StockPrice>> SearchForStocks(string ticker, CancellationToken cancellationToken)
         {
             var loadedLinesTask = Task.Run(async () =>
             {
                 var data = new List<StockPrice>();
+                await Task.Delay((i++) * 1000);// increase delay for each interaction
 
                 using (var stream = new StreamReader(File.OpenRead("StockPrices_Small.csv")))
                 {

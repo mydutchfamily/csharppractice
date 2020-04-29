@@ -357,12 +357,11 @@ namespace AsynchronousProgramming
             try
             {
                 var tickers = tbTickers.Text.Split(',', ' ');
-                var tickerLoadingTasks = new List<Task<IEnumerable<StockPrice>>>();
-                var service = new StockService();
+                var tickerLoadingTasks = new List<Task<List<StockPrice>>>();
 
                 foreach (var item in tickers)
                 {
-                    var loadedLines = service.SearchForStocks(item, cancellationTokenSource.Token);
+                    var loadedLines = SearchForStocks(item, cancellationTokenSource.Token);
 
                     tickerLoadingTasks.Add(loadedLines);
                 }
@@ -396,7 +395,7 @@ namespace AsynchronousProgramming
             btnManyTasks.Text = "7 Many Tasks";
         }
 
-        private async void btnMock_Click(object sender, EventArgs e)
+        private void btnMock_Click(object sender, EventArgs e)
         {
             btnMock.Text = "Cancel";
 
@@ -441,6 +440,65 @@ namespace AsynchronousProgramming
             }
 
             btnMock.Text = "8 Use Mock";
+        }
+
+        private async void btnOneByOne_Click(object sender, EventArgs e)
+        {
+            btnOneByOne.Text = "Cancel";
+
+            if (cancellationTokenSource != null)
+            {
+                cancellationTokenSource.Cancel();
+                cancellationTokenSource = null;
+                return;
+            }
+
+            cancellationTokenSource = new CancellationTokenSource();
+
+            cancellationTokenSource.Token.Register(() => { textBox1.Text = "Cancellation requested"; });
+
+            try
+            {
+                var tickers = tbTickers.Text.Split(',', ' ');
+                var tickerLoadingTasks = new List<Task<IEnumerable<StockPrice>>>();
+                var service = new StockService();
+                var stocks = new ConcurrentBag<StockPrice>();//thread safe collection
+
+                foreach (var item in tickers)
+                {
+                    var loadedLines = service.SearchForStocks(item, cancellationTokenSource.Token)
+                        .ContinueWith(t =>{
+                            foreach (var stock in t.Result.Take(5))
+                                stocks.Add(stock);
+
+                            GuiDelegate del = delegate
+                            {
+                                dataGridView1.DataSource = stocks.Select(p => new { value = $"{p.Ticker} {p.Volume}" }).ToList();
+                                dataGridView1.Columns[0].Width = dataGridView1.Width;
+                            };
+
+                            dataGridView1.Invoke(del);
+
+                            return t.Result;
+                        });
+
+                    tickerLoadingTasks.Add(loadedLines);
+                }
+
+                var allLoadingTasks = Task.WhenAll(tickerLoadingTasks);
+
+                await allLoadingTasks;
+            }
+            catch (Exception ex)
+            {
+                textBox1.Text = ex.Message;
+            }
+            finally
+            {
+                cancellationTokenSource = null;
+            }
+
+            btnOneByOne.Text = "9 One By One";
         }
     }
 }

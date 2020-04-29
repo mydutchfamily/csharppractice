@@ -42,15 +42,16 @@
             this.btnException = new System.Windows.Forms.Button();
             this.btnAsyncAsync = new System.Windows.Forms.Button();
             this.btnMock = new System.Windows.Forms.Button();
+            this.btnOneByOne = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // btnSearchFiles
             // 
-            this.btnSearchFiles.Location = new System.Drawing.Point(197, 34);
+            this.btnSearchFiles.Location = new System.Drawing.Point(265, 37);
             this.btnSearchFiles.Name = "btnSearchFiles";
-            this.btnSearchFiles.Size = new System.Drawing.Size(107, 25);
+            this.btnSearchFiles.Size = new System.Drawing.Size(94, 25);
             this.btnSearchFiles.TabIndex = 0;
             this.btnSearchFiles.Text = "Search Files";
             this.btnSearchFiles.UseVisualStyleBackColor = true;
@@ -58,17 +59,17 @@
             // 
             // textBox1
             // 
-            this.textBox1.Location = new System.Drawing.Point(330, 1);
+            this.textBox1.Location = new System.Drawing.Point(365, 1);
             this.textBox1.Multiline = true;
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(562, 61);
+            this.textBox1.Size = new System.Drawing.Size(527, 61);
             this.textBox1.TabIndex = 2;
             // 
             // btnTaskRun
             // 
             this.btnTaskRun.Location = new System.Drawing.Point(6, 76);
             this.btnTaskRun.Name = "btnTaskRun";
-            this.btnTaskRun.Size = new System.Drawing.Size(124, 25);
+            this.btnTaskRun.Size = new System.Drawing.Size(99, 25);
             this.btnTaskRun.TabIndex = 3;
             this.btnTaskRun.Text = "2 Task.Run";
             this.btnTaskRun.UseVisualStyleBackColor = true;
@@ -78,16 +79,16 @@
             // 
             this.tbTicker.Location = new System.Drawing.Point(6, 19);
             this.tbTicker.Name = "tbTicker";
-            this.tbTicker.Size = new System.Drawing.Size(179, 20);
+            this.tbTicker.Size = new System.Drawing.Size(247, 20);
             this.tbTicker.TabIndex = 4;
             this.tbTicker.Text = "MSFT";
             // 
             // dataGridView1
             // 
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(197, 68);
+            this.dataGridView1.Location = new System.Drawing.Point(265, 68);
             this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(695, 244);
+            this.dataGridView1.Size = new System.Drawing.Size(627, 244);
             this.dataGridView1.TabIndex = 6;
             this.dataGridView1.DoubleClick += new System.EventHandler(this.dataGridView1_DoubleClick);
             // 
@@ -95,7 +96,7 @@
             // 
             this.btnContinuetion.Location = new System.Drawing.Point(6, 107);
             this.btnContinuetion.Name = "btnContinuetion";
-            this.btnContinuetion.Size = new System.Drawing.Size(124, 25);
+            this.btnContinuetion.Size = new System.Drawing.Size(99, 25);
             this.btnContinuetion.TabIndex = 7;
             this.btnContinuetion.Text = "3 Continuetion";
             this.btnContinuetion.UseVisualStyleBackColor = true;
@@ -105,7 +106,7 @@
             // 
             this.btnLoadFile.Location = new System.Drawing.Point(6, 45);
             this.btnLoadFile.Name = "btnLoadFile";
-            this.btnLoadFile.Size = new System.Drawing.Size(124, 25);
+            this.btnLoadFile.Size = new System.Drawing.Size(99, 25);
             this.btnLoadFile.TabIndex = 8;
             this.btnLoadFile.Text = "1 Load File";
             this.btnLoadFile.UseVisualStyleBackColor = true;
@@ -113,6 +114,7 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.btnOneByOne);
             this.groupBox1.Controls.Add(this.btnMock);
             this.groupBox1.Controls.Add(this.tbTickers);
             this.groupBox1.Controls.Add(this.btnManyTasks);
@@ -126,7 +128,7 @@
             this.groupBox1.Dock = System.Windows.Forms.DockStyle.Left;
             this.groupBox1.Location = new System.Drawing.Point(0, 0);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(191, 317);
+            this.groupBox1.Size = new System.Drawing.Size(259, 317);
             this.groupBox1.TabIndex = 9;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Load prices";
@@ -135,7 +137,7 @@
             // 
             this.tbTickers.Location = new System.Drawing.Point(7, 230);
             this.tbTickers.Name = "tbTickers";
-            this.tbTickers.Size = new System.Drawing.Size(178, 20);
+            this.tbTickers.Size = new System.Drawing.Size(137, 20);
             this.tbTickers.TabIndex = 15;
             this.tbTickers.Text = "MSFT ABC AXL AAL AAN";
             // 
@@ -143,7 +145,7 @@
             // 
             this.btnManyTasks.Location = new System.Drawing.Point(6, 257);
             this.btnManyTasks.Name = "btnManyTasks";
-            this.btnManyTasks.Size = new System.Drawing.Size(122, 25);
+            this.btnManyTasks.Size = new System.Drawing.Size(97, 25);
             this.btnManyTasks.TabIndex = 14;
             this.btnManyTasks.Text = "7 Many Tasks";
             this.btnManyTasks.UseVisualStyleBackColor = true;
@@ -153,7 +155,7 @@
             // 
             this.btnWithCancel.Location = new System.Drawing.Point(6, 200);
             this.btnWithCancel.Name = "btnWithCancel";
-            this.btnWithCancel.Size = new System.Drawing.Size(123, 25);
+            this.btnWithCancel.Size = new System.Drawing.Size(98, 25);
             this.btnWithCancel.TabIndex = 13;
             this.btnWithCancel.Text = "6 With Cancel";
             this.btnWithCancel.UseVisualStyleBackColor = true;
@@ -163,7 +165,7 @@
             // 
             this.btnException.Location = new System.Drawing.Point(6, 169);
             this.btnException.Name = "btnException";
-            this.btnException.Size = new System.Drawing.Size(124, 25);
+            this.btnException.Size = new System.Drawing.Size(99, 25);
             this.btnException.TabIndex = 11;
             this.btnException.Text = "5 Exception";
             this.btnException.UseVisualStyleBackColor = true;
@@ -173,7 +175,7 @@
             // 
             this.btnAsyncAsync.Location = new System.Drawing.Point(6, 138);
             this.btnAsyncAsync.Name = "btnAsyncAsync";
-            this.btnAsyncAsync.Size = new System.Drawing.Size(124, 25);
+            this.btnAsyncAsync.Size = new System.Drawing.Size(99, 25);
             this.btnAsyncAsync.TabIndex = 10;
             this.btnAsyncAsync.Text = "4 Async(async())";
             this.btnAsyncAsync.UseVisualStyleBackColor = true;
@@ -183,11 +185,21 @@
             // 
             this.btnMock.Location = new System.Drawing.Point(6, 287);
             this.btnMock.Name = "btnMock";
-            this.btnMock.Size = new System.Drawing.Size(123, 25);
+            this.btnMock.Size = new System.Drawing.Size(98, 25);
             this.btnMock.TabIndex = 16;
             this.btnMock.Text = "8 Use Mock";
             this.btnMock.UseVisualStyleBackColor = true;
             this.btnMock.Click += new System.EventHandler(this.btnMock_Click);
+            // 
+            // btnOneByOne
+            // 
+            this.btnOneByOne.Location = new System.Drawing.Point(117, 46);
+            this.btnOneByOne.Name = "btnOneByOne";
+            this.btnOneByOne.Size = new System.Drawing.Size(135, 23);
+            this.btnOneByOne.TabIndex = 17;
+            this.btnOneByOne.Text = "9 One By One";
+            this.btnOneByOne.UseVisualStyleBackColor = true;
+            this.btnOneByOne.Click += new System.EventHandler(this.btnOneByOne_Click);
             // 
             // Form1
             // 
@@ -224,6 +236,7 @@
         private System.Windows.Forms.Button btnManyTasks;
         private System.Windows.Forms.TextBox tbTickers;
         private System.Windows.Forms.Button btnMock;
+        private System.Windows.Forms.Button btnOneByOne;
     }
 }
 
