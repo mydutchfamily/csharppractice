@@ -30,13 +30,14 @@
         {
             this.btnSearchFiles = new System.Windows.Forms.Button();
             this.textBox1 = new System.Windows.Forms.TextBox();
-            this.btnLoadFile = new System.Windows.Forms.Button();
+            this.btnTaskRun = new System.Windows.Forms.Button();
             this.tbTicker = new System.Windows.Forms.TextBox();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
+            this.btnContinuetion = new System.Windows.Forms.Button();
+            this.btnLoadFile = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.button3 = new System.Windows.Forms.Button();
+            this.btnException = new System.Windows.Forms.Button();
+            this.btnAsyncAsync = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
@@ -49,25 +50,25 @@
             this.btnSearchFiles.TabIndex = 0;
             this.btnSearchFiles.Text = "Search Files";
             this.btnSearchFiles.UseVisualStyleBackColor = true;
-            this.btnSearchFiles.Click += new System.EventHandler(this.button1_Click);
+            this.btnSearchFiles.Click += new System.EventHandler(this.btnSearchFiles_Click);
             // 
             // textBox1
             // 
             this.textBox1.Location = new System.Drawing.Point(330, 1);
             this.textBox1.Multiline = true;
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(360, 38);
+            this.textBox1.Size = new System.Drawing.Size(562, 61);
             this.textBox1.TabIndex = 2;
             // 
-            // btnLoadFile
+            // btnTaskRun
             // 
-            this.btnLoadFile.Location = new System.Drawing.Point(6, 76);
-            this.btnLoadFile.Name = "btnLoadFile";
-            this.btnLoadFile.Size = new System.Drawing.Size(124, 25);
-            this.btnLoadFile.TabIndex = 3;
-            this.btnLoadFile.Text = "2 Task.Run";
-            this.btnLoadFile.UseVisualStyleBackColor = true;
-            this.btnLoadFile.Click += new System.EventHandler(this.btnLoadFile_Click);
+            this.btnTaskRun.Location = new System.Drawing.Point(6, 76);
+            this.btnTaskRun.Name = "btnTaskRun";
+            this.btnTaskRun.Size = new System.Drawing.Size(124, 25);
+            this.btnTaskRun.TabIndex = 3;
+            this.btnTaskRun.Text = "2 Task.Run";
+            this.btnTaskRun.UseVisualStyleBackColor = true;
+            this.btnTaskRun.Click += new System.EventHandler(this.btnTaskRun_Click);
             // 
             // tbTicker
             // 
@@ -85,33 +86,34 @@
             this.dataGridView1.Size = new System.Drawing.Size(695, 244);
             this.dataGridView1.TabIndex = 6;
             // 
-            // button1
+            // btnContinuetion
             // 
-            this.button1.Location = new System.Drawing.Point(6, 107);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(124, 25);
-            this.button1.TabIndex = 7;
-            this.button1.Text = "3 Continuetion";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click_1);
+            this.btnContinuetion.Location = new System.Drawing.Point(6, 107);
+            this.btnContinuetion.Name = "btnContinuetion";
+            this.btnContinuetion.Size = new System.Drawing.Size(124, 25);
+            this.btnContinuetion.TabIndex = 7;
+            this.btnContinuetion.Text = "3 Continuetion";
+            this.btnContinuetion.UseVisualStyleBackColor = true;
+            this.btnContinuetion.Click += new System.EventHandler(this.btnContinuetion_Click);
             // 
-            // button2
+            // btnLoadFile
             // 
-            this.button2.Location = new System.Drawing.Point(6, 45);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(124, 25);
-            this.button2.TabIndex = 8;
-            this.button2.Text = "1 Load File";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
+            this.btnLoadFile.Location = new System.Drawing.Point(6, 45);
+            this.btnLoadFile.Name = "btnLoadFile";
+            this.btnLoadFile.Size = new System.Drawing.Size(124, 25);
+            this.btnLoadFile.TabIndex = 8;
+            this.btnLoadFile.Text = "1 Load File";
+            this.btnLoadFile.UseVisualStyleBackColor = true;
+            this.btnLoadFile.Click += new System.EventHandler(this.btnLoadFile_Click);
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.button3);
+            this.groupBox1.Controls.Add(this.btnException);
+            this.groupBox1.Controls.Add(this.btnAsyncAsync);
             this.groupBox1.Controls.Add(this.tbTicker);
-            this.groupBox1.Controls.Add(this.button1);
-            this.groupBox1.Controls.Add(this.button2);
+            this.groupBox1.Controls.Add(this.btnContinuetion);
             this.groupBox1.Controls.Add(this.btnLoadFile);
+            this.groupBox1.Controls.Add(this.btnTaskRun);
             this.groupBox1.Dock = System.Windows.Forms.DockStyle.Left;
             this.groupBox1.Location = new System.Drawing.Point(0, 0);
             this.groupBox1.Name = "groupBox1";
@@ -120,15 +122,25 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Load prices";
             // 
-            // button3
+            // btnException
             // 
-            this.button3.Location = new System.Drawing.Point(6, 138);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(124, 25);
-            this.button3.TabIndex = 10;
-            this.button3.Text = "4 Async(async())";
-            this.button3.UseVisualStyleBackColor = true;
-            this.button3.Click += new System.EventHandler(this.button3_Click);
+            this.btnException.Location = new System.Drawing.Point(6, 169);
+            this.btnException.Name = "btnException";
+            this.btnException.Size = new System.Drawing.Size(124, 25);
+            this.btnException.TabIndex = 11;
+            this.btnException.Text = "5 Exception";
+            this.btnException.UseVisualStyleBackColor = true;
+            this.btnException.Click += new System.EventHandler(this.btnException_Click);
+            // 
+            // btnAsyncAsync
+            // 
+            this.btnAsyncAsync.Location = new System.Drawing.Point(6, 138);
+            this.btnAsyncAsync.Name = "btnAsyncAsync";
+            this.btnAsyncAsync.Size = new System.Drawing.Size(124, 25);
+            this.btnAsyncAsync.TabIndex = 10;
+            this.btnAsyncAsync.Text = "4 Async(async())";
+            this.btnAsyncAsync.UseVisualStyleBackColor = true;
+            this.btnAsyncAsync.Click += new System.EventHandler(this.btnAsyncAsync_Click);
             // 
             // Form1
             // 
@@ -153,13 +165,14 @@
 
         private System.Windows.Forms.Button btnSearchFiles;
         private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.Button btnLoadFile;
+        private System.Windows.Forms.Button btnTaskRun;
         private System.Windows.Forms.TextBox tbTicker;
         private System.Windows.Forms.DataGridView dataGridView1;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button btnContinuetion;
+        private System.Windows.Forms.Button btnLoadFile;
         private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Button btnAsyncAsync;
+        private System.Windows.Forms.Button btnException;
     }
 }
 
