@@ -366,9 +366,20 @@ namespace AsynchronousProgramming
                     tickerLoadingTasks.Add(loadedLines);
                 }
 
-                var alllines = await Task.WhenAll(tickerLoadingTasks);
+                var timeoutTask = Task.Delay(1000);
 
-                var data = alllines.SelectMany(ls => ls);
+                var allLoadingTasks = Task.WhenAll(tickerLoadingTasks);
+
+                var completedTask = await Task.WhenAny(timeoutTask, allLoadingTasks);// return first completed task
+
+                if (completedTask == timeoutTask)
+                {
+                    cancellationTokenSource.Cancel();
+                    cancellationTokenSource = null;
+                    throw new Exception("Timeout");
+                }
+
+                var data = allLoadingTasks.Result.SelectMany(ls => ls);
 
                 dataGridView1.DataSource = data.Select(p => new { value = $"{p.Ticker} {p.Volume}" }).ToList();
                 dataGridView1.Columns[0].Width = dataGridView1.Width;
