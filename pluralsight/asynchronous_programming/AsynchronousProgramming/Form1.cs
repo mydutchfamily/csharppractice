@@ -500,5 +500,22 @@ namespace AsynchronousProgramming
 
             btnOneByOne.Text = "9 One By One";
         }
+
+        
+        private async void btnStayOut_Click(object sender, EventArgs e)
+        {
+            var result = await GetStockFor(tbTicker.Text);
+            textBox1.Text = "Stocks loaded";// back into inner thread
+        }
+
+        private async Task<IEnumerable<StockPrice>> GetStockFor(string text)
+        {
+            var stocks = await SearchForStocks(text, CancellationToken.None)
+                .ConfigureAwait(false);// stay in outer thread, do not switch back 
+
+            //textBox1.Text = "Stocks loaded"; //exception: control not in outer thread
+
+            return stocks.Take(5);
+        }
     }
 }

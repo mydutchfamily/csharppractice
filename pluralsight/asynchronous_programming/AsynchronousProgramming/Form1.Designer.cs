@@ -43,6 +43,7 @@
             this.btnAsyncAsync = new System.Windows.Forms.Button();
             this.btnMock = new System.Windows.Forms.Button();
             this.btnOneByOne = new System.Windows.Forms.Button();
+            this.btnStayOut = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
@@ -114,6 +115,7 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.btnStayOut);
             this.groupBox1.Controls.Add(this.btnOneByOne);
             this.groupBox1.Controls.Add(this.btnMock);
             this.groupBox1.Controls.Add(this.tbTickers);
@@ -201,6 +203,16 @@
             this.btnOneByOne.UseVisualStyleBackColor = true;
             this.btnOneByOne.Click += new System.EventHandler(this.btnOneByOne_Click);
             // 
+            // btnStayOut
+            // 
+            this.btnStayOut.Location = new System.Drawing.Point(117, 75);
+            this.btnStayOut.Name = "btnStayOut";
+            this.btnStayOut.Size = new System.Drawing.Size(135, 25);
+            this.btnStayOut.TabIndex = 18;
+            this.btnStayOut.Text = "10 Stay Out";
+            this.btnStayOut.UseVisualStyleBackColor = true;
+            this.btnStayOut.Click += new System.EventHandler(this.btnStayOut_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -237,6 +249,7 @@
         private System.Windows.Forms.TextBox tbTickers;
         private System.Windows.Forms.Button btnMock;
         private System.Windows.Forms.Button btnOneByOne;
+        private System.Windows.Forms.Button btnStayOut;
     }
 }
 
