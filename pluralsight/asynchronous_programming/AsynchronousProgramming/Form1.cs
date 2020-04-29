@@ -7,8 +7,10 @@ using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Windows;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Diagnostics;
 
 namespace AsynchronousProgramming
 {
@@ -107,6 +109,139 @@ namespace AsynchronousProgramming
                 };
 
                 dataGridView1.Invoke(del);// use invoke to execute delegate in original thread;
+            });
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            // execute the code with blocking GUI interaction
+            var lines = File.ReadAllLines("StockPrices_Small.csv");
+
+            var data = new List<StockPrice>();
+
+            foreach (var line in lines.Skip(1))
+            {
+                var segments = line.Split(',');
+
+                for (var i = 0; i < segments.Length; i++) segments[i] = segments[i].Trim('\'', '"');
+                var price = new StockPrice
+                {
+                    Ticker = segments[0],
+                    TradeDate = DateTime.ParseExact(segments[1], "M/d/yyyy h:mm:ss tt", CultureInfo.InvariantCulture),
+                    Volume = Convert.ToInt32(segments[6], CultureInfo.InvariantCulture),
+                    Change = Convert.ToDecimal(segments[7], CultureInfo.InvariantCulture),
+                    ChangePercent = Convert.ToDecimal(segments[8], CultureInfo.InvariantCulture),
+                };
+                data.Add(price);
+            }
+
+                dataGridView1.DataSource = data.Where(price => price.Ticker == tbTicker.Text).Select(p => new { value = $"{p.Ticker} {p.Volume}" }).ToList();
+                dataGridView1.Columns[0].Width = dataGridView1.Width;
+        }
+
+        private void button1_Click_1(object sender, EventArgs e)
+        {
+            string buttonCaption = button1.Text;
+
+            var loadedLines = Task.Run(() =>
+            {
+                GuiDelegate del = delegate
+                {
+                    button1.Text = "In progress";
+                };
+
+                button1.Invoke(del);
+
+                var lines = File.ReadAllLines("StockPrices_Small.csv");
+                return lines;
+            });
+
+            var processStocks = loadedLines.ContinueWith(t =>
+            {// use results from previous Task
+                var lines = t.Result;// may ask for result ONLY when task completed
+
+                var data = new List<StockPrice>();
+
+                foreach (var line in lines.Skip(1))
+                {
+                    var segments = line.Split(',');
+
+                    for (var i = 0; i < segments.Length; i++) segments[i] = segments[i].Trim('\'', '"');
+                    var price = new StockPrice
+                    {
+                        Ticker = segments[0],
+                        TradeDate = DateTime.ParseExact(segments[1], "M/d/yyyy h:mm:ss tt", CultureInfo.InvariantCulture),
+                        Volume = Convert.ToInt32(segments[6], CultureInfo.InvariantCulture),
+                        Change = Convert.ToDecimal(segments[7], CultureInfo.InvariantCulture),
+                        ChangePercent = Convert.ToDecimal(segments[8], CultureInfo.InvariantCulture),
+                    };
+                    data.Add(price);
+                }
+
+                GuiDelegate del = delegate
+                {
+                    dataGridView1.DataSource = data.Where(price => price.Ticker == tbTicker.Text).Select(p => new { value = $"{p.Ticker} {p.Volume}" }).ToList();
+                    dataGridView1.Columns[0].Width = dataGridView1.Width;
+                };
+
+                dataGridView1.Invoke(del);
+            });
+
+            processStocks.ContinueWith(_=> {
+                GuiDelegate del = delegate
+                {
+                    button1.Text = buttonCaption;
+                };
+
+                button1.Invoke(del);
+            });
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            var loadedLines = Task.Run(async () =>
+            {
+                using (var stream = new StreamReader(File.OpenRead("StockPrices_Small.csv")))
+                {
+                    var lines = new List<string>();
+                    string line;
+                    while ((line = await stream.ReadLineAsync()) != null)
+                    {
+                        lines.Add(line);
+                    }
+                    return lines;
+                }          
+            });
+
+            var processStocks = loadedLines.ContinueWith(t =>
+            {// use results from previous Task
+                var lines = t.Result;// may ask for result ONLY when task completed
+
+                var data = new List<StockPrice>();
+
+                foreach (var line in lines.Skip(1))
+                {
+                    var segments = line.Split(',');
+
+                    for (var i = 0; i < segments.Length; i++) segments[i] = segments[i].Trim('\'', '"');
+                    var price = new StockPrice
+                    {
+                        Ticker = segments[0],
+                        TradeDate = DateTime.ParseExact(segments[1], "M/d/yyyy h:mm:ss tt", CultureInfo.InvariantCulture),
+                        Volume = Convert.ToInt32(segments[6], CultureInfo.InvariantCulture),
+                        Change = Convert.ToDecimal(segments[7], CultureInfo.InvariantCulture),
+                        ChangePercent = Convert.ToDecimal(segments[8], CultureInfo.InvariantCulture),
+                    };
+                    data.Add(price);
+                }
+
+                GuiDelegate del = delegate
+                {
+                    dataGridView1.DataSource = data.Where(price => price.Ticker == tbTicker.Text).Select(p => new { value = $"{p.Ticker} {p.Volume}" }).ToList();
+                    dataGridView1.Columns[0].Width = dataGridView1.Width;
+                };
+
+                dataGridView1.Invoke(del);
             });
         }
     }
