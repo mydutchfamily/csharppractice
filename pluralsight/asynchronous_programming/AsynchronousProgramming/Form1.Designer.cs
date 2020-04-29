@@ -28,47 +28,71 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.button1 = new System.Windows.Forms.Button();
-            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
+            this.btnSearchFiles = new System.Windows.Forms.Button();
             this.textBox1 = new System.Windows.Forms.TextBox();
+            this.btnLoadFile = new System.Windows.Forms.Button();
+            this.tbTicker = new System.Windows.Forms.TextBox();
+            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
-            // button1
+            // btnSearchFiles
             // 
-            this.button1.Location = new System.Drawing.Point(301, 3);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(107, 38);
-            this.button1.TabIndex = 0;
-            this.button1.Text = "button1";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
-            // 
-            // richTextBox1
-            // 
-            this.richTextBox1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.richTextBox1.Location = new System.Drawing.Point(0, 47);
-            this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(1103, 265);
-            this.richTextBox1.TabIndex = 1;
-            this.richTextBox1.Text = "";
+            this.btnSearchFiles.Location = new System.Drawing.Point(301, 3);
+            this.btnSearchFiles.Name = "btnSearchFiles";
+            this.btnSearchFiles.Size = new System.Drawing.Size(107, 38);
+            this.btnSearchFiles.TabIndex = 0;
+            this.btnSearchFiles.Text = "Search Files";
+            this.btnSearchFiles.UseVisualStyleBackColor = true;
+            this.btnSearchFiles.Click += new System.EventHandler(this.button1_Click);
             // 
             // textBox1
             // 
-            this.textBox1.Location = new System.Drawing.Point(446, 7);
+            this.textBox1.Location = new System.Drawing.Point(414, 3);
+            this.textBox1.Multiline = true;
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(656, 20);
+            this.textBox1.Size = new System.Drawing.Size(360, 38);
             this.textBox1.TabIndex = 2;
+            // 
+            // btnLoadFile
+            // 
+            this.btnLoadFile.Location = new System.Drawing.Point(171, 3);
+            this.btnLoadFile.Name = "btnLoadFile";
+            this.btnLoadFile.Size = new System.Drawing.Size(114, 38);
+            this.btnLoadFile.TabIndex = 3;
+            this.btnLoadFile.Text = "Load File";
+            this.btnLoadFile.UseVisualStyleBackColor = true;
+            this.btnLoadFile.Click += new System.EventHandler(this.btnLoadFile_Click);
+            // 
+            // tbTicker
+            // 
+            this.tbTicker.Location = new System.Drawing.Point(12, 8);
+            this.tbTicker.Name = "tbTicker";
+            this.tbTicker.Size = new System.Drawing.Size(133, 20);
+            this.tbTicker.TabIndex = 4;
+            // 
+            // dataGridView1
+            // 
+            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.dataGridView1.Location = new System.Drawing.Point(0, 47);
+            this.dataGridView1.Name = "dataGridView1";
+            this.dataGridView1.Size = new System.Drawing.Size(774, 265);
+            this.dataGridView1.TabIndex = 6;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1103, 312);
+            this.ClientSize = new System.Drawing.Size(774, 312);
+            this.Controls.Add(this.dataGridView1);
+            this.Controls.Add(this.tbTicker);
+            this.Controls.Add(this.btnLoadFile);
             this.Controls.Add(this.textBox1);
-            this.Controls.Add(this.richTextBox1);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.btnSearchFiles);
             this.Name = "Form1";
             this.Text = "Form1";
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -76,9 +100,11 @@
 
         #endregion
 
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.RichTextBox richTextBox1;
+        private System.Windows.Forms.Button btnSearchFiles;
         private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.Button btnLoadFile;
+        private System.Windows.Forms.TextBox tbTicker;
+        private System.Windows.Forms.DataGridView dataGridView1;
     }
 }
 
