@@ -21,25 +21,25 @@ namespace AsynchronousProgramming
         delegate void GuiDelegate();
         private Action<Task<string[]>> continuationAction;
         private Action loadFile;
-        Func<string, StockPrice> createStock;
+
+        public static Func<string, StockPrice> createStock = s => {
+            var segments = s.Split(',');
+
+            for (var i = 0; i < segments.Length; i++) segments[i] = segments[i].Trim('\'', '"');
+            return new StockPrice
+            {
+                Ticker = segments[0],
+                TradeDate = DateTime.ParseExact(segments[1], "M/d/yyyy h:mm:ss tt", CultureInfo.InvariantCulture),
+                Volume = Convert.ToInt32(segments[6], CultureInfo.InvariantCulture),
+                Change = Convert.ToDecimal(segments[7], CultureInfo.InvariantCulture),
+                ChangePercent = Convert.ToDecimal(segments[8], CultureInfo.InvariantCulture),
+            };
+        };
+
         private string buttonCaption;
         public Form1()
         {
             InitializeComponent();
-
-             createStock = s => {
-                var segments = s.Split(',');
-
-                for (var i = 0; i < segments.Length; i++) segments[i] = segments[i].Trim('\'', '"');
-                return new StockPrice
-                {
-                    Ticker = segments[0],
-                    TradeDate = DateTime.ParseExact(segments[1], "M/d/yyyy h:mm:ss tt", CultureInfo.InvariantCulture),
-                    Volume = Convert.ToInt32(segments[6], CultureInfo.InvariantCulture),
-                    Change = Convert.ToDecimal(segments[7], CultureInfo.InvariantCulture),
-                    ChangePercent = Convert.ToDecimal(segments[8], CultureInfo.InvariantCulture),
-                };
-            };
 
             continuationAction = t =>
             {// use results from previous Task
@@ -357,16 +357,17 @@ namespace AsynchronousProgramming
             try
             {
                 var tickers = tbTickers.Text.Split(',', ' ');
+                var tickerLoadingTasks = new List<Task<IEnumerable<StockPrice>>>();
+                var service = new StockService();
 
-                var tickerLoadingTasks = new List<Task<List<StockPrice>>>();
                 foreach (var item in tickers)
                 {
-                    var loadedLines = SearchForStocks(item, cancellationTokenSource.Token);
+                    var loadedLines = service.SearchForStocks(item, cancellationTokenSource.Token);
 
                     tickerLoadingTasks.Add(loadedLines);
                 }
 
-                var timeoutTask = Task.Delay(1000);
+                var timeoutTask = Task.Delay(2000);
 
                 var allLoadingTasks = Task.WhenAll(tickerLoadingTasks);
 
@@ -393,6 +394,53 @@ namespace AsynchronousProgramming
             }
 
             btnManyTasks.Text = "7 Many Tasks";
+        }
+
+        private async void btnMock_Click(object sender, EventArgs e)
+        {
+            btnMock.Text = "Cancel";
+
+            if (cancellationTokenSource != null)
+            {
+                cancellationTokenSource.Cancel();
+                cancellationTokenSource = null;
+                return;
+            }
+
+            cancellationTokenSource = new CancellationTokenSource();
+
+            cancellationTokenSource.Token.Register(() => { textBox1.Text = "Cancellation requested"; });
+
+            try
+            {
+                var tickers = tbTickers.Text.Split(',', ' ');
+                var tickerLoadingTasks = new List<Task<IEnumerable<StockPrice>>>();
+                var service = new MockStockService();
+
+                foreach (var item in tickers)
+                {
+                    var loadedLines = service.SearchForStocks(item, cancellationTokenSource.Token);
+
+                    tickerLoadingTasks.Add(loadedLines);
+                }
+
+                var allLoadingTasks = Task.WhenAll(tickerLoadingTasks);
+
+                var data = allLoadingTasks.Result.SelectMany(ls => ls);
+
+                dataGridView1.DataSource = data.Select(p => new { value = $"{p.Ticker} {p.Volume}" }).ToList();
+                dataGridView1.Columns[0].Width = dataGridView1.Width;
+            }
+            catch (Exception ex)
+            {
+                textBox1.Text = ex.Message;
+            }
+            finally
+            {
+                cancellationTokenSource = null;
+            }
+
+            btnMock.Text = "8 Use Mock";
         }
     }
 }

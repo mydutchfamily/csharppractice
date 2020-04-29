@@ -41,6 +41,7 @@
             this.btnWithCancel = new System.Windows.Forms.Button();
             this.btnException = new System.Windows.Forms.Button();
             this.btnAsyncAsync = new System.Windows.Forms.Button();
+            this.btnMock = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
@@ -112,6 +113,7 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.btnMock);
             this.groupBox1.Controls.Add(this.tbTickers);
             this.groupBox1.Controls.Add(this.btnManyTasks);
             this.groupBox1.Controls.Add(this.btnWithCancel);
@@ -124,7 +126,7 @@
             this.groupBox1.Dock = System.Windows.Forms.DockStyle.Left;
             this.groupBox1.Location = new System.Drawing.Point(0, 0);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(191, 312);
+            this.groupBox1.Size = new System.Drawing.Size(191, 317);
             this.groupBox1.TabIndex = 9;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Load prices";
@@ -177,11 +179,21 @@
             this.btnAsyncAsync.UseVisualStyleBackColor = true;
             this.btnAsyncAsync.Click += new System.EventHandler(this.btnAsyncAsync_Click);
             // 
+            // btnMock
+            // 
+            this.btnMock.Location = new System.Drawing.Point(6, 287);
+            this.btnMock.Name = "btnMock";
+            this.btnMock.Size = new System.Drawing.Size(123, 25);
+            this.btnMock.TabIndex = 16;
+            this.btnMock.Text = "8 Use Mock";
+            this.btnMock.UseVisualStyleBackColor = true;
+            this.btnMock.Click += new System.EventHandler(this.btnMock_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(894, 312);
+            this.ClientSize = new System.Drawing.Size(894, 317);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.textBox1);
@@ -211,6 +223,7 @@
         private System.Windows.Forms.Button btnWithCancel;
         private System.Windows.Forms.Button btnManyTasks;
         private System.Windows.Forms.TextBox tbTickers;
+        private System.Windows.Forms.Button btnMock;
     }
 }
 
