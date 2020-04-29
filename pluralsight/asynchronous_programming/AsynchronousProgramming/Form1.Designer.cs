@@ -36,6 +36,8 @@
             this.btnContinuetion = new System.Windows.Forms.Button();
             this.btnLoadFile = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.tbTickers = new System.Windows.Forms.TextBox();
+            this.btnManyTasks = new System.Windows.Forms.Button();
             this.btnWithCancel = new System.Windows.Forms.Button();
             this.btnException = new System.Windows.Forms.Button();
             this.btnAsyncAsync = new System.Windows.Forms.Button();
@@ -110,6 +112,8 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.tbTickers);
+            this.groupBox1.Controls.Add(this.btnManyTasks);
             this.groupBox1.Controls.Add(this.btnWithCancel);
             this.groupBox1.Controls.Add(this.btnException);
             this.groupBox1.Controls.Add(this.btnAsyncAsync);
@@ -125,9 +129,27 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Load prices";
             // 
+            // tbTickers
+            // 
+            this.tbTickers.Location = new System.Drawing.Point(7, 230);
+            this.tbTickers.Name = "tbTickers";
+            this.tbTickers.Size = new System.Drawing.Size(178, 20);
+            this.tbTickers.TabIndex = 15;
+            this.tbTickers.Text = "MSFT ABC AXL AAL AAN";
+            // 
+            // btnManyTasks
+            // 
+            this.btnManyTasks.Location = new System.Drawing.Point(6, 257);
+            this.btnManyTasks.Name = "btnManyTasks";
+            this.btnManyTasks.Size = new System.Drawing.Size(122, 25);
+            this.btnManyTasks.TabIndex = 14;
+            this.btnManyTasks.Text = "7 Many Tasks";
+            this.btnManyTasks.UseVisualStyleBackColor = true;
+            this.btnManyTasks.Click += new System.EventHandler(this.btnManyTasks_Click);
+            // 
             // btnWithCancel
             // 
-            this.btnWithCancel.Location = new System.Drawing.Point(7, 200);
+            this.btnWithCancel.Location = new System.Drawing.Point(6, 200);
             this.btnWithCancel.Name = "btnWithCancel";
             this.btnWithCancel.Size = new System.Drawing.Size(123, 25);
             this.btnWithCancel.TabIndex = 13;
@@ -187,6 +209,8 @@
         private System.Windows.Forms.Button btnAsyncAsync;
         private System.Windows.Forms.Button btnException;
         private System.Windows.Forms.Button btnWithCancel;
+        private System.Windows.Forms.Button btnManyTasks;
+        private System.Windows.Forms.TextBox tbTickers;
     }
 }
 

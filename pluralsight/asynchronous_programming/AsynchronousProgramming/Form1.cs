@@ -12,6 +12,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Diagnostics;
 using System.Threading;
+using System.Collections.Concurrent;
 
 namespace AsynchronousProgramming
 {
@@ -20,10 +21,25 @@ namespace AsynchronousProgramming
         delegate void GuiDelegate();
         private Action<Task<string[]>> continuationAction;
         private Action loadFile;
+        Func<string, StockPrice> createStock;
         private string buttonCaption;
         public Form1()
         {
             InitializeComponent();
+
+             createStock = s => {
+                var segments = s.Split(',');
+
+                for (var i = 0; i < segments.Length; i++) segments[i] = segments[i].Trim('\'', '"');
+                return new StockPrice
+                {
+                    Ticker = segments[0],
+                    TradeDate = DateTime.ParseExact(segments[1], "M/d/yyyy h:mm:ss tt", CultureInfo.InvariantCulture),
+                    Volume = Convert.ToInt32(segments[6], CultureInfo.InvariantCulture),
+                    Change = Convert.ToDecimal(segments[7], CultureInfo.InvariantCulture),
+                    ChangePercent = Convert.ToDecimal(segments[8], CultureInfo.InvariantCulture),
+                };
+            };
 
             continuationAction = t =>
             {// use results from previous Task
@@ -33,18 +49,7 @@ namespace AsynchronousProgramming
 
                 foreach (var line in lines.Skip(1))
                 {
-                    var segments = line.Split(',');
-
-                    for (var i = 0; i < segments.Length; i++) segments[i] = segments[i].Trim('\'', '"');
-                    var price = new StockPrice
-                    {
-                        Ticker = segments[0],
-                        TradeDate = DateTime.ParseExact(segments[1], "M/d/yyyy h:mm:ss tt", CultureInfo.InvariantCulture),
-                        Volume = Convert.ToInt32(segments[6], CultureInfo.InvariantCulture),
-                        Change = Convert.ToDecimal(segments[7], CultureInfo.InvariantCulture),
-                        ChangePercent = Convert.ToDecimal(segments[8], CultureInfo.InvariantCulture),
-                    };
-                    data.Add(price);
+                    data.Add(createStock(line));
                 }
 
                 GuiDelegate del = delegate
@@ -56,7 +61,6 @@ namespace AsynchronousProgramming
                 dataGridView1.Invoke(del);
             };
 
-
             loadFile = () =>
             {
                 var lines = File.ReadAllLines("StockPrices_Small.csv");
@@ -65,18 +69,7 @@ namespace AsynchronousProgramming
 
                 foreach (var line in lines.Skip(1))
                 {
-                    var segments = line.Split(',');
-
-                    for (var i = 0; i < segments.Length; i++) segments[i] = segments[i].Trim('\'', '"');
-                    var price = new StockPrice
-                    {
-                        Ticker = segments[0],
-                        TradeDate = DateTime.ParseExact(segments[1], "M/d/yyyy h:mm:ss tt", CultureInfo.InvariantCulture),
-                        Volume = Convert.ToInt32(segments[6], CultureInfo.InvariantCulture),
-                        Change = Convert.ToDecimal(segments[7], CultureInfo.InvariantCulture),
-                        ChangePercent = Convert.ToDecimal(segments[8], CultureInfo.InvariantCulture),
-                    };
-                    data.Add(price);
+                    data.Add(createStock(line));
                 }
 
                 GuiDelegate del = delegate
@@ -319,6 +312,76 @@ namespace AsynchronousProgramming
         private void dataGridView1_DoubleClick(object sender, EventArgs e)
         {
             dataGridView1.DataSource = null;
+        }
+
+        private Task<List<StockPrice>> SearchForStocks(string ticker, CancellationToken cancellationToken)
+        {
+            var loadedLinesTask = Task.Run(async () =>
+            {
+                var data = new List<StockPrice>();
+
+                using (var stream = new StreamReader(File.OpenRead("StockPrices_Small.csv")))
+                {
+                    var lines = new List<string>();
+                    string line;
+                    while ((line = await stream.ReadLineAsync()) != null)
+                    {
+                        if (cancellationToken.IsCancellationRequested)
+                        {
+                            return data;
+                        }
+                        if (line.Contains(ticker))
+                            data.Add(createStock(line));
+                    }
+                    return data;
+                }
+            }, cancellationToken);
+
+            return loadedLinesTask;
+        }
+        private async void btnManyTasks_Click(object sender, EventArgs e)
+        {
+            btnManyTasks.Text = "Cancel";
+
+            if (cancellationTokenSource != null)
+            {
+                cancellationTokenSource.Cancel();
+                cancellationTokenSource = null;
+                return;
+            }
+
+            cancellationTokenSource = new CancellationTokenSource();
+
+            cancellationTokenSource.Token.Register(() => { textBox1.Text = "Cancellation requested"; });
+
+            try
+            {
+                var tickers = tbTickers.Text.Split(',', ' ');
+
+                var tickerLoadingTasks = new List<Task<List<StockPrice>>>();
+                foreach (var item in tickers)
+                {
+                    var loadedLines = SearchForStocks(item, cancellationTokenSource.Token);
+
+                    tickerLoadingTasks.Add(loadedLines);
+                }
+
+                var alllines = await Task.WhenAll(tickerLoadingTasks);
+
+                var data = alllines.SelectMany(ls => ls);
+
+                dataGridView1.DataSource = data.Select(p => new { value = $"{p.Ticker} {p.Volume}" }).ToList();
+                dataGridView1.Columns[0].Width = dataGridView1.Width;
+            }
+            catch (Exception ex)
+            {
+                textBox1.Text = ex.Message;
+            }
+            finally {
+                cancellationTokenSource = null;
+            }
+
+            btnManyTasks.Text = "7 Many Tasks";
         }
     }
 }
