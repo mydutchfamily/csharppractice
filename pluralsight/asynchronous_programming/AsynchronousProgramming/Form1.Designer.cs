@@ -36,6 +36,7 @@
             this.btnContinuetion = new System.Windows.Forms.Button();
             this.btnLoadFile = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.btnWithCancel = new System.Windows.Forms.Button();
             this.btnException = new System.Windows.Forms.Button();
             this.btnAsyncAsync = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
@@ -85,6 +86,7 @@
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.Size = new System.Drawing.Size(695, 244);
             this.dataGridView1.TabIndex = 6;
+            this.dataGridView1.DoubleClick += new System.EventHandler(this.dataGridView1_DoubleClick);
             // 
             // btnContinuetion
             // 
@@ -108,6 +110,7 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.btnWithCancel);
             this.groupBox1.Controls.Add(this.btnException);
             this.groupBox1.Controls.Add(this.btnAsyncAsync);
             this.groupBox1.Controls.Add(this.tbTicker);
@@ -121,6 +124,16 @@
             this.groupBox1.TabIndex = 9;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Load prices";
+            // 
+            // btnWithCancel
+            // 
+            this.btnWithCancel.Location = new System.Drawing.Point(7, 200);
+            this.btnWithCancel.Name = "btnWithCancel";
+            this.btnWithCancel.Size = new System.Drawing.Size(123, 25);
+            this.btnWithCancel.TabIndex = 13;
+            this.btnWithCancel.Text = "6 With Cancel";
+            this.btnWithCancel.UseVisualStyleBackColor = true;
+            this.btnWithCancel.Click += new System.EventHandler(this.btnWithCancel_Click);
             // 
             // btnException
             // 
@@ -173,6 +186,7 @@
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Button btnAsyncAsync;
         private System.Windows.Forms.Button btnException;
+        private System.Windows.Forms.Button btnWithCancel;
     }
 }
 

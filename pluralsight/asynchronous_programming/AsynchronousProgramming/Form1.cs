@@ -11,6 +11,7 @@ using System.Windows;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Diagnostics;
+using System.Threading;
 
 namespace AsynchronousProgramming
 {
@@ -256,6 +257,68 @@ namespace AsynchronousProgramming
 
                 btnException.Invoke(del);
             });
+        }
+
+        CancellationTokenSource cancellationTokenSource = null;
+        private void btnWithCancel_Click(object sender, EventArgs e)
+        {
+            btnWithCancel.Text = "Cancel";
+
+            if (cancellationTokenSource != null)
+            {
+                cancellationTokenSource.Cancel();
+                cancellationTokenSource = null;
+                return;
+            }
+
+            cancellationTokenSource = new CancellationTokenSource();
+
+            cancellationTokenSource.Token.Register(() => { textBox1.Text = "Cancellation requested";});
+
+            var loadedLines = SearchForStocks(cancellationTokenSource.Token);
+
+            var processStocks = loadedLines.ContinueWith(continuationAction,
+                cancellationTokenSource.Token,
+                TaskContinuationOptions.OnlyOnRanToCompletion,
+                TaskScheduler.Current);
+
+            processStocks.ContinueWith(t =>
+            {
+                GuiDelegate del = delegate
+                {
+                    btnWithCancel.Text = "6 With Cancel";
+                };
+
+                btnWithCancel.Invoke(del);
+            });
+        }
+
+        private Task<string[]> SearchForStocks(CancellationToken cancellationToken)
+        {
+            var loadedLinesTask = Task.Run(async () =>
+            {
+                using (var stream = new StreamReader(File.OpenRead("StockPrices_Small.csv")))
+                {
+                    var lines = new List<string>();
+                    string line;
+                    while ((line = await stream.ReadLineAsync()) != null)
+                    {
+                        if (cancellationToken.IsCancellationRequested)
+                        {
+                            return lines.ToArray();
+                        }
+                        lines.Add(line);
+                    }
+                    return lines.ToArray();
+                }
+            }, cancellationToken);
+
+            return loadedLinesTask;
+        }
+
+        private void dataGridView1_DoubleClick(object sender, EventArgs e)
+        {
+            dataGridView1.DataSource = null;
         }
     }
 }
