@@ -45,6 +45,7 @@
             this.btnException = new System.Windows.Forms.Button();
             this.btnAsyncAsync = new System.Windows.Forms.Button();
             this.btnParallel = new System.Windows.Forms.Button();
+            this.btnParallelForEach = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
@@ -116,6 +117,7 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.btnParallelForEach);
             this.groupBox1.Controls.Add(this.btnParallel);
             this.groupBox1.Controls.Add(this.btnStayOut);
             this.groupBox1.Controls.Add(this.btnOneByOne);
@@ -225,6 +227,16 @@
             this.btnParallel.UseVisualStyleBackColor = true;
             this.btnParallel.Click += new System.EventHandler(this.btnParallel_Click);
             // 
+            // btnParallelForEach
+            // 
+            this.btnParallelForEach.Location = new System.Drawing.Point(118, 138);
+            this.btnParallelForEach.Name = "btnParallelForEach";
+            this.btnParallelForEach.Size = new System.Drawing.Size(132, 24);
+            this.btnParallelForEach.TabIndex = 20;
+            this.btnParallelForEach.Text = "12 ParallelForEach";
+            this.btnParallelForEach.UseVisualStyleBackColor = true;
+            this.btnParallelForEach.Click += new System.EventHandler(this.btnParallelForEach_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -263,6 +275,7 @@
         private System.Windows.Forms.Button btnOneByOne;
         private System.Windows.Forms.Button btnStayOut;
         private System.Windows.Forms.Button btnParallel;
+        private System.Windows.Forms.Button btnParallelForEach;
     }
 }
 

@@ -550,7 +550,7 @@ namespace AsynchronousProgramming
                 var data = (await Task.WhenAll(tickerLoadingTasks)).SelectMany(ls => ls);
 
                 Parallel.Invoke(// locks current thread - GUI
-                    new ParallelOptions {MaxDegreeOfParallelism = 2 }, //how many tasks can run at once
+                    new ParallelOptions {MaxDegreeOfParallelism = 2 }, // optional, how many tasks can run at once
                     () => {
                         Debug.WriteLine("Starting Operation 1");
 
@@ -616,6 +616,88 @@ namespace AsynchronousProgramming
             }
 
             return computedValue;
+        }
+
+        private async void btnParallelForEach_Click(object sender, EventArgs e)
+        {
+            btnParallelForEach.Text = "Cancel";
+
+            if (cancellationTokenSource != null)
+            {
+                cancellationTokenSource.Cancel();
+                cancellationTokenSource = null;
+                return;
+            }
+
+            cancellationTokenSource = new CancellationTokenSource();
+
+            cancellationTokenSource.Token.Register(() => { textBox1.Text = "Cancellation requested"; });
+
+            try
+            {
+                var tickers = tbTickers.Text.Split(',', ' ');
+                var tickerLoadingTasks = new List<Task<List<StockPrice>>>();
+
+                foreach (var item in tickers)
+                {
+                    var loadedLines = SearchForStocks(item, cancellationTokenSource.Token);
+
+                    tickerLoadingTasks.Add(loadedLines);
+                }
+
+                var loadedStocks = await Task.WhenAll(tickerLoadingTasks);
+
+                var values = new ConcurrentBag<StockCalculation>();
+
+                var executionResult = Parallel.ForEach(loadedStocks,
+                    new ParallelOptions { MaxDegreeOfParallelism = 2}, // optional
+                    (stocks,
+                    state// optional
+                    ) =>
+                //foreach (var stocks in loadedStocks)
+                {
+                    var ticker = stocks.First().Ticker;
+
+                    Debug.WriteLine($"Start processing {ticker}");
+
+                    if (ticker == "MSFT") {
+                        Debug.WriteLine($"Found {ticker}, breaking");
+
+                        //state.Break();// not terminating current tasks, but preventing to start new
+                        state.Stop();// not terminating current tasks, but preventing to start new
+
+                        return;
+                    }
+
+                    if (state.IsStopped) return;// <= state.Stop();
+
+                    var result = CalculateExpensiveComputation(stocks);
+
+                    var data = new StockCalculation {
+                        Ticker = stocks.First().Ticker,
+                        Result = result
+                    };
+
+                    values.Add(data);
+                }
+                );
+
+                //executionResult.
+
+                dataGridView1.DataSource = values.Select(p => new { value = $"{p.Ticker} {p.Result}" }).ToList();
+                dataGridView1.Columns[0].Width = dataGridView1.Width;
+            }
+            catch (Exception ex)
+            {
+                textBox1.Text = ex.Message;
+            }
+            finally
+            {
+                cancellationTokenSource = null;
+            }
+
+            btnParallelForEach.Text = "12 btnParallelForEach";
+
         }
     }
 }
