@@ -46,6 +46,7 @@
             this.btnAsyncAsync = new System.Windows.Forms.Button();
             this.btnParallel = new System.Windows.Forms.Button();
             this.btnParallelForEach = new System.Windows.Forms.Button();
+            this.btnSharedVar = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
@@ -117,6 +118,7 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.btnSharedVar);
             this.groupBox1.Controls.Add(this.btnParallelForEach);
             this.groupBox1.Controls.Add(this.btnParallel);
             this.groupBox1.Controls.Add(this.btnStayOut);
@@ -237,6 +239,16 @@
             this.btnParallelForEach.UseVisualStyleBackColor = true;
             this.btnParallelForEach.Click += new System.EventHandler(this.btnParallelForEach_Click);
             // 
+            // btnSharedVar
+            // 
+            this.btnSharedVar.Location = new System.Drawing.Point(118, 169);
+            this.btnSharedVar.Name = "btnSharedVar";
+            this.btnSharedVar.Size = new System.Drawing.Size(131, 25);
+            this.btnSharedVar.TabIndex = 21;
+            this.btnSharedVar.Text = "13 Shared Var";
+            this.btnSharedVar.UseVisualStyleBackColor = true;
+            this.btnSharedVar.Click += new System.EventHandler(this.btnSharedVar_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -276,6 +288,7 @@
         private System.Windows.Forms.Button btnStayOut;
         private System.Windows.Forms.Button btnParallel;
         private System.Windows.Forms.Button btnParallelForEach;
+        private System.Windows.Forms.Button btnSharedVar;
     }
 }
 

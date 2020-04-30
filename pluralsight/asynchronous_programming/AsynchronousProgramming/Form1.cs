@@ -22,7 +22,8 @@ namespace AsynchronousProgramming
         private Action<Task<string[]>> continuationAction;
         private Action loadFile;
 
-        public static Func<string, StockPrice> createStock = s => {
+        public static Func<string, StockPrice> createStock = s =>
+        {
             var segments = s.Split(',');
 
             for (var i = 0; i < segments.Length; i++) segments[i] = segments[i].Trim('\'', '"');
@@ -202,7 +203,7 @@ namespace AsynchronousProgramming
                         lines.Add(line);
                     }
                     return lines.ToArray();
-                }          
+                }
             });
 
             var processStocks = loadedLines.ContinueWith(continuationAction);
@@ -266,7 +267,7 @@ namespace AsynchronousProgramming
 
             cancellationTokenSource = new CancellationTokenSource();
 
-            cancellationTokenSource.Token.Register(() => { textBox1.Text = "Cancellation requested";});
+            cancellationTokenSource.Token.Register(() => { textBox1.Text = "Cancellation requested"; });
 
             var loadedLines = SearchForStocks(cancellationTokenSource.Token);
 
@@ -388,7 +389,8 @@ namespace AsynchronousProgramming
             {
                 textBox1.Text = ex.Message;
             }
-            finally {
+            finally
+            {
                 cancellationTokenSource = null;
             }
 
@@ -467,7 +469,8 @@ namespace AsynchronousProgramming
                 foreach (var item in tickers)
                 {
                     var loadedLines = service.SearchForStocks(item, cancellationTokenSource.Token)
-                        .ContinueWith(t =>{
+                        .ContinueWith(t =>
+                        {
                             foreach (var stock in t.Result.Take(5))
                                 stocks.Add(stock);
 
@@ -501,7 +504,7 @@ namespace AsynchronousProgramming
             btnOneByOne.Text = "9 One By One";
         }
 
-        
+
         private async void btnStayOut_Click(object sender, EventArgs e)
         {
             var result = await GetStockFor(tbTicker.Text);
@@ -550,8 +553,9 @@ namespace AsynchronousProgramming
                 var data = (await Task.WhenAll(tickerLoadingTasks)).SelectMany(ls => ls);
 
                 Parallel.Invoke(// locks current thread - GUI
-                    new ParallelOptions {MaxDegreeOfParallelism = 2 }, // optional, how many tasks can run at once
-                    () => {
+                    new ParallelOptions { MaxDegreeOfParallelism = 2 }, // optional, how many tasks can run at once
+                    () =>
+                    {
                         Debug.WriteLine("Starting Operation 1");
 
                         CalculateExpensiveComputation(data);
@@ -560,21 +564,24 @@ namespace AsynchronousProgramming
 
                         Debug.WriteLine("Completed Operation 1");
                     },
-                    () => {
+                    () =>
+                    {
                         Debug.WriteLine("Starting Operation 2");
 
                         CalculateExpensiveComputation(data);
 
                         Debug.WriteLine("Completed Operation 2");
                     },
-                    () => {
+                    () =>
+                    {
                         Debug.WriteLine("Starting Operation 3");
 
                         CalculateExpensiveComputation(data);
 
                         Debug.WriteLine("Completed Operation 3");
                     },
-                    () => {
+                    () =>
+                    {
                         Debug.WriteLine("Starting Operation 4");
 
                         CalculateExpensiveComputation(data);
@@ -650,36 +657,38 @@ namespace AsynchronousProgramming
                 var values = new ConcurrentBag<StockCalculation>();
 
                 var executionResult = Parallel.ForEach(loadedStocks,
-                    new ParallelOptions { MaxDegreeOfParallelism = 2}, // optional
+                    new ParallelOptions { MaxDegreeOfParallelism = 2 }, // optional
                     (stocks,
                     state// optional
                     ) =>
-                //foreach (var stocks in loadedStocks)
-                {
-                    var ticker = stocks.First().Ticker;
+                    //foreach (var stocks in loadedStocks)
+                    {
+                        var ticker = stocks.First().Ticker;
 
-                    Debug.WriteLine($"Start processing {ticker}");
+                        Debug.WriteLine($"Start processing {ticker}");
 
-                    if (ticker == "MSFT") {
-                        Debug.WriteLine($"Found {ticker}, breaking");
+                        if (ticker == "MSFT")
+                        {
+                            Debug.WriteLine($"Found {ticker}, breaking");
 
-                        //state.Break();// not terminating current tasks, but preventing to start new
-                        state.Stop();// not terminating current tasks, but preventing to start new
+                            //state.Break();// not terminating current tasks, but preventing to start new
+                            state.Stop();// not terminating current tasks, but preventing to start new
 
-                        return;
+                            return;
+                        }
+
+                        if (state.IsStopped) return;// <= state.Stop();
+
+                        var result = CalculateExpensiveComputation(stocks);
+
+                        var data = new StockCalculation
+                        {
+                            Ticker = stocks.First().Ticker,
+                            Result = result
+                        };
+
+                        values.Add(data);
                     }
-
-                    if (state.IsStopped) return;// <= state.Stop();
-
-                    var result = CalculateExpensiveComputation(stocks);
-
-                    var data = new StockCalculation {
-                        Ticker = stocks.First().Ticker,
-                        Result = result
-                    };
-
-                    values.Add(data);
-                }
                 );
 
                 //executionResult.
@@ -698,6 +707,103 @@ namespace AsynchronousProgramming
 
             btnParallelForEach.Text = "12 btnParallelForEach";
 
+        }
+
+        static object syncRoot = new object();
+        private async void btnSharedVar_Click(object sender, EventArgs e)
+        {
+            btnSharedVar.Text = "Cancel";
+
+            if (cancellationTokenSource != null)
+            {
+                cancellationTokenSource.Cancel();
+                cancellationTokenSource = null;
+                return;
+            }
+
+            cancellationTokenSource = new CancellationTokenSource();
+
+            cancellationTokenSource.Token.Register(() => { textBox1.Text = "Cancellation requested"; });
+
+            try
+            {
+                var tickers = tbTickers.Text.Split(',', ' ');
+                var tickerLoadingTasks = new List<Task<List<StockPrice>>>();
+
+                foreach (var item in tickers)
+                {
+                    var loadedLines = SearchForStocks(item, cancellationTokenSource.Token);
+
+                    tickerLoadingTasks.Add(loadedLines);
+                }
+
+                var loadedStocks = await Task.WhenAll(tickerLoadingTasks);
+
+                var loadedStocksFor = loadedStocks
+                    .SelectMany(stock => stock)
+                    .ToArray();
+
+                decimal total = 0;
+                int totalSafe = 0;
+                decimal totalDecSafe = 0;
+
+                var executionResult = Parallel.For(0, loadedStocksFor.Length, i =>
+                    {
+                        total += Compute(loadedStocksFor[i]);// not thread safe
+
+                        Interlocked.Add(ref totalSafe, (int)Compute(loadedStocksFor[i]));// only for int
+
+                        var value = Compute(loadedStocksFor[i]);
+                        lock (syncRoot)// wait until code finished
+                        {
+                            totalDecSafe += value;
+                        }
+                    }
+                );
+
+
+                decimal totalDecSafeEach = 0;
+                Parallel.ForEach(loadedStocks, stocks =>
+                {
+                    var value = 0m;
+                    foreach (var stock in stocks)
+                    {
+                        value += Compute(stock);
+                    }
+                    lock (syncRoot)// wait until code finished
+                    {
+                        totalDecSafeEach += value;
+                    }
+                });
+
+                textBox1.Text = $"{nameof(total)}: {total.ToString()}, {nameof(totalSafe)}:{totalSafe}, {nameof(totalDecSafe)}:{totalDecSafe}, {nameof(totalDecSafeEach)}:{totalDecSafeEach}";
+            }
+            catch (Exception ex)
+            {
+                textBox1.Text = ex.Message;
+            }
+            finally
+            {
+                cancellationTokenSource = null;
+            }
+
+            btnSharedVar.Text = "13 Shared Var";
+        }
+
+        private decimal Compute(StockPrice stock)
+        {
+            Thread.Yield();
+
+            decimal x = 0;
+            for (var a = 0; a < 5; a++)
+            {
+                for (var b = 0; b < 10; b++)
+                {
+                    x += a + stock.Change;
+                }
+            }
+
+            return x;
         }
     }
 }
