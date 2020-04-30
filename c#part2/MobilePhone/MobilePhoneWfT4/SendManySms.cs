@@ -56,10 +56,20 @@ namespace MobilePhoneWfT4
 
             smsFormatting.DataSource = Enum.GetNames(typeof(TextBoxOutput.FormatingStyle));
             cmbWords.DataSource = new List<string>() { FILTER_ALL_VALUES }.Concat(words).ToArray();
-            cmbLogic.DataSource = Enum.GetNames(typeof(LogicOperand)); //new string[] { "OR", "AND" };
+            cmbLogic.DataSource = Enum.GetNames(typeof(LogicOperand));
             dtpFrom.CustomFormat = "MM/dd/yyyy hh:mm:ss";
             dtpTo.CustomFormat = "MM/dd/yyyy hh:mm:ss";
+
+            resetFilters();
+        }
+
+        private void resetFilters()
+        {
+            dtpFrom.Value = DateTimePicker.MinimumDateTime;
             dtpTo.Value = DateTime.Now;
+            cbxSubscribers.Text = FILTER_ALL_VALUES;
+            cmbWords.Text = FILTER_ALL_VALUES;
+            cmbLogic.Text = LogicOperand.OR.ToString();
         }
 
         private void cbx_SelectedValueChanged(object sender, EventArgs e)
@@ -68,17 +78,27 @@ namespace MobilePhoneWfT4
 
             if (filterChanged != null)
             {
-                FilterParams filterParams = new FilterParams() { SubString = cmbWords.Text, ReceivedFrom = cbxSubscribers.Text, Logic = (LogicOperand)Enum.Parse(typeof(LogicOperand), cmbLogic.Text), From = dtpFrom.Value, To = dtpTo.Value.AddMilliseconds(999) };
+                LogicOperand logic;
+                Enum.TryParse(cmbLogic.Text,out logic);
+
+                FilterParams filterParams = new FilterParams() {
+                    SubString = cmbWords.Text,
+                    ReceivedFrom = cbxSubscribers.Text,
+                    Logic = logic,
+                    From = dtpFrom.Value,
+                    To = dtpTo.Value.AddMilliseconds(999) };
                 lvFilteredSms.Items.AddRange(filterChanged(phones, filterParams));
             }
         }
 
         private void btnResetFilters_Click(object sender, EventArgs e)
         {
-            dtpFrom.Value = DateTimePicker.MinimumDateTime;
-            dtpTo.Value = DateTime.Now;
-            cbxSubscribers.Text = FILTER_ALL_VALUES;
-            cmbWords.Text = FILTER_ALL_VALUES;
+            resetFilters();
+        }
+
+        private void receivedSms_DoubleClick(object sender, EventArgs e)
+        {
+            receivedSms.Clear();
         }
 
         private void button1_Click(object sender, EventArgs e)

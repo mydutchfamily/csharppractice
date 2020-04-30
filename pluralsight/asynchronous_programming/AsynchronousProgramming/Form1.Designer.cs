@@ -36,6 +36,11 @@
             this.btnContinuetion = new System.Windows.Forms.Button();
             this.btnLoadFile = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.btnStartAnonum = new System.Windows.Forms.Button();
+            this.btnRunStartNew = new System.Windows.Forms.Button();
+            this.btnStartNew = new System.Windows.Forms.Button();
+            this.btnNotepad = new System.Windows.Forms.Button();
+            this.btnCompletion = new System.Windows.Forms.Button();
             this.btnProgress = new System.Windows.Forms.Button();
             this.btnSharedVar = new System.Windows.Forms.Button();
             this.btnParallelForEach = new System.Windows.Forms.Button();
@@ -49,11 +54,6 @@
             this.btnException = new System.Windows.Forms.Button();
             this.btnAsyncAsync = new System.Windows.Forms.Button();
             this.progressBar1 = new System.Windows.Forms.ProgressBar();
-            this.btnCompletion = new System.Windows.Forms.Button();
-            this.btnNotepad = new System.Windows.Forms.Button();
-            this.btnStartNew = new System.Windows.Forms.Button();
-            this.btnRunStartNew = new System.Windows.Forms.Button();
-            this.btnStartAnonum = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
@@ -153,6 +153,56 @@
             this.groupBox1.TabIndex = 9;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Load prices";
+            // 
+            // btnStartAnonum
+            // 
+            this.btnStartAnonum.Location = new System.Drawing.Point(227, 48);
+            this.btnStartAnonum.Name = "btnStartAnonum";
+            this.btnStartAnonum.Size = new System.Drawing.Size(107, 25);
+            this.btnStartAnonum.TabIndex = 27;
+            this.btnStartAnonum.Text = "19 StartAnonum";
+            this.btnStartAnonum.UseVisualStyleBackColor = true;
+            this.btnStartAnonum.Click += new System.EventHandler(this.btnStartAnonum_Click);
+            // 
+            // btnRunStartNew
+            // 
+            this.btnRunStartNew.Location = new System.Drawing.Point(227, 19);
+            this.btnRunStartNew.Name = "btnRunStartNew";
+            this.btnRunStartNew.Size = new System.Drawing.Size(107, 25);
+            this.btnRunStartNew.TabIndex = 26;
+            this.btnRunStartNew.Text = "18 RunStartNew";
+            this.btnRunStartNew.UseVisualStyleBackColor = true;
+            this.btnRunStartNew.Click += new System.EventHandler(this.btnRunStartNew_Click);
+            // 
+            // btnStartNew
+            // 
+            this.btnStartNew.Location = new System.Drawing.Point(112, 287);
+            this.btnStartNew.Name = "btnStartNew";
+            this.btnStartNew.Size = new System.Drawing.Size(110, 25);
+            this.btnStartNew.TabIndex = 25;
+            this.btnStartNew.Text = "17 Start New";
+            this.btnStartNew.UseVisualStyleBackColor = true;
+            this.btnStartNew.Click += new System.EventHandler(this.btnStartNew_Click);
+            // 
+            // btnNotepad
+            // 
+            this.btnNotepad.Location = new System.Drawing.Point(112, 257);
+            this.btnNotepad.Name = "btnNotepad";
+            this.btnNotepad.Size = new System.Drawing.Size(110, 25);
+            this.btnNotepad.TabIndex = 24;
+            this.btnNotepad.Text = "16 Notepad";
+            this.btnNotepad.UseVisualStyleBackColor = true;
+            this.btnNotepad.Click += new System.EventHandler(this.btnNotepad_Click);
+            // 
+            // btnCompletion
+            // 
+            this.btnCompletion.Location = new System.Drawing.Point(113, 203);
+            this.btnCompletion.Name = "btnCompletion";
+            this.btnCompletion.Size = new System.Drawing.Size(110, 25);
+            this.btnCompletion.TabIndex = 23;
+            this.btnCompletion.Text = "15 Completion";
+            this.btnCompletion.UseVisualStyleBackColor = true;
+            this.btnCompletion.Click += new System.EventHandler(this.btnCompletion_Click);
             // 
             // btnProgress
             // 
@@ -278,56 +328,6 @@
             this.progressBar1.Name = "progressBar1";
             this.progressBar1.Size = new System.Drawing.Size(91, 24);
             this.progressBar1.TabIndex = 10;
-            // 
-            // btnCompletion
-            // 
-            this.btnCompletion.Location = new System.Drawing.Point(113, 203);
-            this.btnCompletion.Name = "btnCompletion";
-            this.btnCompletion.Size = new System.Drawing.Size(110, 25);
-            this.btnCompletion.TabIndex = 23;
-            this.btnCompletion.Text = "15 Completion";
-            this.btnCompletion.UseVisualStyleBackColor = true;
-            this.btnCompletion.Click += new System.EventHandler(this.btnCompletion_Click);
-            // 
-            // btnNotepad
-            // 
-            this.btnNotepad.Location = new System.Drawing.Point(112, 257);
-            this.btnNotepad.Name = "btnNotepad";
-            this.btnNotepad.Size = new System.Drawing.Size(110, 25);
-            this.btnNotepad.TabIndex = 24;
-            this.btnNotepad.Text = "16 Notepad";
-            this.btnNotepad.UseVisualStyleBackColor = true;
-            this.btnNotepad.Click += new System.EventHandler(this.btnNotepad_Click);
-            // 
-            // btnStartNew
-            // 
-            this.btnStartNew.Location = new System.Drawing.Point(112, 287);
-            this.btnStartNew.Name = "btnStartNew";
-            this.btnStartNew.Size = new System.Drawing.Size(110, 25);
-            this.btnStartNew.TabIndex = 25;
-            this.btnStartNew.Text = "17 Start New";
-            this.btnStartNew.UseVisualStyleBackColor = true;
-            this.btnStartNew.Click += new System.EventHandler(this.btnStartNew_Click);
-            // 
-            // btnRunStartNew
-            // 
-            this.btnRunStartNew.Location = new System.Drawing.Point(227, 19);
-            this.btnRunStartNew.Name = "btnRunStartNew";
-            this.btnRunStartNew.Size = new System.Drawing.Size(107, 25);
-            this.btnRunStartNew.TabIndex = 26;
-            this.btnRunStartNew.Text = "18 RunStartNew";
-            this.btnRunStartNew.UseVisualStyleBackColor = true;
-            this.btnRunStartNew.Click += new System.EventHandler(this.btnRunStartNew_Click);
-            // 
-            // btnStartAnonum
-            // 
-            this.btnStartAnonum.Location = new System.Drawing.Point(227, 48);
-            this.btnStartAnonum.Name = "btnStartAnonum";
-            this.btnStartAnonum.Size = new System.Drawing.Size(107, 25);
-            this.btnStartAnonum.TabIndex = 27;
-            this.btnStartAnonum.Text = "19 StartAnonum";
-            this.btnStartAnonum.UseVisualStyleBackColor = true;
-            this.btnStartAnonum.Click += new System.EventHandler(this.btnStartAnonum_Click);
             // 
             // Form1
             // 

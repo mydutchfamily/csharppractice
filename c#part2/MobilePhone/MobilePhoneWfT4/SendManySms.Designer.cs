@@ -66,7 +66,7 @@
             this.smsFormatting.Name = "smsFormatting";
             this.smsFormatting.Size = new System.Drawing.Size(154, 21);
             this.smsFormatting.TabIndex = 0;
-            this.smsFormatting.SelectedIndexChanged += new System.EventHandler(this.smsFormatting_SelectedIndexChanged);
+            this.smsFormatting.SelectionChangeCommitted += new System.EventHandler(this.smsFormatting_SelectedIndexChanged);
             // 
             // button1
             // 
@@ -132,6 +132,7 @@
             this.receivedSms.Size = new System.Drawing.Size(504, 201);
             this.receivedSms.TabIndex = 4;
             this.receivedSms.Text = "";
+            this.receivedSms.DoubleClick += new System.EventHandler(this.receivedSms_DoubleClick);
             // 
             // tbpgFilteredSms
             // 
@@ -269,6 +270,7 @@
             this.btnResetFilters.TabIndex = 10;
             this.btnResetFilters.Text = "Reset Filters";
             this.btnResetFilters.UseVisualStyleBackColor = true;
+            this.btnResetFilters.Click += new System.EventHandler(this.btnResetFilters_Click);
             // 
             // SendManySms
             // 

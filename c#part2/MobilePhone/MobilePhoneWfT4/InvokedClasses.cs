@@ -4,6 +4,7 @@ using MobilePhoneClT2.Implementation;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -21,10 +22,7 @@ namespace MobilePhoneWfT4
         {
             IEnumerable<SmsMessage> allSms = new SmsMessage[0];
 
-            foreach (GeneralPhone phone in phones)
-            {
-                allSms = allSms.Concat(phone.UseComponent<Memory>().Get<SmsMessage>());
-            }
+            allSms = phones.Select(p => p.UseComponent<Memory>().Get<SmsMessage>()).SelectMany(p => p);
 
             Func<SmsMessage, bool> where;
 
