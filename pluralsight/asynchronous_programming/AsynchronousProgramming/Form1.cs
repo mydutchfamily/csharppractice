@@ -829,7 +829,8 @@ namespace AsynchronousProgramming
                 progressBar1.Value = 0;
                 progressBar1.Maximum = tickers.Count();
 
-                IProgress<List<StockPrice>> progress = new Progress<List<StockPrice>>(stocks => {
+                IProgress<List<StockPrice>> progress = new Progress<List<StockPrice>>(stocks =>
+                {
                     progressBar1.Value += 1;
                     textBox1.Text += $"Loaded {stocks.Count()} for {stocks.First().Ticker} {Environment.NewLine}";
                 });
@@ -838,7 +839,8 @@ namespace AsynchronousProgramming
                 {
                     var loadedLines = SearchForStocks(item, cancellationTokenSource.Token);
 
-                    loadedLines= loadedLines.ContinueWith(st =>{
+                    loadedLines = loadedLines.ContinueWith(st =>
+                    {
                         progress.Report(st.Result);
                         return st.Result;
                     });
@@ -899,10 +901,12 @@ namespace AsynchronousProgramming
             btnCompletion.Text = "15 Completion";
         }
 
-        private Task<List<StockPrice>> GetStocksFor(string ticker) {
+        private Task<List<StockPrice>> GetStocksFor(string ticker)
+        {
             var source = new TaskCompletionSource<List<StockPrice>>();
 
-            ThreadPool.QueueUserWorkItem(_ => {
+            ThreadPool.QueueUserWorkItem(_ =>
+            {
                 try
                 {
                     var prices = new List<StockPrice>();
@@ -977,6 +981,159 @@ namespace AsynchronousProgramming
 
             process.Start();
             return source.Task;
+        }
+
+        private async void btnStartNew_Click(object sender, EventArgs e)
+        {
+            btnStartNew.Text = "Cancel";
+
+            if (cancellationTokenSource != null)
+            {
+                cancellationTokenSource.Cancel();
+                cancellationTokenSource = null;
+                return;
+            }
+
+            cancellationTokenSource = new CancellationTokenSource();
+
+            cancellationTokenSource.Token.Register(() => { textBox1.Text = "Cancellation requested"; });
+
+            try
+            {
+                Debug.WriteLine("Starting");
+                await Task.Factory.StartNew(() =>
+                {
+                    Task.Factory.StartNew(() =>
+                    {
+                        Thread.Sleep(1000);
+                        Debug.WriteLine("Completing 1");
+                    }, TaskCreationOptions.AttachedToParent);//parent thread will wait for this task- synchronized
+
+                    Task.Factory.StartNew(() =>
+                    {
+                        Thread.Sleep(1000);
+                        Debug.WriteLine("Completing 2");
+                    });
+
+                    Task.Factory.StartNew(() =>
+                    {
+                        Thread.Sleep(1000);
+                        Debug.WriteLine("Completing 3");
+                    });
+                },
+                TaskCreationOptions.DenyChildAttach// with option parent thread will ignore child threads
+                );
+                Debug.WriteLine("Completed");
+            }
+            catch (Exception ex)
+            {
+                textBox1.Text = ex.Message;
+            }
+            finally
+            {
+                cancellationTokenSource = null;
+            }
+
+            btnStartNew.Text = "17 Start New";
+        }
+
+        private async void btnRunStartNew_Click(object sender, EventArgs e)
+        {
+            btnRunStartNew.Text = "Cancel";
+
+            if (cancellationTokenSource != null)
+            {
+                cancellationTokenSource.Cancel();
+                cancellationTokenSource = null;
+                return;
+            }
+
+            cancellationTokenSource = new CancellationTokenSource();
+            try
+            {
+                var tickers = tbTickers.Text.Split(',', ' ');
+                var tickerLoadingTasks = new List<Task<List<StockPrice>>>();
+
+                foreach (var item in tickers)
+                {
+                    var loadedLines = SearchForStocks(item, cancellationTokenSource.Token);
+                    tickerLoadingTasks.Add(loadedLines);
+                }
+
+                var allStocks = await Task.WhenAll(tickerLoadingTasks);
+
+                //var operation = Task.Run(() =>// by default running with detached child threads
+                var operation = Task.Factory.StartNew(() =>
+                {
+                    Task.Factory.StartNew(() =>
+                    {
+                        foreach (var stocks in allStocks)
+                        {
+                            Debug.WriteLine($"Processing {stocks.First().Ticker}");
+
+                            var partial = CalculateExpensiveComputation(stocks);
+                        }
+                    }, TaskCreationOptions.AttachedToParent);// as Task.Run run without child,option will not work 
+                });
+
+                await operation;
+
+                Debug.WriteLine("Process completed");
+
+            }
+            catch (Exception ex)
+            {
+                textBox1.Text = ex.Message;
+            }
+            finally
+            {
+                cancellationTokenSource = null;
+            }
+
+            btnRunStartNew.Text = "18 RunStartNew";
+        }
+
+        private async void btnStartAnonum_Click(object sender, EventArgs e)
+        {
+            btnStartAnonum.Text = "Cancel";
+
+            if (cancellationTokenSource != null)
+            {
+                cancellationTokenSource.Cancel();
+                cancellationTokenSource = null;
+                return;
+            }
+
+            cancellationTokenSource = new CancellationTokenSource();
+            try
+            {
+                var service = new StockService();
+                var operation = Task.Factory.StartNew(async (obj) =>// obj is the service
+                {
+                    var stockService = obj as StockService;
+
+                    var prices = await stockService.SearchForStocks("MSFT", cancellationTokenSource.Token);
+
+                    return prices.Take(5);
+
+                }, service)// pass as obj into lambda
+                .Unwrap();
+
+                //var result = await await operation;// without Unwrap()
+                var result = await operation;
+
+                Debug.WriteLine("Process completed");
+            }
+            catch (Exception ex)
+            {
+                textBox1.Text = ex.Message;
+            }
+            finally
+            {
+                cancellationTokenSource = null;
+            }
+
+            btnStartAnonum.Text = "19 StartAnonum";
         }
     }
 }
