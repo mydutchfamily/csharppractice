@@ -47,6 +47,8 @@
             this.btnParallel = new System.Windows.Forms.Button();
             this.btnParallelForEach = new System.Windows.Forms.Button();
             this.btnSharedVar = new System.Windows.Forms.Button();
+            this.btnProgress = new System.Windows.Forms.Button();
+            this.progressBar1 = new System.Windows.Forms.ProgressBar();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
@@ -118,6 +120,7 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.btnProgress);
             this.groupBox1.Controls.Add(this.btnSharedVar);
             this.groupBox1.Controls.Add(this.btnParallelForEach);
             this.groupBox1.Controls.Add(this.btnParallel);
@@ -249,11 +252,29 @@
             this.btnSharedVar.UseVisualStyleBackColor = true;
             this.btnSharedVar.Click += new System.EventHandler(this.btnSharedVar_Click);
             // 
+            // btnProgress
+            // 
+            this.btnProgress.Location = new System.Drawing.Point(119, 200);
+            this.btnProgress.Name = "btnProgress";
+            this.btnProgress.Size = new System.Drawing.Size(129, 24);
+            this.btnProgress.TabIndex = 22;
+            this.btnProgress.Text = "14 Progress";
+            this.btnProgress.UseVisualStyleBackColor = true;
+            this.btnProgress.Click += new System.EventHandler(this.btnProgress_Click);
+            // 
+            // progressBar1
+            // 
+            this.progressBar1.Location = new System.Drawing.Point(267, 7);
+            this.progressBar1.Name = "progressBar1";
+            this.progressBar1.Size = new System.Drawing.Size(91, 24);
+            this.progressBar1.TabIndex = 10;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(894, 317);
+            this.Controls.Add(this.progressBar1);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.textBox1);
@@ -289,6 +310,8 @@
         private System.Windows.Forms.Button btnParallel;
         private System.Windows.Forms.Button btnParallelForEach;
         private System.Windows.Forms.Button btnSharedVar;
+        private System.Windows.Forms.Button btnProgress;
+        private System.Windows.Forms.ProgressBar progressBar1;
     }
 }
 

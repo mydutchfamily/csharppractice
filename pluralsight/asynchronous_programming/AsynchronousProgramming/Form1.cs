@@ -805,5 +805,64 @@ namespace AsynchronousProgramming
 
             return x;
         }
+
+        private async void btnProgress_Click(object sender, EventArgs e)
+        {
+            btnProgress.Text = "Cancel";
+
+            if (cancellationTokenSource != null)
+            {
+                cancellationTokenSource.Cancel();
+                cancellationTokenSource = null;
+                return;
+            }
+
+            cancellationTokenSource = new CancellationTokenSource();
+
+            cancellationTokenSource.Token.Register(() => { textBox1.Text = "Cancellation requested"; });
+
+            try
+            {
+                var tickers = tbTickers.Text.Split(',', ' ');
+                var tickerLoadingTasks = new List<Task<List<StockPrice>>>();
+
+                progressBar1.Value = 0;
+                progressBar1.Maximum = tickers.Count();
+
+                IProgress<List<StockPrice>> progress = new Progress<List<StockPrice>>(stocks => {
+                    progressBar1.Value += 1;
+                    textBox1.Text += $"Loaded {stocks.Count()} for {stocks.First().Ticker} {Environment.NewLine}";
+                });
+
+                foreach (var item in tickers)
+                {
+                    var loadedLines = SearchForStocks(item, cancellationTokenSource.Token);
+
+                    loadedLines= loadedLines.ContinueWith(st =>{
+                        progress.Report(st.Result);
+                        return st.Result;
+                    });
+
+                    tickerLoadingTasks.Add(loadedLines);
+                }
+
+                var allLoadingTasks = await Task.WhenAll(tickerLoadingTasks);
+
+                var data = allLoadingTasks.SelectMany(ls => ls);
+
+                dataGridView1.DataSource = data.Select(p => new { value = $"{p.Ticker} {p.Volume}" }).ToList();
+                dataGridView1.Columns[0].Width = dataGridView1.Width;
+            }
+            catch (Exception ex)
+            {
+                textBox1.Text = ex.Message;
+            }
+            finally
+            {
+                cancellationTokenSource = null;
+            }
+
+            btnProgress.Text = "14 Completion";
+        }
     }
 }
