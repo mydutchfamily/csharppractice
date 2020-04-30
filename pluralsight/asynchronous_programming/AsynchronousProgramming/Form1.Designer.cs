@@ -36,14 +36,15 @@
             this.btnContinuetion = new System.Windows.Forms.Button();
             this.btnLoadFile = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.btnStayOut = new System.Windows.Forms.Button();
+            this.btnOneByOne = new System.Windows.Forms.Button();
+            this.btnMock = new System.Windows.Forms.Button();
             this.tbTickers = new System.Windows.Forms.TextBox();
             this.btnManyTasks = new System.Windows.Forms.Button();
             this.btnWithCancel = new System.Windows.Forms.Button();
             this.btnException = new System.Windows.Forms.Button();
             this.btnAsyncAsync = new System.Windows.Forms.Button();
-            this.btnMock = new System.Windows.Forms.Button();
-            this.btnOneByOne = new System.Windows.Forms.Button();
-            this.btnStayOut = new System.Windows.Forms.Button();
+            this.btnParallel = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
@@ -115,6 +116,7 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.btnParallel);
             this.groupBox1.Controls.Add(this.btnStayOut);
             this.groupBox1.Controls.Add(this.btnOneByOne);
             this.groupBox1.Controls.Add(this.btnMock);
@@ -134,6 +136,36 @@
             this.groupBox1.TabIndex = 9;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Load prices";
+            // 
+            // btnStayOut
+            // 
+            this.btnStayOut.Location = new System.Drawing.Point(117, 75);
+            this.btnStayOut.Name = "btnStayOut";
+            this.btnStayOut.Size = new System.Drawing.Size(135, 25);
+            this.btnStayOut.TabIndex = 18;
+            this.btnStayOut.Text = "10 Stay Out";
+            this.btnStayOut.UseVisualStyleBackColor = true;
+            this.btnStayOut.Click += new System.EventHandler(this.btnStayOut_Click);
+            // 
+            // btnOneByOne
+            // 
+            this.btnOneByOne.Location = new System.Drawing.Point(117, 46);
+            this.btnOneByOne.Name = "btnOneByOne";
+            this.btnOneByOne.Size = new System.Drawing.Size(135, 23);
+            this.btnOneByOne.TabIndex = 17;
+            this.btnOneByOne.Text = "9 One By One";
+            this.btnOneByOne.UseVisualStyleBackColor = true;
+            this.btnOneByOne.Click += new System.EventHandler(this.btnOneByOne_Click);
+            // 
+            // btnMock
+            // 
+            this.btnMock.Location = new System.Drawing.Point(6, 287);
+            this.btnMock.Name = "btnMock";
+            this.btnMock.Size = new System.Drawing.Size(98, 25);
+            this.btnMock.TabIndex = 16;
+            this.btnMock.Text = "8 Use Mock";
+            this.btnMock.UseVisualStyleBackColor = true;
+            this.btnMock.Click += new System.EventHandler(this.btnMock_Click);
             // 
             // tbTickers
             // 
@@ -183,35 +215,15 @@
             this.btnAsyncAsync.UseVisualStyleBackColor = true;
             this.btnAsyncAsync.Click += new System.EventHandler(this.btnAsyncAsync_Click);
             // 
-            // btnMock
+            // btnParallel
             // 
-            this.btnMock.Location = new System.Drawing.Point(6, 287);
-            this.btnMock.Name = "btnMock";
-            this.btnMock.Size = new System.Drawing.Size(98, 25);
-            this.btnMock.TabIndex = 16;
-            this.btnMock.Text = "8 Use Mock";
-            this.btnMock.UseVisualStyleBackColor = true;
-            this.btnMock.Click += new System.EventHandler(this.btnMock_Click);
-            // 
-            // btnOneByOne
-            // 
-            this.btnOneByOne.Location = new System.Drawing.Point(117, 46);
-            this.btnOneByOne.Name = "btnOneByOne";
-            this.btnOneByOne.Size = new System.Drawing.Size(135, 23);
-            this.btnOneByOne.TabIndex = 17;
-            this.btnOneByOne.Text = "9 One By One";
-            this.btnOneByOne.UseVisualStyleBackColor = true;
-            this.btnOneByOne.Click += new System.EventHandler(this.btnOneByOne_Click);
-            // 
-            // btnStayOut
-            // 
-            this.btnStayOut.Location = new System.Drawing.Point(117, 75);
-            this.btnStayOut.Name = "btnStayOut";
-            this.btnStayOut.Size = new System.Drawing.Size(135, 25);
-            this.btnStayOut.TabIndex = 18;
-            this.btnStayOut.Text = "10 Stay Out";
-            this.btnStayOut.UseVisualStyleBackColor = true;
-            this.btnStayOut.Click += new System.EventHandler(this.btnStayOut_Click);
+            this.btnParallel.Location = new System.Drawing.Point(118, 107);
+            this.btnParallel.Name = "btnParallel";
+            this.btnParallel.Size = new System.Drawing.Size(133, 25);
+            this.btnParallel.TabIndex = 19;
+            this.btnParallel.Text = "11 Parallel";
+            this.btnParallel.UseVisualStyleBackColor = true;
+            this.btnParallel.Click += new System.EventHandler(this.btnParallel_Click);
             // 
             // Form1
             // 
@@ -250,6 +262,7 @@
         private System.Windows.Forms.Button btnMock;
         private System.Windows.Forms.Button btnOneByOne;
         private System.Windows.Forms.Button btnStayOut;
+        private System.Windows.Forms.Button btnParallel;
     }
 }
 

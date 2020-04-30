@@ -517,5 +517,105 @@ namespace AsynchronousProgramming
 
             return stocks.Take(5);
         }
+
+        private async void btnParallel_Click(object sender, EventArgs e)
+        {
+            btnParallel.Text = "Cancel";
+            #region Cancel
+            if (cancellationTokenSource != null)
+            {
+                cancellationTokenSource.Cancel();
+                cancellationTokenSource = null;
+                return;
+            }
+
+            cancellationTokenSource = new CancellationTokenSource();
+
+            cancellationTokenSource.Token.Register(() => { textBox1.Text = "Cancellation requested"; });
+            #endregion
+            try
+            {
+                #region Create Stock Tasks
+                var tickers = tbTickers.Text.Split(',', ' ');
+                var tickerLoadingTasks = new List<Task<List<StockPrice>>>();
+
+                foreach (var item in tickers)
+                {
+                    var loadedLines = SearchForStocks(item, cancellationTokenSource.Token);
+
+                    tickerLoadingTasks.Add(loadedLines);
+                }
+                #endregion
+
+                var data = (await Task.WhenAll(tickerLoadingTasks)).SelectMany(ls => ls);
+
+                Parallel.Invoke(// locks current thread - GUI
+                    new ParallelOptions {MaxDegreeOfParallelism = 2 }, //how many tasks can run at once
+                    () => {
+                        Debug.WriteLine("Starting Operation 1");
+
+                        CalculateExpensiveComputation(data);
+
+                        //GuiObj.Invoke(()=>{}); // will try to call UI thread and as it is locked - deadlock appear 
+
+                        Debug.WriteLine("Completed Operation 1");
+                    },
+                    () => {
+                        Debug.WriteLine("Starting Operation 2");
+
+                        CalculateExpensiveComputation(data);
+
+                        Debug.WriteLine("Completed Operation 2");
+                    },
+                    () => {
+                        Debug.WriteLine("Starting Operation 3");
+
+                        CalculateExpensiveComputation(data);
+
+                        Debug.WriteLine("Completed Operation 3");
+                    },
+                    () => {
+                        Debug.WriteLine("Starting Operation 4");
+
+                        CalculateExpensiveComputation(data);
+
+                        Debug.WriteLine("Completed Operation 4");
+                    }
+                    );
+
+                dataGridView1.DataSource = data.Select(p => new { value = $"{p.Ticker} {p.Volume}" }).ToList();
+                dataGridView1.Columns[0].Width = dataGridView1.Width;
+            }
+            catch (Exception ex)
+            {
+                textBox1.Text = ex.Message;
+            }
+            finally
+            {
+                cancellationTokenSource = null;
+            }
+
+            btnParallel.Text = "9 One By One";
+        }
+
+        private decimal CalculateExpensiveComputation(IEnumerable<StockPrice> stocks)
+        {
+            Thread.Yield();
+
+            var computedValue = 0m;
+
+            foreach (var stock in stocks)
+            {
+                for (int i = 0; i < stocks.Count() - 2; i++)
+                {
+                    for (int a = 0; a < 5; a++)
+                    {
+                        computedValue += stocks.ElementAt(i).Change + stocks.ElementAt(i + 1).Change;
+                    }
+                }
+            }
+
+            return computedValue;
+        }
     }
 }
