@@ -862,7 +862,121 @@ namespace AsynchronousProgramming
                 cancellationTokenSource = null;
             }
 
-            btnProgress.Text = "14 Completion";
+            btnProgress.Text = "14 Progress";
+        }
+
+        private async void btnCompletion_Click(object sender, EventArgs e)
+        {
+            btnCompletion.Text = "Cancel";
+
+            if (cancellationTokenSource != null)
+            {
+                cancellationTokenSource.Cancel();
+                cancellationTokenSource = null;
+                return;
+            }
+
+            cancellationTokenSource = new CancellationTokenSource();
+
+            cancellationTokenSource.Token.Register(() => { textBox1.Text = "Cancellation requested"; });
+
+            try
+            {
+                var data = await GetStocksFor(tbTicker.Text);
+
+                dataGridView1.DataSource = data.Select(p => new { value = $"{p.Ticker} {p.Volume}" }).ToList();
+                dataGridView1.Columns[0].Width = dataGridView1.Width;
+            }
+            catch (Exception ex)
+            {
+                textBox1.Text = ex.Message;
+            }
+            finally
+            {
+                cancellationTokenSource = null;
+            }
+
+            btnCompletion.Text = "15 Completion";
+        }
+
+        private Task<List<StockPrice>> GetStocksFor(string ticker) {
+            var source = new TaskCompletionSource<List<StockPrice>>();
+
+            ThreadPool.QueueUserWorkItem(_ => {
+                try
+                {
+                    var prices = new List<StockPrice>();
+
+                    var lines = File.ReadAllLines("StockPrices_Small.csv");
+
+                    foreach (var line in lines.Skip(1))
+                    {
+                        prices.Add(createStock(line));
+                    }
+
+                    source.SetResult(prices.Where(p => p.Ticker == ticker).ToList());
+                }
+                catch (Exception ex)
+                {
+                    source.SetException(ex);
+                }
+            });
+
+            return source.Task;
+        }
+
+        private async void btnNotepad_Click(object sender, EventArgs e)
+        {
+            btnNotepad.Text = "Cancel";
+
+            if (cancellationTokenSource != null)
+            {
+                cancellationTokenSource.Cancel();
+                cancellationTokenSource = null;
+                return;
+            }
+
+            cancellationTokenSource = new CancellationTokenSource();
+
+            cancellationTokenSource.Token.Register(() => { textBox1.Text = "Cancellation requested"; });
+
+            try
+            {
+                await WorkInNotepad();
+
+            }
+            catch (Exception ex)
+            {
+                textBox1.Text = ex.Message;
+            }
+            finally
+            {
+                cancellationTokenSource = null;
+            }
+
+            btnNotepad.Text = "16 Notepad";
+        }
+
+        private Task WorkInNotepad()
+        {
+            var source = new TaskCompletionSource<List<StockPrice>>();
+            var process = new Process
+            {
+                EnableRaisingEvents = true,
+                StartInfo = new ProcessStartInfo("Notepad.exe")
+                {
+                    RedirectStandardError = true,
+                    UseShellExecute = false
+                }
+            };
+
+            process.Exited += (sender, e) =>
+             {
+                 source.SetResult(null);
+             };
+
+            process.Start();
+            return source.Task;
         }
     }
 }

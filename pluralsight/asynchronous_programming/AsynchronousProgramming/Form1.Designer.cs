@@ -36,6 +36,10 @@
             this.btnContinuetion = new System.Windows.Forms.Button();
             this.btnLoadFile = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.btnProgress = new System.Windows.Forms.Button();
+            this.btnSharedVar = new System.Windows.Forms.Button();
+            this.btnParallelForEach = new System.Windows.Forms.Button();
+            this.btnParallel = new System.Windows.Forms.Button();
             this.btnStayOut = new System.Windows.Forms.Button();
             this.btnOneByOne = new System.Windows.Forms.Button();
             this.btnMock = new System.Windows.Forms.Button();
@@ -44,11 +48,9 @@
             this.btnWithCancel = new System.Windows.Forms.Button();
             this.btnException = new System.Windows.Forms.Button();
             this.btnAsyncAsync = new System.Windows.Forms.Button();
-            this.btnParallel = new System.Windows.Forms.Button();
-            this.btnParallelForEach = new System.Windows.Forms.Button();
-            this.btnSharedVar = new System.Windows.Forms.Button();
-            this.btnProgress = new System.Windows.Forms.Button();
             this.progressBar1 = new System.Windows.Forms.ProgressBar();
+            this.btnCompletion = new System.Windows.Forms.Button();
+            this.btnNotepad = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
@@ -120,6 +122,8 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.btnNotepad);
+            this.groupBox1.Controls.Add(this.btnCompletion);
             this.groupBox1.Controls.Add(this.btnProgress);
             this.groupBox1.Controls.Add(this.btnSharedVar);
             this.groupBox1.Controls.Add(this.btnParallelForEach);
@@ -143,6 +147,46 @@
             this.groupBox1.TabIndex = 9;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Load prices";
+            // 
+            // btnProgress
+            // 
+            this.btnProgress.Location = new System.Drawing.Point(119, 200);
+            this.btnProgress.Name = "btnProgress";
+            this.btnProgress.Size = new System.Drawing.Size(129, 24);
+            this.btnProgress.TabIndex = 22;
+            this.btnProgress.Text = "14 Progress";
+            this.btnProgress.UseVisualStyleBackColor = true;
+            this.btnProgress.Click += new System.EventHandler(this.btnProgress_Click);
+            // 
+            // btnSharedVar
+            // 
+            this.btnSharedVar.Location = new System.Drawing.Point(118, 169);
+            this.btnSharedVar.Name = "btnSharedVar";
+            this.btnSharedVar.Size = new System.Drawing.Size(131, 25);
+            this.btnSharedVar.TabIndex = 21;
+            this.btnSharedVar.Text = "13 Shared Var";
+            this.btnSharedVar.UseVisualStyleBackColor = true;
+            this.btnSharedVar.Click += new System.EventHandler(this.btnSharedVar_Click);
+            // 
+            // btnParallelForEach
+            // 
+            this.btnParallelForEach.Location = new System.Drawing.Point(118, 138);
+            this.btnParallelForEach.Name = "btnParallelForEach";
+            this.btnParallelForEach.Size = new System.Drawing.Size(132, 24);
+            this.btnParallelForEach.TabIndex = 20;
+            this.btnParallelForEach.Text = "12 ParallelForEach";
+            this.btnParallelForEach.UseVisualStyleBackColor = true;
+            this.btnParallelForEach.Click += new System.EventHandler(this.btnParallelForEach_Click);
+            // 
+            // btnParallel
+            // 
+            this.btnParallel.Location = new System.Drawing.Point(118, 107);
+            this.btnParallel.Name = "btnParallel";
+            this.btnParallel.Size = new System.Drawing.Size(133, 25);
+            this.btnParallel.TabIndex = 19;
+            this.btnParallel.Text = "11 Parallel";
+            this.btnParallel.UseVisualStyleBackColor = true;
+            this.btnParallel.Click += new System.EventHandler(this.btnParallel_Click);
             // 
             // btnStayOut
             // 
@@ -222,52 +266,32 @@
             this.btnAsyncAsync.UseVisualStyleBackColor = true;
             this.btnAsyncAsync.Click += new System.EventHandler(this.btnAsyncAsync_Click);
             // 
-            // btnParallel
-            // 
-            this.btnParallel.Location = new System.Drawing.Point(118, 107);
-            this.btnParallel.Name = "btnParallel";
-            this.btnParallel.Size = new System.Drawing.Size(133, 25);
-            this.btnParallel.TabIndex = 19;
-            this.btnParallel.Text = "11 Parallel";
-            this.btnParallel.UseVisualStyleBackColor = true;
-            this.btnParallel.Click += new System.EventHandler(this.btnParallel_Click);
-            // 
-            // btnParallelForEach
-            // 
-            this.btnParallelForEach.Location = new System.Drawing.Point(118, 138);
-            this.btnParallelForEach.Name = "btnParallelForEach";
-            this.btnParallelForEach.Size = new System.Drawing.Size(132, 24);
-            this.btnParallelForEach.TabIndex = 20;
-            this.btnParallelForEach.Text = "12 ParallelForEach";
-            this.btnParallelForEach.UseVisualStyleBackColor = true;
-            this.btnParallelForEach.Click += new System.EventHandler(this.btnParallelForEach_Click);
-            // 
-            // btnSharedVar
-            // 
-            this.btnSharedVar.Location = new System.Drawing.Point(118, 169);
-            this.btnSharedVar.Name = "btnSharedVar";
-            this.btnSharedVar.Size = new System.Drawing.Size(131, 25);
-            this.btnSharedVar.TabIndex = 21;
-            this.btnSharedVar.Text = "13 Shared Var";
-            this.btnSharedVar.UseVisualStyleBackColor = true;
-            this.btnSharedVar.Click += new System.EventHandler(this.btnSharedVar_Click);
-            // 
-            // btnProgress
-            // 
-            this.btnProgress.Location = new System.Drawing.Point(119, 200);
-            this.btnProgress.Name = "btnProgress";
-            this.btnProgress.Size = new System.Drawing.Size(129, 24);
-            this.btnProgress.TabIndex = 22;
-            this.btnProgress.Text = "14 Progress";
-            this.btnProgress.UseVisualStyleBackColor = true;
-            this.btnProgress.Click += new System.EventHandler(this.btnProgress_Click);
-            // 
             // progressBar1
             // 
             this.progressBar1.Location = new System.Drawing.Point(267, 7);
             this.progressBar1.Name = "progressBar1";
             this.progressBar1.Size = new System.Drawing.Size(91, 24);
             this.progressBar1.TabIndex = 10;
+            // 
+            // btnCompletion
+            // 
+            this.btnCompletion.Location = new System.Drawing.Point(154, 230);
+            this.btnCompletion.Name = "btnCompletion";
+            this.btnCompletion.Size = new System.Drawing.Size(93, 25);
+            this.btnCompletion.TabIndex = 23;
+            this.btnCompletion.Text = "15 Completion";
+            this.btnCompletion.UseVisualStyleBackColor = true;
+            this.btnCompletion.Click += new System.EventHandler(this.btnCompletion_Click);
+            // 
+            // btnNotepad
+            // 
+            this.btnNotepad.Location = new System.Drawing.Point(118, 257);
+            this.btnNotepad.Name = "btnNotepad";
+            this.btnNotepad.Size = new System.Drawing.Size(128, 25);
+            this.btnNotepad.TabIndex = 24;
+            this.btnNotepad.Text = "16 Notepad";
+            this.btnNotepad.UseVisualStyleBackColor = true;
+            this.btnNotepad.Click += new System.EventHandler(this.btnNotepad_Click);
             // 
             // Form1
             // 
@@ -312,6 +336,8 @@
         private System.Windows.Forms.Button btnSharedVar;
         private System.Windows.Forms.Button btnProgress;
         private System.Windows.Forms.ProgressBar progressBar1;
+        private System.Windows.Forms.Button btnCompletion;
+        private System.Windows.Forms.Button btnNotepad;
     }
 }
 
