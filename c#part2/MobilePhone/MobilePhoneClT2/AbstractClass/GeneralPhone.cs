@@ -5,6 +5,9 @@ using MobilePhoneClT2.Implementation;
 using System.Linq;
 using MobilePhoneClT2.Interfaces;
 using MobilePhoneClT2.Enums;
+using System.Threading.Tasks;
+using System.Threading;
+using System.Diagnostics;
 
 namespace MobilePhoneClT2.AbstractClass
 {
@@ -16,13 +19,18 @@ namespace MobilePhoneClT2.AbstractClass
         private string vSerialNumber;
         private Contact myContact;
         private List<IComponent> vPhoneComponents;
-        protected List<IInterconnection> connectedDevices = new List<IInterconnection>();
+        protected IProgress<int> progress;
+        protected static object syncRoot = new object();
+        protected HashSet<IInterconnection> connectedDevices;
         protected HashSet<System.Collections.ICollection> Memory { get; set; }
+        protected Dictionary<string, Action<int>> deviceActions;
 
-        public GeneralPhone(string formFactor, string serialNumber)
+        public GeneralPhone(FormFactor formFactor, string serialNumber)
         {
             SerialNumber = serialNumber;
             FormFactor = formFactor;
+            this.deviceActions = new Dictionary<string, Action<int>>();
+            connectedDevices = new HashSet<IInterconnection>();
         }
 
         public ComponentTypes ComponentType { get; } = ComponentTypes.Phone;
@@ -46,14 +54,11 @@ namespace MobilePhoneClT2.AbstractClass
            get { return vPhoneComponents?.GetRange(0, vPhoneComponents.Count); }
            protected set { vPhoneComponents = value; }
         }
-        public string FormFactor { get; }
-        public virtual List<Plugins> SupportedPlugins
-        {
-            get
-            {
-                throw new NotImplementedException("No supported plugins provided for this phone");
-            }
-        }
+        public FormFactor FormFactor { get; }
+        public virtual List<Plugins> SupportedPlugins { get; } = new List<Plugins>() { Plugins.Button };
+
+        public Plugins PluginToUse { get; set; } = Plugins.Button;
+        public Action<int> Action { get; set; }
 
         public override string ToString()
         {
@@ -70,42 +75,51 @@ namespace MobilePhoneClT2.AbstractClass
             return strBldr.ToString();
         }
 
-        public virtual IPhone PluginDevice(IInterconnection device)
+        public virtual IPhone PluginDevice(IInterconnection device, Action<int> action = null)
         {
             if (SupportedPlugins.Contains(device.PluginToUse))
             {
                 connectedDevices.Add(device);
-            }
-            else
+
+                if (action != null)
+                    device.Action = action;
+                else if (deviceActions.ContainsKey(device.GetType().Name))
+                    device.Action = deviceActions[device.GetType().Name];
+                else
+                    throw new NotImplementedException($"No action provided to execute for device: {device.GetType().Name}");
+            } else
             {
-                throw new NotImplementedException("Not supported type of device connection");
+                throw new NotImplementedException($"Not supported type of device connection: {device.PluginToUse}");
             }
+            return this;
+        }
+
+        public IPhone DisconnectDevice(IInterconnection device)
+        {
+            if (connectedDevices.Remove(device))
+            {
+                device.Action = null;
+            };
 
             return this;
         }
 
-        public Boolean ExecuteDevice(string deviceType)
+        public async Task ExecuteDevice<T>(Action<int> progressReportAction = null, int? executeTimes = null) where T : class, IInterconnection
         {
-            IInterconnection device = null;
+            T device = null;
             foreach (IInterconnection item in connectedDevices) {
-                if (deviceType.Equals(item.GetType().Name))
+                if (typeof(T).Name == item.GetType().Name)
                 {
-                    device = item;
+                    device = (T)item;
                     break;
                 }
             }
 
-            if (device is IPlayback)
-            {
-                return device.DoAction();
+            if (progressReportAction != null) {
+                progress = new Progress<int>(progressReportAction);
             }
-            else if (device is IPowerSupply)
-            {
-                return device.DoAction();
-            }
-            else {
-                return false;
-            }
+
+            await device.DoAction(executeTimes);
         }
 
        public T UseComponent<T>() where T : class, IComponent
@@ -150,6 +164,27 @@ namespace MobilePhoneClT2.AbstractClass
         }
         public void AddContact(params Contact[] contacts) {
             this.UseComponent<Memory>().Add<Contact>(contacts);
+        }
+
+        public async Task DoAction(int? executeTimes = null) {
+            await Task.Run(() =>
+            {
+                while ((Action != null && executeTimes != null && executeTimes > 0)
+                        || (Action != null && executeTimes == null))
+                {
+                    lock (syncRoot)
+                    {
+                        Action?.Invoke(3);
+                    }
+
+                    executeTimes = executeTimes == null ? null : --executeTimes;
+                    Thread.Sleep(3000);
+                    Debug.WriteLine("**** power is consumed  *****");
+                }
+                if (Action == null && executeTimes != null && executeTimes <= 0)
+                    return;
+            }
+            );
         }
     }
 }

@@ -21,15 +21,24 @@ namespace MobilePhoneWfT2
         private IInterconnection powerBank;
         private IPhone gamePhone;
         IOutput output;
+        private Action<int> headsetAction, powerAction;
+        delegate void invokeGui();
         public Form1()
         {
             InitializeComponent();
 
-            gamePhone = new GamePhone("Bar", "BP20200321");
+            gamePhone = new GamePhone(FormFactor.Bar, "BP20200321");
             output = new TextBoxOutput(this.outputTextBox);
-            headsetSony = new HeadsetSony("BP20200321", output);
 
-            powerBank = new PowerBank("BP20200325", output);
+            invokeGui del1 = () => { output.WriteLine("HeadsetSony in Action"); };
+            headsetAction = (i) => { outputTextBox.Invoke(del1); };
+
+            invokeGui del2 = () => { output.WriteLine($"Phone is charging by {nameof(PowerBank)}"); };
+            powerAction = (i) => { outputTextBox.Invoke(del2);};
+
+            headsetSony = new HeadsetSony("BP20200321");
+
+            powerBank = new PowerBank("BP20200325");
             powerBank.PluginToUse = Plugins.Usb;
         }
 
@@ -64,14 +73,14 @@ namespace MobilePhoneWfT2
             {
                 case 1:
                     headsetSony.PluginToUse = Plugins.Bluetooth;
-                    gamePhone.PluginDevice(headsetSony).ExecuteDevice(typeof(HeadsetSony).Name);
+                    gamePhone.PluginDevice(headsetSony, headsetAction).ExecuteDevice<HeadsetSony>();
                     break;
                 case 2:
                     headsetSony.PluginToUse = Plugins.HeadSetJack35;
-                    gamePhone.PluginDevice(headsetSony).ExecuteDevice(typeof(HeadsetSony).Name);
+                    gamePhone.PluginDevice(headsetSony, headsetAction).ExecuteDevice<HeadsetSony>();
                     break;
                 case 3:
-                    gamePhone.PluginDevice(powerBank).ExecuteDevice(typeof(PowerBank).Name);
+                    gamePhone.PluginDevice(powerBank, powerAction).ExecuteDevice<PowerBank>(executeTimes: 1);
                     break;
                 default:
                     output.WriteLine("Unknown device selected");

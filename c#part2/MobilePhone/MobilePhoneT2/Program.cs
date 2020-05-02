@@ -13,13 +13,15 @@ namespace MobilePhoneClT2
     {
         static void Main(string[] args)
         {
-            IPhone gamePhone = new GamePhone("Bar", "BP20200321");
+            IPhone gamePhone = new GamePhone(FormFactor.Bar, "BP20200321");
 
             IOutput output = new ConsoleOutput();
 
-            IInterconnection headsetSony = new HeadsetSony("BP20200321", output);
+            IInterconnection headsetSony = new HeadsetSony("BP20200321");
 
-            IInterconnection powerBank = new PowerBank("BP20200325", output);
+            Action<int> headsetAction = (i) => { output.WriteLine("HeadsetSony in Action"); };
+
+            IInterconnection powerBank = new PowerBank("BP20200325");
             powerBank.PluginToUse = Plugins.Usb;
 
             Console.WriteLine("Select device to connect with the phone:");
@@ -34,14 +36,14 @@ namespace MobilePhoneClT2
             switch (choice) {
                 case 1:
                     headsetSony.PluginToUse = Plugins.Bluetooth;
-                    gamePhone.PluginDevice(headsetSony).ExecuteDevice(typeof(HeadsetSony).Name);
+                    gamePhone.PluginDevice(headsetSony, headsetAction).ExecuteDevice<HeadsetSony>();
                     break;
                 case 2:
                     headsetSony.PluginToUse = Plugins.HeadSetJack35;
-                    gamePhone.PluginDevice(headsetSony).ExecuteDevice(typeof(HeadsetSony).Name);
+                    gamePhone.PluginDevice(headsetSony, headsetAction).ExecuteDevice<HeadsetSony>();
                     break;
                 case 3:
-                    gamePhone.PluginDevice(powerBank).ExecuteDevice(typeof(PowerBank).Name);
+                    gamePhone.PluginDevice(powerBank, (i) => { output.WriteLine($"Phone is charging by {nameof(PowerBank)}"); }).ExecuteDevice<PowerBank>(executeTimes:1);
                     break;
                 default:
                     output.WriteLine("Unknown device selected");

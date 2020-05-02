@@ -1,6 +1,7 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using MobilePhoneClT2;
 using MobilePhoneClT2.AbstractClass;
+using MobilePhoneClT2.Enums;
 using MobilePhoneClT2.Implementation;
 using System;
 using System.Collections.Generic;
@@ -30,9 +31,9 @@ namespace MobilePhoneWfT4.Tests
             DateTime from, to;
             SetDates(fromTo, out from, out to);
 
-            GeneralPhone smsPhone1 = new SmsPhone("Bar", "BP20200406");
+            GeneralPhone smsPhone1 = new SmsPhone(FormFactor.Bar, "BP20200406");
             smsPhone1.SimCard = "Alex";
-            GeneralPhone smsPhone2 = new SmsPhone("Bar", "BP20200409");
+            GeneralPhone smsPhone2 = new SmsPhone(FormFactor.Bar, "BP20200409");
             smsPhone2.SimCard = "Vova";
 
             var contact2 = smsPhone2.GetMyContact();

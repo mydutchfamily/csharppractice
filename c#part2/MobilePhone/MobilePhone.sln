@@ -21,6 +21,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MobilePhoneWfT4", "MobilePh
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MobilePhoneWfT4Tests", "MobilePhoneWfT4Tests\MobilePhoneWfT4Tests.csproj", "{C116A60A-33AE-4452-AE43-D61B97BE777A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MobilePhoneWfT5", "MobilePhoneWfT5\MobilePhoneWfT5.csproj", "{AF37B105-8566-4077-81BD-B9FC2FF969D0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MobilePhoneWfT5Tests", "MobilePhoneWfT5Tests\MobilePhoneWfT5Tests.csproj", "{E9E33720-538F-452D-97F7-814452BBC911}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -63,6 +67,14 @@ Global
 		{C116A60A-33AE-4452-AE43-D61B97BE777A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C116A60A-33AE-4452-AE43-D61B97BE777A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C116A60A-33AE-4452-AE43-D61B97BE777A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AF37B105-8566-4077-81BD-B9FC2FF969D0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AF37B105-8566-4077-81BD-B9FC2FF969D0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AF37B105-8566-4077-81BD-B9FC2FF969D0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AF37B105-8566-4077-81BD-B9FC2FF969D0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E9E33720-538F-452D-97F7-814452BBC911}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E9E33720-538F-452D-97F7-814452BBC911}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E9E33720-538F-452D-97F7-814452BBC911}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E9E33720-538F-452D-97F7-814452BBC911}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

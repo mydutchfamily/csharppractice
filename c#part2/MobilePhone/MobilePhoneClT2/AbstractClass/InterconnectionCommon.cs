@@ -2,8 +2,10 @@
 using MobilePhoneClT2.Interfaces;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace MobilePhoneClT2.AbstractClass
@@ -12,10 +14,19 @@ namespace MobilePhoneClT2.AbstractClass
     {
         protected Plugins vPluginToUse;
         protected List<Plugins> vSupportedPlugins;
+        protected static object syncRoot = new object();
 
         public abstract ComponentTypes ComponentType { get; }
-        public abstract string SerialNumber { get; }
-        public abstract Boolean DoAction(object data = null);
+        public string SerialNumber { get; }
+
+        public InterconnectionCommon(string serialNumber)
+        {
+            SerialNumber = serialNumber;
+        }
+        public virtual async Task DoAction(int? executeTimes = null)
+        {
+            await Task.Run(()=> { Action?.Invoke(0); });
+        }
         public Plugins PluginToUse
         {
             get
@@ -42,5 +53,6 @@ namespace MobilePhoneClT2.AbstractClass
             }
         }
 
+        public Action<int> Action {get; set;}
     }
 }

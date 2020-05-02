@@ -31,13 +31,13 @@ namespace MobilePhoneWfT4
         {
             InitializeComponent();
 
-            smsPhone1 = new SmsPhone("Bar", "BP20200406");
+            smsPhone1 = new SmsPhone(FormFactor.Bar, "BP20200406");
             smsPhone1.SimCard = "Alex";
-            smsPhone2 = new SmsPhone("Bar", "BP20200409");
+            smsPhone2 = new SmsPhone(FormFactor.Bar, "BP20200409");
             smsPhone2.SimCard = "Vova";
-            smsPhone3 = new SmsPhone("Bar", "BP20200406");
+            smsPhone3 = new SmsPhone(FormFactor.Bar, "BP20200406");
             smsPhone3.SimCard = "Stas";
-            smsPhone4 = new SmsPhone("Bar", "BP20200409");
+            smsPhone4 = new SmsPhone(FormFactor.Bar, "BP20200409");
             smsPhone4.SimCard = "Oleg";
 
             output = new TextBoxOutput(this.receivedSms);

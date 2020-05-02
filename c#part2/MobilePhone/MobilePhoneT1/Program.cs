@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using MobilePhoneT1.Interfaces;
 using MobilePhoneT1.Implementation;
+using MobilePhoneClT2.Enums;
 
 namespace MobilePhoneT1
 {
@@ -12,13 +13,13 @@ namespace MobilePhoneT1
     {
         static void Main(string[] args)
         {
-            IPhone phone = new Phone("Bar", "BP20200225");
+            IPhone phone = new Phone(FormFactor.Bar, "BP20200225");
 
             phone.SimCard = "Sim";
 
             Console.WriteLine(phone);
 
-            IPhone gamePhone = new GamePhone("Bar", "BP20200318");
+            IPhone gamePhone = new GamePhone(FormFactor.Bar, "BP20200318");
 
             Console.WriteLine(gamePhone);
         }

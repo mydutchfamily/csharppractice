@@ -10,7 +10,7 @@ namespace MobilePhoneClT2.Implementation
 {
     public class GamePhone : GeneralPhone
     {
-        public GamePhone(string formFactor, string serialNumber) : base(formFactor, serialNumber)
+        public GamePhone(FormFactor formFactor, string serialNumber) : base(formFactor, serialNumber)
         {
             List<IComponent> components = new List<IComponent>();
             components.Add(new MonochromeScreen("Monochrome", 120, 70, "2LTMD20200318"));

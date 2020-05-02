@@ -28,8 +28,8 @@ namespace MobilePhoneWfT3
 
             smsFormatting.DataSource = Enum.GetNames(typeof(TextBoxOutput.FormatingStyle));
 
-            smsPhone1 = new SmsPhone("Bar", "BP20200406");
-            smsPhone2 = new SmsPhone("Bar", "BP20200409");
+            smsPhone1 = new SmsPhone(FormFactor.Bar, "BP20200406");
+            smsPhone2 = new SmsPhone(FormFactor.Bar, "BP20200409");
 
             output = new TextBoxOutput(this.receivedSms);
             subscribe = smsPhone2.UseComponent<SmsCommunicator>().Subscribe(output);           

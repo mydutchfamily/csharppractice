@@ -79,8 +79,8 @@ namespace MobilePhoneWfT3.Tests
         [TestMethod()]
         public void MessageWasReceived()
         {
-            IPhone smsPhone1 = new SmsPhone("Bar", "BP20200406");
-            IPhone smsPhone2 = new SmsPhone("Bar", "BP20200409");
+            IPhone smsPhone1 = new SmsPhone(FormFactor.Bar, "BP20200406");
+            IPhone smsPhone2 = new SmsPhone(FormFactor.Bar, "BP20200409");
             string tesString = "TEST STRING";
             MockTextBoxOutput mockoutput = new MockTextBoxOutput(richTextBox);
 
