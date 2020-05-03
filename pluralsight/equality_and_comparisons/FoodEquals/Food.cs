@@ -36,5 +36,9 @@ namespace FoodEquals
         {
             return _name;
         }
+
+        //public static bool operator ==(FoodStruct x, FoodStruct y) {
+
+        //}
     }
 }
