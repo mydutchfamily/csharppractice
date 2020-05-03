@@ -11,6 +11,17 @@ namespace FoodEquals
     {
         static void Main(string[] args)
         {
+
+            FoodItem bananai1 = new FoodItem("banana", FoodGroup.Fruit);
+            FoodItem bananai2 = new FoodItem("banana", FoodGroup.Fruit);
+            FoodItem chocolatei = new FoodItem("chocolate", FoodGroup.Sweets);
+
+            Console.WriteLine("banana1 == banana2: " + (bananai1 == bananai2));
+            Console.WriteLine("banana2 == chocolate: " + (bananai2 == chocolatei));
+            Console.WriteLine("banana1 == chocolate: " + (bananai1 == chocolatei));
+
+            Console.WriteLine("********************************************");
+
             string str1 = "Click me";
             string str2 = string.Copy(str1);
             DiaplayWhwtherArgsEqual(str1, str2);
