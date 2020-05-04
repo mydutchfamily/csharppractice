@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -11,6 +12,39 @@ namespace FoodEquals
     {
         static void Main(string[] args)
         {
+            string apple0 = "Apple";
+            string apple1 = "App" + "le";
+
+            Console.WriteLine("strings are {0} and {1}", apple0, apple1);
+
+            Console.WriteLine(apple0 == apple1);
+            Console.WriteLine(ReferenceEquals(apple0, apple1));// return True because compiler will optimize memory and two var will refer to one string;
+
+            string str1 = "erkl\u00e4ren";//combining characters a + "
+            string str2 = "erkla\u0308ren";
+            StringComparisons.DisplayAllComparisons(str1, str2);
+
+             str1 = "Stra\u00dfe";//expansion character, not depend on culture
+             str2 = "Strasse";
+            StringComparisons.DisplayAllComparisons(str1, str2);
+
+            Console.WriteLine("Current culture is " + Thread.CurrentThread.CurrentCulture);
+
+             str1 = "apple";
+             str2 = "PINEAPPLE";
+            StringComparisons.DisplayAllComparisons(str1, str2);
+
+            int result = string.Compare("lemon", "LEMON", StringComparison.OrdinalIgnoreCase);
+            Console.WriteLine("Compare result is " + result);
+
+            result = string.Compare("lemon", "LEMON", StringComparison.Ordinal);
+            Console.WriteLine("Compare result is " + result);
+
+            result = string.Compare("lemon", "lime", StringComparison.Ordinal);
+            Console.WriteLine("Compare result is " + result);
+
+            Console.WriteLine("********************************************");
+
             CalorieCount cal300 = new CalorieCount(300);
             CalorieCount cal400 = new CalorieCount(400);
 
@@ -53,8 +87,8 @@ namespace FoodEquals
 
             Console.WriteLine("********************************************");
 
-            string str1 = "Click me";
-            string str2 = string.Copy(str1);
+             str1 = "Click me";
+             str2 = string.Copy(str1);
             DiaplayWhwtherArgsEqual(str1, str2);
 
             Console.WriteLine("********************************************");
