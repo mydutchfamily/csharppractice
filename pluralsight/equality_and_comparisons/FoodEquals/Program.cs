@@ -11,6 +11,21 @@ namespace FoodEquals
     {
         static void Main(string[] args)
         {
+            CalorieCount cal300 = new CalorieCount(300);
+            CalorieCount cal400 = new CalorieCount(400);
+
+            DisplayOrder(cal300, cal400);
+            DisplayOrder(cal400, cal300);
+            DisplayOrder(cal300, cal300);
+
+            if(cal300 < cal400 )
+                Console.WriteLine("cal300 < cal400");
+
+            if (cal300 == cal400)
+                Console.WriteLine("cal300 = cal400");
+
+            Console.WriteLine("********************************************");
+
             Food apple = new Food("apple", FoodGroup.Fruit);
             Food apple2 = new Food("apple", FoodGroup.Fruit);
             CookedFood stewedApple = new CookedFood("stewed", "apple", FoodGroup.Fruit);
@@ -97,6 +112,17 @@ namespace FoodEquals
             //Console.WriteLine(bananas == bananas2);// operator == should be overloaded
 
             Console.ReadLine();
+        }
+
+        private static void DisplayOrder<T>(T x, T y) where T: IComparable<T>
+        {
+            int result = x.CompareTo(y);
+            if (result == 0)
+                Console.WriteLine("{0,12} = {1}", x, y);
+            else if(result > 0)
+                Console.WriteLine("{0, 12} > {1}", x, y);
+            else
+                Console.WriteLine("{0, 12} < {1}", x, y);
         }
 
         static void DisplayWhetherEqual(Food food1, Food food2)
