@@ -5,6 +5,8 @@ VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FoodEquals", "FoodEquals.csproj", "{31A791DD-B3D7-4009-A1A0-578BE835D1B6}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Comparers", "..\Comparers\Comparers.csproj", "{34DE000D-EFCA-4C42-AC52-1CFC99EF912E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{31A791DD-B3D7-4009-A1A0-578BE835D1B6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{31A791DD-B3D7-4009-A1A0-578BE835D1B6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{31A791DD-B3D7-4009-A1A0-578BE835D1B6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{34DE000D-EFCA-4C42-AC52-1CFC99EF912E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{34DE000D-EFCA-4C42-AC52-1CFC99EF912E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{34DE000D-EFCA-4C42-AC52-1CFC99EF912E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{34DE000D-EFCA-4C42-AC52-1CFC99EF912E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
