@@ -36,7 +36,14 @@ namespace Comparers
                 return -1;
             if (y == null)
                 return 1;
-            return string.Compare(x.Name, y.Name, StringComparison.CurrentCulture);
+            int nameOrder = string.Compare(x.Name, y.Name, StringComparison.CurrentCulture);
+
+            if (nameOrder != 0)
+                return nameOrder;// names are different
+
+            // names are the same, order by groups
+            return string.Compare(x.Group.ToString(), y.Group.ToString(), StringComparison.CurrentCulture);
+            // but we still missing fields from child class CookedFood - cookingMethod 
         }
     }
 }
