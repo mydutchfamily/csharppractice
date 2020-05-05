@@ -12,6 +12,23 @@ namespace Comparers
         static void Main(string[] args)
         {
 
+            var names1 = new HashSet<string>(StringComparer.CurrentCultureIgnoreCase) { "apple", "pear", "pineapple", "Apple" };
+
+            foreach (var item in names1)
+            {
+                Console.WriteLine(item);
+            }
+
+
+            var names = new HashSet<string>() { "apple", "pear", "pineapple", "Apple"};
+
+            foreach (var item in names)
+            {
+                Console.WriteLine(item);// with 2 apples
+            }
+
+            Console.WriteLine("*********************************************");
+
             var foodItems2 = new HashSet<FoodItem>(EqualityComparer<FoodItem>.Default);
             foodItems2.Add(new FoodItem("apple", FoodGroup.Fruit));
             foodItems2.Add(new FoodItem("pear", FoodGroup.Fruit));
