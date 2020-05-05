@@ -1,5 +1,6 @@
 ﻿using FoodEquals;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,6 +12,31 @@ namespace Comparers
     {
         static void Main(string[] args)
         {
+            string[] arr5 = { "apple", "orange", "pineapple" };
+            string[] arr6 = { "apple", "pear", "Pineapple" };// arrays structurally equal
+
+            var arrayComp = (IStructuralComparable)arr5;// interface implemented explicitly, so need to be casted
+            int structComp = arrayComp.CompareTo(arr6, StringComparer.OrdinalIgnoreCase);
+            Console.WriteLine(structComp);
+
+            Console.WriteLine("*********************************************");
+
+            string[] arr3 = { "apple", "orange", "pineapple" };
+            string[] arr4 = { "apple", "orange", "Pineapple" };// arrays structurally equal
+
+            var arrayEq = (IStructuralEquatable)arr3;// interface implemented explicitly, so need to be casted
+            bool structEqual = arrayEq.Equals(arr4, StringComparer.OrdinalIgnoreCase);
+            Console.WriteLine(structEqual);
+
+            Console.WriteLine("*********************************************");
+
+            string[] arr1 = { "apple", "orange", "pineapple" };
+            string[] arr2 = { "apple", "orange", "pineapple" };// arrays structurally equal
+
+            Console.WriteLine(arr1 == arr2);
+            Console.WriteLine(arr1.Equals(arr2));
+
+            Console.WriteLine("*********************************************");
 
             FoodItem beetroot = new FoodItem("beetroot", FoodGroup.Vegetables);
             FoodItem pickledBeetroot = new FoodItem("beetroot", FoodGroup.Sweets);
