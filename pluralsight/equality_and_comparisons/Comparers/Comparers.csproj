@@ -45,6 +45,7 @@
   <ItemGroup>
     <Compile Include="FoodItemEqualityComparer.cs" />
     <Compile Include="FoodNameComparer.cs" />
+    <Compile Include="FoodNameEqualityComparer.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
