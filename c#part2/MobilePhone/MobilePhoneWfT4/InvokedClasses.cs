@@ -1,12 +1,10 @@
 ﻿using MobilePhoneClT2;
 using MobilePhoneClT2.AbstractClass;
 using MobilePhoneClT2.Implementation;
+using MobilePhoneClT2.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Linq.Expressions;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using static MobilePhoneWfT4.InvokedClasses;
 
@@ -50,12 +48,12 @@ namespace MobilePhoneWfT4
         {
             IEnumerable<SmsMessage> allSms = new SmsMessage[0];
 
-            foreach (GeneralPhone phone in phones)
+            foreach (IPhone phone in phones)
             {
                 allSms = allSms.Concat(phone.UseComponent<Memory>().Get<SmsMessage>());
             }
 
-            var receivedFrom = allSms.Select(c => c.ReceivedFrom).Distinct();
+            var receivedFrom = allSms.Where(c=> c.ReceivedFrom != null).Select(c => c.ReceivedFrom).Distinct();
 
             return new List<string>() { FILTER_ALL_VALUES }.Concat(receivedFrom).ToArray();
         }

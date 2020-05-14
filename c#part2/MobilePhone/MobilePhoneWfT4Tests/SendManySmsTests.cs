@@ -17,14 +17,14 @@ namespace MobilePhoneWfT4.Tests
         private string[] words = new string[] {"Game", "Box", "Box", "Hey", "Hey", "Hey"};
 
         //Add the packages MsTest.TestAdapter and MsTest.TestFramework.
-        [DataRow(FILTER_ALL_VALUES, FILTER_ALL_VALUES, LogicOperand.OR, "MinAndMax", 6)]
-        [DataRow(FILTER_ALL_VALUES, FILTER_ALL_VALUES, LogicOperand.AND, "MinAndMax", 6)]
-        [DataRow("Game", FILTER_ALL_VALUES, LogicOperand.AND, "MinAndMax", 1)]
+        [DataRow(FILTER_ALL_VALUES, FILTER_ALL_VALUES, LogicOperand.OR, "MinAndMax", 12)]
+        [DataRow(FILTER_ALL_VALUES, FILTER_ALL_VALUES, LogicOperand.AND, "MinAndMax", 12)]
+        [DataRow("Game", FILTER_ALL_VALUES, LogicOperand.AND, "MinAndMax", 2)]
         [DataRow("Game", "Vova", LogicOperand.AND, "MinAndMax", 0)]
-        [DataRow(FILTER_ALL_VALUES, "Alex", LogicOperand.AND, "MinAndMax", 6)]
+        [DataRow(FILTER_ALL_VALUES, "", LogicOperand.AND, "MinAndMax", 12)]
         [DataRow(FILTER_ALL_VALUES, FILTER_ALL_VALUES, LogicOperand.AND, "DayBefore", 0)]
         [DataRow(FILTER_ALL_VALUES, FILTER_ALL_VALUES, LogicOperand.AND, "DayAfter", 0)]
-        [DataRow("Hey", "Alex", LogicOperand.AND, "MinAndMax", 3)]
+        [DataRow("Hey", "", LogicOperand.AND, "MinAndMax", 6)]
         [DataTestMethod]
         public void FilteringSms(string subString, string receivedFrom, LogicOperand logic, string fromTo, int expectedResults)
         {
@@ -32,11 +32,11 @@ namespace MobilePhoneWfT4.Tests
             SetDates(fromTo, out from, out to);
 
             GeneralPhone smsPhone1 = new SmsPhone(FormFactor.Bar, "BP20200406");
-            smsPhone1.SimCard = "Alex";
+            smsPhone1.AddSimCard(new SimCard());
             GeneralPhone smsPhone2 = new SmsPhone(FormFactor.Bar, "BP20200409");
-            smsPhone2.SimCard = "Vova";
+            smsPhone2.AddSimCard(new SimCard());
 
-            var contact2 = smsPhone2.GetMyContact();
+            var contact2 = smsPhone2.GetMyContact("Vova");
             smsPhone1.AddContact(contact2);
 
             int i = 0;

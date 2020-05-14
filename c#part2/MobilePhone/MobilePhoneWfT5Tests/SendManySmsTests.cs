@@ -2,11 +2,6 @@
 using MobilePhoneClT2.Enums;
 using MobilePhoneClT2.Implementation;
 using MobilePhoneClT2.Interfaces;
-using MobilePhoneWfT5;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace MobilePhoneWfT5.Tests

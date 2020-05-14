@@ -2,12 +2,7 @@
 using MobilePhoneClT2;
 using MobilePhoneClT2.Implementation;
 using MobilePhoneClT2.Interfaces;
-using MobilePhoneWfT3;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using MobilePhoneClT2.Enums;
 
@@ -84,8 +79,8 @@ namespace MobilePhoneWfT3.Tests
             string tesString = "TEST STRING";
             MockTextBoxOutput mockoutput = new MockTextBoxOutput(richTextBox);
 
-            Action<SmsMessage> subscribe = smsPhone2.UseComponent<SmsCommunicator>().Subscribe(mockoutput);
-            smsPhone1.UseComponent<SmsCommunicator>().SetRecipient(subscribe).SendSms(tesString);
+            Action<SmsMessage> subscribe = smsPhone2.UseComponent<Communicator>().SmsSubscribe(mockoutput);
+            smsPhone1.UseComponent<Communicator>().SetRecipient(subscribe).SendSms(tesString);
 
             Assert.IsTrue(methodCalled == 1, $"Method {nameof(mockoutput.WriteLine)} must be called once");
         }

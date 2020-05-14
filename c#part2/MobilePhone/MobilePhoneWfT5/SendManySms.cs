@@ -2,17 +2,11 @@
 using MobilePhoneClT2.Implementation;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using MobilePhoneClT2;
 using MobilePhoneClT2.Enums;
-using static MobilePhoneClT2.TextBoxOutput;
-using MobilePhoneClT2.AbstractClass;
 using static MobilePhoneWfT5.InvokedClasses;
 using System.Threading;
 using System.Diagnostics;
@@ -40,20 +34,20 @@ namespace MobilePhoneWfT5
             InitializeComponent();
 
             smsPhone1 = new SmsPhone(FormFactor.Bar, "BP20200406");
-            smsPhone1.SimCard = "Alex";
+            smsPhone1.AddSimCard(new SimCard(), output);
             smsPhone2 = new SmsPhone(FormFactor.Bar, "BP20200409");
-            smsPhone2.SimCard = "Vova";
+            smsPhone2.AddSimCard(new SimCard(), output);
             smsPhone3 = new SmsPhone(FormFactor.Bar, "BP20200406");
-            smsPhone3.SimCard = "Stas";
+            smsPhone3.AddSimCard(new SimCard(), output);
             smsPhone4 = new SmsPhone(FormFactor.Bar, "BP20200409");
-            smsPhone4.SimCard = "Oleg";
+            smsPhone4.AddSimCard(new SimCard(), output);
 
             output = new TextBoxOutput(this.receivedSms);
 
-            var contact1 = smsPhone1.GetMyContact(output);
-            var contact2 = smsPhone2.GetMyContact(output);
-            var contact3 = smsPhone3.GetMyContact(output);
-            var contact4 = smsPhone4.GetMyContact(output);
+            var contact1 = smsPhone1.GetMyContact("Alex");
+            var contact2 = smsPhone2.GetMyContact("Vova");
+            var contact3 = smsPhone3.GetMyContact("Stas");
+            var contact4 = smsPhone4.GetMyContact("Oleg");
 
             smsPhone1.AddContact(contact2, contact3, contact4);
             smsPhone2.AddContact(contact1);
@@ -73,10 +67,10 @@ namespace MobilePhoneWfT5
             sendSms = delegate
             {
                 int arrLength = words.Length - 1;
-                smsPhone1.SendSms($"smsVSO|{words[random.Next(arrLength)]}|{smsCount++}", output, "Vova", "Stas", "Oleg");
-                smsPhone2.SendSms($"smsVA|{words[random.Next(arrLength)]}|{smsCount++}", output, "Alex");
-                smsPhone3.SendSms($"smsSA|{words[random.Next(arrLength)]}|{smsCount++}", output, "Alex");
-                smsPhone4.SendSms($"smsOA|{words[random.Next(arrLength)]}|{smsCount++}", output, "Alex");
+                smsPhone1.SendSms($"smsVSO|{words[random.Next(arrLength)]}|{smsCount++}", output, 0,"Vova", "Stas", "Oleg");
+                smsPhone2.SendSms($"smsVA|{words[random.Next(arrLength)]}|{smsCount++}", output, 0, "Alex");
+                smsPhone3.SendSms($"smsSA|{words[random.Next(arrLength)]}|{smsCount++}", output, 0,"Alex");
+                smsPhone4.SendSms($"smsOA|{words[random.Next(arrLength)]}|{smsCount++}", output, 0,"Alex");
 
                 cbxSubscribers.DataSource = getAllSenders(phones);
             };

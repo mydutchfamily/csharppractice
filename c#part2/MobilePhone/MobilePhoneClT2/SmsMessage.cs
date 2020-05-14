@@ -1,9 +1,5 @@
 ﻿using MobilePhoneClT2.Interfaces.Markers;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace MobilePhoneClT2
 {
@@ -20,14 +16,18 @@ namespace MobilePhoneClT2
         public DateTime ReceivedTime { get; set; }
         public MsgStatus Status { get; set; }
         public bool IsRead { get; set; } = false;
+        public Action<SmsMessage> Sender { get; set; }
 
         public SmsMessage Clone() {
-            return new SmsMessage() { SendTo = this.SendTo == null ? null:String.Copy(this.SendTo),
-                ReceivedFrom = String.Copy(this.ReceivedFrom),
+            return new SmsMessage() {
+                SendTo = this.SendTo == null ? null:String.Copy(this.SendTo),
+                ReceivedFrom = this.ReceivedFrom == null ? null : String.Copy(this.ReceivedFrom),
                 Text = String.Copy(this.Text),
                 ReceivedTime = this.ReceivedTime,
                 SentTime = this.SentTime,
-                Status = (MsgStatus)(int)this.Status};
+                Status = (MsgStatus)(int)this.Status,
+                Sender = this.Sender
+            };            
         }
 
         public override string ToString()

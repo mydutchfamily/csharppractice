@@ -4,9 +4,10 @@ using System.Collections.Generic;
 
 namespace MobilePhoneClT2.Implementation
 {
-    public class SmsPhone : GeneralPhone
+    public class SmsCallPhone : GeneralPhone
     {
-        public SmsPhone(FormFactor formFactor, string serialNumber) :base(formFactor, serialNumber)
+        public override SimCard[] SimCards { get; } = new SimCard[2];
+        public SmsCallPhone(FormFactor formFactor, string serialNumber) :base(formFactor, serialNumber)
         {
             List<IComponent> components = new List<IComponent>();
             components.Add(new MonochromeScreen("Monochrome", 120, 70, "2LTMD20200225"));
@@ -18,7 +19,8 @@ namespace MobilePhoneClT2.Implementation
             var memory = new Memory("MC20200424");
             memory.Add<SmsMessage>(new List<SmsMessage>());
             memory.Add<Contact>(new List<Contact>());
-
+            memory.Add<PhoneCall>(new List<PhoneCall>());
+            
             components.Add(memory);
 
             this.PhoneComponents = components;
@@ -33,7 +35,7 @@ namespace MobilePhoneClT2.Implementation
                 progress?.Report(battery.Capacity);
             });
 
-            this.deviceActions.Add(typeof(SmsPhone).Name, (powerDown) =>
+            this.deviceActions.Add(typeof(SmsCallPhone).Name, (powerDown) =>
             {
                 lock (syncRoot)
                 {

@@ -13,12 +13,11 @@ namespace MobilePhoneClT2.AbstractClass
 {
     public abstract class GeneralPhone : IPhone
     {
-
         private string vSimCard;
         private string vFormFactor;
         private string vSerialNumber;
-        private Contact myContact;
         private List<IComponent> vPhoneComponents;
+        private int activeSimCardIx = 0;
         protected IProgress<int> progress;
         protected static object syncRoot = new object();
         protected HashSet<IInterconnection> connectedDevices;
@@ -35,24 +34,16 @@ namespace MobilePhoneClT2.AbstractClass
 
         public ComponentTypes ComponentType { get; } = ComponentTypes.Phone;
 
-        public string SimCard
+        public SimCard ActiveSimCard
         {
-            get
-            {
-                return vSimCard ?? "N/A";
-            }
-
-            set
-            {
-                vSimCard = value;
-            }
+            get { return SimCards[activeSimCardIx]; }
         }
 
         public string SerialNumber { get; }
         public List<IComponent> PhoneComponents
         {
-           get { return vPhoneComponents?.GetRange(0, vPhoneComponents.Count); }
-           protected set { vPhoneComponents = value; }
+            get { return vPhoneComponents?.GetRange(0, vPhoneComponents.Count); }
+            protected set { vPhoneComponents = value; }
         }
         public FormFactor FormFactor { get; }
         public virtual List<Plugins> SupportedPlugins { get; } = new List<Plugins>() { Plugins.Button };
@@ -60,10 +51,12 @@ namespace MobilePhoneClT2.AbstractClass
         public Plugins PluginToUse { get; set; } = Plugins.Button;
         public Action<int> Action { get; set; }
 
+        public virtual SimCard[] SimCards { get; } = new SimCard[1];
+
         public override string ToString()
         {
             StringBuilder strBldr = new StringBuilder();
-            strBldr.AppendLine($"phone form factor is:{FormFactor}, used operator: {SimCard}");
+            strBldr.AppendLine($"phone form factor is:{FormFactor}");
 
             if (vPhoneComponents != null && vPhoneComponents.Count > 0)
             {
@@ -87,7 +80,8 @@ namespace MobilePhoneClT2.AbstractClass
                     device.Action = deviceActions[device.GetType().Name];
                 else
                     throw new NotImplementedException($"No action provided to execute for device: {device.GetType().Name}");
-            } else
+            }
+            else
             {
                 throw new NotImplementedException($"Not supported type of device connection: {device.PluginToUse}");
             }
@@ -107,7 +101,8 @@ namespace MobilePhoneClT2.AbstractClass
         public async Task ExecuteDevice<T>(Action<int> progressReportAction = null, int? executeTimes = null) where T : class, IInterconnection
         {
             T device = null;
-            foreach (IInterconnection item in connectedDevices) {
+            foreach (IInterconnection item in connectedDevices)
+            {
                 if (typeof(T).Name == item.GetType().Name)
                 {
                     device = (T)item;
@@ -115,14 +110,15 @@ namespace MobilePhoneClT2.AbstractClass
                 }
             }
 
-            if (progressReportAction != null) {
+            if (progressReportAction != null)
+            {
                 progress = new Progress<int>(progressReportAction);
             }
 
             await device.DoAction(executeTimes);
         }
 
-       public T UseComponent<T>() where T : class, IComponent
+        public T UseComponent<T>() where T : class, IComponent
         {
             T component = null;
             foreach (IComponent item in vPhoneComponents)
@@ -137,36 +133,67 @@ namespace MobilePhoneClT2.AbstractClass
             return component;
         }
 
-        public bool TryGetContact(string name, out Contact contact) {
+        public bool TryGetContact(string name, out Contact contact)
+        {
             contact = this.UseComponent<Memory>()?.Get<Contact>()?.Where(c => c.Name == name).Single();
             return contact != null;
         }
 
-        public void SendSms(string smsText, TextBoxOutput output = null, params string[] names) {
+        public void SendSms(string smsText, TextBoxOutput output = null, int simNum = 0, params string[] names)
+        {
             Contact contact;
             foreach (var name in names)
             {
                 if (this.TryGetContact(name, out contact))
                 {
-                    this.UseComponent<SmsCommunicator>().SendSms(contact, smsText, output);
+                    this.UseComponent<Communicator>().SendSms(contact, smsText, output, simNum);
                 }
             }
         }
 
-        public Contact GetMyContact(TextBoxOutput output = null) {
-            if (myContact == null)
+        public void MakeCall(int duration, string name, TextBoxOutput output = null, int simNum = 0)
+        {
+            Contact contact = this.UseComponent<Memory>().Get<Contact>().Where(x => x.Name == name).First();
+
+            this.UseComponent<Communicator>().MakeCall(contact, duration, output, simNum);
+        }
+
+        public Contact GetMyContact(string name, int simNum = 0)
+        {
+            Contact contact = new Contact(name, SimCards[simNum].SmsReceiver, SimCards[simNum].CallReceiver);
+            return contact;
+        }
+
+        public void AddContact(params Contact[] contacts)
+        {
+            var allContacts = this.UseComponent<Memory>().Get<Contact>();
+
+            foreach (var item in contacts)
             {
-                Action<SmsMessage> subscribe = this.UseComponent<SmsCommunicator>().Subscribe(output);
-                myContact = new Contact(this.SimCard, subscribe);
+                if (allContacts.Contains(item))//IEquatable<Contact>
+                {
+                    throw new Exception($"Contact details for {item.Name} already saved");
+                }
+                else
+                {
+                    var contact = allContacts.Where(c => c.Name == item.Name).FirstOrDefault();
+
+                    if (contact == null)
+                    {
+                        var addContact = item.Clone();
+                        this.UseComponent<Memory>().Add<Contact>(addContact);
+                    }
+                    else
+                    {
+                        contact.SmsReceiver.Add(item.SmsReceiver[0]);
+                        contact.CallReceiver.Add(item.CallReceiver[0]);
+                    }
+                }
             }
-
-            return myContact;
-        }
-        public void AddContact(params Contact[] contacts) {
-            this.UseComponent<Memory>().Add<Contact>(contacts);
         }
 
-        public async Task DoAction(int? executeTimes = null) {
+        public async Task DoAction(int? executeTimes = null)
+        {
             await Task.Run(() =>
             {
                 while ((Action != null && executeTimes != null && executeTimes > 0)
@@ -185,6 +212,56 @@ namespace MobilePhoneClT2.AbstractClass
                     return;
             }
             );
+        }
+
+        public IPhone AddSimCard(SimCard simCard, TextBoxOutput output = null)
+        {
+            bool added = false;
+            for (int i = 0; i < SimCards.Length; i++)
+            {
+                if (SimCards[i] == null)
+                {
+                    SimCards[i] = simCard;
+                    added = true;
+                    break;
+                }
+            }
+
+            if (!added) throw new Exception("No free slot found for SimCard");
+
+            simCard.CallReceiver = this.UseComponent<Communicator>().CallSubscribe(output);
+            simCard.SmsReceiver = this.UseComponent<Communicator>().SmsSubscribe(output);
+
+            return this;
+        }
+
+        public SimCard RemoveSimCard(int simCardIx)
+        {
+            SimCard sim = SimCards[simCardIx];
+            SimCards[simCardIx] = null;
+            sim.CallReceiver = null;
+            sim.SmsReceiver = null;
+
+            return sim;
+        }
+
+        public IPhone RemoveSimCard(SimCard simCard)
+        {
+            for (int i = 0; i < SimCards.Length; i++)
+            {
+                if (SimCards[i] == simCard) {
+                    SimCards[i] = null;
+                    simCard.CallReceiver = null;
+                    simCard.SmsReceiver = null;
+                }
+            }
+            return this;
+        }
+
+        public IPhone SetActiveSimCard(int simCardIx)
+        {
+            activeSimCardIx = simCardIx;
+            return this;
         }
     }
 }

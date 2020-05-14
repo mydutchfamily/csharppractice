@@ -5,9 +5,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
-using static MobilePhoneWfT5.InvokedClasses;
+using static MobilePhoneWfT6.InvokedClasses;
 
-namespace MobilePhoneWfT5
+namespace MobilePhoneWfT6
 {
     public class InvokedClasses
     {
@@ -47,14 +47,22 @@ namespace MobilePhoneWfT5
         {
             IEnumerable<SmsMessage> allSms = new SmsMessage[0];
 
-            foreach (IPhone phone in phones)
-            {
-                allSms = allSms.Concat(phone.UseComponent<Memory>().Get<SmsMessage>());
-            }
+            allSms = phones.Select(p => p.UseComponent<Memory>().Get<SmsMessage>()).SelectMany(p => p);
 
             var receivedFrom = allSms.Where(c=> c.ReceivedFrom != null).Select(c => c.ReceivedFrom).Distinct();
 
             return new List<string>() { FILTER_ALL_VALUES }.Concat(receivedFrom).ToArray();
+        }
+
+        public static string[] FilteringCallers(IEnumerable<IPhone> phones)
+        {
+            IEnumerable<PhoneCall> allCalls = new PhoneCall[0];
+
+            allCalls = phones.Select(p => p.UseComponent<Memory>().Get<PhoneCall>()).SelectMany(p => p);
+
+            var callers = allCalls.Select(c => c.From).Distinct();
+
+            return new List<string>() { FILTER_ALL_VALUES }.Concat(callers).ToArray();
         }
 
     }
@@ -68,5 +76,34 @@ namespace MobilePhoneWfT5
         public DateTime From { get; set; }
 
         public DateTime To { get; set; }
+    }
+
+    public class PhoneCallsByTime : Comparer<PhoneCall>
+    {
+        private static PhoneCallsByTime _instance = new PhoneCallsByTime();
+
+        public static PhoneCallsByTime Instance { get { return _instance; } }
+
+        private PhoneCallsByTime() { }
+        public override int Compare(PhoneCall x, PhoneCall y)
+        {
+            if (x == null && y == null)
+                return 0;
+            if (x == null)
+                return -1;
+            if (y == null)
+                return 1;
+
+            var xDt = x.StartTime.AddMilliseconds(- x.StartTime.Millisecond);
+            var yDt = y.StartTime.AddMilliseconds(-y.StartTime.Millisecond);
+            int order = DateTime.Compare(xDt, yDt);
+
+            order = order > 0 ? -1 : order == 0 ? 0:1;
+
+            if (order != 0)
+                return order;
+
+            return string.Compare(x.From, y.From, StringComparison.CurrentCulture);
+        }
     }
 }

@@ -1,12 +1,5 @@
 ﻿using MobilePhoneClT2.Interfaces;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using MobilePhoneClT2;
 using MobilePhoneClT2.Enums;
@@ -32,7 +25,7 @@ namespace MobilePhoneWfT3
             smsPhone2 = new SmsPhone(FormFactor.Bar, "BP20200409");
 
             output = new TextBoxOutput(this.receivedSms);
-            subscribe = smsPhone2.UseComponent<SmsCommunicator>().Subscribe(output);           
+            subscribe = smsPhone2.UseComponent<Communicator>().SmsSubscribe(output);           
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -43,7 +36,7 @@ namespace MobilePhoneWfT3
 
         private void timerSms_Tick(object sender, EventArgs e)
         {
-            smsPhone1.UseComponent<SmsCommunicator>().SetRecipient(subscribe).SendSms($"sms{smsCount++}");
+            smsPhone1.UseComponent<Communicator>().SetRecipient(subscribe).SendSms($"sms{smsCount++}");
         }
 
         private void smsFormatting_SelectedIndexChanged(object sender, EventArgs e)
