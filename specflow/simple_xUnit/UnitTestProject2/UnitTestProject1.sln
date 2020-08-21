@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReuseStep", "..\SpecFlowExc
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GettingInfo", "..\GettingInfo\GettingInfo.csproj", "{1E1F343A-BD2B-4F4C-AE05-B36B3579A256}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ParallelRunning", "..\ParallelRunning\ParallelRunning.csproj", "{D1BF1527-B4A8-4F21-AF8A-B7137D35F3EB}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{1E1F343A-BD2B-4F4C-AE05-B36B3579A256}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1E1F343A-BD2B-4F4C-AE05-B36B3579A256}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1E1F343A-BD2B-4F4C-AE05-B36B3579A256}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D1BF1527-B4A8-4F21-AF8A-B7137D35F3EB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D1BF1527-B4A8-4F21-AF8A-B7137D35F3EB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D1BF1527-B4A8-4F21-AF8A-B7137D35F3EB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D1BF1527-B4A8-4F21-AF8A-B7137D35F3EB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

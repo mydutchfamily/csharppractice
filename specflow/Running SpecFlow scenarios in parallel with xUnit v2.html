@@ -1,0 +1,877 @@
+<!DOCTYPE html>
+<!-- saved from url=(0083)http://gasparnagy.com/2016/02/running-specflow-scenarios-in-parallel-with-xunit-v2/ -->
+<html lang="en-US"><!--<![endif]--><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+<title>Running SpecFlow scenarios in parallel with xUnit v2 - Gáspár Nagy on software</title>
+<link rel="pingback" href="http://gasparnagy.com/xmlrpc.php">
+
+<!-- This site is optimized with the Yoast SEO plugin v12.8 - https://yoast.com/wordpress/plugins/seo/ -->
+<meta name="robots" content="max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+<link rel="canonical" href="http://gasparnagy.com/2016/02/running-specflow-scenarios-in-parallel-with-xunit-v2/">
+<meta property="og:locale" content="en_US">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Running SpecFlow scenarios in parallel with xUnit v2 - Gáspár Nagy on software">
+<meta property="og:description" content="As mentioned earlier, one of the key new features of SpecFlow v2 is that you can run your tests in parallel within this same AppDomain. This is currently possible with NUnit v3 and xUnit v2. This post shows a step-by-step guidance about how this can be done. First of all, I would like to highlight …">
+<meta property="og:url" content="http://gasparnagy.com/2016/02/running-specflow-scenarios-in-parallel-with-xunit-v2/">
+<meta property="og:site_name" content="Gáspár Nagy on software">
+<meta property="article:tag" content="BDD">
+<meta property="article:tag" content="bdd addict">
+<meta property="article:tag" content="parallel">
+<meta property="article:tag" content="SpecFlow">
+<meta property="article:tag" content="SpecFlow v2">
+<meta property="article:tag" content="xUnit">
+<meta property="article:section" content="Uncategorized">
+<meta property="article:published_time" content="2016-02-23T13:11:18+00:00">
+<meta property="article:modified_time" content="2016-03-01T08:04:23+00:00">
+<meta property="og:updated_time" content="2016-03-01T08:04:23+00:00">
+<meta property="og:image" content="http://gasparnagy.com/wp-content/uploads/2016/02/bigstock-GARMISCH-PARTENKIRCHEN-GERMAN-96767258.jpg">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:description" content="As mentioned earlier, one of the key new features of SpecFlow v2 is that you can run your tests in parallel within this same AppDomain. This is currently possible with NUnit v3 and xUnit v2. This post shows a step-by-step guidance about how this can be done. First of all, I would like to highlight […]">
+<meta name="twitter:title" content="Running SpecFlow scenarios in parallel with xUnit v2 - Gáspár Nagy on software">
+<meta name="twitter:site" content="@gasparnagy">
+<meta name="twitter:image" content="http://gasparnagy.com/wp-content/uploads/2016/02/bigstock-GARMISCH-PARTENKIRCHEN-GERMAN-96767258.jpg">
+<meta name="twitter:creator" content="@gasparnagy">
+<script id="twitter-wjs" src="./Running SpecFlow scenarios in parallel with xUnit v2_files/widgets.js.завантаження"></script><script async="" src="./Running SpecFlow scenarios in parallel with xUnit v2_files/default" charset="UTF-8" crossorigin="*"></script><script type="text/javascript" async="" src="./Running SpecFlow scenarios in parallel with xUnit v2_files/ga.js.завантаження"></script><script type="application/ld+json" class="yoast-schema-graph yoast-schema-graph--main">{"@context":"https://schema.org","@graph":[{"@type":["Person","Organization"],"@id":"http://gasparnagy.com/#/schema/person/c27b43c0121a0faa0ac92266d935a71e","name":"G\u00e1sp\u00e1r","image":{"@type":"ImageObject","@id":"http://gasparnagy.com/#personlogo","url":"http://gasparnagy.com/wp-content/uploads/2019/09/gasparnagy-square-1024.jpg","width":1024,"height":1024,"caption":"G\u00e1sp\u00e1r"},"logo":{"@id":"http://gasparnagy.com/#personlogo"},"sameAs":["https://twitter.com/gasparnagy"]},{"@type":"WebSite","@id":"http://gasparnagy.com/#website","url":"http://gasparnagy.com/","name":"G\u00e1sp\u00e1r Nagy on software","description":"coach, trainer and bdd addict, creator of SpecFlow; owner of Spec Solutions","publisher":{"@id":"http://gasparnagy.com/#/schema/person/c27b43c0121a0faa0ac92266d935a71e"},"potentialAction":{"@type":"SearchAction","target":"http://gasparnagy.com/?s={search_term_string}","query-input":"required name=search_term_string"}},{"@type":"ImageObject","@id":"http://gasparnagy.com/2016/02/running-specflow-scenarios-in-parallel-with-xunit-v2/#primaryimage","url":"http://gasparnagy.com/wp-content/uploads/2016/02/bigstock-GARMISCH-PARTENKIRCHEN-GERMAN-96767258.jpg","width":344,"height":231},{"@type":"WebPage","@id":"http://gasparnagy.com/2016/02/running-specflow-scenarios-in-parallel-with-xunit-v2/#webpage","url":"http://gasparnagy.com/2016/02/running-specflow-scenarios-in-parallel-with-xunit-v2/","inLanguage":"en-US","name":"Running SpecFlow scenarios in parallel with xUnit v2 - G\u00e1sp\u00e1r Nagy on software","isPartOf":{"@id":"http://gasparnagy.com/#website"},"primaryImageOfPage":{"@id":"http://gasparnagy.com/2016/02/running-specflow-scenarios-in-parallel-with-xunit-v2/#primaryimage"},"datePublished":"2016-02-23T13:11:18+00:00","dateModified":"2016-03-01T08:04:23+00:00"},{"@type":"Article","@id":"http://gasparnagy.com/2016/02/running-specflow-scenarios-in-parallel-with-xunit-v2/#article","isPartOf":{"@id":"http://gasparnagy.com/2016/02/running-specflow-scenarios-in-parallel-with-xunit-v2/#webpage"},"author":{"@id":"http://gasparnagy.com/#/schema/person/c27b43c0121a0faa0ac92266d935a71e"},"headline":"Running SpecFlow scenarios in parallel with xUnit v2","datePublished":"2016-02-23T13:11:18+00:00","dateModified":"2016-03-01T08:04:23+00:00","commentCount":0,"mainEntityOfPage":{"@id":"http://gasparnagy.com/2016/02/running-specflow-scenarios-in-parallel-with-xunit-v2/#webpage"},"publisher":{"@id":"http://gasparnagy.com/#/schema/person/c27b43c0121a0faa0ac92266d935a71e"},"image":{"@id":"http://gasparnagy.com/2016/02/running-specflow-scenarios-in-parallel-with-xunit-v2/#primaryimage"},"keywords":"BDD,bdd addict,parallel,SpecFlow,SpecFlow v2,xUnit","articleSection":""}]}</script>
+<!-- / Yoast SEO plugin. -->
+
+<link rel="dns-prefetch" href="http://s0.wp.com/">
+<link rel="dns-prefetch" href="http://s.w.org/">
+<link rel="alternate" type="application/rss+xml" title="Gáspár Nagy on software » Feed" href="http://gasparnagy.com/feed/">
+<link rel="alternate" type="application/rss+xml" title="Gáspár Nagy on software » Comments Feed" href="http://gasparnagy.com/comments/feed/">
+		<script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/12.0.0-1\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/12.0.0-1\/svg\/","svgExt":".svg","source":{"concatemoji":"http:\/\/gasparnagy.com\/wp-includes\/js\/wp-emoji-release.min.js?ver=5.3.2"}};
+			!function(e,a,t){var r,n,o,i,p=a.createElement("canvas"),s=p.getContext&&p.getContext("2d");function c(e,t){var a=String.fromCharCode;s.clearRect(0,0,p.width,p.height),s.fillText(a.apply(this,e),0,0);var r=p.toDataURL();return s.clearRect(0,0,p.width,p.height),s.fillText(a.apply(this,t),0,0),r===p.toDataURL()}function l(e){if(!s||!s.fillText)return!1;switch(s.textBaseline="top",s.font="600 32px Arial",e){case"flag":return!c([127987,65039,8205,9895,65039],[127987,65039,8203,9895,65039])&&(!c([55356,56826,55356,56819],[55356,56826,8203,55356,56819])&&!c([55356,57332,56128,56423,56128,56418,56128,56421,56128,56430,56128,56423,56128,56447],[55356,57332,8203,56128,56423,8203,56128,56418,8203,56128,56421,8203,56128,56430,8203,56128,56423,8203,56128,56447]));case"emoji":return!c([55357,56424,55356,57342,8205,55358,56605,8205,55357,56424,55356,57340],[55357,56424,55356,57342,8203,55358,56605,8203,55357,56424,55356,57340])}return!1}function d(e){var t=a.createElement("script");t.src=e,t.defer=t.type="text/javascript",a.getElementsByTagName("head")[0].appendChild(t)}for(i=Array("flag","emoji"),t.supports={everything:!0,everythingExceptFlag:!0},o=0;o<i.length;o++)t.supports[i[o]]=l(i[o]),t.supports.everything=t.supports.everything&&t.supports[i[o]],"flag"!==i[o]&&(t.supports.everythingExceptFlag=t.supports.everythingExceptFlag&&t.supports[i[o]]);t.supports.everythingExceptFlag=t.supports.everythingExceptFlag&&!t.supports.flag,t.DOMReady=!1,t.readyCallback=function(){t.DOMReady=!0},t.supports.everything||(n=function(){t.readyCallback()},a.addEventListener?(a.addEventListener("DOMContentLoaded",n,!1),e.addEventListener("load",n,!1)):(e.attachEvent("onload",n),a.attachEvent("onreadystatechange",function(){"complete"===a.readyState&&t.readyCallback()})),(r=t.source||{}).concatemoji?d(r.concatemoji):r.wpemoji&&r.twemoji&&(d(r.twemoji),d(r.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script><script src="./Running SpecFlow scenarios in parallel with xUnit v2_files/wp-emoji-release.min.js.завантаження" type="text/javascript" defer=""></script>
+		<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+	<link rel="stylesheet" id="main-css" href="./Running SpecFlow scenarios in parallel with xUnit v2_files/style.css" type="text/css" media="all">
+<link rel="stylesheet" id="wp-block-library-css" href="./Running SpecFlow scenarios in parallel with xUnit v2_files/style.min.css" type="text/css" media="all">
+<link rel="stylesheet" id="jetpack_css-css" href="./Running SpecFlow scenarios in parallel with xUnit v2_files/jetpack.css" type="text/css" media="all">
+<script type="text/javascript" src="./Running SpecFlow scenarios in parallel with xUnit v2_files/jquery.js.завантаження"></script>
+<script type="text/javascript" src="./Running SpecFlow scenarios in parallel with xUnit v2_files/jquery-migrate.min.js.завантаження"></script>
+<link rel="https://api.w.org/" href="http://gasparnagy.com/wp-json/">
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="http://gasparnagy.com/xmlrpc.php?rsd">
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="http://gasparnagy.com/wp-includes/wlwmanifest.xml"> 
+<meta name="generator" content="WordPress 5.3.2">
+<link rel="shortlink" href="http://gasparnagy.com/?p=702">
+<link rel="alternate" type="application/json+oembed" href="http://gasparnagy.com/wp-json/oembed/1.0/embed?url=http%3A%2F%2Fgasparnagy.com%2F2016%2F02%2Frunning-specflow-scenarios-in-parallel-with-xunit-v2%2F">
+<link rel="alternate" type="text/xml+oembed" href="http://gasparnagy.com/wp-json/oembed/1.0/embed?url=http%3A%2F%2Fgasparnagy.com%2F2016%2F02%2Frunning-specflow-scenarios-in-parallel-with-xunit-v2%2F&amp;format=xml">
+
+<link rel="dns-prefetch" href="http://jetpack.wordpress.com/">
+<link rel="dns-prefetch" href="http://s0.wp.com/">
+<link rel="dns-prefetch" href="http://s1.wp.com/">
+<link rel="dns-prefetch" href="http://s2.wp.com/">
+<link rel="dns-prefetch" href="http://public-api.wordpress.com/">
+<link rel="dns-prefetch" href="http://0.gravatar.com/">
+<link rel="dns-prefetch" href="http://1.gravatar.com/">
+<link rel="dns-prefetch" href="http://2.gravatar.com/">
+	 <!--[if lt IE 9]>
+		 <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+	 <![endif]-->
+ 		<style type="text/css">
+			#branding {border-top-color:  #EC5F00!important;} 
+			#colophon {border-top-color:  #EC5F00!important;} 
+			blockquote {border-left-color:  #EC5F00!important;} 
+			a, a:link, a:visited {color: #EC5F00!important;}
+			#branding #main-menu ul li a {background-color: #EC5F00!important;}
+			#branding #main-menu ul ul a:hover, #branding #main-menu ul ul ul a:hover {color: #EC5F00!important;}
+			.widget h3.widget-title, .widget_get_recent_comments h1.widget-title {color: #EC5F00!important;}
+			.widget a:hover, .widget a:active {color: #EC5F00!important;}
+			#search_submit, input#submit {color: #EC5F00!important;} 
+			#search_submit:hover, input#submit:hover {background-color: #EC5F00!important;}
+			.reply a:hover, .reply a:focus, .reply a:active {background-color: #EC5F00!important;}
+			@media screen and (max-width: 480px) {#branding #main-menu ul ul li a:hover, #branding #main-menu ul ul ul li a:hover  {color: #EC5F00!important;} 
+			#wpadminbar .quicklinks .menupop ul li a,#wpadminbar .quicklinks .menupop ul li a strong,#wpadminbar .quicklinks .menupop.hover ul li a, #wpadminbar.nojs .quicklinks .menupop:hover ul li a {color: #21759B!important;}			
+#wpadminbar * {color: #CCCCCC!important;}
+#wpadminbar.nojs .ab-top-menu > li.menupop:hover > .ab-item, #wpadminbar .ab-top-menu > li.menupop.hover > .ab-item {	color: #333!important;}
+		</style>
+			<link rel="stylesheet" type="text/css" id="wp-custom-css" href="./Running SpecFlow scenarios in parallel with xUnit v2_files/saved_resource">
+		<!-- 
+			Plugin: Super Simple Google Analytics 
+	Plugin URL: Super Simple Google Analytics
+
+
+	-->
+
+<script type="text/javascript">
+	  var _gaq = _gaq || [];
+	  _gaq.push(['_setAccount', 'UA-6543084-3']);
+	  _gaq.push(['_trackPageview']);
+	
+	  (function() {
+		var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+		ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+		var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+	  })();
+	</script><style type="text/css">.IN-2bc0215c-7188-4274-b598-1969e06d4d7c-3npS60y-EvfF7G_lioSx2Q{display:block!important;border:1px solid #cdcfd2!important;background-color:#fff!important;color:#373a3d!important;width:100vw!important}.IN-2bc0215c-7188-4274-b598-1969e06d4d7c-3npS60y-EvfF7G_lioSx2Q .IN-2bc0215c-7188-4274-b598-1969e06d4d7c-24GeGuJgk9LrMLp7qVvlyz{background:#6a7e89!important;color:#fff!important;padding:10px!important;font-size:18px!important;font-family:sans-serif!important}.IN-2bc0215c-7188-4274-b598-1969e06d4d7c-3npS60y-EvfF7G_lioSx2Q .IN-2bc0215c-7188-4274-b598-1969e06d4d7c-KVjdulkCFfUZps29EbgAC{background:#f3f6f8!important;border-bottom:1px solid #cdcfd2!important}.IN-2bc0215c-7188-4274-b598-1969e06d4d7c-3npS60y-EvfF7G_lioSx2Q .IN-2bc0215c-7188-4274-b598-1969e06d4d7c-KVjdulkCFfUZps29EbgAC>*{margin-right:10px!important}.IN-2bc0215c-7188-4274-b598-1969e06d4d7c-3npS60y-EvfF7G_lioSx2Q .IN-2bc0215c-7188-4274-b598-1969e06d4d7c-1OeZ2PQ98oAp6Vc5mMc6V5{list-style:none!important}.IN-2bc0215c-7188-4274-b598-1969e06d4d7c-3npS60y-EvfF7G_lioSx2Q .IN-2bc0215c-7188-4274-b598-1969e06d4d7c-vCwYmWF_l83ScZBrGnRoi,.IN-2bc0215c-7188-4274-b598-1969e06d4d7c-3npS60y-EvfF7G_lioSx2Q .IN-2bc0215c-7188-4274-b598-1969e06d4d7c-1OeZ2PQ98oAp6Vc5mMc6V5{margin:0!important;padding:0!important;width:100%!important;display:block!important}.IN-2bc0215c-7188-4274-b598-1969e06d4d7c-3npS60y-EvfF7G_lioSx2Q .IN-2bc0215c-7188-4274-b598-1969e06d4d7c-vCwYmWF_l83ScZBrGnRoi:not(:last-child){border-bottom:1px solid #cdcfd2!important}.IN-2bc0215c-7188-4274-b598-1969e06d4d7c-3npS60y-EvfF7G_lioSx2Q .IN-2bc0215c-7188-4274-b598-1969e06d4d7c-1XQZkb-FlHWABUp4_uShaZ{color:inherit!important;cursor:pointer!important;width:100%!important;display:inline-block!important;margin:10px!important}.IN-2bc0215c-7188-4274-b598-1969e06d4d7c-3npS60y-EvfF7G_lioSx2Q .IN-2bc0215c-7188-4274-b598-1969e06d4d7c-1XTzMvb2XKitWz0mFLlyyp{margin:5px!important;display:block!important;width:auto!important;white-space:pre!important;overflow-x:scroll!important;background:inherit!important;color:inherit!important;font-family:monospace}.IN-2bc0215c-7188-4274-b598-1969e06d4d7c-3npS60y-EvfF7G_lioSx2Q .IN-2bc0215c-7188-4274-b598-1969e06d4d7c-1XTzMvb2XKitWz0mFLlyyp:not(.IN-2bc0215c-7188-4274-b598-1969e06d4d7c-39QUvFFn5B7GMcqMQkOXZ3){display:none!important}.IN-2bc0215c-7188-4274-b598-1969e06d4d7c-3npS60y-EvfF7G_lioSx2Q .IN-2bc0215c-7188-4274-b598-1969e06d4d7c-295DY3nO0DbJWMsOqmjCli{background:#f5f5f5!important;color:#5a5a5a!important}.IN-2bc0215c-7188-4274-b598-1969e06d4d7c-3npS60y-EvfF7G_lioSx2Q.IN-2bc0215c-7188-4274-b598-1969e06d4d7c-1aQZwu6CUzAf2zUcI7tg0Q .IN-2bc0215c-7188-4274-b598-1969e06d4d7c-295DY3nO0DbJWMsOqmjCli{display:none!important}.IN-2bc0215c-7188-4274-b598-1969e06d4d7c-3npS60y-EvfF7G_lioSx2Q .IN-2bc0215c-7188-4274-b598-1969e06d4d7c-38EPFyKXMtoP12rPlmrHxs{background:#e6f7ff!important;color:#006097!important}.IN-2bc0215c-7188-4274-b598-1969e06d4d7c-3npS60y-EvfF7G_lioSx2Q.IN-2bc0215c-7188-4274-b598-1969e06d4d7c-3W4ZnQjhoGfT1gTNcqRXdi .IN-2bc0215c-7188-4274-b598-1969e06d4d7c-38EPFyKXMtoP12rPlmrHxs{display:none!important}.IN-2bc0215c-7188-4274-b598-1969e06d4d7c-3npS60y-EvfF7G_lioSx2Q .IN-2bc0215c-7188-4274-b598-1969e06d4d7c-HGYnfzlmgOZ-l7eANhQe_{background:#fff3ea!important;color:#993a00!important}.IN-2bc0215c-7188-4274-b598-1969e06d4d7c-3npS60y-EvfF7G_lioSx2Q.IN-2bc0215c-7188-4274-b598-1969e06d4d7c-24e52A11B1UIErbKHtBmqc .IN-2bc0215c-7188-4274-b598-1969e06d4d7c-HGYnfzlmgOZ-l7eANhQe_{display:none!important}.IN-2bc0215c-7188-4274-b598-1969e06d4d7c-3npS60y-EvfF7G_lioSx2Q .IN-2bc0215c-7188-4274-b598-1969e06d4d7c-jji74ZzulHScD0OAD_G7h{background:#fef2f1!important;color:#b10823!important}.IN-2bc0215c-7188-4274-b598-1969e06d4d7c-3npS60y-EvfF7G_lioSx2Q.IN-2bc0215c-7188-4274-b598-1969e06d4d7c-28jAOA7cDee-95LvwGsOP- .IN-2bc0215c-7188-4274-b598-1969e06d4d7c-jji74ZzulHScD0OAD_G7h{display:none!important}.IN-2bc0215c-7188-4274-b598-1969e06d4d7c-1G9ISYhSF8XoOmdcl0yKDu{background-color:#0073b1!important;border:0!important;border-radius:2px!important;box-sizing:border-box!important;color:#fff!important;cursor:pointer!important;display:inline-block!important;font-family:-apple-system,system-ui,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Fira Sans,Ubuntu,Oxygen,Oxygen Sans,Cantarell,Droid Sans,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol,Lucida Grande,Helvetica,Arial,sans-serif!important;font-weight:600!important;overflow:hidden!important;outline-width:2px!important;position:relative!important;text-align:center!important;text-decoration:none!important;vertical-align:middle!important;white-space:nowrap!important}.IN-2bc0215c-7188-4274-b598-1969e06d4d7c-1G9ISYhSF8XoOmdcl0yKDu:disabled{cursor:not-allowed!important;opacity:.7!important}.IN-2bc0215c-7188-4274-b598-1969e06d4d7c-1G9ISYhSF8XoOmdcl0yKDu:not(:disabled):not(.IN-2bc0215c-7188-4274-b598-1969e06d4d7c-1zhzkayakwEXovVYUbq5Gy):hover{background-color:#006097!important}.IN-2bc0215c-7188-4274-b598-1969e06d4d7c-1G9ISYhSF8XoOmdcl0yKDu:not(:disabled):not(.IN-2bc0215c-7188-4274-b598-1969e06d4d7c-1zhzkayakwEXovVYUbq5Gy):active{background-color:#004b7c!important}.IN-2bc0215c-7188-4274-b598-1969e06d4d7c-1G9ISYhSF8XoOmdcl0yKDu.IN-2bc0215c-7188-4274-b598-1969e06d4d7c-1zhzkayakwEXovVYUbq5Gy{background-color:#fff!important;color:#0073b1!important;box-shadow:inset 0 0 0 1px rgba(0,0,0,.3)!important}.IN-2bc0215c-7188-4274-b598-1969e06d4d7c-1G9ISYhSF8XoOmdcl0yKDu.IN-2bc0215c-7188-4274-b598-1969e06d4d7c-1zhzkayakwEXovVYUbq5Gy:not(:disabled):hover{color:#006097!important}.IN-2bc0215c-7188-4274-b598-1969e06d4d7c-1G9ISYhSF8XoOmdcl0yKDu.IN-2bc0215c-7188-4274-b598-1969e06d4d7c-1zhzkayakwEXovVYUbq5Gy:not(:disabled):active{color:#004b7c!important}.IN-2bc0215c-7188-4274-b598-1969e06d4d7c-1G9ISYhSF8XoOmdcl0yKDu>xdoor-icon{display:inline-block!important;height:100%!important;vertical-align:top!important}.IN-2bc0215c-7188-4274-b598-1969e06d4d7c-1G9ISYhSF8XoOmdcl0yKDu>xdoor-icon>svg{pointer-events:none!important}.IN-2bc0215c-7188-4274-b598-1969e06d4d7c-1G9ISYhSF8XoOmdcl0yKDu.IN-2bc0215c-7188-4274-b598-1969e06d4d7c-7inSbaAsvG5bf7w6lJTEr{font-size:10px!important;height:16px!important;line-height:16px!important;padding:0 6px!important}.IN-2bc0215c-7188-4274-b598-1969e06d4d7c-1G9ISYhSF8XoOmdcl0yKDu.IN-2bc0215c-7188-4274-b598-1969e06d4d7c-7inSbaAsvG5bf7w6lJTEr>xdoor-icon{margin-left:-6px!important;margin-right:3px!important}.IN-2bc0215c-7188-4274-b598-1969e06d4d7c-1G9ISYhSF8XoOmdcl0yKDu.IN-2bc0215c-7188-4274-b598-1969e06d4d7c-7inSbaAsvG5bf7w6lJTEr>xdoor-icon>svg{height:16px!important;width:16px!important}.IN-2bc0215c-7188-4274-b598-1969e06d4d7c-1G9ISYhSF8XoOmdcl0yKDu.IN-2bc0215c-7188-4274-b598-1969e06d4d7c-7inSbaAsvG5bf7w6lJTEr.IN-2bc0215c-7188-4274-b598-1969e06d4d7c-2lrEjt4SOTxqrYsv1piG4c>xdoor-icon{margin-right:-6px!important}.IN-2bc0215c-7188-4274-b598-1969e06d4d7c-1G9ISYhSF8XoOmdcl0yKDu,.IN-2bc0215c-7188-4274-b598-1969e06d4d7c-1G9ISYhSF8XoOmdcl0yKDu.IN-2bc0215c-7188-4274-b598-1969e06d4d7c-3uCBSbQNVNf2QjqHe1rfb6{font-size:11px!important;height:20px!important;line-height:20px!important;padding:0 7px!important}.IN-2bc0215c-7188-4274-b598-1969e06d4d7c-1G9ISYhSF8XoOmdcl0yKDu.IN-2bc0215c-7188-4274-b598-1969e06d4d7c-3uCBSbQNVNf2QjqHe1rfb6>xdoor-icon,.IN-2bc0215c-7188-4274-b598-1969e06d4d7c-1G9ISYhSF8XoOmdcl0yKDu>xdoor-icon{margin-left:-7px!important;margin-right:3.5px!important}.IN-2bc0215c-7188-4274-b598-1969e06d4d7c-1G9ISYhSF8XoOmdcl0yKDu.IN-2bc0215c-7188-4274-b598-1969e06d4d7c-3uCBSbQNVNf2QjqHe1rfb6>xdoor-icon>svg,.IN-2bc0215c-7188-4274-b598-1969e06d4d7c-1G9ISYhSF8XoOmdcl0yKDu>xdoor-icon>svg{height:20px!important;width:20px!important}.IN-2bc0215c-7188-4274-b598-1969e06d4d7c-1G9ISYhSF8XoOmdcl0yKDu.IN-2bc0215c-7188-4274-b598-1969e06d4d7c-3uCBSbQNVNf2QjqHe1rfb6.IN-2bc0215c-7188-4274-b598-1969e06d4d7c-2lrEjt4SOTxqrYsv1piG4c>xdoor-icon,.IN-2bc0215c-7188-4274-b598-1969e06d4d7c-1G9ISYhSF8XoOmdcl0yKDu.IN-2bc0215c-7188-4274-b598-1969e06d4d7c-2lrEjt4SOTxqrYsv1piG4c>xdoor-icon{margin-right:-7px!important}.IN-2bc0215c-7188-4274-b598-1969e06d4d7c-1G9ISYhSF8XoOmdcl0yKDu.IN-2bc0215c-7188-4274-b598-1969e06d4d7c-21Smv9YG-5V6M6KP-5v2WG{font-size:14px!important;height:24px!important;line-height:24px!important;padding:0 12px!important}.IN-2bc0215c-7188-4274-b598-1969e06d4d7c-1G9ISYhSF8XoOmdcl0yKDu.IN-2bc0215c-7188-4274-b598-1969e06d4d7c-21Smv9YG-5V6M6KP-5v2WG>xdoor-icon{margin-left:-12px!important;margin-right:6px!important}.IN-2bc0215c-7188-4274-b598-1969e06d4d7c-1G9ISYhSF8XoOmdcl0yKDu.IN-2bc0215c-7188-4274-b598-1969e06d4d7c-21Smv9YG-5V6M6KP-5v2WG>xdoor-icon>svg{height:24px!important;width:24px!important}.IN-2bc0215c-7188-4274-b598-1969e06d4d7c-1G9ISYhSF8XoOmdcl0yKDu.IN-2bc0215c-7188-4274-b598-1969e06d4d7c-21Smv9YG-5V6M6KP-5v2WG.IN-2bc0215c-7188-4274-b598-1969e06d4d7c-2lrEjt4SOTxqrYsv1piG4c>xdoor-icon{margin-right:-12px!important}.IN-2bc0215c-7188-4274-b598-1969e06d4d7c-1G9ISYhSF8XoOmdcl0yKDu.IN-2bc0215c-7188-4274-b598-1969e06d4d7c-1TGdQUTLZdNG4R87OfAB-q{font-size:16px!important;height:32px!important;line-height:32px!important;padding:0 16px!important}.IN-2bc0215c-7188-4274-b598-1969e06d4d7c-1G9ISYhSF8XoOmdcl0yKDu.IN-2bc0215c-7188-4274-b598-1969e06d4d7c-1TGdQUTLZdNG4R87OfAB-q>xdoor-icon{margin-left:-16px!important;margin-right:8px!important}.IN-2bc0215c-7188-4274-b598-1969e06d4d7c-1G9ISYhSF8XoOmdcl0yKDu.IN-2bc0215c-7188-4274-b598-1969e06d4d7c-1TGdQUTLZdNG4R87OfAB-q>xdoor-icon>svg{height:32px!important;width:32px!important}.IN-2bc0215c-7188-4274-b598-1969e06d4d7c-1G9ISYhSF8XoOmdcl0yKDu.IN-2bc0215c-7188-4274-b598-1969e06d4d7c-1TGdQUTLZdNG4R87OfAB-q.IN-2bc0215c-7188-4274-b598-1969e06d4d7c-2lrEjt4SOTxqrYsv1piG4c>xdoor-icon{margin-right:-16px!important}</style><style>.li-connect-widget .li-connect-mark {background:url(//static.licdn.com/scds/common/u/images/apps/connect/sprites/sprite_connect_v14.png) -92px -42px no-repeat !important;display:inline-block !important;height:16px !important;text-decoration:none !important;width:16px !important;vertical-align:middle !important;*margin:0 3px !important;*vertical-align:bottom !important;}.IN-widget .hovered .li-connect-mark {cursor:pointer !important;}.li-connect-widget.pending .li-connect-mark {background:url(data:image/gif;base64,R0lGODlhEAAQAKIAAP///+bm5s7OzpycnGNjYwAAAAAAAAAAACH/C05FVFNDQVBFMi4wAwEAAAAh+QQFCgAAACwAAAAADgAQAAADNAi6MMNQOReBEG0CQta92cZ11seMZBlxClh55lu6Mi23GBQEsL3vOBDwx8MBiMei7ndLQhIAIfkEBQoAAAAsAgAAAA4ADgAAAyUIqiL7rzUIpRuDsouzVp33AdgIEYQJoKjJpi4cBOo8mzaN62MCACH5BAUKAAAALAAAAgAQAAwAAAMmCLoMIi2q92Sj0LK6QtDAMACeZ4li+UnoaGoiqBCEPNO1jOc6nwAAIfkEBQoAAAAsAgACAA4ADgAAAyUIEdD+ajH45KRu4Y2F4I3ngeJHmtswgICqYgTRulQcz7DN3lQCACH5BAUKAAAALAIAAAAMABAAAAMmCKoR+6w5GBtd9urNu/8XQVCCAIjiU5boOAzAaqbvG5tPDWv2kwAAIfkEBQoAAAAsAAACAA4ADgAAAyUIugwRLb4X2YR1UUBIXl33ceFImsswmKo6tqsgZK4sj/aM60sCACH5BAUKAAAALAAAAgAQAAwAAAMmCEqk/o8xSIFsFc7sxuBAEACel4li+VXoaHLiIwigM881cNM5DiYAIfkECQoAAAAsAAAAABAAEAAAAygIukDEkDkX1xhtVnBv3lwHMt4ICIKpoKjKpi6sjkEw17WK2zo//5EEADs=) no-repeat !important;*background:url(//static.licdn.com/scds/common/u/images/apps/connect/sprites/sprite_connect_v14.png) -92px -42px no-repeat !important;cursor:wait !important;}</style><script charset="utf-8" src="./Running SpecFlow scenarios in parallel with xUnit v2_files/moment_timeline_tweet.006e6e150e3a965b21e4fc914a590d30.js.завантаження"></script><script charset="utf-8" src="./Running SpecFlow scenarios in parallel with xUnit v2_files/timeline.5ca108765b2ea8f4f7bf6784a62617a7.js.завантаження"></script><style type="text/css">@keyframes tawkMaxOpen{0%{opacity:0;transform:translate(30px,0);;}to{opacity:1;transform:translate(0px,0);}}@-moz-keyframes tawkMaxOpen{0%{opacity:0;transform:translate(30px,0);;}to{opacity:1;transform:translate(0px,0);}}@-webkit-keyframes tawkMaxOpen{0%{opacity:0;transform:translate(30px,0);;}to{opacity:1;transform:translate(0px,0);}}#kgM2xl9-1598011802187{outline:none!important;visibility:visible!important;resize:none!important;box-shadow:none!important;overflow:visible!important;background:none!important;opacity:1!important;filter:alpha(opacity=100)!important;-ms-filter:progid:DXImageTransform.Microsoft.Alpha(Opacity1)!important;-moz-opacity:1!important;-khtml-opacity:1!important;top:auto!important;right:10px!important;bottom:0px!important;left:auto!important;position:fixed!important;border:0!important;min-height:0!important;min-width:0!important;max-height:none!important;max-width:none!important;padding:0!important;margin:0!important;-moz-transition-property:none!important;-webkit-transition-property:none!important;-o-transition-property:none!important;transition-property:none!important;transform:none!important;-webkit-transform:none!important;-ms-transform:none!important;width:auto!important;height:auto!important;display:none!important;z-index:2000000000!important;background-color:transparent!important;cursor:auto!important;float:none!important;border-radius:unset!important;pointer-events:auto!important}#nxkuuUY-1598011802188.open{animation : tawkMaxOpen .25s ease!important;}</style></head>
+
+<body class="post-template-default single single-post postid-702 single-format-standard custom-background">
+<div id="page" class="clearfix">
+	<header id="branding">
+		<nav id="main-menu" class="clearfix">
+				<div class="menu-menu-container"><ul id="menu-menu" class="menu"><li id="menu-item-1241" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1241"><a href="https://www.specsolutions.eu/">Spec Solutions</a></li>
+<li id="menu-item-1353" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1353"><a href="https://www.specsolutions.eu/services/training/">Training</a></li>
+<li id="menu-item-204" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-204"><a href="http://gasparnagy.com/resources/">Resources</a></li>
+<li id="menu-item-56" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-56"><a href="http://gasparnagy.com/about/">About Me</a></li>
+</ul></div>		</nav><!-- #main-menu -->
+            <hgroup id="blog-title">
+         
+				<!--shows header-image if there is one -->
+										<h1 id="site-title"><a href="http://gasparnagy.com/" title="Gáspár Nagy on software">Gáspár Nagy on software</a></h1>
+						<h2 id="site-description">coach, trainer and bdd addict, creator of SpecFlow; owner of Spec Solutions</h2>
+					 		
+			</hgroup>
+	</header><!-- #branding -->
+	<div id="main">
+<div id="wrapper">
+	<div id="content">
+							<article id="post-702" class="post-702 post type-post status-publish format-standard hentry category-uncategorized tag-bdd tag-bdd-addict tag-parallel tag-specflow tag-specflow-v2 tag-xunit">
+
+	<header class="entry-header">
+			<h1><a href="http://gasparnagy.com/2016/02/running-specflow-scenarios-in-parallel-with-xunit-v2/" title="Running SpecFlow scenarios in parallel with xUnit v2" rel="bookmark">Running SpecFlow scenarios in parallel with xUnit v2</a></h1>
+            <p>by Gáspár  on February 23, 2016</p>
+	</header><!-- END .entry-header -->
+        
+	<div class="entry-content">
+						            
+			<p>As mentioned earlier, one of the key new features of SpecFlow v2 is that you can run your tests in parallel within this same AppDomain. This is currently possible with NUnit v3 and xUnit v2. This post shows a step-by-step guidance about how this can be done.</p><span id="more-702"></span>
+ 
+<p><img title="Course workers repair the piste between runs at the team event a parallel slalom race at the 2011 Alpine skiing World Championships" style="border-left-width: 0px; border-right-width: 0px; background-image: none; border-bottom-width: 0px; float: right; padding-top: 0px; padding-left: 0px; display: inline; padding-right: 0px; border-top-width: 0px" border="0" alt="Course workers repair the piste between runs at the team event a parallel slalom race at the 2011 Alpine skiing World Championships" src="./Running SpecFlow scenarios in parallel with xUnit v2_files/bigstock-GARMISCH-PARTENKIRCHEN-GERMAN-96767258.jpg" width="344" align="right" height="231">First of all, I would like to highlight that even though you can speed up the execution of your tests with parallelization, if you have integration steps that depend on shared resources (e.g. on a shared database), you have to make extra considerations in order to be able to parallelize them. In fact, if you have never run your tests in parallel before, it is quite unlikely that they will run smoothly without any change. So just like with every new method, it makes sense to conduct some experiment on how this works before jumping into the parallelization of your real project. </p>
+ 
+<p>If your project uses xUnit, you can switch off parallelization until you fix all related problems with the <code>[assembly: CollectionBehavior(DisableTestParallelization = true)]</code> global attribute.</p>
+ 
+<p>As an example, we can use the “Calculator Sample” that you get when you add a new feature file to your project. Not the best example, but good enough for now. You can find the code sample for this post on GitHub: <a href="https://github.com/gasparnagy/Sample_ParallelSpecFlowXUnit">Sample_ParallelSpecFlowXUnit</a>.</p>
+ 
+<p>If you are not familiar with xUnit, there is a <a href="https://xunit.github.io/docs/getting-started-desktop.html">good introduction</a> on their website. Here I am going to concentrate only on the really necessary steps. </p>
+ 
+<p>If you are familiar with the general SpecFlow setup, you can have a quick look at the <a href="https://github.com/gasparnagy/Sample_ParallelSpecFlowXUnit">GitHub repo</a> and jump to the “Ready to run” section directly.</p>
+ 
+<h2>Create a project</h2>
+ 
+<p><img title="dependencies" style="border-left-width: 0px; border-right-width: 0px; background-image: none; border-bottom-width: 0px; float: right; padding-top: 0px; padding-left: 0px; margin: 3px 0px 3px 3px; display: inline; padding-right: 0px; border-top-width: 0px" border="0" alt="dependencies" src="./Running SpecFlow scenarios in parallel with xUnit v2_files/dependencies.png" width="301" align="right" height="297">So first, you need to create a new class library project (I’ve called it <code>Calculator.Specs</code>) and add a few NuGet packages. Fortunately there is a composition package called <code>SpecFlow.xUnit</code> that does almost all of it. Start with adding that one. This adds the packages shown in the picture and in addition to that, it configures SpecFlow to use xUnit as a unit test provider. So the App.Config should look like this.</p>
+ 
+<p><script src="./Running SpecFlow scenarios in parallel with xUnit v2_files/54b3fe009bcb4a63f68c.js.завантаження"></script><link rel="stylesheet" href="./Running SpecFlow scenarios in parallel with xUnit v2_files/gist-embed-fd43f22140a6ad2cc9d0aa1f169a01f3.css"></p><div id="gist31032422" class="gist">
+    <div class="gist-file">
+      <div class="gist-data">
+        <div class="js-gist-file-update-container js-task-list-container file-box">
+  <div id="file-app-config" class="file ">
+    
+
+  <div itemprop="text" class="Box-body p-0 blob-wrapper data type-xml  ">
+      
+<table class="highlight tab-size js-file-line-container" data-tab-size="8" data-paste-markdown-skip="">
+      <tbody><tr>
+        <td id="file-app-config-L1" class="blob-num js-line-number" data-line-number="1"></td>
+        <td id="file-app-config-LC1" class="blob-code blob-code-inner js-file-line">&lt;<span class="pl-ent">specFlow</span>&gt;</td>
+      </tr>
+      <tr>
+        <td id="file-app-config-L2" class="blob-num js-line-number" data-line-number="2"></td>
+        <td id="file-app-config-LC2" class="blob-code blob-code-inner js-file-line">  &lt;<span class="pl-ent">unitTestProvider</span> <span class="pl-e">name</span>=<span class="pl-s"><span class="pl-pds">"</span>xUnit<span class="pl-pds">"</span></span> /&gt;</td>
+      </tr>
+      <tr>
+        <td id="file-app-config-L3" class="blob-num js-line-number" data-line-number="3"></td>
+        <td id="file-app-config-LC3" class="blob-code blob-code-inner js-file-line">&lt;/<span class="pl-ent">specFlow</span>&gt;</td>
+      </tr>
+</tbody></table>
+
+
+  </div>
+
+  </div>
+</div>
+
+      </div>
+      <div class="gist-meta">
+        <a href="https://gist.github.com/gasparnagy/54b3fe009bcb4a63f68c/raw/9dd70fa1454c076917e32a22d9183ed5993d27d4/App.config" style="float:right">view raw</a>
+        <a href="https://gist.github.com/gasparnagy/54b3fe009bcb4a63f68c#file-app-config">App.config</a>
+        hosted with ❤ by <a href="https://github.com/">GitHub</a>
+      </div>
+    </div>
+</div>
+<p></p>
+ 
+<p>Actually this should be enough to start coding, but if you want to run your tests as well, you can add the <code>xunit.runner.console</code> package that provides a console runner or the <code>xunit.runner.visualstudio</code> package that shows your tests in the Visual Studio Test Explorer window. You can also add both of them…</p>
+ 
+<h2>Add scenarios</h2>
+ 
+<p>As I have said, in order to have some initial specs, we just need to add a new SpecFlow Feature File from the solution explorer, because that gives us a scenario for the “Addition” function of our calculator. You can push it up a bit by turning into a Scenario Outline, so that we have a bit more tests to play with.</p>
+ 
+<p><script src="./Running SpecFlow scenarios in parallel with xUnit v2_files/54b3fe009bcb4a63f68c.js(1).завантаження"></script><link rel="stylesheet" href="./Running SpecFlow scenarios in parallel with xUnit v2_files/gist-embed-fd43f22140a6ad2cc9d0aa1f169a01f3.css"></p><div id="gist31032422" class="gist">
+    <div class="gist-file">
+      <div class="gist-data">
+        <div class="js-gist-file-update-container js-task-list-container file-box">
+  <div id="file-addition-feature" class="file ">
+    
+
+  <div itemprop="text" class="Box-body p-0 blob-wrapper data type-gherkin  ">
+      
+<table class="highlight tab-size js-file-line-container" data-tab-size="8" data-paste-markdown-skip="">
+      <tbody><tr>
+        <td id="file-addition-feature-L1" class="blob-num js-line-number" data-line-number="1"></td>
+        <td id="file-addition-feature-LC1" class="blob-code blob-code-inner js-file-line"><span class="pl-k">Feature</span>:<span class="pl-s"> Addition</span></td>
+      </tr>
+      <tr>
+        <td id="file-addition-feature-L2" class="blob-num js-line-number" data-line-number="2"></td>
+        <td id="file-addition-feature-LC2" class="blob-code blob-code-inner js-file-line">
+</td>
+      </tr>
+      <tr>
+        <td id="file-addition-feature-L3" class="blob-num js-line-number" data-line-number="3"></td>
+        <td id="file-addition-feature-LC3" class="blob-code blob-code-inner js-file-line"><span class="pl-k">Scenario Outline</span>:<span class="pl-s"> Add two numbers</span></td>
+      </tr>
+      <tr>
+        <td id="file-addition-feature-L4" class="blob-num js-line-number" data-line-number="4"></td>
+        <td id="file-addition-feature-LC4" class="blob-code blob-code-inner js-file-line">	<span class="pl-k">Given </span>I have entered <span class="pl-smi">&lt;a&gt;</span> into the calculator</td>
+      </tr>
+      <tr>
+        <td id="file-addition-feature-L5" class="blob-num js-line-number" data-line-number="5"></td>
+        <td id="file-addition-feature-LC5" class="blob-code blob-code-inner js-file-line">	<span class="pl-k">And </span>I have entered <span class="pl-smi">&lt;b&gt;</span> into the calculator</td>
+      </tr>
+      <tr>
+        <td id="file-addition-feature-L6" class="blob-num js-line-number" data-line-number="6"></td>
+        <td id="file-addition-feature-LC6" class="blob-code blob-code-inner js-file-line">	<span class="pl-k">When </span>I press add</td>
+      </tr>
+      <tr>
+        <td id="file-addition-feature-L7" class="blob-num js-line-number" data-line-number="7"></td>
+        <td id="file-addition-feature-LC7" class="blob-code blob-code-inner js-file-line">	<span class="pl-k">Then </span>the result should be <span class="pl-smi">&lt;result&gt;</span> on the screen</td>
+      </tr>
+      <tr>
+        <td id="file-addition-feature-L8" class="blob-num js-line-number" data-line-number="8"></td>
+        <td id="file-addition-feature-LC8" class="blob-code blob-code-inner js-file-line">
+</td>
+      </tr>
+      <tr>
+        <td id="file-addition-feature-L9" class="blob-num js-line-number" data-line-number="9"></td>
+        <td id="file-addition-feature-LC9" class="blob-code blob-code-inner js-file-line"><span class="pl-k">Examples</span>:<span class="pl-s"> </span></td>
+      </tr>
+      <tr>
+        <td id="file-addition-feature-L10" class="blob-num js-line-number" data-line-number="10"></td>
+        <td id="file-addition-feature-LC10" class="blob-code blob-code-inner js-file-line"><span class="pl-k">	| <span class="pl-s1">case</span>          | <span class="pl-s1">a</span>  | <span class="pl-s1">b</span>  | <span class="pl-s1">result</span> |</span></td>
+      </tr>
+      <tr>
+        <td id="file-addition-feature-L11" class="blob-num js-line-number" data-line-number="11"></td>
+        <td id="file-addition-feature-LC11" class="blob-code blob-code-inner js-file-line"><span class="pl-k">	| <span class="pl-s1">classic</span>       | <span class="pl-s1">50</span> | <span class="pl-s1">70</span> | <span class="pl-s1">120</span>    |</span></td>
+      </tr>
+      <tr>
+        <td id="file-addition-feature-L12" class="blob-num js-line-number" data-line-number="12"></td>
+        <td id="file-addition-feature-LC12" class="blob-code blob-code-inner js-file-line"><span class="pl-k">	| <span class="pl-s1">commutativity</span> | <span class="pl-s1">70</span> | <span class="pl-s1">50</span> | <span class="pl-s1">120</span>    |</span></td>
+      </tr>
+      <tr>
+        <td id="file-addition-feature-L13" class="blob-num js-line-number" data-line-number="13"></td>
+        <td id="file-addition-feature-LC13" class="blob-code blob-code-inner js-file-line"><span class="pl-k">	| <span class="pl-s1">zero</span>          | <span class="pl-s1">0</span>  | <span class="pl-s1">42</span> | <span class="pl-s1">42</span>     |</span></td>
+      </tr>
+</tbody></table>
+
+
+  </div>
+
+  </div>
+</div>
+
+      </div>
+      <div class="gist-meta">
+        <a href="https://gist.github.com/gasparnagy/54b3fe009bcb4a63f68c/raw/9dd70fa1454c076917e32a22d9183ed5993d27d4/Addition.feature" style="float:right">view raw</a>
+        <a href="https://gist.github.com/gasparnagy/54b3fe009bcb4a63f68c#file-addition-feature">Addition.feature</a>
+        hosted with ❤ by <a href="https://github.com/">GitHub</a>
+      </div>
+    </div>
+</div>
+<p></p>
+ 
+<p>Most of the test runner frameworks that allow parallel execution run the tests from the same class sequentially and only parallelize the tests in different test classes. xUnit works in the same way. This means that if we really want to see something running in parallel, we need to have at least two feature files! So let’s add a <code>Multiplication.feature</code> similarly to the addition.</p>
+
+<p><script src="./Running SpecFlow scenarios in parallel with xUnit v2_files/54b3fe009bcb4a63f68c.js(2).завантаження"></script><link rel="stylesheet" href="./Running SpecFlow scenarios in parallel with xUnit v2_files/gist-embed-fd43f22140a6ad2cc9d0aa1f169a01f3.css"></p><div id="gist31032422" class="gist">
+    <div class="gist-file">
+      <div class="gist-data">
+        <div class="js-gist-file-update-container js-task-list-container file-box">
+  <div id="file-multiplication-feature" class="file ">
+    
+
+  <div itemprop="text" class="Box-body p-0 blob-wrapper data type-gherkin  ">
+      
+<table class="highlight tab-size js-file-line-container" data-tab-size="8" data-paste-markdown-skip="">
+      <tbody><tr>
+        <td id="file-multiplication-feature-L1" class="blob-num js-line-number" data-line-number="1"></td>
+        <td id="file-multiplication-feature-LC1" class="blob-code blob-code-inner js-file-line"><span class="pl-k">Feature</span>:<span class="pl-s"> Multiplication</span></td>
+      </tr>
+      <tr>
+        <td id="file-multiplication-feature-L2" class="blob-num js-line-number" data-line-number="2"></td>
+        <td id="file-multiplication-feature-LC2" class="blob-code blob-code-inner js-file-line">
+</td>
+      </tr>
+      <tr>
+        <td id="file-multiplication-feature-L3" class="blob-num js-line-number" data-line-number="3"></td>
+        <td id="file-multiplication-feature-LC3" class="blob-code blob-code-inner js-file-line"><span class="pl-k">Scenario Outline</span>:<span class="pl-s"> Add two numbers</span></td>
+      </tr>
+      <tr>
+        <td id="file-multiplication-feature-L4" class="blob-num js-line-number" data-line-number="4"></td>
+        <td id="file-multiplication-feature-LC4" class="blob-code blob-code-inner js-file-line">	<span class="pl-k">Given </span>I have entered <span class="pl-smi">&lt;a&gt;</span> into the calculator</td>
+      </tr>
+      <tr>
+        <td id="file-multiplication-feature-L5" class="blob-num js-line-number" data-line-number="5"></td>
+        <td id="file-multiplication-feature-LC5" class="blob-code blob-code-inner js-file-line">	<span class="pl-k">And </span>I have entered <span class="pl-smi">&lt;b&gt;</span> into the calculator</td>
+      </tr>
+      <tr>
+        <td id="file-multiplication-feature-L6" class="blob-num js-line-number" data-line-number="6"></td>
+        <td id="file-multiplication-feature-LC6" class="blob-code blob-code-inner js-file-line">	<span class="pl-k">When </span>I press multiply</td>
+      </tr>
+      <tr>
+        <td id="file-multiplication-feature-L7" class="blob-num js-line-number" data-line-number="7"></td>
+        <td id="file-multiplication-feature-LC7" class="blob-code blob-code-inner js-file-line">	<span class="pl-k">Then </span>the result should be <span class="pl-smi">&lt;result&gt;</span> on the screen</td>
+      </tr>
+      <tr>
+        <td id="file-multiplication-feature-L8" class="blob-num js-line-number" data-line-number="8"></td>
+        <td id="file-multiplication-feature-LC8" class="blob-code blob-code-inner js-file-line">
+</td>
+      </tr>
+      <tr>
+        <td id="file-multiplication-feature-L9" class="blob-num js-line-number" data-line-number="9"></td>
+        <td id="file-multiplication-feature-LC9" class="blob-code blob-code-inner js-file-line"><span class="pl-k">Examples</span>:<span class="pl-s"> </span></td>
+      </tr>
+      <tr>
+        <td id="file-multiplication-feature-L10" class="blob-num js-line-number" data-line-number="10"></td>
+        <td id="file-multiplication-feature-LC10" class="blob-code blob-code-inner js-file-line"><span class="pl-k">	| <span class="pl-s1">case</span>          | <span class="pl-s1">a</span>  | <span class="pl-s1">b</span>  | <span class="pl-s1">result</span> |</span></td>
+      </tr>
+      <tr>
+        <td id="file-multiplication-feature-L11" class="blob-num js-line-number" data-line-number="11"></td>
+        <td id="file-multiplication-feature-LC11" class="blob-code blob-code-inner js-file-line"><span class="pl-k">	| <span class="pl-s1">classic</span>       | <span class="pl-s1">50</span> | <span class="pl-s1">70</span> | <span class="pl-s1">3500</span>   |</span></td>
+      </tr>
+      <tr>
+        <td id="file-multiplication-feature-L12" class="blob-num js-line-number" data-line-number="12"></td>
+        <td id="file-multiplication-feature-LC12" class="blob-code blob-code-inner js-file-line"><span class="pl-k">	| <span class="pl-s1">commutativity</span> | <span class="pl-s1">70</span> | <span class="pl-s1">50</span> | <span class="pl-s1">3500</span>   |</span></td>
+      </tr>
+      <tr>
+        <td id="file-multiplication-feature-L13" class="blob-num js-line-number" data-line-number="13"></td>
+        <td id="file-multiplication-feature-LC13" class="blob-code blob-code-inner js-file-line"><span class="pl-k">	| <span class="pl-s1">zero</span>          | <span class="pl-s1">0</span>  | <span class="pl-s1">42</span> | <span class="pl-s1">0</span>      |</span></td>
+      </tr>
+      <tr>
+        <td id="file-multiplication-feature-L14" class="blob-num js-line-number" data-line-number="14"></td>
+        <td id="file-multiplication-feature-LC14" class="blob-code blob-code-inner js-file-line"><span class="pl-k">	| <span class="pl-s1">one</span>           | <span class="pl-s1">1</span>  | <span class="pl-s1">42</span> | <span class="pl-s1">42</span>     |</span></td>
+      </tr>
+</tbody></table>
+
+
+  </div>
+
+  </div>
+</div>
+
+      </div>
+      <div class="gist-meta">
+        <a href="https://gist.github.com/gasparnagy/54b3fe009bcb4a63f68c/raw/9dd70fa1454c076917e32a22d9183ed5993d27d4/Multiplication.feature" style="float:right">view raw</a>
+        <a href="https://gist.github.com/gasparnagy/54b3fe009bcb4a63f68c#file-multiplication-feature">Multiplication.feature</a>
+        hosted with ❤ by <a href="https://github.com/">GitHub</a>
+      </div>
+    </div>
+</div>
+<p></p>
+  
+<h2>Run the tests</h2>
+ 
+<p>As I have mentioned, you can run the tests in different ways. With the console runner you need to do something like this from the solution root:</p>
+ 
+<p><b><code>&gt; .\packages\xunit.runner.console.2.1.0\tools\xunit.console.exe .\Calculator.Specs\bin\Debug\Calculator.Specs.dll</code></b></p>
+ 
+<p>xUnit runs the tests in parallel by default., so you don’t have to specify any extra arguments. If you want to force single-threaded execution, you need to provide the <code>-parallel none</code> option. This is quite convenient for experimenting.</p>
+ 
+<p>The Visual Studio runner also runs the tests in parallel by default. To my knowledge, you cannot turn this off in the runner itself, but there are several ways to configure the default parallel behavior for xUnit described <a href="https://xunit.github.io/docs/running-tests-in-parallel.html">here</a>.</p>
+ 
+<h2>Implement the step definitions and the calculator</h2>
+ 
+<p>As the specs imply, this is a kind of <a href="https://en.wikipedia.org/wiki/Reverse_Polish_notation">Reverse Polish notation</a> style calculator, where you have to enter the operands first and then select the operation to be performed. So the implementation will probably have a stack for the operands and some methods for the operators, like <code>Add()</code> or <code>Multiply()</code>. You can query back the result from the calculator. So this is a stateful class. You can look at the implementation <a href="https://github.com/gasparnagy/Sample_ParallelSpecFlowXUnit/blob/master/Calculator.Specs/Calculator.cs">here</a>. </p>
+ 
+<p>The step definitions are also pretty simple. They keep the calculator instance in an instance field and do the necessary calls and assertions.</p>
+ 
+<p><script src="./Running SpecFlow scenarios in parallel with xUnit v2_files/54b3fe009bcb4a63f68c.js(3).завантаження"></script><link rel="stylesheet" href="./Running SpecFlow scenarios in parallel with xUnit v2_files/gist-embed-fd43f22140a6ad2cc9d0aa1f169a01f3.css"></p><div id="gist31032422" class="gist">
+    <div class="gist-file">
+      <div class="gist-data">
+        <div class="js-gist-file-update-container js-task-list-container file-box">
+  <div id="file-calculatorsteps-cs" class="file ">
+    
+
+  <div itemprop="text" class="Box-body p-0 blob-wrapper data type-c  ">
+      
+<table class="highlight tab-size js-file-line-container" data-tab-size="8" data-paste-markdown-skip="">
+      <tbody><tr>
+        <td id="file-calculatorsteps-cs-L1" class="blob-num js-line-number" data-line-number="1"></td>
+        <td id="file-calculatorsteps-cs-LC1" class="blob-code blob-code-inner js-file-line">[<span class="pl-en">Binding</span>]</td>
+      </tr>
+      <tr>
+        <td id="file-calculatorsteps-cs-L2" class="blob-num js-line-number" data-line-number="2"></td>
+        <td id="file-calculatorsteps-cs-LC2" class="blob-code blob-code-inner js-file-line"><span class="pl-k">public</span> <span class="pl-k">class</span> <span class="pl-en">CalculatorSteps</span></td>
+      </tr>
+      <tr>
+        <td id="file-calculatorsteps-cs-L3" class="blob-num js-line-number" data-line-number="3"></td>
+        <td id="file-calculatorsteps-cs-LC3" class="blob-code blob-code-inner js-file-line">{</td>
+      </tr>
+      <tr>
+        <td id="file-calculatorsteps-cs-L4" class="blob-num js-line-number" data-line-number="4"></td>
+        <td id="file-calculatorsteps-cs-LC4" class="blob-code blob-code-inner js-file-line">  <span class="pl-k">private</span> <span class="pl-k">readonly</span> <span class="pl-en">Calculator</span> <span class="pl-smi">calculator</span> <span class="pl-k">=</span> <span class="pl-k">new</span> <span class="pl-en">Calculator</span>();</td>
+      </tr>
+      <tr>
+        <td id="file-calculatorsteps-cs-L5" class="blob-num js-line-number" data-line-number="5"></td>
+        <td id="file-calculatorsteps-cs-LC5" class="blob-code blob-code-inner js-file-line">
+</td>
+      </tr>
+      <tr>
+        <td id="file-calculatorsteps-cs-L6" class="blob-num js-line-number" data-line-number="6"></td>
+        <td id="file-calculatorsteps-cs-LC6" class="blob-code blob-code-inner js-file-line">  [<span class="pl-en">Given</span>(<span class="pl-s"><span class="pl-pds">@"</span>I have entered (.*) into the calculator<span class="pl-pds">"</span></span>)]</td>
+      </tr>
+      <tr>
+        <td id="file-calculatorsteps-cs-L7" class="blob-num js-line-number" data-line-number="7"></td>
+        <td id="file-calculatorsteps-cs-LC7" class="blob-code blob-code-inner js-file-line">  <span class="pl-k">public</span> <span class="pl-k">void</span> <span class="pl-en">GivenIHaveEnteredIntoTheCalculator</span>(<span class="pl-k">int</span> <span class="pl-smi">operand</span>)</td>
+      </tr>
+      <tr>
+        <td id="file-calculatorsteps-cs-L8" class="blob-num js-line-number" data-line-number="8"></td>
+        <td id="file-calculatorsteps-cs-LC8" class="blob-code blob-code-inner js-file-line">  {</td>
+      </tr>
+      <tr>
+        <td id="file-calculatorsteps-cs-L9" class="blob-num js-line-number" data-line-number="9"></td>
+        <td id="file-calculatorsteps-cs-LC9" class="blob-code blob-code-inner js-file-line">      <span class="pl-smi">calculator</span>.<span class="pl-en">Enter</span>(<span class="pl-smi">operand</span>);</td>
+      </tr>
+      <tr>
+        <td id="file-calculatorsteps-cs-L10" class="blob-num js-line-number" data-line-number="10"></td>
+        <td id="file-calculatorsteps-cs-LC10" class="blob-code blob-code-inner js-file-line">  }</td>
+      </tr>
+      <tr>
+        <td id="file-calculatorsteps-cs-L11" class="blob-num js-line-number" data-line-number="11"></td>
+        <td id="file-calculatorsteps-cs-LC11" class="blob-code blob-code-inner js-file-line">  </td>
+      </tr>
+      <tr>
+        <td id="file-calculatorsteps-cs-L12" class="blob-num js-line-number" data-line-number="12"></td>
+        <td id="file-calculatorsteps-cs-LC12" class="blob-code blob-code-inner js-file-line">  [<span class="pl-en">When</span>(<span class="pl-s"><span class="pl-pds">@"</span>I press add<span class="pl-pds">"</span></span>)]</td>
+      </tr>
+      <tr>
+        <td id="file-calculatorsteps-cs-L13" class="blob-num js-line-number" data-line-number="13"></td>
+        <td id="file-calculatorsteps-cs-LC13" class="blob-code blob-code-inner js-file-line">  <span class="pl-k">public</span> <span class="pl-k">void</span> <span class="pl-en">WhenIPressAdd</span>()</td>
+      </tr>
+      <tr>
+        <td id="file-calculatorsteps-cs-L14" class="blob-num js-line-number" data-line-number="14"></td>
+        <td id="file-calculatorsteps-cs-LC14" class="blob-code blob-code-inner js-file-line">  {</td>
+      </tr>
+      <tr>
+        <td id="file-calculatorsteps-cs-L15" class="blob-num js-line-number" data-line-number="15"></td>
+        <td id="file-calculatorsteps-cs-LC15" class="blob-code blob-code-inner js-file-line">    <span class="pl-smi">calculator</span>.<span class="pl-en">Add</span>();</td>
+      </tr>
+      <tr>
+        <td id="file-calculatorsteps-cs-L16" class="blob-num js-line-number" data-line-number="16"></td>
+        <td id="file-calculatorsteps-cs-LC16" class="blob-code blob-code-inner js-file-line">  }</td>
+      </tr>
+      <tr>
+        <td id="file-calculatorsteps-cs-L17" class="blob-num js-line-number" data-line-number="17"></td>
+        <td id="file-calculatorsteps-cs-LC17" class="blob-code blob-code-inner js-file-line">
+</td>
+      </tr>
+      <tr>
+        <td id="file-calculatorsteps-cs-L18" class="blob-num js-line-number" data-line-number="18"></td>
+        <td id="file-calculatorsteps-cs-LC18" class="blob-code blob-code-inner js-file-line">  <span class="pl-c"><span class="pl-c">//</span>...</span></td>
+      </tr>
+      <tr>
+        <td id="file-calculatorsteps-cs-L19" class="blob-num js-line-number" data-line-number="19"></td>
+        <td id="file-calculatorsteps-cs-LC19" class="blob-code blob-code-inner js-file-line">
+</td>
+      </tr>
+      <tr>
+        <td id="file-calculatorsteps-cs-L20" class="blob-num js-line-number" data-line-number="20"></td>
+        <td id="file-calculatorsteps-cs-LC20" class="blob-code blob-code-inner js-file-line">  [<span class="pl-en">Then</span>(<span class="pl-s"><span class="pl-pds">@"</span>the result should be (.*) on the screen<span class="pl-pds">"</span></span>)]</td>
+      </tr>
+      <tr>
+        <td id="file-calculatorsteps-cs-L21" class="blob-num js-line-number" data-line-number="21"></td>
+        <td id="file-calculatorsteps-cs-LC21" class="blob-code blob-code-inner js-file-line">  <span class="pl-k">public</span> <span class="pl-k">void</span> <span class="pl-en">ThenTheResultShouldBeOnTheScreen</span>(<span class="pl-k">int</span> <span class="pl-smi">expectedResult</span>)</td>
+      </tr>
+      <tr>
+        <td id="file-calculatorsteps-cs-L22" class="blob-num js-line-number" data-line-number="22"></td>
+        <td id="file-calculatorsteps-cs-LC22" class="blob-code blob-code-inner js-file-line">  {</td>
+      </tr>
+      <tr>
+        <td id="file-calculatorsteps-cs-L23" class="blob-num js-line-number" data-line-number="23"></td>
+        <td id="file-calculatorsteps-cs-LC23" class="blob-code blob-code-inner js-file-line">    <span class="pl-smi">Assert</span>.<span class="pl-en">Equal</span>(<span class="pl-smi">expectedResult</span>, <span class="pl-smi">calculator</span>.<span class="pl-smi">Result</span>);</td>
+      </tr>
+      <tr>
+        <td id="file-calculatorsteps-cs-L24" class="blob-num js-line-number" data-line-number="24"></td>
+        <td id="file-calculatorsteps-cs-LC24" class="blob-code blob-code-inner js-file-line">  }</td>
+      </tr>
+      <tr>
+        <td id="file-calculatorsteps-cs-L25" class="blob-num js-line-number" data-line-number="25"></td>
+        <td id="file-calculatorsteps-cs-LC25" class="blob-code blob-code-inner js-file-line">}</td>
+      </tr>
+</tbody></table>
+
+
+  </div>
+
+  </div>
+</div>
+
+      </div>
+      <div class="gist-meta">
+        <a href="https://gist.github.com/gasparnagy/54b3fe009bcb4a63f68c/raw/9dd70fa1454c076917e32a22d9183ed5993d27d4/CalculatorSteps.cs" style="float:right">view raw</a>
+        <a href="https://gist.github.com/gasparnagy/54b3fe009bcb4a63f68c#file-calculatorsteps-cs">CalculatorSteps.cs</a>
+        hosted with ❤ by <a href="https://github.com/">GitHub</a>
+      </div>
+    </div>
+</div>
+<p></p>
+ 
+<h2>Ready to run</h2>
+ 
+<p>OK. So let’s run our scenarios. (I’m sure you have already done this during the implementation process.) They pass! Hurray!</p>
+ 
+<p>But wait! Are they running really in parallel? Sometimes it is not so easy to see that. SpecFlow provides some help. If the tests run in parallel, all trace messages are prefixed with the thread id. If you run the tests single-threaded, there is no such prefix. So let’s go back to the console and check. For me it looks like this:</p>
+ 
+<p><img title="console_parallel" style="border-left-width: 0px; border-right-width: 0px; background-image: none; border-bottom-width: 0px; padding-top: 0px; padding-left: 0px; display: inline; padding-right: 0px; border-top-width: 0px" border="0" alt="console_parallel" src="./Running SpecFlow scenarios in parallel with xUnit v2_files/console_parallel.png" width="544" height="371"></p>
+ 
+<p>As you can see, the execution started with a multiplication scenario on thread #13 and an addition on thread #8. If you run the same test, but now with the <code>-parallel none</code> option, you would not see the thread numbers in the output.</p>
+ 
+<h2>That evil static state</h2>
+ 
+<p>The <a href="https://msdn.microsoft.com/en-us/library/2bh4z9hs%28v=vs.110%29.aspx">.NET AppDomains</a> provide memory boundary. All static states (objects stored in static fields) are visible to any other code within the same AppDomain. So if you run the tests in parallel within the same AppDomain, as we are doing now, all shared fields can be accessed from all test threads, so they are potentially dangerous. Of course, static state is also a potential problem in the real application, but during the normal execution of the application, there is only one application instance running in the AppDomain. So using static fields for caching – if thread-safe – can be a valid usage. During testing however, every test represents an instance of the application that we expect to run in isolation. So even innocent caches might cause troubles.</p>
+ 
+<p><img title="image" style="border-left-width: 0px; border-right-width: 0px; background-image: none; border-bottom-width: 0px; float: right; padding-top: 0px; padding-left: 0px; display: inline; padding-right: 0px; border-top-width: 0px" border="0" alt="image" src="./Running SpecFlow scenarios in parallel with xUnit v2_files/image.png" width="354" align="right" height="116">We can simply simulate this problem by changing the step definition class field (holding the current calculator instance) to static. </p>
+ 
+<p>You can get the same effect (or maybe even worse) if you change the stack of operands inside the calculator to static.</p>
+ 
+<p>If you run the tests now (without the <code>-parallel none</code> option), you will see strange errors, like this.</p>
+ 
+<p><img title="image" style="border-left-width: 0px; border-right-width: 0px; background-image: none; border-bottom-width: 0px; padding-top: 0px; padding-left: 0px; display: inline; padding-right: 0px; border-top-width: 0px" border="0" alt="image" src="./Running SpecFlow scenarios in parallel with xUnit v2_files/image-1.png" width="544" height="177"></p>
+ 
+<p>Although static fields are usually problematic points of parallelization, they just represent the problem of shared state. Unfortunately you can also have shared state in a database too. That is much harder to fix. </p>
+ 
+<p>Also don’t forget that even if you don’t use static fields, maybe one of the libraries you use (e.g. an ORM) does use static caches… These problems are typically hard to find and fix.</p>
+ 
+<h2>The Scenario Context</h2>
+ 
+<p>Another problem you might face when switching to parallel execution is the access to the <code>ScenarioContext.Current</code> static property. Currently SpecFlow throws an exception if you try to access this property from a parallel testing environment.</p>
+ 
+<p>Let’s change the step definitions to use ScenarioContext.Current to store the calculator. (You can see the complete solution for this in the <a href="https://github.com/gasparnagy/Sample_ParallelSpecFlowXUnit/tree/scenariocontext">“scenariocontext” branch</a> of the GitHub repo.)</p>
+ 
+<p><script src="./Running SpecFlow scenarios in parallel with xUnit v2_files/54b3fe009bcb4a63f68c.js(4).завантаження"></script><link rel="stylesheet" href="./Running SpecFlow scenarios in parallel with xUnit v2_files/gist-embed-fd43f22140a6ad2cc9d0aa1f169a01f3.css"></p><div id="gist31032422" class="gist">
+    <div class="gist-file">
+      <div class="gist-data">
+        <div class="js-gist-file-update-container js-task-list-container file-box">
+  <div id="file-stepswithscenariocontext-cs" class="file ">
+    
+
+  <div itemprop="text" class="Box-body p-0 blob-wrapper data type-c  ">
+      
+<table class="highlight tab-size js-file-line-container" data-tab-size="8" data-paste-markdown-skip="">
+      <tbody><tr>
+        <td id="file-stepswithscenariocontext-cs-L1" class="blob-num js-line-number" data-line-number="1"></td>
+        <td id="file-stepswithscenariocontext-cs-LC1" class="blob-code blob-code-inner js-file-line">[<span class="pl-en">Given</span>(<span class="pl-s"><span class="pl-pds">@"</span>I have entered (.*) into the calculator<span class="pl-pds">"</span></span>)]</td>
+      </tr>
+      <tr>
+        <td id="file-stepswithscenariocontext-cs-L2" class="blob-num js-line-number" data-line-number="2"></td>
+        <td id="file-stepswithscenariocontext-cs-LC2" class="blob-code blob-code-inner js-file-line"><span class="pl-k">public</span> <span class="pl-k">void</span> <span class="pl-en">GivenIHaveEnteredIntoTheCalculator</span>(<span class="pl-k">int</span> <span class="pl-smi">operand</span>)</td>
+      </tr>
+      <tr>
+        <td id="file-stepswithscenariocontext-cs-L3" class="blob-num js-line-number" data-line-number="3"></td>
+        <td id="file-stepswithscenariocontext-cs-LC3" class="blob-code blob-code-inner js-file-line">{</td>
+      </tr>
+      <tr>
+        <td id="file-stepswithscenariocontext-cs-L4" class="blob-num js-line-number" data-line-number="4"></td>
+        <td id="file-stepswithscenariocontext-cs-LC4" class="blob-code blob-code-inner js-file-line">  ((<span class="pl-en">Calculator</span>)<span class="pl-smi">ScenarioContext</span>.<span class="pl-smi">Current</span>[<span class="pl-s"><span class="pl-pds">"</span>calc<span class="pl-pds">"</span></span>]).<span class="pl-en">Enter</span>(<span class="pl-smi">operand</span>);</td>
+      </tr>
+      <tr>
+        <td id="file-stepswithscenariocontext-cs-L5" class="blob-num js-line-number" data-line-number="5"></td>
+        <td id="file-stepswithscenariocontext-cs-LC5" class="blob-code blob-code-inner js-file-line">}</td>
+      </tr>
+</tbody></table>
+
+
+  </div>
+
+  </div>
+</div>
+
+      </div>
+      <div class="gist-meta">
+        <a href="https://gist.github.com/gasparnagy/54b3fe009bcb4a63f68c/raw/9dd70fa1454c076917e32a22d9183ed5993d27d4/StepsWithScenarioContext.cs" style="float:right">view raw</a>
+        <a href="https://gist.github.com/gasparnagy/54b3fe009bcb4a63f68c#file-stepswithscenariocontext-cs">StepsWithScenarioContext.cs</a>
+        hosted with ❤ by <a href="https://github.com/">GitHub</a>
+      </div>
+    </div>
+</div>
+<p></p>
+ 
+<p>If you run the tests in parallel with this, you will get the exception I’ve mentioned.</p>
+ 
+<p><img title="console_parallel_scenariocontext_error" style="border-left-width: 0px; border-right-width: 0px; background-image: none; border-bottom-width: 0px; padding-top: 0px; padding-left: 0px; display: inline; padding-right: 0px; border-top-width: 0px" border="0" alt="console_parallel_scenariocontext_error" src="./Running SpecFlow scenarios in parallel with xUnit v2_files/console_parallel_scenariocontext_error.png" width="544" height="164"></p>
+ 
+<p>In order to solve this problem – if you really need to use the scenario context – you have to get the current context instance using <a href="http://www.specflow.org/documentation/Context-Injection/">context injection</a>. Sounds complicated but it it easy: just declare a ScenarioContext parameter for the constructor of your step definition class and save it to an instance field. You can use the instance field in your step definitions, and these will also work with parallel execution. (See the <a href="https://github.com/gasparnagy/Sample_ParallelSpecFlowXUnit/tree/scenariocontext-parallel"><code>scenariocontext-parallel</code> branch</a> for a complete solution.)</p>
+ 
+<p><script src="./Running SpecFlow scenarios in parallel with xUnit v2_files/54b3fe009bcb4a63f68c.js(5).завантаження"></script><link rel="stylesheet" href="./Running SpecFlow scenarios in parallel with xUnit v2_files/gist-embed-fd43f22140a6ad2cc9d0aa1f169a01f3.css"></p><div id="gist31032422" class="gist">
+    <div class="gist-file">
+      <div class="gist-data">
+        <div class="js-gist-file-update-container js-task-list-container file-box">
+  <div id="file-stepswithscenariocontextparallel-cs" class="file ">
+    
+
+  <div itemprop="text" class="Box-body p-0 blob-wrapper data type-c  ">
+      
+<table class="highlight tab-size js-file-line-container" data-tab-size="8" data-paste-markdown-skip="">
+      <tbody><tr>
+        <td id="file-stepswithscenariocontextparallel-cs-L1" class="blob-num js-line-number" data-line-number="1"></td>
+        <td id="file-stepswithscenariocontextparallel-cs-LC1" class="blob-code blob-code-inner js-file-line">[<span class="pl-en">Binding</span>]</td>
+      </tr>
+      <tr>
+        <td id="file-stepswithscenariocontextparallel-cs-L2" class="blob-num js-line-number" data-line-number="2"></td>
+        <td id="file-stepswithscenariocontextparallel-cs-LC2" class="blob-code blob-code-inner js-file-line"><span class="pl-k">public</span> <span class="pl-k">class</span> <span class="pl-en">CalculatorSteps</span></td>
+      </tr>
+      <tr>
+        <td id="file-stepswithscenariocontextparallel-cs-L3" class="blob-num js-line-number" data-line-number="3"></td>
+        <td id="file-stepswithscenariocontextparallel-cs-LC3" class="blob-code blob-code-inner js-file-line">{</td>
+      </tr>
+      <tr>
+        <td id="file-stepswithscenariocontextparallel-cs-L4" class="blob-num js-line-number" data-line-number="4"></td>
+        <td id="file-stepswithscenariocontextparallel-cs-LC4" class="blob-code blob-code-inner js-file-line">  <span class="pl-k">private</span> <span class="pl-k">readonly</span> <span class="pl-en">ScenarioContext</span> <span class="pl-smi">scenarioContext</span>;</td>
+      </tr>
+      <tr>
+        <td id="file-stepswithscenariocontextparallel-cs-L5" class="blob-num js-line-number" data-line-number="5"></td>
+        <td id="file-stepswithscenariocontextparallel-cs-LC5" class="blob-code blob-code-inner js-file-line">
+</td>
+      </tr>
+      <tr>
+        <td id="file-stepswithscenariocontextparallel-cs-L6" class="blob-num js-line-number" data-line-number="6"></td>
+        <td id="file-stepswithscenariocontextparallel-cs-LC6" class="blob-code blob-code-inner js-file-line">  <span class="pl-k">public</span> <span class="pl-en">CalculatorSteps</span>(<span class="pl-en">ScenarioContext</span> <span class="pl-smi">scenarioContext</span>)</td>
+      </tr>
+      <tr>
+        <td id="file-stepswithscenariocontextparallel-cs-L7" class="blob-num js-line-number" data-line-number="7"></td>
+        <td id="file-stepswithscenariocontextparallel-cs-LC7" class="blob-code blob-code-inner js-file-line">  {</td>
+      </tr>
+      <tr>
+        <td id="file-stepswithscenariocontextparallel-cs-L8" class="blob-num js-line-number" data-line-number="8"></td>
+        <td id="file-stepswithscenariocontextparallel-cs-LC8" class="blob-code blob-code-inner js-file-line">    <span class="pl-k">this</span>.<span class="pl-smi">scenarioContext</span> <span class="pl-k">=</span> <span class="pl-smi">scenarioContext</span>;</td>
+      </tr>
+      <tr>
+        <td id="file-stepswithscenariocontextparallel-cs-L9" class="blob-num js-line-number" data-line-number="9"></td>
+        <td id="file-stepswithscenariocontextparallel-cs-LC9" class="blob-code blob-code-inner js-file-line">  }</td>
+      </tr>
+      <tr>
+        <td id="file-stepswithscenariocontextparallel-cs-L10" class="blob-num js-line-number" data-line-number="10"></td>
+        <td id="file-stepswithscenariocontextparallel-cs-LC10" class="blob-code blob-code-inner js-file-line">
+</td>
+      </tr>
+      <tr>
+        <td id="file-stepswithscenariocontextparallel-cs-L11" class="blob-num js-line-number" data-line-number="11"></td>
+        <td id="file-stepswithscenariocontextparallel-cs-LC11" class="blob-code blob-code-inner js-file-line">  [<span class="pl-en">Given</span>(<span class="pl-s"><span class="pl-pds">@"</span>I have entered (.*) into the calculator<span class="pl-pds">"</span></span>)]</td>
+      </tr>
+      <tr>
+        <td id="file-stepswithscenariocontextparallel-cs-L12" class="blob-num js-line-number" data-line-number="12"></td>
+        <td id="file-stepswithscenariocontextparallel-cs-LC12" class="blob-code blob-code-inner js-file-line">  <span class="pl-k">public</span> <span class="pl-k">void</span> <span class="pl-en">GivenIHaveEnteredIntoTheCalculator</span>(<span class="pl-k">int</span> <span class="pl-smi">operand</span>)</td>
+      </tr>
+      <tr>
+        <td id="file-stepswithscenariocontextparallel-cs-L13" class="blob-num js-line-number" data-line-number="13"></td>
+        <td id="file-stepswithscenariocontextparallel-cs-LC13" class="blob-code blob-code-inner js-file-line">  {</td>
+      </tr>
+      <tr>
+        <td id="file-stepswithscenariocontextparallel-cs-L14" class="blob-num js-line-number" data-line-number="14"></td>
+        <td id="file-stepswithscenariocontextparallel-cs-LC14" class="blob-code blob-code-inner js-file-line">    ((<span class="pl-en">Calculator</span>)<span class="pl-smi">scenarioContext</span>[<span class="pl-s"><span class="pl-pds">"</span>calc<span class="pl-pds">"</span></span>]).<span class="pl-en">Enter</span>(<span class="pl-smi">operand</span>);</td>
+      </tr>
+      <tr>
+        <td id="file-stepswithscenariocontextparallel-cs-L15" class="blob-num js-line-number" data-line-number="15"></td>
+        <td id="file-stepswithscenariocontextparallel-cs-LC15" class="blob-code blob-code-inner js-file-line">  }</td>
+      </tr>
+      <tr>
+        <td id="file-stepswithscenariocontextparallel-cs-L16" class="blob-num js-line-number" data-line-number="16"></td>
+        <td id="file-stepswithscenariocontextparallel-cs-LC16" class="blob-code blob-code-inner js-file-line">  <span class="pl-c"><span class="pl-c">//</span>...</span></td>
+      </tr>
+      <tr>
+        <td id="file-stepswithscenariocontextparallel-cs-L17" class="blob-num js-line-number" data-line-number="17"></td>
+        <td id="file-stepswithscenariocontextparallel-cs-LC17" class="blob-code blob-code-inner js-file-line">}</td>
+      </tr>
+</tbody></table>
+
+
+  </div>
+
+  </div>
+</div>
+
+      </div>
+      <div class="gist-meta">
+        <a href="https://gist.github.com/gasparnagy/54b3fe009bcb4a63f68c/raw/9dd70fa1454c076917e32a22d9183ed5993d27d4/StepsWithScenarioContextParallel.cs" style="float:right">view raw</a>
+        <a href="https://gist.github.com/gasparnagy/54b3fe009bcb4a63f68c#file-stepswithscenariocontextparallel-cs">StepsWithScenarioContextParallel.cs</a>
+        hosted with ❤ by <a href="https://github.com/">GitHub</a>
+      </div>
+    </div>
+</div>
+<p></p>
+
+ 
+<p>If you re-run the tests, you can see that they run again without errors also with parallel execution.</p>
+ 
+<h2>Next Steps</h2>
+ 
+<p>You can use this simple project for doing further experiments. You can add more feature files to increase the degree of parallelization. You can <a href="https://xunit.github.io/docs/running-tests-in-parallel.html">modify the parallel behavior of xunit</a> and you can introduce further complexity as well, like logging the entered numbers into a (shared) file or to a shared database. </p>
+ 
+<p>Once you have seen how the typical problems can be identified and solved, you can try to turn your project into a parallel testable state. </p>					</div><!-- END .entry-content -->
+
+				<div class="clear"></div>
+		<footer class="entry-meta">
+<p>&nbsp;</p>
+<p>—</p>
+<p>You can learn and practice this and other tips about SpecFlow on my <a href="http://www.specsolutions.eu/courses/specflow">SpecFlow course</a> (official SpecFlow course). See the upcoming courses or <a href="http://www.specsolutions.eu/services/trainings">book a private in-house course</a>!</p>
+<ul>
+<li><a href="https://www.specsolutions.eu/courses/bddvitals/202009bddvitalslondon/">BDD Vitals course, 21 September 2020, instructor-led, online</a></li><li><a href="https://www.specsolutions.eu/courses/specflow/202009specflowlondon/">BDD with SpecFlow course for devs &amp; testers with Gáspár Nagy, 21-23 September 2020, instructor-led, online</a></li></ul>
+			<p>
+								Categories: <a href="http://gasparnagy.com/category/uncategorized/" rel="category tag">Uncategorized</a> | 
+													Tags: <a href="http://gasparnagy.com/tag/bdd/" rel="tag">BDD</a>, <a href="http://gasparnagy.com/tag/bdd-addict/" rel="tag">bdd addict</a>, <a href="http://gasparnagy.com/tag/parallel/" rel="tag">parallel</a>, <a href="http://gasparnagy.com/tag/specflow/" rel="tag">SpecFlow</a>, <a href="http://gasparnagy.com/tag/specflow-v2/" rel="tag">SpecFlow v2</a>, <a href="http://gasparnagy.com/tag/xunit/" rel="tag">xUnit</a> | 
+					    
+                Share on: 
+				
+                <!-- get clean titles -->
+                                
+    	        <!--Twitter -->
+        	    <a href="http://twitter.com/home?status=Currently%20reading:Running+SpecFlow+scenarios+in+parallel+with+xUnit+v2%20http%3A%2F%2Fgasparnagy.com%2F2016%2F02%2Frunning-specflow-scenarios-in-parallel-with-xunit-v2%2F" target="_blank"> Twitter</a>, 
+            	<!--Facebook-->
+	            <a href="https://www.facebook.com/share.php?u=http%3A%2F%2Fgasparnagy.com%2F2016%2F02%2Frunning-specflow-scenarios-in-parallel-with-xunit-v2%2F&amp;t=Running+SpecFlow+scenarios+in+parallel+with+xUnit+v2" target="_blank">Facebook</a>, 
+    	        <!--Delicious -->
+        	    <a href="http://del.icio.us/post?v=4;url=http%3A%2F%2Fgasparnagy.com%2F2016%2F02%2Frunning-specflow-scenarios-in-parallel-with-xunit-v2%2F" target="_blank">Delicious</a> |
+                <!--Permalink-->
+       			<a href="http://gasparnagy.com/2016/02/running-specflow-scenarios-in-parallel-with-xunit-v2/">Permalink </a>
+				<!--Admin Edit-->
+				 
+            </p>					                 
+	</footer>
+</article>
+			<div id="comments">
+	
+			<p class="nocomments">Comments are closed.</p>
+	 
+
+	
+</div><!-- END #comments -->
+
+		
+   					
+
+	</div><!-- END #content -->
+			<div id="secondary" class="widget-area" role="complementary">
+			<aside id="widget-linkedin" class="widget widget_text">			<div class="textwidget"><script src="./Running SpecFlow scenarios in parallel with xUnit v2_files/in.js.завантаження" type="text/javascript"></script>
+<span class="IN-widget" data-lnkd-debug="&lt;script type=&quot;IN/MemberProfile+init&quot; data-id=&quot;http://www.linkedin.com/pub/gaspar-nagy/23/713/641&quot; data-format=&quot;hover&quot; data-text=&quot;Gaspar Nagy&quot; data-related=&quot;false&quot;&gt;&lt;/script&gt;" style="display: inline-block; line-height: 1; vertical-align: bottom; padding: 0px; margin: 0px; text-indent: 0px;"><span style="padding: 0px !important; margin: 0px !important; text-indent: 0px !important; display: inline-block !important; vertical-align: bottom !important;"><span id="li_ui_li_gen_2eb3af18-75ae-48ed-bd57-389404770cc3" class="li-connect-widget"><a id="li_ui_li_gen_2eb3af18-75ae-48ed-bd57-389404770cc3-link" class="li-connect-link" href="javascript:void(0);"><span id="li_ui_li_gen_2eb3af18-75ae-48ed-bd57-389404770cc3-mark" class="li-connect-mark"></span></a> <a class="li-connect-link" href="javascript:void(0);"><span id="li_ui_li_gen_2eb3af18-75ae-48ed-bd57-389404770cc3-text" class="li-connect-text">Gaspar Nagy</span></a></span></span></span>
+</div>
+		</aside><aside id="search-2" class="widget widget_search"><div class="search">
+	<form id="search_form" action="http://gasparnagy.com/" method="get">
+		<input id="s" type="text" value="" name="s">
+		<input id="search_submit" type="submit" value="search" name="SearchSubmit">
+	</form>
+</div></aside><aside id="linkcat-64" class="widget widget_links"><h3 class="widget-title">Upcoming Courses</h3>
+	<ul class="xoxo blogroll">
+<li><a href="https://www.specsolutions.eu/courses/bddvitals/202009bddvitalslondon/" title="Eager to learn wiriting better BDD scenarios? Join the remote course in your (home) office!" target="_blank">BDD Vitals course, 21 September 2020, instructor-led, online</a></li>
+<li><a href="https://www.specsolutions.eu/courses/specflow/202009specflowlondon/" title="Official remote course with the creator of SpecFlow on implementing Specification by Example" target="_blank">BDD with SpecFlow course for devs &amp; testers with Gáspár Nagy, 21-23 September 2020, instructor-led, online</a></li>
+
+	</ul>
+</aside>
+<aside id="media_image-3" class="widget widget_media_image"><h3 class="widget-title">BDD Addict Newsletter</h3><a href="http://specsolutions.eu/bddaddict/"><img class="image aligncenter" src="./Running SpecFlow scenarios in parallel with xUnit v2_files/bddaddict-newsletter-250x200.png" alt="" width="250" height="200"></a></aside><aside id="tag_cloud-2" class="widget widget_tag_cloud"><h3 class="widget-title">Tags</h3><div class="tagcloud"><a href="http://gasparnagy.com/tag/net/" class="tag-cloud-link tag-link-80 tag-link-position-1" style="font-size: 11.547945205479pt;" aria-label=".NET (6 items)">.NET</a>
+<a href="http://gasparnagy.com/tag/net-core/" class="tag-cloud-link tag-link-83 tag-link-position-2" style="font-size: 9.1506849315068pt;" aria-label=".NET Core (3 items)">.NET Core</a>
+<a href="http://gasparnagy.com/tag/net-framework/" class="tag-cloud-link tag-link-12 tag-link-position-3" style="font-size: 9.1506849315068pt;" aria-label=".NET Framework (3 items)">.NET Framework</a>
+<a href="http://gasparnagy.com/tag/agile/" class="tag-cloud-link tag-link-54 tag-link-position-4" style="font-size: 13.753424657534pt;" aria-label="Agile (11 items)">Agile</a>
+<a href="http://gasparnagy.com/tag/agile-testing/" class="tag-cloud-link tag-link-88 tag-link-position-5" style="font-size: 13.369863013699pt;" aria-label="agile testing (10 items)">agile testing</a>
+<a href="http://gasparnagy.com/tag/asp-net/" class="tag-cloud-link tag-link-35 tag-link-position-6" style="font-size: 9.1506849315068pt;" aria-label="ASP.NET (3 items)">ASP.NET</a>
+<a href="http://gasparnagy.com/tag/automation/" class="tag-cloud-link tag-link-85 tag-link-position-7" style="font-size: 10.876712328767pt;" aria-label="automation (5 items)">automation</a>
+<a href="http://gasparnagy.com/tag/azure-devops/" class="tag-cloud-link tag-link-97 tag-link-position-8" style="font-size: 9.1506849315068pt;" aria-label="Azure DevOps (3 items)">Azure DevOps</a>
+<a href="http://gasparnagy.com/tag/bdd/" class="tag-cloud-link tag-link-3 tag-link-position-9" style="font-size: 21.616438356164pt;" aria-label="BDD (78 items)">BDD</a>
+<a href="http://gasparnagy.com/tag/bdd-addict/" class="tag-cloud-link tag-link-66 tag-link-position-10" style="font-size: 19.698630136986pt;" aria-label="bdd addict (49 items)">bdd addict</a>
+<a href="http://gasparnagy.com/tag/bdd-scenarios/" class="tag-cloud-link tag-link-86 tag-link-position-11" style="font-size: 10.876712328767pt;" aria-label="bdd scenarios (5 items)">bdd scenarios</a>
+<a href="http://gasparnagy.com/tag/course/" class="tag-cloud-link tag-link-9 tag-link-position-12" style="font-size: 10.109589041096pt;" aria-label="Course (4 items)">Course</a>
+<a href="http://gasparnagy.com/tag/cucumber/" class="tag-cloud-link tag-link-73 tag-link-position-13" style="font-size: 18.835616438356pt;" aria-label="Cucumber (40 items)">Cucumber</a>
+<a href="http://gasparnagy.com/tag/developer/" class="tag-cloud-link tag-link-11 tag-link-position-14" style="font-size: 12.986301369863pt;" aria-label="developer (9 items)">developer</a>
+<a href="http://gasparnagy.com/tag/deveroom/" class="tag-cloud-link tag-link-100 tag-link-position-15" style="font-size: 10.109589041096pt;" aria-label="Deveroom (4 items)">Deveroom</a>
+<a href="http://gasparnagy.com/tag/discovery/" class="tag-cloud-link tag-link-87 tag-link-position-16" style="font-size: 11.547945205479pt;" aria-label="discovery (6 items)">discovery</a>
+<a href="http://gasparnagy.com/tag/example-mapping/" class="tag-cloud-link tag-link-92 tag-link-position-17" style="font-size: 12.027397260274pt;" aria-label="Example Mapping (7 items)">Example Mapping</a>
+<a href="http://gasparnagy.com/tag/gherkin/" class="tag-cloud-link tag-link-15 tag-link-position-18" style="font-size: 13.369863013699pt;" aria-label="Gherkin (10 items)">Gherkin</a>
+<a href="http://gasparnagy.com/tag/git/" class="tag-cloud-link tag-link-51 tag-link-position-19" style="font-size: 8pt;" aria-label="git (2 items)">git</a>
+<a href="http://gasparnagy.com/tag/iis/" class="tag-cloud-link tag-link-27 tag-link-position-20" style="font-size: 8pt;" aria-label="IIS (2 items)">IIS</a>
+<a href="http://gasparnagy.com/tag/integration-testing/" class="tag-cloud-link tag-link-56 tag-link-position-21" style="font-size: 10.109589041096pt;" aria-label="Integration Testing (4 items)">Integration Testing</a>
+<a href="http://gasparnagy.com/tag/mtm/" class="tag-cloud-link tag-link-70 tag-link-position-22" style="font-size: 9.1506849315068pt;" aria-label="MTM (3 items)">MTM</a>
+<a href="http://gasparnagy.com/tag/mvc/" class="tag-cloud-link tag-link-34 tag-link-position-23" style="font-size: 9.1506849315068pt;" aria-label="MVC (3 items)">MVC</a>
+<a href="http://gasparnagy.com/tag/newsletter/" class="tag-cloud-link tag-link-68 tag-link-position-24" style="font-size: 8pt;" aria-label="newsletter (2 items)">newsletter</a>
+<a href="http://gasparnagy.com/tag/parallel/" class="tag-cloud-link tag-link-67 tag-link-position-25" style="font-size: 8pt;" aria-label="parallel (2 items)">parallel</a>
+<a href="http://gasparnagy.com/tag/scenarios/" class="tag-cloud-link tag-link-95 tag-link-position-26" style="font-size: 10.876712328767pt;" aria-label="scenarios (5 items)">scenarios</a>
+<a href="http://gasparnagy.com/tag/security/" class="tag-cloud-link tag-link-32 tag-link-position-27" style="font-size: 8pt;" aria-label="Security (2 items)">Security</a>
+<a href="http://gasparnagy.com/tag/specflow/" class="tag-cloud-link tag-link-5 tag-link-position-28" style="font-size: 22pt;" aria-label="SpecFlow (86 items)">SpecFlow</a>
+<a href="http://gasparnagy.com/tag/specflow-tips/" class="tag-cloud-link tag-link-72 tag-link-position-29" style="font-size: 14.041095890411pt;" aria-label="SpecFlow Tips (12 items)">SpecFlow Tips</a>
+<a href="http://gasparnagy.com/tag/specflow-v2/" class="tag-cloud-link tag-link-71 tag-link-position-30" style="font-size: 11.547945205479pt;" aria-label="SpecFlow v2 (6 items)">SpecFlow v2</a>
+<a href="http://gasparnagy.com/tag/specrun/" class="tag-cloud-link tag-link-7 tag-link-position-31" style="font-size: 9.1506849315068pt;" aria-label="SpecRun (3 items)">SpecRun</a>
+<a href="http://gasparnagy.com/tag/specsync/" class="tag-cloud-link tag-link-81 tag-link-position-32" style="font-size: 10.109589041096pt;" aria-label="SpecSync (4 items)">SpecSync</a>
+<a href="http://gasparnagy.com/tag/tdd/" class="tag-cloud-link tag-link-25 tag-link-position-33" style="font-size: 11.547945205479pt;" aria-label="TDD (6 items)">TDD</a>
+<a href="http://gasparnagy.com/tag/test-automation/" class="tag-cloud-link tag-link-84 tag-link-position-34" style="font-size: 13.369863013699pt;" aria-label="test automation (10 items)">test automation</a>
+<a href="http://gasparnagy.com/tag/testing/" class="tag-cloud-link tag-link-93 tag-link-position-35" style="font-size: 9.1506849315068pt;" aria-label="testing (3 items)">testing</a>
+<a href="http://gasparnagy.com/tag/tfs/" class="tag-cloud-link tag-link-41 tag-link-position-36" style="font-size: 12.027397260274pt;" aria-label="TFS (7 items)">TFS</a>
+<a href="http://gasparnagy.com/tag/tools/" class="tag-cloud-link tag-link-8 tag-link-position-37" style="font-size: 12.027397260274pt;" aria-label="Tools (7 items)">Tools</a>
+<a href="http://gasparnagy.com/tag/unit-testing/" class="tag-cloud-link tag-link-23 tag-link-position-38" style="font-size: 10.109589041096pt;" aria-label="Unit Testing (4 items)">Unit Testing</a>
+<a href="http://gasparnagy.com/tag/user-story/" class="tag-cloud-link tag-link-55 tag-link-position-39" style="font-size: 8pt;" aria-label="User Story (2 items)">User Story</a>
+<a href="http://gasparnagy.com/tag/visual-studio-2010/" class="tag-cloud-link tag-link-14 tag-link-position-40" style="font-size: 9.1506849315068pt;" aria-label="Visual Studio 2010 (3 items)">Visual Studio 2010</a>
+<a href="http://gasparnagy.com/tag/visual-studio-2013/" class="tag-cloud-link tag-link-45 tag-link-position-41" style="font-size: 8pt;" aria-label="Visual Studio 2013 (2 items)">Visual Studio 2013</a>
+<a href="http://gasparnagy.com/tag/vsts/" class="tag-cloud-link tag-link-75 tag-link-position-42" style="font-size: 10.876712328767pt;" aria-label="VSTS (5 items)">VSTS</a>
+<a href="http://gasparnagy.com/tag/wcf/" class="tag-cloud-link tag-link-29 tag-link-position-43" style="font-size: 10.109589041096pt;" aria-label="WCF (4 items)">WCF</a>
+<a href="http://gasparnagy.com/tag/windows-7/" class="tag-cloud-link tag-link-28 tag-link-position-44" style="font-size: 8pt;" aria-label="Windows 7 (2 items)">Windows 7</a>
+<a href="http://gasparnagy.com/tag/xunit/" class="tag-cloud-link tag-link-69 tag-link-position-45" style="font-size: 8pt;" aria-label="xUnit (2 items)">xUnit</a></div>
+</aside>		<aside id="recent-posts-2" class="widget widget_recent_entries">		<h3 class="widget-title">Recent Posts</h3>		<ul>
+											<li>
+					<a href="http://gasparnagy.com/2020/07/bdd-addict-newsletter-may-april-2020-47/">BDD Addict Newsletter May-June 2020 (#47)</a>
+									</li>
+											<li>
+					<a href="http://gasparnagy.com/2020/04/bdd-addict-newsletter-march-april-2020/">BDD Addict Newsletter March-April 2020 (#46)</a>
+									</li>
+											<li>
+					<a href="http://gasparnagy.com/2020/04/things-i-have-learned-from-my-first-online-bdd-course/">Things I have learned from my first online BDD course</a>
+									</li>
+											<li>
+					<a href="http://gasparnagy.com/2020/03/bdd-addict-newsletter-february-2019-2/">BDD Addict Newsletter February 2020</a>
+									</li>
+											<li>
+					<a href="http://gasparnagy.com/2020/03/thoughts-on-the-specflow-acquisition/">Thoughts on the SpecFlow acquisition</a>
+									</li>
+					</ul>
+		</aside><aside id="twitter_timeline-2" class="widget widget_twitter_timeline"><iframe id="twitter-widget-0" scrolling="no" frameborder="0" allowtransparency="true" allowfullscreen="true" class="twitter-timeline twitter-timeline-rendered" style="position: absolute; visibility: hidden; display: block; width: 0px; height: 0px; padding: 0px; border: none;" src="./Running SpecFlow scenarios in parallel with xUnit v2_files/saved_resource.html"></iframe><a class="twitter-timeline twitter-timeline-error" data-width="288" data-height="400" data-theme="light" data-link-color="#f96e5b" data-border-color="#e8e8e8" data-lang="EN" data-partner="jetpack" data-widget-id="379535448705474560" href="https://twitter.com/379535448705474560" data-twitter-extracted-i1598011801203929055="true">My Tweets</a></aside>		</div><!-- END #secondary .widget-area-->
+	</div><!-- END #main -->
+</div><!-- END wrapper -->
+
+<!-- "The Link to www.pixxels.at is completely optional, but if you like the Theme I would appreciate it if you keep the credit link at the bottom."  -->
+
+	<footer id="colophon" class="clearfix">
+		<p>© by <a href="http://gasparnagy.com/" title="Gáspár Nagy on software" rel="home">Gáspár Nagy on software</a>, 2020 // proudly powered by <a href="http://wordpress.org/">WordPress</a> // Theme: neni by <a href="http://www.pixxels.at/">pixxels.at</a></p>
+		<a href="http://gasparnagy.com/2016/02/running-specflow-scenarios-in-parallel-with-xunit-v2/#page" class="top">Top</a>
+	</footer><!-- END #colophon -->
+	
+</div><!-- END #page -->
+<!--Start of Tawk.to Script (0.3.3)-->
+<script type="text/javascript">
+var Tawk_API=Tawk_API||{};
+var Tawk_LoadStart=new Date();
+(function(){
+var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+s1.async=true;
+s1.src='https://embed.tawk.to/58a414d2ff923c0ab42013e5/default';
+s1.charset='UTF-8';
+s1.setAttribute('crossorigin','*');
+s0.parentNode.insertBefore(s1,s0);
+})();
+</script>
+<!--End of Tawk.to Script (0.3.3)--><script type="text/javascript" src="./Running SpecFlow scenarios in parallel with xUnit v2_files/devicepx-jetpack.js.завантаження"></script>
+<script type="text/javascript" src="./Running SpecFlow scenarios in parallel with xUnit v2_files/twitter-timeline.min.js.завантаження"></script>
+<script type="text/javascript" src="./Running SpecFlow scenarios in parallel with xUnit v2_files/wp-embed.min.js.завантаження"></script>
+<script type="text/javascript" src="./Running SpecFlow scenarios in parallel with xUnit v2_files/e-202034.js.завантаження" async="async" defer="defer"></script>
+<script type="text/javascript">
+	_stq = window._stq || [];
+	_stq.push([ 'view', {v:'ext',j:'1:8.0',blog:'57938217',post:'702',tz:'1',srv:'gasparnagy.com'} ]);
+	_stq.push([ 'clickTrackerInit', '57938217', '702' ]);
+</script>
+
+
+
+<!--Generated by Endurance Page Cache--><img src="./Running SpecFlow scenarios in parallel with xUnit v2_files/g.gif" alt=":)" width="6" height="5" id="wpstats"><iframe scrolling="no" frameborder="0" allowtransparency="true" src="./Running SpecFlow scenarios in parallel with xUnit v2_files/widget_iframe.3c5aa8e2a38bbbee4b6d88e6846fc657.html" title="Twitter settings iframe" style="display: none;"></iframe><div id="kgM2xl9-1598011802187" class="" style="display: block !important;"><iframe id="nxkuuUY-1598011802188" src="./Running SpecFlow scenarios in parallel with xUnit v2_files/saved_resource(1).html" frameborder="0" scrolling="no" title="chat widget" class="" style="outline: none !important; visibility: visible !important; resize: none !important; box-shadow: none !important; overflow: visible !important; background: none transparent !important; opacity: 1 !important; top: auto !important; right: auto !important; bottom: auto !important; left: auto !important; position: static !important; border: 0px !important; min-height: auto !important; min-width: auto !important; max-height: none !important; max-width: none !important; padding: 0px !important; margin: 0px !important; transition-property: none !important; transform: none !important; width: 350px !important; z-index: 999999 !important; cursor: auto !important; float: none !important; border-radius: unset !important; pointer-events: auto !important; display: none !important; height: 120px !important;"></iframe><iframe id="L6nIq8l-1598011802189" src="./Running SpecFlow scenarios in parallel with xUnit v2_files/saved_resource(2).html" frameborder="0" scrolling="no" title="chat widget" class="" style="outline: none !important; visibility: visible !important; resize: none !important; box-shadow: none !important; overflow: visible !important; background: none transparent !important; opacity: 1 !important; position: fixed !important; border: 0px !important; padding: 0px !important; margin: 0px !important; transition-property: none !important; z-index: 1000001 !important; cursor: auto !important; float: none !important; pointer-events: auto !important; height: 40px !important; min-height: 40px !important; max-height: 40px !important; width: 160px !important; min-width: 160px !important; max-width: 160px !important; border-radius: 0px !important; transform: rotate(-90deg) translateZ(0px) !important; transform-origin: 49% center !important; right: -60px !important; left: auto !important; top: calc(50% - 20px) !important; bottom: auto !important; display: block !important;"></iframe><iframe id="F7WMpDK-1598011802189" src="./Running SpecFlow scenarios in parallel with xUnit v2_files/saved_resource(3).html" frameborder="0" scrolling="no" title="chat widget" class="" style="outline: none !important; visibility: visible !important; resize: none !important; box-shadow: none !important; overflow: visible !important; background: none transparent !important; opacity: 1 !important; position: fixed !important; border: 0px !important; padding: 0px !important; margin: 0px !important; transition-property: none !important; transform: none !important; display: none !important; z-index: 1000003 !important; cursor: auto !important; float: none !important; border-radius: unset !important; pointer-events: auto !important; right: 24px !important; top: calc(50% - 80px) !important; left: auto !important; bottom: auto !important; width: 21px !important; max-width: 21px !important; min-width: 21px !important; height: 21px !important; max-height: 21px !important; min-height: 21px !important;"></iframe><div class="" style="outline: none !important; visibility: visible !important; resize: none !important; box-shadow: none !important; overflow: visible !important; background: none transparent !important; opacity: 1 !important; top: 0px !important; right: auto !important; bottom: auto !important; left: 0px !important; position: absolute !important; border: 0px !important; min-height: auto !important; min-width: auto !important; max-height: none !important; max-width: none !important; padding: 0px !important; margin: 0px !important; transition-property: none !important; transform: none !important; width: 100% !important; height: 100% !important; display: none !important; z-index: 1000001 !important; cursor: move !important; float: left !important; border-radius: unset !important; pointer-events: auto !important;"></div><div id="LOteJjL-1598011802187" class="" style="outline: none !important; visibility: visible !important; resize: none !important; box-shadow: none !important; overflow: visible !important; background: none transparent !important; opacity: 1 !important; top: 0px !important; right: auto !important; bottom: auto !important; left: 0px !important; position: absolute !important; border: 0px !important; min-height: auto !important; min-width: auto !important; max-height: none !important; max-width: none !important; padding: 0px !important; margin: 0px !important; transition-property: none !important; transform: none !important; width: 6px !important; height: 100% !important; display: block !important; z-index: 999998 !important; cursor: w-resize !important; float: none !important; border-radius: unset !important; pointer-events: auto !important;"></div><div id="gcd02Gu-1598011802187" class="" style="outline: none !important; visibility: visible !important; resize: none !important; box-shadow: none !important; overflow: visible !important; background: none transparent !important; opacity: 1 !important; top: 0px !important; right: 0px !important; bottom: auto !important; left: auto !important; position: absolute !important; border: 0px !important; min-height: auto !important; min-width: auto !important; max-height: none !important; max-width: none !important; padding: 0px !important; margin: 0px !important; transition-property: none !important; transform: none !important; width: 6px !important; height: 100% !important; display: block !important; z-index: 999998 !important; cursor: e-resize !important; float: none !important; border-radius: unset !important; pointer-events: auto !important;"></div><div id="rgErNC5-1598011802187" class="" style="outline: none !important; visibility: visible !important; resize: none !important; box-shadow: none !important; overflow: visible !important; background: none transparent !important; opacity: 1 !important; top: 0px !important; right: 0px !important; bottom: auto !important; left: auto !important; position: absolute !important; border: 0px !important; min-height: auto !important; min-width: auto !important; max-height: none !important; max-width: none !important; padding: 0px !important; margin: 0px !important; transition-property: none !important; transform: none !important; width: 100% !important; height: 6px !important; display: block !important; z-index: 999998 !important; cursor: n-resize !important; float: none !important; border-radius: unset !important; pointer-events: auto !important;"></div><div id="yO2VuAm-1598011802187" class="" style="outline: none !important; visibility: visible !important; resize: none !important; box-shadow: none !important; overflow: visible !important; background: none transparent !important; opacity: 1 !important; top: auto !important; right: 0px !important; bottom: 0px !important; left: auto !important; position: absolute !important; border: 0px !important; min-height: auto !important; min-width: auto !important; max-height: none !important; max-width: none !important; padding: 0px !important; margin: 0px !important; transition-property: none !important; transform: none !important; width: 100% !important; height: 6px !important; display: block !important; z-index: 999998 !important; cursor: s-resize !important; float: none !important; border-radius: unset !important; pointer-events: auto !important;"></div><div id="rcnQUvI-1598011802187" class="" style="outline: none !important; visibility: visible !important; resize: none !important; box-shadow: none !important; overflow: visible !important; background: none transparent !important; opacity: 1 !important; top: 0px !important; right: auto !important; bottom: auto !important; left: 0px !important; position: absolute !important; border: 0px !important; min-height: auto !important; min-width: auto !important; max-height: none !important; max-width: none !important; padding: 0px !important; margin: 0px !important; transition-property: none !important; transform: none !important; width: 12px !important; height: 12px !important; display: block !important; z-index: 999998 !important; cursor: nw-resize !important; float: none !important; border-radius: unset !important; pointer-events: auto !important;"></div><div id="WT3fWCd-1598011802187" class="" style="outline: none !important; visibility: visible !important; resize: none !important; box-shadow: none !important; overflow: visible !important; background: none transparent !important; opacity: 1 !important; top: 0px !important; right: 0px !important; bottom: auto !important; left: auto !important; position: absolute !important; border: 0px !important; min-height: auto !important; min-width: auto !important; max-height: none !important; max-width: none !important; padding: 0px !important; margin: 0px !important; transition-property: none !important; transform: none !important; width: 12px !important; height: 12px !important; display: block !important; z-index: 999998 !important; cursor: ne-resize !important; float: none !important; border-radius: unset !important; pointer-events: auto !important;"></div><div id="ybacIpA-1598011802187" class="" style="outline: none !important; visibility: visible !important; resize: none !important; box-shadow: none !important; overflow: visible !important; background: none transparent !important; opacity: 1 !important; top: auto !important; right: auto !important; bottom: 0px !important; left: 0px !important; position: absolute !important; border: 0px !important; min-height: auto !important; min-width: auto !important; max-height: none !important; max-width: none !important; padding: 0px !important; margin: 0px !important; transition-property: none !important; transform: none !important; width: 12px !important; height: 12px !important; display: block !important; z-index: 999998 !important; cursor: sw-resize !important; float: none !important; border-radius: unset !important; pointer-events: auto !important;"></div><div id="CHagepd-1598011802187" class="" style="outline: none !important; visibility: visible !important; resize: none !important; box-shadow: none !important; overflow: visible !important; background: none transparent !important; opacity: 1 !important; top: auto !important; right: 0px !important; bottom: 0px !important; left: auto !important; position: absolute !important; border: 0px !important; min-height: auto !important; min-width: auto !important; max-height: none !important; max-width: none !important; padding: 0px !important; margin: 0px !important; transition-property: none !important; transform: none !important; width: 12px !important; height: 12px !important; display: block !important; z-index: 999999 !important; cursor: se-resize !important; float: none !important; border-radius: unset !important; pointer-events: auto !important;"></div><iframe id="eZi0O32-1598011802234" src="./Running SpecFlow scenarios in parallel with xUnit v2_files/saved_resource(4).html" frameborder="0" scrolling="no" title="chat widget" class="" style="outline: none !important; visibility: visible !important; resize: none !important; box-shadow: none !important; overflow: visible !important; background: none transparent !important; opacity: 1 !important; position: fixed !important; border: 0px !important; min-height: auto !important; min-width: auto !important; max-height: none !important; max-width: none !important; padding: 0px !important; margin: 0px !important; transition-property: none !important; transform: none !important; width: 378px !important; height: 603.5px !important; display: none !important; z-index: 999999 !important; cursor: auto !important; float: none !important; border-radius: unset !important; pointer-events: auto !important; top: calc(50% - 120px) !important; bottom: auto !important; right: 65px !important; left: auto !important;"></iframe></div></body></html>
