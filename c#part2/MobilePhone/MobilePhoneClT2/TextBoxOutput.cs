@@ -1,4 +1,5 @@
-﻿using MobilePhoneClT2.Interfaces;
+﻿using MobilePhoneClT2.Enums;
+using MobilePhoneClT2.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,6 +12,7 @@ namespace MobilePhoneClT2
     public class TextBoxOutput : IOutput
     {
         public enum FormatingStyle { None, WithTime, WithDate, WithStars, WithQuotes };
+
         private RichTextBox richTextBox;
         public TextBoxOutput(RichTextBox richTextBox)
         {

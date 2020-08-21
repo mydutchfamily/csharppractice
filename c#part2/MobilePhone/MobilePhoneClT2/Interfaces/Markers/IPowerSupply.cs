@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace MobilePhoneClT2.Interfaces
 {
-    interface IPowerSupply
+    public interface IPowerSupply
     {
     }
 }

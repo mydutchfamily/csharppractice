@@ -27,31 +27,31 @@ namespace MobilePhoneClT2.Implementation.Tests
         }
 
         [TestMethod()]
-        public void HeadsetSonyOutputTest()
+        public async Task HeadsetSonyOutputTest()
         {
-            IPhone gamePhone = new GamePhone("Bar", "BP20200321");
+            IPhone gamePhone = new GamePhone(FormFactor.Bar, "BP20200321");
 
             IOutput output = new outputTest();
 
-            IInterconnection headsetSony = new HeadsetSony("BP20200321", output);
+            IInterconnection headsetSony = new HeadsetSony("BP20200321");
 
             headsetSony.PluginToUse = Plugins.HeadSetJack35;
-            gamePhone.PluginDevice(headsetSony).ExecuteDevice(typeof(HeadsetSony).Name);
+            await gamePhone.PluginDevice(headsetSony, (i) => { output.WriteLine("HeadsetSony in Action"); }).ExecuteDevice<HeadsetSony>();
 
             Assert.AreEqual("HeadsetSony in Action\n", writtenText);
         }
 
         [TestMethod()]
-        public void PowerBankOutputTest()
+        public async Task PowerBankOutputTest()
         {
-            IPhone gamePhone = new GamePhone("Bar", "BP20200321");
+            IPhone gamePhone = new GamePhone(FormFactor.Bar, "BP20200321");
 
             IOutput output = new outputTest();
 
-            IInterconnection powerBank = new PowerBank("BP20200325", output);
+            IInterconnection powerBank = new PowerBank("BP20200325");
             powerBank.PluginToUse = Plugins.Usb;
 
-            gamePhone.PluginDevice(powerBank).ExecuteDevice(typeof(PowerBank).Name);
+            await gamePhone.PluginDevice(powerBank, (i) => { output.WriteLine($"Phone is charging by {nameof(PowerBank)}"); }).ExecuteDevice<PowerBank>(executeTimes: 1);
 
             Assert.AreEqual("Phone is charging by PowerBank\n", writtenText);
         }

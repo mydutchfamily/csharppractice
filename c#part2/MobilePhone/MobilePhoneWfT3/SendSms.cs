@@ -1,15 +1,9 @@
 ﻿using MobilePhoneClT2.Interfaces;
-using MobilePhoneClT2.Implementation;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using MobilePhoneClT2;
+using MobilePhoneClT2.Enums;
+using MobilePhoneClT2.Implementation;
 
 namespace MobilePhoneWfT3
 {
@@ -18,7 +12,7 @@ namespace MobilePhoneWfT3
         
         private IPhone smsPhone1;
         private IPhone smsPhone2;
-        private Action<string> subscribe;
+        private Action<SmsMessage> subscribe;
         private TextBoxOutput output;
         int smsCount = 0;
         public SendSms()
@@ -27,11 +21,11 @@ namespace MobilePhoneWfT3
 
             smsFormatting.DataSource = Enum.GetNames(typeof(TextBoxOutput.FormatingStyle));
 
-            smsPhone1 = new SmsPhone("Bar", "BP20200406");
-            smsPhone2 = new SmsPhone("Bar", "BP20200409");
+            smsPhone1 = new SmsPhone(FormFactor.Bar, "BP20200406");
+            smsPhone2 = new SmsPhone(FormFactor.Bar, "BP20200409");
 
             output = new TextBoxOutput(this.receivedSms);
-            subscribe = smsPhone2.UseComponent<SmsCommunicator>().Subscribe(output);
+            subscribe = smsPhone2.UseComponent<Communicator>().SmsSubscribe(output);           
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -42,12 +36,15 @@ namespace MobilePhoneWfT3
 
         private void timerSms_Tick(object sender, EventArgs e)
         {
-            smsPhone1.UseComponent<SmsCommunicator>().AddRecipient(subscribe).SendSms($"sms{smsCount++}");
+            smsPhone1.UseComponent<Communicator>().SetRecipient(subscribe).SendSms($"sms{smsCount++}");
         }
 
         private void smsFormatting_SelectedIndexChanged(object sender, EventArgs e)
         {
-            output.Formating = (TextBoxOutput.FormatingStyle)smsFormatting.SelectedIndex;
+            if (output != null)
+            {
+                output.Formating = (TextBoxOutput.FormatingStyle)smsFormatting.SelectedIndex;
+            }
         }
     }
 }

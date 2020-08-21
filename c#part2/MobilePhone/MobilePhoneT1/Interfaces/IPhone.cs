@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using MobilePhoneClT2.Enums;
+using System.Collections.Generic;
 
 namespace MobilePhoneT1.Interfaces
 {
@@ -6,7 +7,7 @@ namespace MobilePhoneT1.Interfaces
     {
         List<IComponent> PhoneComponents { get;}
 
-        string FormFactor { get;}
+        FormFactor FormFactor { get;}
 
         string SimCard { get; set;}
 

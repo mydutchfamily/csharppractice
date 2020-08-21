@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MobilePhoneClT2.Enums;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -8,14 +9,12 @@ namespace MobilePhoneT1.Interfaces
     {
 
         private string vSimCard;
-        private string vFormFactor;
-        private string vSerialNumber;
         private List<IComponent> vPhoneComponents;
 
-        public GeneralPhone(string formFactor, string serialNumber)
+        public GeneralPhone(FormFactor formFactor, string serialNumber)
         {
-            vSerialNumber = serialNumber;
-            vFormFactor = formFactor;
+            SerialNumber = serialNumber;
+            FormFactor = formFactor;
         }
 
         public string ComponentType { get; } = "Phone body";
@@ -35,10 +34,7 @@ namespace MobilePhoneT1.Interfaces
 
         public string SerialNumber
         {
-            get
-            {
-                return vSerialNumber;
-            }
+            get;
         }
 
         public List<IComponent> PhoneComponents
@@ -47,12 +43,9 @@ namespace MobilePhoneT1.Interfaces
            protected set { vPhoneComponents = value; }
         }
 
-        public string FormFactor
+        public FormFactor FormFactor
         {
-            get
-            {
-                return vFormFactor;
-            }
+            get;
         }
 
         public override string ToString()

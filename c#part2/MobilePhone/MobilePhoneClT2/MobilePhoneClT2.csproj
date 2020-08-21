@@ -43,16 +43,20 @@
   <ItemGroup>
     <Compile Include="AbstractClass\GeneralPhone.cs" />
     <Compile Include="AbstractClass\InterconnectionCommon.cs" />
+    <Compile Include="Contact.cs" />
     <Compile Include="Enums\Enums.cs" />
+    <Compile Include="Implementation\Battery.cs" />
     <Compile Include="Implementation\GamePhone.cs" />
     <Compile Include="Implementation\HeadsetSony.cs" />
     <Compile Include="Implementation\Joystick.cs" />
     <Compile Include="Implementation\Keyboard.cs" />
     <Compile Include="Implementation\KeyboardWithJoystick.cs" />
+    <Compile Include="Implementation\Memory.cs" />
     <Compile Include="Implementation\MonochromeScreen.cs" />
     <Compile Include="Implementation\Phone.cs" />
     <Compile Include="Implementation\PowerBank.cs" />
-    <Compile Include="Implementation\SmsCommunicator.cs" />
+    <Compile Include="Implementation\SmsCallPhone.cs" />
+    <Compile Include="Implementation\Communicator.cs" />
     <Compile Include="Implementation\SmsPhone.cs" />
     <Compile Include="Interfaces\IComponent.cs" />
     <Compile Include="Interfaces\IInterconnection.cs" />
@@ -61,12 +65,16 @@
     <Compile Include="Interfaces\IPhone.cs" />
     <Compile Include="Interfaces\IScreen.cs" />
     <Compile Include="Interfaces\Markers\IBluetooth.cs" />
+    <Compile Include="Interfaces\Markers\IMemory.cs" />
     <Compile Include="Interfaces\Markers\IPlayback.cs" />
     <Compile Include="Interfaces\Markers\IPowerSupply.cs" />
     <Compile Include="Interfaces\Markers\ITypec.cs" />
     <Compile Include="Interfaces\Markers\IUsb.cs" />
     <Compile Include="Interfaces\Markers\IWifi.cs" />
+    <Compile Include="PhoneCall.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SimCard.cs" />
+    <Compile Include="SmsMessage.cs" />
     <Compile Include="TextBoxOutput.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

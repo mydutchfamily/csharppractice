@@ -9,9 +9,10 @@ namespace MobilePhoneClT2.Interfaces
 {
     public interface IInterconnection: IComponent
     {
-        Boolean DoAction(object data = null);
+        Task DoAction(int? executeTimes = null);
         Plugins PluginToUse { get; set; }
 
         List<Plugins> SupportedPlugins { get; }
+        Action<int> Action { get; set; }
     }
 }

@@ -1,12 +1,13 @@
 ﻿using System.Collections.Generic;
 using System.Text;
 using MobilePhoneT1.Interfaces;
+using MobilePhoneClT2.Enums;
 
 namespace MobilePhoneT1.Implementation
 {
     class Phone : GeneralPhone
     {
-        public Phone(string formFactor, string serialNumber) :base(formFactor, serialNumber)
+        public Phone(FormFactor formFactor, string serialNumber) :base(formFactor, serialNumber)
         {
             List<IComponent> components = new List<IComponent>();
             components.Add(new MonochromeScreen("Monochrome", 120, 70, "2LTMD20200225"));
