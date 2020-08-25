@@ -84,10 +84,10 @@ namespace ParallelRunning.Features
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("User Details form entry verification", null, new string[] {
                         "mytag"});
-#line 5
+#line 42
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
-#line 6
+#line 43
  testRunner.Given("I navigate to application", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
             TechTalk.SpecFlow.Table table1 = new TechTalk.SpecFlow.Table(new string[] {
@@ -96,9 +96,9 @@ this.ScenarioInitialize(scenarioInfo);
             table1.AddRow(new string[] {
                         "admin",
                         "admin"});
-#line 7
+#line 44
  testRunner.And("I enter UserName and Password", ((string)(null)), table1, "And ");
-#line 10
+#line 47
  testRunner.And("I click login", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             TechTalk.SpecFlow.Table table2 = new TechTalk.SpecFlow.Table(new string[] {
@@ -109,9 +109,9 @@ this.ScenarioInitialize(scenarioInfo);
                         "k",
                         "Karthik",
                         "k"});
-#line 11
+#line 48
  testRunner.And("I start entering user form details like", ((string)(null)), table2, "And ");
-#line 14
+#line 51
  testRunner.And("I click submit button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             this.ScenarioCleanup();

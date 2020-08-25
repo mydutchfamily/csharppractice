@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<!-- saved from url=(0066)http://www.brendanconnolly.net/organizing-tests-with-xunit-traits/ -->
+<html lang="en-US"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<link rel="profile" href="http://gmpg.org/xfn/11">
+<title>Organizing Tests With xUnit Traits – Assert.This</title>
+<meta name="viewport" content="width=device-width">
+<meta name="generator" content="WordPress 5.5">
+<link rel="dns-prefetch" href="http://fonts.googleapis.com/">
+<link rel="dns-prefetch" href="http://s.w.org/">
+<link rel="dns-prefetch" href="http://v0.wordpress.com/">
+<link rel="dns-prefetch" href="http://i0.wp.com/">
+<link rel="dns-prefetch" href="http://i1.wp.com/">
+<link rel="dns-prefetch" href="http://i2.wp.com/">
+<link rel="dns-prefetch" href="http://c0.wp.com/">
+<link rel="dns-prefetch" href="http://widgets.wp.com/">
+<link rel="dns-prefetch" href="http://s0.wp.com/">
+<link rel="dns-prefetch" href="http://0.gravatar.com/">
+<link rel="dns-prefetch" href="http://1.gravatar.com/">
+<link rel="dns-prefetch" href="http://2.gravatar.com/">
+<link rel="alternate" type="application/rss+xml" title="Assert.This » Feed" href="http://www.brendanconnolly.net/feed/">
+<link rel="alternate" type="application/rss+xml" title="Assert.This » Comments Feed" href="http://www.brendanconnolly.net/comments/feed/">
+<link rel="alternate" type="application/rss+xml" title="Assert.This » Organizing Tests With xUnit Traits Comments Feed" href="http://www.brendanconnolly.net/organizing-tests-with-xunit-traits/feed/">
+<link rel="pingback" href="http://www.brendanconnolly.net/xmlrpc.php">
+<!-- This site uses the Google Analytics by ExactMetrics plugin v6.2.2 - Using Analytics tracking - https://www.exactmetrics.com/ -->
+<script async="" src="./Organizing Tests With xUnit Traits – run some tests_files/analytics.js.download"></script><script type="text/javascript" data-cfasync="false">
+	var em_version         = '6.2.2';
+	var em_track_user      = true;
+	var em_no_track_reason = '';
+	
+	var disableStr = 'ga-disable-UA-78944500-1';
+
+	/* Function to detect opted out users */
+	function __gaTrackerIsOptedOut() {
+		return document.cookie.indexOf(disableStr + '=true') > -1;
+	}
+
+	/* Disable tracking if the opt-out cookie exists. */
+	if ( __gaTrackerIsOptedOut() ) {
+		window[disableStr] = true;
+	}
+
+	/* Opt-out function */
+	function __gaTrackerOptout() {
+	  document.cookie = disableStr + '=true; expires=Thu, 31 Dec 2099 23:59:59 UTC; path=/';
+	  window[disableStr] = true;
+	}
+
+	if ( 'undefined' === typeof gaOptout ) {
+		function gaOptout() {
+			__gaTrackerOptout();
+		}
+	}
+	
+	if ( em_track_user ) {
+		(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+			(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+			m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+		})(window,document,'script','//www.google-analytics.com/analytics.js','__gaTracker');
+
+window.ga = __gaTracker;		__gaTracker('create', 'UA-78944500-1', 'auto');
+		__gaTracker('set', 'forceSSL', true);
+		__gaTracker('send','pageview');
+		__gaTracker( function() { window.ga = __gaTracker; } );
+	} else {
+		console.log( "" );
+		(function() {
+			/* https://developers.google.com/analytics/devguides/collection/analyticsjs/ */
+			var noopfn = function() {
+				return null;
+			};
+			var noopnullfn = function() {
+				return null;
+			};
+			var Tracker = function() {
+				return null;
+			};
+			var p = Tracker.prototype;
+			p.get = noopfn;
+			p.set = noopfn;
+			p.send = noopfn;
+			var __gaTracker = function() {
+				var len = arguments.length;
+				if ( len === 0 ) {
+					return;
+				}
+				var f = arguments[len-1];
+				if ( typeof f !== 'object' || f === null || typeof f.hitCallback !== 'function' ) {
+					console.log( 'Not running function __gaTracker(' + arguments[0] + " ....) because you are not being tracked. " + em_no_track_reason );
+					return;
+				}
+				try {
+					f.hitCallback();
+				} catch (ex) {
+
+				}
+			};
+			__gaTracker.create = function() {
+				return new Tracker();
+			};
+			__gaTracker.getByName = noopnullfn;
+			__gaTracker.getAll = function() {
+				return [];
+			};
+			__gaTracker.remove = noopfn;
+			window['__gaTracker'] = __gaTracker;
+			window.ga = __gaTracker;		})();
+		}
+</script>
+<!-- / Google Analytics by ExactMetrics -->
+		<script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/13.0.0\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/13.0.0\/svg\/","svgExt":".svg","source":{"concatemoji":"http:\/\/www.brendanconnolly.net\/wp-includes\/js\/wp-emoji-release.min.js?ver=5.5"}};
+			!function(e,a,t){var r,n,o,i,p=a.createElement("canvas"),s=p.getContext&&p.getContext("2d");function c(e,t){var a=String.fromCharCode;s.clearRect(0,0,p.width,p.height),s.fillText(a.apply(this,e),0,0);var r=p.toDataURL();return s.clearRect(0,0,p.width,p.height),s.fillText(a.apply(this,t),0,0),r===p.toDataURL()}function l(e){if(!s||!s.fillText)return!1;switch(s.textBaseline="top",s.font="600 32px Arial",e){case"flag":return!c([127987,65039,8205,9895,65039],[127987,65039,8203,9895,65039])&&(!c([55356,56826,55356,56819],[55356,56826,8203,55356,56819])&&!c([55356,57332,56128,56423,56128,56418,56128,56421,56128,56430,56128,56423,56128,56447],[55356,57332,8203,56128,56423,8203,56128,56418,8203,56128,56421,8203,56128,56430,8203,56128,56423,8203,56128,56447]));case"emoji":return!c([55357,56424,8205,55356,57212],[55357,56424,8203,55356,57212])}return!1}function d(e){var t=a.createElement("script");t.src=e,t.defer=t.type="text/javascript",a.getElementsByTagName("head")[0].appendChild(t)}for(i=Array("flag","emoji"),t.supports={everything:!0,everythingExceptFlag:!0},o=0;o<i.length;o++)t.supports[i[o]]=l(i[o]),t.supports.everything=t.supports.everything&&t.supports[i[o]],"flag"!==i[o]&&(t.supports.everythingExceptFlag=t.supports.everythingExceptFlag&&t.supports[i[o]]);t.supports.everythingExceptFlag=t.supports.everythingExceptFlag&&!t.supports.flag,t.DOMReady=!1,t.readyCallback=function(){t.DOMReady=!0},t.supports.everything||(n=function(){t.readyCallback()},a.addEventListener?(a.addEventListener("DOMContentLoaded",n,!1),e.addEventListener("load",n,!1)):(e.attachEvent("onload",n),a.attachEvent("onreadystatechange",function(){"complete"===a.readyState&&t.readyCallback()})),(r=t.source||{}).concatemoji?d(r.concatemoji):r.wpemoji&&r.twemoji&&(d(r.twemoji),d(r.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script><script src="./Organizing Tests With xUnit Traits – run some tests_files/wp-emoji-release.min.js.download" type="text/javascript" defer=""></script>
+		<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+	<link rel="stylesheet" id="wp-block-library-css" href="./Organizing Tests With xUnit Traits – run some tests_files/style.min.css" type="text/css" media="all">
+<style id="wp-block-library-inline-css" type="text/css">
+.has-text-align-justify{text-align:justify;}
+</style>
+<link rel="stylesheet" id="omega-style-css" href="./Organizing Tests With xUnit Traits – run some tests_files/style(1).css" type="text/css" media="all">
+<link rel="stylesheet" id="me-google-fonts-css" href="./Organizing Tests With xUnit Traits – run some tests_files/css" type="text/css" media="all">
+<link rel="stylesheet" id="simple-social-icons-font-css" href="./Organizing Tests With xUnit Traits – run some tests_files/style(2).css" type="text/css" media="all">
+<link rel="stylesheet" id="social-logos-css" href="./Organizing Tests With xUnit Traits – run some tests_files/social-logos.min.css" type="text/css" media="all">
+<link rel="stylesheet" id="jetpack_css-css" href="./Organizing Tests With xUnit Traits – run some tests_files/jetpack.css" type="text/css" media="all">
+<script type="text/javascript" id="exactmetrics-frontend-script-js-extra">
+/* <![CDATA[ */
+var exactmetrics_frontend = {"js_events_tracking":"true","download_extensions":"zip,mp3,mpeg,pdf,docx,pptx,xlsx,rar","inbound_paths":"[{\"path\":\"\\\/go\\\/\",\"label\":\"affiliate\"},{\"path\":\"\\\/recommend\\\/\",\"label\":\"affiliate\"}]","home_url":"http:\/\/www.brendanconnolly.net","hash_tracking":"false"};
+/* ]]> */
+</script>
+<script type="text/javascript" src="./Organizing Tests With xUnit Traits – run some tests_files/frontend.min.js.download" id="exactmetrics-frontend-script-js"></script>
+<script type="text/javascript" src="./Organizing Tests With xUnit Traits – run some tests_files/jquery.js.download" id="jquery-js"></script>
+<script type="text/javascript" src="./Organizing Tests With xUnit Traits – run some tests_files/init.js.download" id="me-init-js"></script>
+<script type="text/javascript" src="./Organizing Tests With xUnit Traits – run some tests_files/svgxuse.js.download" id="svg-x-use-js"></script>
+<link rel="https://api.w.org/" href="http://www.brendanconnolly.net/wp-json/"><link rel="alternate" type="application/json" href="http://www.brendanconnolly.net/wp-json/wp/v2/posts/437"><link rel="EditURI" type="application/rsd+xml" title="RSD" href="http://www.brendanconnolly.net/xmlrpc.php?rsd">
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="http://www.brendanconnolly.net/wp-includes/wlwmanifest.xml"> 
+<link rel="prev" title="REACT to Bugs" href="http://www.brendanconnolly.net/react-to-bugs/">
+<link rel="next" title="SoapUI: Using Dynamic Properties" href="http://www.brendanconnolly.net/soapui-using-dynamic-properties/">
+<link rel="canonical" href="http://www.brendanconnolly.net/organizing-tests-with-xunit-traits/">
+<link rel="shortlink" href="https://wp.me/p6vwxg-73">
+<link rel="alternate" type="application/json+oembed" href="http://www.brendanconnolly.net/wp-json/oembed/1.0/embed?url=http%3A%2F%2Fwww.brendanconnolly.net%2Forganizing-tests-with-xunit-traits%2F">
+<link rel="alternate" type="text/xml+oembed" href="http://www.brendanconnolly.net/wp-json/oembed/1.0/embed?url=http%3A%2F%2Fwww.brendanconnolly.net%2Forganizing-tests-with-xunit-traits%2F&amp;format=xml">
+<style type="text/css">img#wpstats{display:none}</style>	<!--[if lt IE 9]>
+	<script src="http://www.brendanconnolly.net/wp-content/themes/omega/js/html5.js" type="text/javascript"></script>
+	<![endif]-->
+
+<style type="text/css" id="custom-css"></style>
+<link rel="shortcut icon" href="./Organizing Tests With xUnit Traits – run some tests_files/bConnolly-1.jpg">
+
+<!-- Jetpack Open Graph Tags -->
+<meta property="og:type" content="article">
+<meta property="og:title" content="Organizing Tests With xUnit Traits">
+<meta property="og:url" content="http://www.brendanconnolly.net/organizing-tests-with-xunit-traits/">
+<meta property="og:description" content="Once you start to have a larger number of tests it can be important to be able to break them down into different categories or groupings. From a functionality perspective this allows you to only ru…">
+<meta property="article:published_time" content="2016-11-30T07:25:23+00:00">
+<meta property="article:modified_time" content="2018-11-26T04:34:18+00:00">
+<meta property="og:site_name" content="Assert.This">
+<meta property="og:image" content="https://s0.wp.com/i/blank.jpg">
+<meta property="og:locale" content="en_US">
+<meta name="twitter:creator" content="@theBConnolly">
+<meta name="twitter:site" content="@theBConnolly">
+<meta name="twitter:text:title" content="Organizing Tests With xUnit Traits">
+<meta name="twitter:card" content="summary">
+
+<!-- End Jetpack Open Graph Tags -->
+<script async="" type="text/javascript" src="./Organizing Tests With xUnit Traits – run some tests_files/count.js.download"></script><script type="text/javascript" async="" src="./Organizing Tests With xUnit Traits – run some tests_files/embed.js.download"></script><script src="./Organizing Tests With xUnit Traits – run some tests_files/count-data.js.download"></script><link rel="prefetch" as="style" href="https://c.disquscdn.com/next/embed/styles/lounge.6525595c7a9874fa10bd041275e40f17.css"><link rel="prefetch" as="script" href="https://c.disquscdn.com/next/embed/common.bundle.9061cdaed1273d430eb02357766a8560.js"><link rel="prefetch" as="script" href="https://c.disquscdn.com/next/embed/lounge.bundle.61f31d37e7d8fce4eed8fbe3fcee29b6.js"><link rel="prefetch" as="script" href="https://disqus.com/next/config.js"></head>
+<body class="wordpress ltr child-theme y2020 m08 d25 h01 tuesday logged-out custom-header singular singular-post singular-post-437" dir="ltr" itemscope="itemscope" itemtype="http://schema.org/WebPage">
+<div class="site-container">
+	<header id="header" class="site-header" role="banner" itemscope="itemscope" itemtype="http://schema.org/WPHeader"><div class="site-avatar"><a href="http://www.brendanconnolly.net/"><img alt="" src="./Organizing Tests With xUnit Traits – run some tests_files/bConnolly-1.jpg"></a></div><div class="wrap"><div class="title-area"><h2 class="site-title" itemprop="headline"><a href="http://www.brendanconnolly.net/" title="Assert.This" rel="home">Assert.This</a></h2><h3 class="site-description"><span>Testing, Automation, and Exploration</span></h3></div><nav id="navigation" class="nav-primary" role="navigation" itemscope="itemscope" itemtype="http://schema.org/SiteNavigationElement">	
+	<div class="wrap"><a href="http://www.brendanconnolly.net/organizing-tests-with-xunit-traits/#" id="menu-icon" class="menu-icon"><span></span></a><ul class="menu omega-nav-menu menu-primary sf-js-enabled sf-arrows"><li class="page_item page-item-16"><a href="http://www.brendanconnolly.net/about/">About</a></li><li class="page_item page-item-610"><a href="http://www.brendanconnolly.net/writings/">In the Media</a></li><li class="page_item page-item-606"><a href="http://www.brendanconnolly.net/talks/">Talks</a></li><li class="page_item page-item-861"><a href="http://www.brendanconnolly.net/panoramic-quality/">Panoramic Quality</a></li></ul></div></nav><!-- .nav-primary --></div></header><!-- .site-header -->	<div class="site-inner">
+		<div class="wrap"><main class="content" id="content" role="main" itemprop="mainEntityOfPage" itemscope="itemscope" itemtype="http://schema.org/Blog">
+			<article id="post-437" class="entry post publish author-brendanconnollygmail-com post-437 format-standard category-code category-testing category-xunit" itemscope="itemscope" itemtype="http://schema.org/BlogPosting" itemprop="blogPost"><div class="entry-wrap">
+			<header class="entry-header">	<h1 class="entry-title" itemprop="headline">Organizing Tests With xUnit Traits</h1>
+<div class="entry-meta">
+	<time class="entry-time" datetime="2016-11-29T23:25:23-08:00" itemprop="datePublished" title="Tuesday, November 29, 2016, 11:25 pm">November 29, 2016</time>
+	<span class="entry-comments-link"> / <a href="http://www.brendanconnolly.net/organizing-tests-with-xunit-traits/#disqus_thread" data-disqus-identifier="437 http://www.brendanconnolly.net/?p=437">14 Comments</a></span>	</div><!-- .entry-meta --></header><!-- .entry-header -->		
+	<div class="entry-content" itemprop="articleBody">
+<p><img src="./Organizing Tests With xUnit Traits – run some tests_files/organizingMinion.jpg" alt="Organizing Minion" width="500" height="509"></p>
+<p>Once you start to have a larger number of tests it can be important to be able to break them down into different categories or groupings. From a functionality perspective this allows you to only run a subset of tests. They can also help to provide clarity or insight to your test code, by replacing comments or bloated test names with code based cues to preconditions or domain of the tests.</p>
+<p>Both NUnit and MSTest make use of the <em>Category</em> verbiage. NUnit using the <a href="https://github.com/nunit/docs/wiki/Category-Attribute">Category Attribute</a> and MSTest using the <a href="https://msdn.microsoft.com/en-us/library/dd286683.aspx">TestCategory Attribute</a>. You might expect xUnit to also have something named similarly, but instead they have chosen the <em>Trait</em> attribute.</p>
+<h3>Traits</h3>
+<p>If you are used to using categories from other frameworks, the <em>Trait</em> attribute is slightly confusing when you first look at it.<br>
+Instead of:</p>
+<pre><code class="language-cs">[Category("MyCategoryName")]
+public void ...
+
+</code></pre>
+<p>The trait attribute uses a name and value pair</p>
+<pre><code class="language-cs">[Trait("Category","MyCategoryName")]
+public void ...
+</code></pre>
+<p>When I first saw this I wasn't sure if the name property value had any significance, i.e. is it a set of magic strings I ended up peeking through the framework code on GitHub to confirm that the name parameter is up to user preference. If you are familiar with NUnit then it's like a hybrid of the category and <a href="https://github.com/nunit/docs/wiki/Property-Attribute">property</a> attributes.</p>
+<h3>Test Runner View</h3>
+<p>Another benefit to organizing tests using traits is that when using a GUI based test runner, like the test runner in Visual Studio the tests can be sorted accordingly.<br>
+For Example:</p>
+<pre><code class="language-cs">[Fact]
+[Trait("Category","Unit")]
+public void Test1(){
+    ...}
+
+[Fact]
+[Trait("Category","Integration")]
+public void Test2(){
+    ...}
+
+[Fact]
+[Trait("Category","UI")]
+public void Test3(){
+    ...}
+
+</code></pre>
+<p>Results in the following display where you can run tests individually or by category.<br>
+<img src="./Organizing Tests With xUnit Traits – run some tests_files/xUnitTestView.png" alt="test view by categories" width="640" height="487"></p>
+<h3>On The Command-line</h3>
+<p>When executing tests from the command-line you can run only a specific category or categories.</p>
+<pre><code>xunit.console.exe ... -trait "Category=Unit"
+-or-
+xunit.console.exe ... -trait "Category=Integration" -trait "Category=UI"
+</code></pre>
+<p>Exclude a category or categories</p>
+<pre><code>xunit.console.exe ... -notrait "Category=Integration"
+-or-
+xunit.console.exe ... -notrait "Category=UI" -notrait "Category="UI"
+
+</code></pre>
+<p>Or you can mix and match to your hearts content.</p>
+<h3>Custom Traits</h3>
+<p>I found <em>traits</em> to feel a little messy, it felt very flexible but at the price of being less intuitive to people that are not already familiar with xUnit. It may not be a huge issue but there seems to be a higher likelihood of misspellings or typo's causing tests to not be run. Luckily xUnit supports creating custom traits.</p>
+<p>In earlier versions it was as simple as sub classing the trait attribute but in later versions that class has been <a href="https://github.com/xunit/xunit/issues/394">sealed</a>. The current process involves implenting the <em>ITraitAttribute</em> <em>ITraitDiscoverer</em> interfaces for your custom trait. The xUnit Samples repo on GitHub provides <a href="https://github.com/xunit/samples.xunit/tree/master/TraitExtensibility">sample code for Category</a>.</p>
+<p>The only issue is the Visual Studio and Resharper test runners do not use the newer process to discover traits. This means that you cannot currently visually group test by custom traits until they update their test runners.</p>
+<h3>Friendly xUnit Categories</h3>
+<p>If you want to run tests by trait, both key and value of a trait must be specified on the commandline. This makes sense when the trait name is generic like category. What if you want something more specific like marking tests related to bugs like <strong>[Trait("Category","Bug")]</strong>. It looks fine, but the problem is you can't run only tests for a specific bug unless you add another attribute  like <strong>[Trait("Bug","8675309")]</strong>.</p>
+<p>To make the process more friendly and to add a little flexibility/functionality check out my <a href="https://github.com/brendanconnolly/Xunit.Categories">xUnit.Categories</a> project on GitHub.</p>
+<p>Or use the <a href="https://www.nuget.org/packages/xunit.categories/">nuget package</a>.</p>
+<h4>Example Bug trait</h4>
+<pre><code class="language-cs">        [Fact]
+        [Bug]
+        public void TestBug()
+        {
+            throw new NotImplementedException("I'm a bug");
+        }
+
+        [Fact]
+        [Bug("777")]
+        public void TestBugWithId()
+        {
+            throw new NotImplementedException("I've got your number");
+}
+
+</code></pre>
+<p>Using this single attribute you get descriptive information and flexibility when running tests.<br>
+You can run all tests marked as Bugs</p>
+<pre><code class="language-bat">xunit.console.exe ... -trait "Category=Bug"
+</code></pre>
+<p>or get more granular</p>
+<pre><code class="language-bat">xunit.console.exe ... -trait "Bug=777"
+</code></pre>
+<div class="sharedaddy sd-sharing-enabled"><div class="robots-nocontent sd-block sd-social sd-social-icon-text sd-sharing"><h3 class="sd-title">Share this:</h3><div class="sd-content"><ul><li class="share-facebook"><a rel="nofollow noopener noreferrer" data-shared="sharing-facebook-437" class="share-facebook sd-button share-icon" href="http://www.brendanconnolly.net/organizing-tests-with-xunit-traits/?share=facebook&amp;nb=1" target="_blank" title="Click to share on Facebook"><span>Facebook</span></a></li><li class="share-linkedin"><a rel="nofollow noopener noreferrer" data-shared="sharing-linkedin-437" class="share-linkedin sd-button share-icon" href="http://www.brendanconnolly.net/organizing-tests-with-xunit-traits/?share=linkedin&amp;nb=1" target="_blank" title="Click to share on LinkedIn"><span>LinkedIn</span></a></li><li class="share-twitter"><a rel="nofollow noopener noreferrer" data-shared="sharing-twitter-437" class="share-twitter sd-button share-icon" href="http://www.brendanconnolly.net/organizing-tests-with-xunit-traits/?share=twitter&amp;nb=1" target="_blank" title="Click to share on Twitter"><span>Twitter</span></a></li><li class="share-reddit"><a rel="nofollow noopener noreferrer" data-shared="" class="share-reddit sd-button share-icon" href="http://www.brendanconnolly.net/organizing-tests-with-xunit-traits/?share=reddit&amp;nb=1" target="_blank" title="Click to share on Reddit"><span>Reddit</span></a></li><li class="share-pocket"><a rel="nofollow noopener noreferrer" data-shared="" class="share-pocket sd-button share-icon" href="http://www.brendanconnolly.net/organizing-tests-with-xunit-traits/?share=pocket&amp;nb=1" target="_blank" title="Click to share on Pocket"><span>Pocket</span></a></li><li class="share-end"></li></ul></div></div></div><div class="sharedaddy sd-block sd-like jetpack-likes-widget-wrapper jetpack-likes-widget-loaded" id="like-post-wrapper-96171254-437-5f44cf5bce976" data-src="https://widgets.wp.com/likes/#blog_id=96171254&amp;post_id=437&amp;origin=www.brendanconnolly.net&amp;obj_id=96171254-437-5f44cf5bce976" data-name="like-post-frame-96171254-437-5f44cf5bce976"><h3 class="sd-title">Like this:</h3><div class="likes-widget-placeholder post-likes-widget-placeholder" style="height: 55px; display: none;"><span class="button"><span>Like</span></span> <span class="loading">Loading...</span></div><iframe name="like-post-frame-96171254-437-5f44cf5bce976" src="./Organizing Tests With xUnit Traits – run some tests_files/saved_resource(1).html" height="55px" width="100%" frameborder="0" scrolling="no"></iframe><span class="sd-text-color"></span><a class="sd-link-color"></a></div>	
+	</div>
+<footer class="entry-footer"><div class="entry-meta">
+	<span class="entry-terms category" itemprop="articleSection">Posted in: <a href="http://www.brendanconnolly.net/category/code/" rel="tag">Code</a>, <a href="http://www.brendanconnolly.net/category/testing/" rel="tag">Testing</a>, <a href="http://www.brendanconnolly.net/category/xunit/" rel="tag">xUnit</a></span>			
+</div></footer>		</div></article>				
+	
+<div id="disqus_thread"><iframe id="dsq-app7734" name="dsq-app7734" allowtransparency="true" frameborder="0" scrolling="no" tabindex="0" title="Disqus" width="100%" src="./Organizing Tests With xUnit Traits – run some tests_files/saved_resource(2).html" horizontalscrolling="no" verticalscrolling="no" style="height: 3709px !important;"></iframe></div>
+</main><!-- .content -->
+		</div>	</div><!-- .site-inner -->
+		
+	<aside id="sidebar" class="sidebar sidebar-primary widget-area" role="complementary" itemscope="" itemtype="http://schema.org/WPSideBar">	
+				<section id="simple-social-icons-2" class="widget widget-1 even widget-first simple-social-icons"><div class="widget-wrap"><ul class="aligncenter"><li class="ssi-github"><a href="https://www.github.com/brendanconnolly" target="_blank" rel="noopener noreferrer"><svg role="img" class="social-github" aria-labelledby="social-github-2"><title id="social-github-2">GitHub</title><use xlink:href="http://www.brendanconnolly.net/wp-content/plugins/simple-social-icons/symbol-defs.svg#social-github"></use></svg></a></li><li class="ssi-linkedin"><a href="https://www.linkedin.com/in/thebconnolly" target="_blank" rel="noopener noreferrer"><svg role="img" class="social-linkedin" aria-labelledby="social-linkedin-2"><title id="social-linkedin-2">LinkedIn</title><use xlink:href="http://www.brendanconnolly.net/wp-content/plugins/simple-social-icons/symbol-defs.svg#social-linkedin"></use></svg></a></li><li class="ssi-rss"><a href="http://www.brendanconnolly.net/wp-rss2.php" target="_blank" rel="noopener noreferrer"><svg role="img" class="social-rss" aria-labelledby="social-rss-2"><title id="social-rss-2">RSS</title><use xlink:href="http://www.brendanconnolly.net/wp-content/plugins/simple-social-icons/symbol-defs.svg#social-rss"></use></svg></a></li><li class="ssi-twitter"><a href="https://www.twitter.com/theBConnolly" target="_blank" rel="noopener noreferrer"><svg role="img" class="social-twitter" aria-labelledby="social-twitter-2"><title id="social-twitter-2">Twitter</title><use xlink:href="http://www.brendanconnolly.net/wp-content/plugins/simple-social-icons/symbol-defs.svg#social-twitter"></use></svg></a></li></ul></div></section><section id="tag_cloud-3" class="widget widget-2 odd widget_tag_cloud"><div class="widget-wrap"><h4 class="widget-title">Categories</h4><div class="tagcloud"><a href="http://www.brendanconnolly.net/category/agile/" class="tag-cloud-link tag-link-28 tag-link-position-1" style="font-size: 10.857142857143pt;" aria-label="Agile (3 items)">Agile</a>
+<a href="http://www.brendanconnolly.net/category/api-testing/" class="tag-cloud-link tag-link-20 tag-link-position-2" style="font-size: 12.571428571429pt;" aria-label="API Testing (5 items)">API Testing</a>
+<a href="http://www.brendanconnolly.net/category/assertions/" class="tag-cloud-link tag-link-3 tag-link-position-3" style="font-size: 11.809523809524pt;" aria-label="Assertions (4 items)">Assertions</a>
+<a href="http://www.brendanconnolly.net/category/automation/" class="tag-cloud-link tag-link-39 tag-link-position-4" style="font-size: 8pt;" aria-label="Automation (1 item)">Automation</a>
+<a href="http://www.brendanconnolly.net/category/balance/" class="tag-cloud-link tag-link-30 tag-link-position-5" style="font-size: 8pt;" aria-label="Balance (1 item)">Balance</a>
+<a href="http://www.brendanconnolly.net/category/testing/bbst/" class="tag-cloud-link tag-link-8 tag-link-position-6" style="font-size: 11.809523809524pt;" aria-label="BBST (4 items)">BBST</a>
+<a href="http://www.brendanconnolly.net/category/books/" class="tag-cloud-link tag-link-37 tag-link-position-7" style="font-size: 8pt;" aria-label="Books (1 item)">Books</a>
+<a href="http://www.brendanconnolly.net/category/bugs/" class="tag-cloud-link tag-link-31 tag-link-position-8" style="font-size: 8pt;" aria-label="Bugs (1 item)">Bugs</a>
+<a href="http://www.brendanconnolly.net/category/burn-out/" class="tag-cloud-link tag-link-29 tag-link-position-9" style="font-size: 8pt;" aria-label="Burn Out (1 item)">Burn Out</a>
+<a href="http://www.brendanconnolly.net/category/cast-2016/" class="tag-cloud-link tag-link-26 tag-link-position-10" style="font-size: 10.857142857143pt;" aria-label="CAST 2016 (3 items)">CAST 2016</a>
+<a href="http://www.brendanconnolly.net/category/code/" class="tag-cloud-link tag-link-4 tag-link-position-11" style="font-size: 13.238095238095pt;" aria-label="Code (6 items)">Code</a>
+<a href="http://www.brendanconnolly.net/category/community/" class="tag-cloud-link tag-link-13 tag-link-position-12" style="font-size: 13.714285714286pt;" aria-label="Community (7 items)">Community</a>
+<a href="http://www.brendanconnolly.net/category/conference/" class="tag-cloud-link tag-link-27 tag-link-position-13" style="font-size: 8pt;" aria-label="Conference (1 item)">Conference</a>
+<a href="http://www.brendanconnolly.net/category/conferences/" class="tag-cloud-link tag-link-33 tag-link-position-14" style="font-size: 8pt;" aria-label="Conferences (1 item)">Conferences</a>
+<a href="http://www.brendanconnolly.net/category/automation/css/" class="tag-cloud-link tag-link-40 tag-link-position-15" style="font-size: 8pt;" aria-label="CSS (1 item)">CSS</a>
+<a href="http://www.brendanconnolly.net/category/database/" class="tag-cloud-link tag-link-25 tag-link-position-16" style="font-size: 8pt;" aria-label="DataBase (1 item)">DataBase</a>
+<a href="http://www.brendanconnolly.net/category/devops/" class="tag-cloud-link tag-link-38 tag-link-position-17" style="font-size: 9.7142857142857pt;" aria-label="DevOps (2 items)">DevOps</a>
+<a href="http://www.brendanconnolly.net/category/testing/fluent-assertions/" class="tag-cloud-link tag-link-9 tag-link-position-18" style="font-size: 8pt;" aria-label="Fluent Assertions (1 item)">Fluent Assertions</a>
+<a href="http://www.brendanconnolly.net/category/heuristics/" class="tag-cloud-link tag-link-19 tag-link-position-19" style="font-size: 9.7142857142857pt;" aria-label="Heuristics (2 items)">Heuristics</a>
+<a href="http://www.brendanconnolly.net/category/how-to/" class="tag-cloud-link tag-link-32 tag-link-position-20" style="font-size: 9.7142857142857pt;" aria-label="How To (2 items)">How To</a>
+<a href="http://www.brendanconnolly.net/category/javascript/" class="tag-cloud-link tag-link-12 tag-link-position-21" style="font-size: 8pt;" aria-label="JavaScript (1 item)">JavaScript</a>
+<a href="http://www.brendanconnolly.net/category/mind-map/" class="tag-cloud-link tag-link-10 tag-link-position-22" style="font-size: 11.809523809524pt;" aria-label="Mind Map (4 items)">Mind Map</a>
+<a href="http://www.brendanconnolly.net/category/mindset/" class="tag-cloud-link tag-link-22 tag-link-position-23" style="font-size: 9.7142857142857pt;" aria-label="Mindset (2 items)">Mindset</a>
+<a href="http://www.brendanconnolly.net/category/mobile/" class="tag-cloud-link tag-link-7 tag-link-position-24" style="font-size: 8pt;" aria-label="Mobile (1 item)">Mobile</a>
+<a href="http://www.brendanconnolly.net/category/notestplans/" class="tag-cloud-link tag-link-15 tag-link-position-25" style="font-size: 9.7142857142857pt;" aria-label="NoTestPlans (2 items)">NoTestPlans</a>
+<a href="http://www.brendanconnolly.net/category/panoramic-quality/" class="tag-cloud-link tag-link-42 tag-link-position-26" style="font-size: 9.7142857142857pt;" aria-label="Panoramic Quality (2 items)">Panoramic Quality</a>
+<a href="http://www.brendanconnolly.net/category/testing/regression-manifesto/" class="tag-cloud-link tag-link-35 tag-link-position-27" style="font-size: 11.809523809524pt;" aria-label="Regression Manifesto (4 items)">Regression Manifesto</a>
+<a href="http://www.brendanconnolly.net/category/rest/" class="tag-cloud-link tag-link-11 tag-link-position-28" style="font-size: 9.7142857142857pt;" aria-label="REST (2 items)">REST</a>
+<a href="http://www.brendanconnolly.net/category/automation/selectors/" class="tag-cloud-link tag-link-41 tag-link-position-29" style="font-size: 8pt;" aria-label="Selectors (1 item)">Selectors</a>
+<a href="http://www.brendanconnolly.net/category/session-based-testing/" class="tag-cloud-link tag-link-23 tag-link-position-30" style="font-size: 8pt;" aria-label="Session Based Testing (1 item)">Session Based Testing</a>
+<a href="http://www.brendanconnolly.net/category/shouldly/" class="tag-cloud-link tag-link-5 tag-link-position-31" style="font-size: 8pt;" aria-label="Shouldly (1 item)">Shouldly</a>
+<a href="http://www.brendanconnolly.net/category/soapui/" class="tag-cloud-link tag-link-21 tag-link-position-32" style="font-size: 11.809523809524pt;" aria-label="SoapUI (4 items)">SoapUI</a>
+<a href="http://www.brendanconnolly.net/category/star-west/" class="tag-cloud-link tag-link-34 tag-link-position-33" style="font-size: 8pt;" aria-label="STAR West (1 item)">STAR West</a>
+<a href="http://www.brendanconnolly.net/category/test-driven-testing/" class="tag-cloud-link tag-link-36 tag-link-position-34" style="font-size: 11.809523809524pt;" aria-label="Test Driven Testing (4 items)">Test Driven Testing</a>
+<a href="http://www.brendanconnolly.net/category/testing/" class="tag-cloud-link tag-link-2 tag-link-position-35" style="font-size: 22pt;" aria-label="Testing (58 items)">Testing</a>
+<a href="http://www.brendanconnolly.net/category/testing-the-arbitrary/" class="tag-cloud-link tag-link-14 tag-link-position-36" style="font-size: 11.809523809524pt;" aria-label="Testing The Arbitrary (4 items)">Testing The Arbitrary</a>
+<a href="http://www.brendanconnolly.net/category/time-management/" class="tag-cloud-link tag-link-16 tag-link-position-37" style="font-size: 9.7142857142857pt;" aria-label="Time Management (2 items)">Time Management</a>
+<a href="http://www.brendanconnolly.net/category/tools/" class="tag-cloud-link tag-link-24 tag-link-position-38" style="font-size: 10.857142857143pt;" aria-label="Tools (3 items)">Tools</a>
+<a href="http://www.brendanconnolly.net/category/weekend-testing/" class="tag-cloud-link tag-link-6 tag-link-position-39" style="font-size: 13.714285714286pt;" aria-label="Weekend Testing (7 items)">Weekend Testing</a>
+<a href="http://www.brendanconnolly.net/category/words-we-use/" class="tag-cloud-link tag-link-17 tag-link-position-40" style="font-size: 12.571428571429pt;" aria-label="Words We Use (5 items)">Words We Use</a>
+<a href="http://www.brendanconnolly.net/category/xunit/" class="tag-cloud-link tag-link-18 tag-link-position-41" style="font-size: 10.857142857143pt;" aria-label="xUnit (3 items)">xUnit</a></div>
+</div></section>
+		<section id="recent-posts-2" class="widget widget-3 even widget_recent_entries"><div class="widget-wrap">
+		<h4 class="widget-title">Recent Posts</h4>
+		<ul>
+											<li>
+					<a href="http://www.brendanconnolly.net/evangelizing-quality/">Evangelizing Quality</a>
+									</li>
+											<li>
+					<a href="http://www.brendanconnolly.net/quality-at-the-speed-of-devops/">Quality at the Speed of DevOps</a>
+									</li>
+											<li>
+					<a href="http://www.brendanconnolly.net/css-wildcard-selectors/">CSS Wildcard Selectors</a>
+									</li>
+											<li>
+					<a href="http://www.brendanconnolly.net/reading-testing-in-devops-pt1/">On Reading: A Practical Guide To Testing in Devops – Part 1</a>
+									</li>
+											<li>
+					<a href="http://www.brendanconnolly.net/test-driven-testing-red-green-refactor/">Test Driven Testing – Red Green Refactor</a>
+									</li>
+					</ul>
+
+		</div></section><section id="search-2" class="widget widget-4 odd widget_search"><div class="widget-wrap"><form role="search" method="get" class="search-form" action="http://www.brendanconnolly.net/">	
+	<input type="search" class="search-field" placeholder="Search ..." value="" name="s" title="Search for:">	<input type="submit" class="search-submit" value="Search">
+</form></div></section><section id="archives-2" class="widget widget-5 even widget_archive"><div class="widget-wrap"><h4 class="widget-title">Archives</h4>
+			<ul>
+					<li><a href="http://www.brendanconnolly.net/2019/06/">June 2019</a></li>
+	<li><a href="http://www.brendanconnolly.net/2019/04/">April 2019</a></li>
+	<li><a href="http://www.brendanconnolly.net/2019/03/">March 2019</a></li>
+	<li><a href="http://www.brendanconnolly.net/2018/08/">August 2018</a></li>
+	<li><a href="http://www.brendanconnolly.net/2018/05/">May 2018</a></li>
+	<li><a href="http://www.brendanconnolly.net/2018/04/">April 2018</a></li>
+	<li><a href="http://www.brendanconnolly.net/2018/03/">March 2018</a></li>
+	<li><a href="http://www.brendanconnolly.net/2018/02/">February 2018</a></li>
+	<li><a href="http://www.brendanconnolly.net/2017/10/">October 2017</a></li>
+	<li><a href="http://www.brendanconnolly.net/2017/02/">February 2017</a></li>
+	<li><a href="http://www.brendanconnolly.net/2016/12/">December 2016</a></li>
+	<li><a href="http://www.brendanconnolly.net/2016/11/">November 2016</a></li>
+	<li><a href="http://www.brendanconnolly.net/2016/10/">October 2016</a></li>
+	<li><a href="http://www.brendanconnolly.net/2016/09/">September 2016</a></li>
+	<li><a href="http://www.brendanconnolly.net/2016/08/">August 2016</a></li>
+	<li><a href="http://www.brendanconnolly.net/2016/07/">July 2016</a></li>
+	<li><a href="http://www.brendanconnolly.net/2016/06/">June 2016</a></li>
+	<li><a href="http://www.brendanconnolly.net/2016/05/">May 2016</a></li>
+	<li><a href="http://www.brendanconnolly.net/2016/04/">April 2016</a></li>
+	<li><a href="http://www.brendanconnolly.net/2016/03/">March 2016</a></li>
+	<li><a href="http://www.brendanconnolly.net/2016/02/">February 2016</a></li>
+	<li><a href="http://www.brendanconnolly.net/2016/01/">January 2016</a></li>
+	<li><a href="http://www.brendanconnolly.net/2015/12/">December 2015</a></li>
+	<li><a href="http://www.brendanconnolly.net/2015/11/">November 2015</a></li>
+	<li><a href="http://www.brendanconnolly.net/2015/10/">October 2015</a></li>
+	<li><a href="http://www.brendanconnolly.net/2015/09/">September 2015</a></li>
+	<li><a href="http://www.brendanconnolly.net/2015/08/">August 2015</a></li>
+	<li><a href="http://www.brendanconnolly.net/2015/07/">July 2015</a></li>
+			</ul>
+
+			</div></section>		<div class="footer-content footer-insert"><p class="copyright">Copyright © 2020 Assert.This.</p>
+
+<p class="credit"><a class="child-link" href="https://themehall.com/me-omega-child-theme" title="Me WordPress Theme">Me</a> WordPress Theme by themehall.com</p></div>  	</aside><!-- .sidebar -->
+<footer id="footer" class="site-footer" role="contentinfo" itemscope="itemscope" itemtype="http://schema.org/WPFooter"><div class="wrap"></div></footer><!-- .site-footer --></div><!-- .site-container -->
+<style type="text/css" media="screen"> #simple-social-icons-2 ul li a, #simple-social-icons-2 ul li a:hover, #simple-social-icons-2 ul li a:focus { background-color: #999999 !important; border-radius: 3px; color: #ffffff !important; border: 0px #ffffff solid !important; font-size: 18px; padding: 9px; }  #simple-social-icons-2 ul li a:hover, #simple-social-icons-2 ul li a:focus { background-color: #666666 !important; border-color: #ffffff !important; color: #ffffff !important; }  #simple-social-icons-2 ul li a:focus { outline: 1px dotted #666666 !important; }</style>
+	<script type="text/javascript">
+		window.WPCOM_sharing_counts = {"http:\/\/www.brendanconnolly.net\/organizing-tests-with-xunit-traits\/":437};
+	</script>
+				<script type="text/javascript" src="./Organizing Tests With xUnit Traits – run some tests_files/photon.min.js.download" id="jetpack-photon-js"></script>
+<script type="text/javascript" id="disqus_count-js-extra">
+/* <![CDATA[ */
+var countVars = {"disqusShortname":"brendanconnolly"};
+/* ]]> */
+</script>
+<script type="text/javascript" src="./Organizing Tests With xUnit Traits – run some tests_files/comment_count.js.download" id="disqus_count-js"></script>
+<script type="text/javascript" id="disqus_embed-js-extra">
+/* <![CDATA[ */
+var embedVars = {"disqusConfig":{"integration":"wordpress 3.0.17"},"disqusIdentifier":"437 http:\/\/www.brendanconnolly.net\/?p=437","disqusShortname":"brendanconnolly","disqusTitle":"Organizing Tests With xUnit Traits","disqusUrl":"http:\/\/www.brendanconnolly.net\/organizing-tests-with-xunit-traits\/","postId":"437"};
+/* ]]> */
+</script>
+<script type="text/javascript" src="./Organizing Tests With xUnit Traits – run some tests_files/comment_embed.js.download" id="disqus_embed-js"></script>
+<script type="text/javascript" src="./Organizing Tests With xUnit Traits – run some tests_files/comment-reply.min.js.download" id="comment-reply-js"></script>
+<script type="text/javascript" src="./Organizing Tests With xUnit Traits – run some tests_files/menu.js.download" id="me-menu-js"></script>
+<script type="text/javascript" src="./Organizing Tests With xUnit Traits – run some tests_files/wp-embed.min.js.download" id="wp-embed-js"></script>
+<script type="text/javascript" src="./Organizing Tests With xUnit Traits – run some tests_files/postmessage.min.js.download" id="postmessage-js"></script>
+<script type="text/javascript" src="./Organizing Tests With xUnit Traits – run some tests_files/jquery.jetpack-resize.min.js.download" id="jetpack_resize-js"></script>
+<script type="text/javascript" src="./Organizing Tests With xUnit Traits – run some tests_files/queuehandler.min.js.download" id="jetpack_likes_queuehandler-js"></script>
+<script type="text/javascript" id="sharing-js-js-extra">
+/* <![CDATA[ */
+var sharing_js_options = {"lang":"en","counts":"1","is_stats_active":"1"};
+/* ]]> */
+</script>
+<script type="text/javascript" src="./Organizing Tests With xUnit Traits – run some tests_files/sharing.min.js.download" id="sharing-js-js"></script>
+<script type="text/javascript" id="sharing-js-js-after">
+var windowOpen;
+			jQuery( document.body ).on( 'click', 'a.share-facebook', function() {
+				// If there's another sharing window open, close it.
+				if ( 'undefined' !== typeof windowOpen ) {
+					windowOpen.close();
+				}
+				windowOpen = window.open( jQuery( this ).attr( 'href' ), 'wpcomfacebook', 'menubar=1,resizable=1,width=600,height=400' );
+				return false;
+			});
+var windowOpen;
+			jQuery( document.body ).on( 'click', 'a.share-linkedin', function() {
+				// If there's another sharing window open, close it.
+				if ( 'undefined' !== typeof windowOpen ) {
+					windowOpen.close();
+				}
+				windowOpen = window.open( jQuery( this ).attr( 'href' ), 'wpcomlinkedin', 'menubar=1,resizable=1,width=580,height=450' );
+				return false;
+			});
+var windowOpen;
+			jQuery( document.body ).on( 'click', 'a.share-twitter', function() {
+				// If there's another sharing window open, close it.
+				if ( 'undefined' !== typeof windowOpen ) {
+					windowOpen.close();
+				}
+				windowOpen = window.open( jQuery( this ).attr( 'href' ), 'wpcomtwitter', 'menubar=1,resizable=1,width=600,height=350' );
+				return false;
+			});
+var windowOpen;
+			jQuery( document.body ).on( 'click', 'a.share-pocket', function() {
+				// If there's another sharing window open, close it.
+				if ( 'undefined' !== typeof windowOpen ) {
+					windowOpen.close();
+				}
+				windowOpen = window.open( jQuery( this ).attr( 'href' ), 'wpcompocket', 'menubar=1,resizable=1,width=450,height=450' );
+				return false;
+			});
+</script>
+	<iframe src="./Organizing Tests With xUnit Traits – run some tests_files/master.html" scrolling="no" id="likes-master" name="likes-master" style="display:none;"></iframe>
+	<div id="likes-other-gravatars"><div class="likes-text"><span>%d</span> bloggers like this:</div><ul class="wpl-avatars sd-like-gravatars"></ul></div>
+	<script type="text/javascript" src="./Organizing Tests With xUnit Traits – run some tests_files/e-202035.js.download" async="async" defer="defer"></script>
+<script type="text/javascript">
+	_stq = window._stq || [];
+	_stq.push([ 'view', {v:'ext',j:'1:8.8.1',blog:'96171254',post:'437',tz:'-7',srv:'www.brendanconnolly.net'} ]);
+	_stq.push([ 'clickTrackerInit', '96171254', '437' ]);
+</script>
+
+<img src="./Organizing Tests With xUnit Traits – run some tests_files/g.gif" alt=":)" width="6" height="5" id="wpstats"><iframe style="display: none;" src="./Organizing Tests With xUnit Traits – run some tests_files/saved_resource(3).html"></iframe></body></html>
