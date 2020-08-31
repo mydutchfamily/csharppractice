@@ -49,3 +49,6 @@ Scenario: User Details form entry verification
 		| Initial | FirstName | MiddleName |
 		| k       | Karthik   | k          |
 	And I click submit button
+	And I verify the entered user form details in the application database
+		| Initial | FirstName | MiddleName |
+		| k       | Karthik   | k          |

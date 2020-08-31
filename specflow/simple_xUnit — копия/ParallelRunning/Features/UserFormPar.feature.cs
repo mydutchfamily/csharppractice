@@ -114,6 +114,17 @@ this.ScenarioInitialize(scenarioInfo);
 #line 51
  testRunner.And("I click submit button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
+            TechTalk.SpecFlow.Table table3 = new TechTalk.SpecFlow.Table(new string[] {
+                        "Initial",
+                        "FirstName",
+                        "MiddleName"});
+            table3.AddRow(new string[] {
+                        "k",
+                        "Karthik",
+                        "k"});
+#line 52
+ testRunner.And("I verify the entered user form details in the application database", ((string)(null)), table3, "And ");
+#line hidden
             this.ScenarioCleanup();
         }
         

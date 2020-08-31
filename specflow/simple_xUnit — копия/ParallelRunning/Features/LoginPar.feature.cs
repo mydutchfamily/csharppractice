@@ -86,10 +86,10 @@ namespace ParallelRunning.Features
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Login user as Administrator", null, new string[] {
                         "smoke",
                         "positive"});
-#line 5
+#line 8
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
-#line 6
+#line 9
  testRunner.Given("I have navigate to application", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
             TechTalk.SpecFlow.Table table1 = new TechTalk.SpecFlow.Table(new string[] {
@@ -98,11 +98,11 @@ this.ScenarioInitialize(scenarioInfo);
             table1.AddRow(new string[] {
                         "admin",
                         "admin"});
-#line 7
- testRunner.And("I enter UserName and Password", ((string)(null)), table1, "And ");
 #line 10
+ testRunner.And("I enter UserName and Password", ((string)(null)), table1, "And ");
+#line 13
  testRunner.Then("I click login", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 11
+#line 14
  testRunner.Then("I should see user logged into application", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
