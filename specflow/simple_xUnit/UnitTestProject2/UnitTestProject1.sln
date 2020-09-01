@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GettingInfo", "..\GettingIn
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ParallelRunning", "..\ParallelRunning\ParallelRunning.csproj", "{D1BF1527-B4A8-4F21-AF8A-B7137D35F3EB}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CallDefFromOut", "..\CallDefFromOut\CallDefFromOut.csproj", "{9B9E5E40-E3CE-4CC8-8A73-47F26542081D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{D1BF1527-B4A8-4F21-AF8A-B7137D35F3EB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D1BF1527-B4A8-4F21-AF8A-B7137D35F3EB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D1BF1527-B4A8-4F21-AF8A-B7137D35F3EB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9B9E5E40-E3CE-4CC8-8A73-47F26542081D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9B9E5E40-E3CE-4CC8-8A73-47F26542081D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9B9E5E40-E3CE-4CC8-8A73-47F26542081D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9B9E5E40-E3CE-4CC8-8A73-47F26542081D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
